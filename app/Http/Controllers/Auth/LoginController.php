@@ -20,6 +20,7 @@ class LoginController extends Controller
 
     /**
      * Step 1: Validate email and send OTP
+     * This is for regular users only. Admins should use /admin/login
      */
     public function sendOtp(Request $request)
     {
@@ -37,11 +38,12 @@ class LoginController extends Controller
             ]);
         }
 
-        // Redirect admins to admin login page
+        // Prevent admins from using the user login flow
+        // They must use the separate admin login at /admin/login
         if ($user->isAdmin()) {
             throw ValidationException::withMessages([
-                'email' => 'Admin users should use the admin login page.',
-            ])->redirectTo('/admin/login');
+                'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
+            ]);
         }
 
         // Generate and send OTP
@@ -61,6 +63,7 @@ class LoginController extends Controller
 
     /**
      * Resend OTP code
+     * This is for regular users only. Admins should use /admin/login
      */
     public function resendOtp(Request $request)
     {
@@ -75,6 +78,13 @@ class LoginController extends Controller
         if (!$user) {
             throw ValidationException::withMessages([
                 'email' => 'No account found with this email address.',
+            ]);
+        }
+
+        // Prevent admins from using the user login flow
+        if ($user->isAdmin()) {
+            throw ValidationException::withMessages([
+                'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
             ]);
         }
 
@@ -94,6 +104,7 @@ class LoginController extends Controller
 
     /**
      * Step 2: Verify OTP and password
+     * This is for regular users only. Admins should use /admin/login
      */
     public function verifyOtpAndLogin(Request $request)
     {
@@ -110,6 +121,15 @@ class LoginController extends Controller
         if (!$user) {
             throw ValidationException::withMessages([
                 'email' => 'No account found with this email address.',
+            ]);
+        }
+
+        // Prevent admins from using the user login flow
+        // This is a security measure in case they somehow bypassed the sendOtp check
+        if ($user->isAdmin()) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
             ]);
         }
 
@@ -157,15 +177,15 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
         
-        if ($user->isAdmin()) {
-            return redirect()->intended('/admin/dashboard');
-        }
-        
+        // Regular users go to their dashboard
+        // Admins should never reach this point due to the check above
         return redirect()->intended('/dashboard');
     }
 
     /**
      * Legacy login method for backward compatibility
+     * Note: This should not be used for new logins. Use the OTP flow instead.
+     * Admins should use /admin/login
      */
     public function login(Request $request)
     {
@@ -176,12 +196,24 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        // Check if user exists and is admin before attempting login
+        $user = User::where('email', $request->email)->first();
+        if ($user && $user->isAdmin()) {
+            throw ValidationException::withMessages([
+                'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
+            ]);
+        }
+
         if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             $request->session()->regenerate();
             $user = Auth::user();
             
+            // Double check - admins should not use this route
             if ($user->isAdmin()) {
-                return redirect()->intended('/admin/dashboard');
+                Auth::logout();
+                throw ValidationException::withMessages([
+                    'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
+                ]);
             }
             
             return redirect()->intended('/dashboard');
