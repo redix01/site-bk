@@ -253,13 +253,44 @@ class UserController extends Controller
             'is_admin' => 'boolean',
         ]);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'balance' => $request->balance ?? $user->balance,
-            'is_admin' => $request->has('is_admin'),
-        ]);
+        DB::transaction(function () use ($request, $user) {
+            // Update user fields
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'is_admin' => $request->boolean('is_admin'),
+            ]);
+
+            // Update balance in wallet if provided (allow 0)
+            if ($request->has('balance') && $request->balance !== null && $request->balance !== '') {
+                $wallet = $this->ensureWallet($user);
+                $balanceInDollars = (float) $request->balance;
+                $balanceInCents = (int) round($balanceInDollars * 100);
+                
+                // Update wallet balance (stored as decimal dollars)
+                $wallet->update([
+                    'balance' => $balanceInDollars,
+                    'ledger_balance' => $balanceInDollars,
+                ]);
+
+                // Also update user balance field for backwards compatibility (stored in cents as integer)
+                $user->update([
+                    'balance' => $balanceInCents,
+                ]);
+            }
+        });
+
+        AuditLog::logEvent('user.updated', [
+            'user_id' => $user->id,
+            'updated_fields' => array_filter([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'is_admin' => $request->boolean('is_admin'),
+                'balance' => $request->has('balance') ? $request->balance : null,
+            ]),
+        ], auth()->user());
 
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }

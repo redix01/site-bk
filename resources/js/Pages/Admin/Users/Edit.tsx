@@ -7,11 +7,30 @@ import { ArrowLeft } from 'lucide-react';
 import { User, PageProps } from '@/types';
 
 export default function Edit({ user }: PageProps & { user: User }) {
+    // Get balance from wallet if available, otherwise from user (convert cents to dollars)
+    const getBalance = () => {
+        if (user.wallet?.balance !== undefined && user.wallet.balance !== null) {
+            // Wallet balance is stored as decimal dollars
+            const walletBalance = typeof user.wallet.balance === 'number' 
+                ? user.wallet.balance 
+                : parseFloat(String(user.wallet.balance));
+            return isNaN(walletBalance) ? 0 : walletBalance;
+        }
+        // User balance is stored in cents, convert to dollars
+        if (user.balance !== undefined && user.balance !== null) {
+            const userBalance = typeof user.balance === 'number' 
+                ? user.balance 
+                : parseFloat(String(user.balance));
+            return isNaN(userBalance) ? 0 : userBalance / 100;
+        }
+        return 0;
+    };
+
     const { data, setData, put, processing, errors } = useForm({
         name: user.name || '',
         email: user.email || '',
         phone: user.phone || '',
-        balance: user.balance || 0,
+        balance: getBalance(),
         is_admin: user.is_admin || false,
     });
 
@@ -93,8 +112,12 @@ export default function Edit({ user }: PageProps & { user: User }) {
                                     id="balance"
                                     type="number"
                                     step="0.01"
+                                    min="0"
                                     value={data.balance}
-                                    onChange={(e) => setData('balance', parseFloat(e.target.value))}
+                                    onChange={(e) => {
+                                        const value = parseFloat(e.target.value);
+                                        setData('balance', isNaN(value) ? 0 : value);
+                                    }}
                                     className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600"
                                 />
                                 {errors.balance && <p className="mt-1 text-sm text-red-400">{errors.balance}</p>}
