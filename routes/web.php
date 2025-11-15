@@ -85,6 +85,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::post('/users/{user}/activate', [UserController::class, 'activate'])->name('users.activate');
     Route::post('/users/{user}/lock', [UserController::class, 'lock'])->name('users.lock');
     Route::patch('/users/{user}/currency', [UserController::class, 'updateCurrency'])->name('users.currency');
+    Route::patch('/users/{user}/created-at', [UserController::class, 'updateCreatedAt'])->name('users.created-at');
     
     // Transaction Management
     Route::resource('transactions', TransactionController::class);

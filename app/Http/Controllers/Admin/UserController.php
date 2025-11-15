@@ -392,6 +392,35 @@ class UserController extends Controller
         return back()->with('success', 'Preferred currency updated successfully.');
     }
 
+    /**
+     * Update the account created date for a user.
+     */
+    public function updateCreatedAt(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'created_at' => 'required|date',
+        ]);
+
+        $oldCreatedAt = $user->created_at;
+        $newCreatedAt = Carbon::parse($validated['created_at']);
+
+        // Update using DB::table to bypass mass assignment protection for created_at
+        DB::table('users')
+            ->where('id', $user->id)
+            ->update(['created_at' => $newCreatedAt]);
+
+        // Refresh the model to get the updated created_at
+        $user->refresh();
+
+        AuditLog::logEvent('user.created_at_updated', [
+            'user_id' => $user->id,
+            'old_created_at' => $oldCreatedAt?->toIso8601String(),
+            'new_created_at' => $newCreatedAt->toIso8601String(),
+        ], auth()->user());
+
+        return back()->with('success', 'Account created date updated successfully.');
+    }
+
     public function destroy(User $user)
     {
         $user->delete();

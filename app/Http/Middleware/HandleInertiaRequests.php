@@ -37,10 +37,17 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $user = $request->user();
+        
+        // Always refresh user from database to get latest data (especially created_at)
+        if ($user) {
+            $user = $user->fresh();
+        }
+
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $user,
             ],
             'supportEmail' => SettingsManager::get('support_email', env('MAIL_SUPPORT')),
             'appSettings' => [

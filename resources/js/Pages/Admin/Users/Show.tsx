@@ -173,6 +173,18 @@ export default function Show({
         preferred_currency: currencyCode,
     });
 
+    // Format date for input field (YYYY-MM-DD)
+    const formatDateForInput = (dateString?: string | null) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        if (Number.isNaN(date.getTime())) return '';
+        return date.toISOString().split('T')[0];
+    };
+
+    const createdAtForm = useForm({
+        created_at: formatDateForInput(user.created_at),
+    });
+
     useEffect(() => {
         currencyForm.setData('preferred_currency', currencyCode);
     }, [currencyCode]);
@@ -182,6 +194,17 @@ export default function Show({
         currencyForm.patch(`/admin/users/${user.id}/currency`, {
             preserveScroll: true,
             onSuccess: () => currencyForm.clearErrors(),
+        });
+    };
+
+    const submitCreatedAt: FormEventHandler<HTMLFormElement> = (event) => {
+        event.preventDefault();
+        createdAtForm.patch(`/admin/users/${user.id}/created-at`, {
+            preserveScroll: true,
+            onSuccess: () => {
+                createdAtForm.clearErrors();
+                router.reload({ only: ['user'] });
+            },
         });
     };
 
@@ -715,6 +738,57 @@ export default function Show({
                                             disabled={currencyForm.processing}
                                         >
                                             {currencyForm.processing ? 'Updating...' : 'Update Currency'}
+                                        </Button>
+                                    </form>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="border-slate-800 bg-slate-900">
+                            <CardHeader>
+                                <CardTitle className="text-slate-50">Account Created Date</CardTitle>
+                                <CardDescription className="text-slate-400">
+                                    Update the account creation date
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-4">
+                                    <div>
+                                        <p className="text-sm text-slate-400">Current created date</p>
+                                        <p className="mt-2 text-slate-200">{formatDateTime(user.created_at)}</p>
+                                    </div>
+
+                                    <form onSubmit={submitCreatedAt} className="space-y-3">
+                                        <div>
+                                            <label
+                                                htmlFor="created_at"
+                                                className="mb-2 block text-sm font-medium text-slate-300"
+                                            >
+                                                New created date
+                                            </label>
+                                            <input
+                                                id="created_at"
+                                                type="date"
+                                                value={createdAtForm.data.created_at}
+                                                onChange={(e) =>
+                                                    createdAtForm.setData('created_at', e.target.value)
+                                                }
+                                                className="h-11 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 text-sm text-slate-100 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+                                                required
+                                            />
+                                            {createdAtForm.errors.created_at && (
+                                                <p className="mt-2 text-xs text-rose-300">
+                                                    {createdAtForm.errors.created_at}
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <Button
+                                            type="submit"
+                                            className="w-full justify-center bg-primary-600 hover:bg-primary-700"
+                                            disabled={createdAtForm.processing}
+                                        >
+                                            {createdAtForm.processing ? 'Updating...' : 'Update Created Date'}
                                         </Button>
                                     </form>
                                 </div>

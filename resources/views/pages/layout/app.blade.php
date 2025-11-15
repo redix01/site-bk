@@ -78,6 +78,13 @@
             color: #000000;
             font-weight: 700;
         }
+        /* Hide bsl-popup overlay to prevent blocking clicks */
+        .bsl-popup {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            opacity: 0 !important;
+        }
     </style>
 
     <!-- Favicon -->

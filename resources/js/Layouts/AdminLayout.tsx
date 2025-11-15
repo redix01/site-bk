@@ -89,20 +89,20 @@ export default function AdminLayout({ children }: PropsWithChildren) {
                 <div className="fixed inset-0 bg-black/80" onClick={() => setSidebarOpen(false)} />
                 <div className="fixed inset-y-0 left-0 w-64 bg-slate-900 shadow-xl">
                     <div className="flex h-16 items-center justify-between px-4 border-b border-slate-800">
-                        {logoUrl ? (
-                            <img src={logoUrl} alt={`${brandName} logo`} className="h-10 w-auto" />
-                        ) : (
-                            <span className="text-xl font-semibold text-slate-50">{adminLabel}</span>
-                        )}
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => setSidebarOpen(false)}
-                        >
-                            <X className="h-5 w-5" />
-                        </Button>
-                    </div>
-                    <nav className="flex-1 px-3 py-4 space-y-6 overflow-y-auto">
+                    {logoUrl ? (
+                        <img src={logoUrl} alt={`${brandName} logo`} className="h-10 w-auto" />
+                    ) : (
+                        <span className="text-xl font-semibold text-slate-50">{adminLabel}</span>
+                    )}
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setSidebarOpen(false)}
+                    >
+                        <X className="h-5 w-5" />
+                    </Button>
+                </div>
+                <nav className="flex-1 px-3 py-4 space-y-6 overflow-y-auto">
                         {navigationGroups.map((group) => (
                             <div key={group.title}>
                                 <h3 className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
