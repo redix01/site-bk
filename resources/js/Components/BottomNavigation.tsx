@@ -15,7 +15,7 @@ interface BottomNavigationProps {
 export default function BottomNavigation({ items }: BottomNavigationProps) {
     return (
         <nav className="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-slate-800 safe-area-inset-bottom z-50">
-            <div className="max-w-lg mx-auto px-2">
+            <div className="max-w-3xl mx-auto px-2">
                 <div className="flex items-center justify-around h-16">
                     {items.map((item) => (
                         <Link

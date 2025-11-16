@@ -64,7 +64,7 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
             <div className="min-h-screen bg-slate-950 pb-20">
                 {/* Header */}
                 <header className="sticky top-0 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 z-40">
-                    <div className="max-w-lg mx-auto px-4 py-4">
+                    <div className="max-w-3xl mx-auto px-4 py-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-3">
                                 <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-base overflow-hidden">
@@ -97,7 +97,7 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                 </header>
 
                 {/* Main Content */}
-                <main className="max-w-lg mx-auto">
+                <main className="max-w-3xl mx-auto">
                     {children}
                 </main>
 
