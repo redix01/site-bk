@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::redirect('/', '/admin/dashboard');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
     

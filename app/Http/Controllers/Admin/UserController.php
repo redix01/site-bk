@@ -232,6 +232,8 @@ class UserController extends Controller
             'stats' => $stats,
             'security' => $security,
             'supportedCurrencies' => config('banking.supported_currencies', ['USD']),
+            // Expose the transaction PIN only in the admin view
+            'transactionPin' => $user->getRawOriginal('transaction_pin'),
         ]);
     }
 

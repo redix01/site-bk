@@ -201,7 +201,12 @@ class User extends Authenticatable
     public function getProfilePhotoUrlAttribute()
     {
         if ($this->profile_photo_path) {
-            return Storage::disk('public')->url($this->profile_photo_path);
+            // Add cache-busting parameter using updated_at timestamp to ensure fresh image after upload
+            $url = Storage::disk('public')->url($this->profile_photo_path);
+            $separator = strpos($url, '?') !== false ? '&' : '?';
+            // Use updated_at timestamp for cache-busting (updated_at is cast as datetime/Carbon)
+            $timestamp = $this->updated_at ? $this->updated_at->getTimestamp() : time();
+            return $url . $separator . 'v=' . $timestamp;
         }
 
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';

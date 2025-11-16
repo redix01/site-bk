@@ -59,7 +59,7 @@ class UserTransferController extends Controller
             return redirect()->back()->withErrors(['error' => 'Transaction PIN not set. Please contact support.']);
         }
         
-        if (!Hash::check($validated['transaction_pin'], $user->transaction_pin)) {
+        if ($validated['transaction_pin'] !== (string) $user->transaction_pin) {
             AuditLog::logEvent('transfer.failed', [
                 'reason' => 'Invalid transaction PIN',
                 'amount' => $validated['amount'],
@@ -204,7 +204,7 @@ class UserTransferController extends Controller
             return redirect()->back()->withErrors(['error' => 'Transaction PIN not set. Please contact support.']);
         }
         
-        if (!Hash::check($validated['transaction_pin'], $user->transaction_pin)) {
+        if ($validated['transaction_pin'] !== (string) $user->transaction_pin) {
             AuditLog::logEvent('wire_transfer.failed', [
                 'reason' => 'Invalid transaction PIN',
                 'amount' => $validated['amount'],

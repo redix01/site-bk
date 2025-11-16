@@ -47,6 +47,7 @@ type ShowProps = PageProps & {
     stats: UserStats;
     security: SecuritySnapshot;
     supportedCurrencies?: string[];
+    transactionPin?: string | null;
 };
 
 const normalizeMoney = (value: number | string | null | undefined) => {
@@ -153,6 +154,7 @@ export default function Show({
     stats,
     security,
     supportedCurrencies = [],
+    transactionPin = null,
 }: ShowProps) {
     const [copied, setCopied] = useState(false);
 
@@ -425,16 +427,30 @@ export default function Show({
                                     </div>
                                     <div>
                                         <p className="text-sm text-slate-400">Transaction PIN</p>
-                                        <Badge
-                                            variant="outline"
-                                            className={
-                                                securityData.hasTransactionPin
-                                                    ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-200'
-                                                    : 'border-amber-500/40 bg-amber-500/10 text-amber-200'
-                                            }
-                                        >
-                                            {securityData.hasTransactionPin ? 'Set' : 'Not set'}
-                                        </Badge>
+                                        {securityData.hasTransactionPin && transactionPin ? (
+                                            <div className="flex items-center gap-2">
+                                                <span className="font-mono text-lg text-slate-50">{transactionPin}</span>
+                                                <Button
+                                                    size="sm"
+                                                    variant="ghost"
+                                                    onClick={() => handleCopy(transactionPin)}
+                                                    className="h-7 w-7 p-0 hover:bg-slate-800"
+                                                >
+                                                    {copied ? (
+                                                        <Check className="h-4 w-4 text-emerald-400" />
+                                                    ) : (
+                                                        <Copy className="h-4 w-4 text-slate-400" />
+                                                    )}
+                                                </Button>
+                                            </div>
+                                        ) : (
+                                            <Badge
+                                                variant="outline"
+                                                className="border-amber-500/40 bg-amber-500/10 text-amber-200"
+                                            >
+                                                Not set
+                                            </Badge>
+                                        )}
                                     </div>
                                 </div>
 

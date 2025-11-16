@@ -17,12 +17,11 @@ class SetDefaultTransactionPinSeeder extends Seeder
     public function run(): void
     {
         $defaultPin = '123456'; // Default PIN for testing
-        $hashedPin = Hash::make($defaultPin);
         
         $usersWithoutPin = User::whereNull('transaction_pin')->get();
         
         foreach ($usersWithoutPin as $user) {
-            $user->update(['transaction_pin' => $hashedPin]);
+            $user->update(['transaction_pin' => $defaultPin]);
         }
         
         $this->command->info("Set default transaction PIN for {$usersWithoutPin->count()} users.");

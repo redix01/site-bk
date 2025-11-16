@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Com
 import { Button } from '@/Components/ui/button';
 import MobileLayout from '@/Layouts/MobileLayout';
 import { LoginHistory, PageProps } from '@/types';
-import { useForm } from '@inertiajs/react';
+import { useForm, router } from '@inertiajs/react';
 import { Camera } from 'lucide-react';
 
 type ProfileAction = 'view' | 'profile' | 'password' | 'security';
@@ -111,6 +111,15 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
         }
     }, [activeAction, pendingPhotoSelect]);
 
+    // Log when the server-provided avatar URL changes (helps verify fresh auth data)
+    useEffect(() => {
+        if (auth?.user?.profile_photo_url) {
+            console.debug('[Profile] profile_photo_url changed', auth.user.profile_photo_url);
+        } else {
+            console.debug('[Profile] profile_photo_url is empty');
+        }
+    }, [auth?.user?.profile_photo_url]);
+
     const actionButtonClasses = (action: ProfileAction) =>
         action === activeAction
             ? 'w-full bg-blue-600 hover:bg-blue-700 text-white'
@@ -134,6 +143,7 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
             preserveScroll: true,
             forceFormData: true,
             onSuccess: () => {
+                console.info('[Profile] Avatar upload success');
                 resetProfileForm();
                 setActiveAction('view');
                 setProfilePhotoPreview((prev) => {
@@ -145,6 +155,14 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                 if (fileInputRef.current) {
                     fileInputRef.current.value = '';
                 }
+                // Reload the page to get fresh user data with updated profile photo
+                router.reload({ only: ['auth'] });
+            },
+            onError: (errors) => {
+                console.error('[Profile] Avatar upload failed', errors);
+            },
+            onFinish: () => {
+                console.debug('[Profile] Avatar upload request finished');
             },
         });
     };
@@ -168,6 +186,15 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
 
     const handleProfilePhotoChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0] ?? null;
+        if (file) {
+            console.debug('[Profile] Selected avatar file', {
+                name: file.name,
+                type: file.type,
+                size: file.size,
+            });
+        } else {
+            console.debug('[Profile] No avatar file selected');
+        }
         setProfileData('profile_photo', file);
         if (profileErrors.profile_photo) {
             clearProfileErrors('profile_photo');
@@ -305,6 +332,14 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                         src={profilePhotoPreview ?? auth.user.profile_photo_url}
                                         alt={auth.user.name}
                                         className="h-full w-full object-cover"
+                                        onLoad={(e) => {
+                                            const img = e.currentTarget as HTMLImageElement;
+                                            console.info('[Profile] Avatar <img> loaded', { src: img.src });
+                                        }}
+                                        onError={(e) => {
+                                            const img = e.currentTarget as HTMLImageElement;
+                                            console.error('[Profile] Avatar <img> failed to load', { src: img.src });
+                                        }}
                                     />
                                 ) : (
                                     auth.user.name.charAt(0).toUpperCase()

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use App\Models\AuditLog;
 use App\Models\LoginHistory;
 
@@ -54,13 +55,65 @@ class UserProfileController extends Controller
 
         $user->update($validated);
 
+        if ($profilePhoto) {
+            Log::info('Profile photo upload received', [
+                'user_id' => $user->id,
+                'original_name' => $profilePhoto->getClientOriginalName(),
+                'mime' => $profilePhoto->getMimeType(),
+                'size_bytes' => $profilePhoto->getSize(),
+                'disk' => 'public',
+            ]);
+        }
+
         $updatedFields = array_keys($validated);
 
         if ($profilePhoto) {
             $path = $profilePhoto->store('profile-photos', 'public');
 
+            $publicUrl = null;
+            $fileExists = false;
+            try {
+                $publicUrl = Storage::disk('public')->url($path);
+                $fileExists = Storage::disk('public')->exists($path);
+            } catch (\Throwable $e) {
+                Log::error('Error generating public URL or checking existence for profile photo', [
+                    'user_id' => $user->id,
+                    'path' => $path,
+                    'disk' => 'public',
+                    'error' => $e->getMessage(),
+                ]);
+            }
+
+            $symlinkPath = public_path('storage');
+            $symlinkExists = is_link($symlinkPath) || file_exists($symlinkPath);
+
+            Log::info('Stored profile photo', [
+                'user_id' => $user->id,
+                'stored_path' => $path,
+                'disk' => 'public',
+                'public_url' => $publicUrl,
+                'file_exists_on_disk' => $fileExists,
+                'public_storage_symlink' => $symlinkPath,
+                'public_storage_symlink_exists' => $symlinkExists,
+                'app_url' => config('app.url'),
+            ]);
+
             if ($user->profile_photo_path) {
-                Storage::disk('public')->delete($user->profile_photo_path);
+                $deleted = false;
+                try {
+                    $deleted = Storage::disk('public')->delete($user->profile_photo_path);
+                } catch (\Throwable $e) {
+                    Log::warning('Failed to delete old profile photo', [
+                        'user_id' => $user->id,
+                        'old_path' => $user->profile_photo_path,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+                Log::info('Old profile photo deletion attempted', [
+                    'user_id' => $user->id,
+                    'old_path' => $user->profile_photo_path,
+                    'deleted' => $deleted,
+                ]);
             }
 
             $user->forceFill(['profile_photo_path' => $path])->save();
@@ -84,7 +137,7 @@ class UserProfileController extends Controller
 
         if ($user->transaction_pin) {
             $rules['current_transaction_pin'] = ['required', 'digits:6', function ($attribute, $value, $fail) use ($user) {
-                if (!Hash::check($value, $user->transaction_pin)) {
+                if ($value !== (string) $user->transaction_pin) {
                     $fail('The current transaction PIN is incorrect.');
                 }
             }];
@@ -92,7 +145,7 @@ class UserProfileController extends Controller
 
         $validated = $request->validate($rules);
 
-        $user->transaction_pin = Hash::make($validated['transaction_pin']);
+        $user->transaction_pin = $validated['transaction_pin'];
         $user->save();
 
         AuditLog::logEvent('user.transaction_pin.updated', [], $user);
