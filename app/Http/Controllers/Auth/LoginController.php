@@ -38,12 +38,9 @@ class LoginController extends Controller
             ]);
         }
 
-        // Prevent admins from using the user login flow
-        // They must use the separate admin login at /admin/login
+        // Prevent admins from using the user login flow - redirect them to admin login
         if ($user->isAdmin()) {
-            throw ValidationException::withMessages([
-                'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
-            ]);
+            return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
         }
 
         // Generate and send OTP
@@ -81,11 +78,9 @@ class LoginController extends Controller
             ]);
         }
 
-        // Prevent admins from using the user login flow
+        // Prevent admins from using the user login flow - redirect them to admin login
         if ($user->isAdmin()) {
-            throw ValidationException::withMessages([
-                'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
-            ]);
+            return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
         }
 
         // Delete any existing OTP codes for this email
@@ -124,13 +119,11 @@ class LoginController extends Controller
             ]);
         }
 
-        // Prevent admins from using the user login flow
+        // Prevent admins from using the user login flow - redirect to admin login
         // This is a security measure in case they somehow bypassed the sendOtp check
         if ($user->isAdmin()) {
             Auth::logout();
-            throw ValidationException::withMessages([
-                'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
-            ]);
+            return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
         }
 
         // Verify OTP code - Get the most recent OTP for this email
@@ -199,9 +192,7 @@ class LoginController extends Controller
         // Check if user exists and is admin before attempting login
         $user = User::where('email', $request->email)->first();
         if ($user && $user->isAdmin()) {
-            throw ValidationException::withMessages([
-                'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
-            ]);
+            return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
         }
 
         if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
@@ -211,9 +202,7 @@ class LoginController extends Controller
             // Double check - admins should not use this route
             if ($user->isAdmin()) {
                 Auth::logout();
-                throw ValidationException::withMessages([
-                    'email' => 'Admin accounts must use the admin login page. Please visit /admin/login',
-                ]);
+                return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
             }
             
             return redirect()->intended('/dashboard');
