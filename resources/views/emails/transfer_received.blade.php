@@ -7,7 +7,7 @@
 @section('headline', 'You Received a Transfer')
 
 @section('intro')
-Hello {{ $recipientName }}, funds have just landed in your BANKO account.
+Hello {{ $recipientName }}, funds have just landed in your account.
 @endsection
 
 @section('content')

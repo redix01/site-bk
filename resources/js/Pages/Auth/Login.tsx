@@ -193,7 +193,7 @@ export default function Login({ status, flash }: LoginProps) {
                                 <Banknote className="h-6 w-6 text-blue-400" />
                             </div>
                             <span className="text-lg font-semibold tracking-[0.35em] text-slate-300 uppercase">
-                                Banko
+                                App
                             </span>
                         </div>
                         <CardTitle className="text-2xl font-bold text-center text-slate-50">

@@ -184,7 +184,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>BANKO</h1>
+        <h1>APP</h1>
         <p>Transaction Receipt</p>
     </div>
 
@@ -317,7 +317,7 @@
     @endif
 
     <div class="footer">
-        <p><strong>BANKO - Your Trusted Banking Partner</strong></p>
+        <p><strong>APP - Your Trusted Banking Partner</strong></p>
         <p>This is an official transaction receipt generated on {{ now()->format('F d, Y \a\t h:i A') }}</p>
         <p>For any inquiries, please contact our support team.</p>
         <p style="margin-top: 15px; color: #94a3b8; font-size: 9px;">

@@ -169,7 +169,7 @@ return [
             'requires_reference' => false,
             'processing_time' => '1-3 business days',
             'instructions' => [
-                'Bank Name' => env('BANK_NAME', 'Banko'),
+                'Bank Name' => env('BANK_NAME', 'Bank'),
                 'Account Name' => '{{USER_NAME}}', // Will be replaced with user's name
                 'Account Number' => '{{ACCOUNT_NUMBER}}', // Will be replaced with user's account number
                 'Routing Number' => env('BANK_ROUTING_NUMBER', '021000021'),
@@ -217,7 +217,7 @@ return [
             'processing_time' => '1-2 business days',
             'fee_percentage' => 2.9, // 2.9%
             'instructions' => [
-                'PayPal Email' => env('PAYPAL_EMAIL', 'payments@banko.com'),
+                'PayPal Email' => env('PAYPAL_EMAIL', 'payments@example.com'),
                 'Payment Type' => 'Friends & Family (to avoid fees) or Goods & Services',
             ],
             'notes' => [
@@ -234,8 +234,8 @@ return [
             'processing_time' => '3-5 business days',
             'fee' => 2500, // $25.00 flat fee
             'instructions' => [
-                'Beneficiary Bank' => env('BANK_NAME', 'Banko'),
-                'Beneficiary Name' => env('BANK_ACCOUNT_NAME', 'Banko Ltd'),
+                'Beneficiary Bank' => env('BANK_NAME', 'Bank'),
+                'Beneficiary Name' => env('BANK_ACCOUNT_NAME', 'Bank Ltd'),
                 'Beneficiary Account' => env('BANK_ACCOUNT_NUMBER', '1234567890'),
                 'Bank Address' => env('BANK_ADDRESS', '123 Banking Street, New York, NY 10001, USA'),
                 'SWIFT/BIC Code' => env('BANK_SWIFT_CODE', 'BANKOUS33'),

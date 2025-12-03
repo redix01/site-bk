@@ -41,7 +41,7 @@ echo "   " . ($isInvalid ? "❌" : "✅") . " Verification result: " . ($isInval
 
 // Test 4: Check User Exists
 echo "4. Testing User Lookup...\n";
-$user = User::where('email', 'admin@banko.com')->first();
+$user = User::where('email', 'admin@example.com')->first();
 if ($user) {
     echo "   ✅ Admin user found: {$user->name} ({$user->email})\n";
 } else {
@@ -61,7 +61,7 @@ echo "\n";
 echo "5. Testing Email Notification...\n";
 try {
     Mail::fake();
-    $user = User::where('email', 'admin@banko.com')->first();
+    $user = User::where('email', 'admin@example.com')->first();
     if ($user) {
         Mail::to($user->email)->send(new OtpCodeMail('123456', $user->name));
         echo "   ✅ Email notification sent successfully\n";
@@ -92,5 +92,5 @@ echo "Next Steps:\n";
 echo "1. Run 'php artisan migrate' to create the OTP table\n";
 echo "2. Start the development server: 'php artisan serve'\n";
 echo "3. Visit http://localhost:8000/login\n";
-echo "4. Test with admin@banko.com or test@example.com\n";
+echo "4. Test with admin@example.com or test@example.com\n";
 echo "5. Check storage/logs/laravel.log for OTP emails\n";

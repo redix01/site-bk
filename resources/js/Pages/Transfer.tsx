@@ -241,7 +241,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
             setFormErrors({});
             setCodeRequestFeedback({
                 type: 'success',
-                message: `Support has been notified at ${supportEmail ?? 'support@banko.test'}. Watch your email for a transfer code.`,
+                message: `Support has been notified at ${supportEmail ?? 'support@example.com'}. Watch your email for a transfer code.`,
             });
         } catch (requestError: any) {
             const message =
@@ -813,7 +813,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                 </div>
                                 <div>
                                     <p className="text-xs text-rose-100/70">
-                                        Need help? Contact us at <span className="font-semibold">{supportEmail ?? 'support@banko.test'}</span>.
+                                        Need help? Contact us at <span className="font-semibold">{supportEmail ?? 'support@example.com'}</span>.
                                     </p>
                                 </div>
                             </div>

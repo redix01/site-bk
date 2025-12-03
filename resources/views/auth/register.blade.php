@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register - {{ config('app.name', 'Banko') }}</title>
+    <title>Register - {{ config('app.name', 'App') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -103,7 +103,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">🏦 Banko</div>
+        <div class="logo">🏦 App</div>
         
         <form method="POST" action="{{ route('register') }}">
             @csrf

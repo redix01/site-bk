@@ -195,7 +195,7 @@ export default function Index({ settings }: Props) {
                                         id="site_name"
                                         value={data.site_name}
                                         onChange={(e) => setData('site_name', e.target.value)}
-                                        placeholder="Banko"
+                                        placeholder="App Name"
                                     />
                                         {errors.site_name && <p className="text-sm text-red-400">{errors.site_name}</p>}
                                     </div>
@@ -210,7 +210,7 @@ export default function Index({ settings }: Props) {
                                         type="email"
                                         value={data.site_email}
                                         onChange={(e) => setData('site_email', e.target.value)}
-                                        placeholder="support@banko.test"
+                                        placeholder="support@example.com"
                                     />
                                         {errors.site_email && <p className="text-sm text-red-400">{errors.site_email}</p>}
                                     </div>
@@ -225,7 +225,7 @@ export default function Index({ settings }: Props) {
                                         type="email"
                                             value={data.support_email}
                                         onChange={(e) => setData('support_email', e.target.value)}
-                                        placeholder="help@banko.test"
+                                        placeholder="help@example.com"
                                     />
                                     {errors.support_email && (
                                             <p className="text-sm text-red-400">{errors.support_email}</p>
@@ -242,7 +242,7 @@ export default function Index({ settings }: Props) {
                                         type="url"
                                         value={data.app_url}
                                         onChange={(e) => setData('app_url', e.target.value)}
-                                        placeholder="https://banko.test"
+                                        placeholder="https://example.com"
                                     />
                                         {errors.app_url && <p className="text-sm text-red-400">{errors.app_url}</p>}
                                     </div>

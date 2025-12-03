@@ -36,7 +36,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
 
-    const brandName = appSettings?.siteName ?? 'Banko';
+    const brandName = appSettings?.siteName ?? 'App';
     const adminLabel = `${brandName} Admin`;
     const logoUrl = appSettings?.logoUrl ?? null;
 

@@ -17,7 +17,7 @@ echo "Creating admin user...\n";
 
 $admin = User::create([
     'name' => 'Admin User',
-    'email' => 'admin@banko.test',
+    'email' => 'admin@example.test',
     'password' => Hash::make('password'),
     'phone' => '+1234567890',
     'is_admin' => true,
@@ -29,7 +29,7 @@ $admin = User::create([
 
 echo "✅ Admin user created successfully!\n\n";
 echo "Login Credentials:\n";
-echo "Email: admin@banko.test\n";
+echo "Email: admin@example.test\n";
 echo "Password: password\n\n";
-echo "Access the admin panel at: http://banko.test/admin/dashboard\n";
+echo "Access the admin panel at: http://example.test/admin/dashboard\n";
 

@@ -27,11 +27,11 @@ class PaymentMethodSeeder extends Seeder
                 'requires_reference' => false,
                 'sort_order' => 1,
                 'configuration' => [
-                    'bank_name' => env('BANK_NAME', 'Banko'),
+                    'bank_name' => env('BANK_NAME', 'Bank'),
                     'routing_number' => env('BANK_ROUTING_NUMBER', '021000021'),
                 ],
                 'instructions' => [
-                    'Bank Name' => env('BANK_NAME', 'Banko'),
+                    'Bank Name' => env('BANK_NAME', 'Bank'),
                     'Account Name' => '{{USER_NAME}}',
                     'Account Number' => '{{ACCOUNT_NUMBER}}',
                     'Routing Number' => env('BANK_ROUTING_NUMBER', '021000021'),
@@ -95,10 +95,10 @@ class PaymentMethodSeeder extends Seeder
                 'requires_reference' => true,
                 'sort_order' => 3,
                 'configuration' => [
-                    'paypal_email' => env('PAYPAL_EMAIL', 'payments@banko.com'),
+                    'paypal_email' => env('PAYPAL_EMAIL', 'payments@example.com'),
                 ],
                 'instructions' => [
-                    'PayPal Email' => env('PAYPAL_EMAIL', 'payments@banko.com'),
+                    'PayPal Email' => env('PAYPAL_EMAIL', 'payments@example.com'),
                     'Payment Type' => 'Friends & Family (to avoid fees) or Goods & Services',
                 ],
                 'notes' => [
@@ -121,14 +121,14 @@ class PaymentMethodSeeder extends Seeder
                 'requires_reference' => true,
                 'sort_order' => 4,
                 'configuration' => [
-                    'bank_name' => env('BANK_NAME', 'Banko'),
+                    'bank_name' => env('BANK_NAME', 'Bank'),
                     'swift_code' => env('BANK_SWIFT_CODE', 'BANKOUS33'),
                     'routing_number' => env('BANK_ROUTING_NUMBER', '021000021'),
                     'bank_address' => env('BANK_ADDRESS', '123 Banking Street, New York, NY 10001, USA'),
                 ],
                 'instructions' => [
-                    'Beneficiary Bank' => env('BANK_NAME', 'Banko'),
-                    'Beneficiary Name' => env('BANK_ACCOUNT_NAME', 'Banko Ltd'),
+                    'Beneficiary Bank' => env('BANK_NAME', 'Bank'),
+                    'Beneficiary Name' => env('BANK_ACCOUNT_NAME', 'Bank Ltd'),
                     'Beneficiary Account' => env('BANK_ACCOUNT_NUMBER', '1234567890'),
                     'Bank Address' => env('BANK_ADDRESS', '123 Banking Street, New York, NY 10001, USA'),
                     'SWIFT/BIC Code' => env('BANK_SWIFT_CODE', 'BANKOUS33'),

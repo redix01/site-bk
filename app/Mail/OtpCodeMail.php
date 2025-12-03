@@ -26,7 +26,7 @@ class OtpCodeMail extends Mailable
      */
     public function build(): self
     {
-        return $this->subject('Your BANKO Login Code')
+        return $this->subject('Your Login Code')
             ->view('emails.otp_code')
             ->with([
                 'code' => $this->code,
