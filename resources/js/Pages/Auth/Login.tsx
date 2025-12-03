@@ -1,5 +1,6 @@
 import { FormEventHandler, useState, useEffect, useRef } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { PageProps } from '@/types';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import { ArrowLeft, Mail, Shield, Lock, RefreshCw, Banknote } from 'lucide-react';
@@ -13,6 +14,8 @@ interface LoginProps {
 }
 
 export default function Login({ status, flash }: LoginProps) {
+    const { appSettings } = usePage<PageProps>().props;
+    const brandName = appSettings?.siteName ?? 'App';
     const [step, setStep] = useState<'email' | 'otp-password'>('email');
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
@@ -193,7 +196,7 @@ export default function Login({ status, flash }: LoginProps) {
                                 <Banknote className="h-6 w-6 text-blue-400" />
                             </div>
                             <span className="text-lg font-semibold tracking-[0.35em] text-slate-300 uppercase">
-                                App
+                                {brandName}
                             </span>
                         </div>
                         <CardTitle className="text-2xl font-bold text-center text-slate-50">

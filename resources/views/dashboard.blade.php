@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard - {{ config('app.name', 'App') }}</title>
+    @php
+        $siteName = \App\Support\SettingsManager::get('site_name', config('app.name', 'App'));
+    @endphp
+    <title>Dashboard - {{ $siteName }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -107,7 +110,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="logo">🏦 App</div>
+        <div class="logo">🏦 {{ $siteName }}</div>
         <div class="user-info">
             <span>Welcome, {{ $user->name }}!</span>
             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
