@@ -50,8 +50,6 @@ class AdminUserSeeder extends Seeder
         ]);
 
         $this->command->info('Admin user created successfully!');
-        $this->command->info('Email: admin@example.com');
-        $this->command->info('Password: admin123');
         $this->command->info('Account Number: ' . $wallet->account_number);
         $this->command->info('Login URL: ' . url('/login'));
     }
