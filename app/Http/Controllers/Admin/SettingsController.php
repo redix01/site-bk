@@ -24,7 +24,7 @@ class SettingsController extends Controller
                 'support_email' => SettingsManager::get('support_email', env('MAIL_SUPPORT')),
                 'url' => SettingsManager::get('app_url', config('app.url')),
                 'timezone' => SettingsManager::get('timezone', config('app.timezone')),
-                'currency' => SettingsManager::get('currency', 'NGN'),
+                'currency' => SettingsManager::get('currency', 'AUD'),
             ],
             'branding' => [
                 'logo_path' => SettingsManager::get('site_logo_path'),

@@ -270,7 +270,7 @@ export default function Index({ settings }: Props) {
                                         id="currency"
                                         value={data.currency}
                                         onChange={(e) => setData('currency', e.target.value.toUpperCase())}
-                                        placeholder="NGN"
+                                        placeholder="AUD"
                                             className="uppercase"
                                     />
                                         {errors.currency && <p className="text-sm text-red-400">{errors.currency}</p>}

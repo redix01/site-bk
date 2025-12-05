@@ -13,7 +13,7 @@ if (!function_exists('format_currency')) {
      * @param  int  $decimals
      * @return string
      */
-    function format_currency($amount, $currency = 'NGN', $decimals = 2)
+    function format_currency($amount, $currency = 'AUD', $decimals = 2)
     {
         $formatted = number_format($amount, $decimals);
         
@@ -24,9 +24,12 @@ if (!function_exists('format_currency')) {
                 return '€' . $formatted;
             case 'GBP':
                 return '£' . $formatted;
+            case 'AUD':
+                return 'A$' . $formatted;
             case 'NGN':
-            default:
                 return '₦' . $formatted;
+            default:
+                return 'A$' . $formatted;
         }
     }
 }

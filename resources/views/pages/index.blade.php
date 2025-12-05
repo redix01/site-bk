@@ -377,7 +377,7 @@
                 <h6 class="mil-mb-60 mil-soft">Get in Touch</h6>
                 <ul class="mil-footer-list">
                     <li class="mil-text-m mil-pale mil-mb-15">
-                        999 Rue du Cherche-Midi, 7755500666 Paris, <br>France
+                        Level 10, 123 Collins Street, Melbourne VIC 3000, <br>Australia
                     </li>
                     <li class="mil-text-m mil-pale mil-mb-15">
                         support@shirecommerce.com

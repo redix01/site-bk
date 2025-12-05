@@ -290,7 +290,7 @@ export default function Create() {
         post('/admin/users');
     };
 
-    const currencyOptions = ['USD', 'EUR', 'GBP', 'NGN', 'CAD'];
+    const currencyOptions = ['USD', 'EUR', 'GBP', 'AUD', 'CAD'];
     const employmentOptions = [
         { value: '', label: 'Select employment status' },
         { value: 'employed', label: 'Employed' },

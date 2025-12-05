@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('account_number', 14)->unique();
             $table->decimal('balance', 20, 2)->default(0);
             $table->decimal('ledger_balance', 20, 2)->default(0);
-            $table->string('currency', 3)->default('NGN');
+            $table->string('currency', 3)->default('AUD');
             $table->enum('status', ['active', 'frozen', 'closed'])->default('active');
             $table->timestamps();
         });
