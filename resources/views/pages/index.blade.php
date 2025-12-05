@@ -388,7 +388,7 @@
         <div class="mil-footer-bottom">
             <div class="row">
                 <div class="col-xl-6">
-                    <p class="mil-text-s mil-pale">© 2024 Financial Group</p>
+                    <p class="mil-text-s mil-pale">© {{ date('Y') }} {{ env('APP_NAME') }}</p>
                 </div>
             </div>
         </div>
