@@ -265,7 +265,6 @@ return [
         'JPY',
         'CAD',
         'AUD',
-        'NGN',
         'CHF',
         'CNY',
     ],
