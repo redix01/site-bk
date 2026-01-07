@@ -2,31 +2,22 @@ import { FormEventHandler, useState, useEffect, useRef } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
-import { ArrowLeft, Mail, Shield, Lock, RefreshCw, Banknote } from 'lucide-react';
+import { Mail, Lock, Banknote } from 'lucide-react';
 
 interface LoginProps {
     status?: string;
     flash?: {
         success?: string;
-        user_name?: string;
-        otp_required?: boolean;
     };
 }
 
 export default function Login({ status, flash }: LoginProps) {
-    const [step, setStep] = useState<'email' | 'otp-password' | 'password-only'>('email');
-    const [userName, setUserName] = useState('');
-    const [userEmail, setUserEmail] = useState('');
-    const [otpRequired, setOtpRequired] = useState(true);
-    const [resendCooldown, setResendCooldown] = useState(0);
-    const [isResending, setIsResending] = useState(false);
     const [botWarning, setBotWarning] = useState<string | null>(null);
     const [humanDetected, setHumanDetected] = useState<boolean>(false);
     const mountTimeRef = useRef<number>(Date.now());
 
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
-        otp_code: '',
         password: '',
         remember: false,
         internal_code: '',
@@ -34,30 +25,6 @@ export default function Login({ status, flash }: LoginProps) {
         interaction_token: 'pending',
     });
     const securityError = (errors as Record<string, string | undefined>).form_security;
-
-    // Check for flash data on mount
-    useEffect(() => {
-        if (flash?.user_name) {
-            setUserName(flash.user_name);
-        }
-        if (flash?.otp_required !== undefined) {
-            setOtpRequired(flash.otp_required);
-            // If OTP is not required, go directly to password-only step
-            if (!flash.otp_required) {
-                setStep('password-only');
-            }
-        }
-    }, [flash]);
-
-    // Cooldown timer effect
-    useEffect(() => {
-        if (resendCooldown > 0) {
-            const timer = setTimeout(() => {
-                setResendCooldown(resendCooldown - 1);
-            }, 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [resendCooldown]);
 
     useEffect(() => {
         const startedAt = Date.now();
@@ -121,92 +88,15 @@ export default function Login({ status, flash }: LoginProps) {
         interaction_token: data.interaction_token,
     };
 
-    const handleEmailSubmit: FormEventHandler = (e) => {
+    const handleLoginSubmit: FormEventHandler = (e) => {
         e.preventDefault();
         if (isSubmissionSuspicious()) {
             return;
         }
-        post('/login/send-otp', {
-            preserveScroll: true,
-            onSuccess: (page) => {
-                const responseFlash = (page.props as any).flash;
-                const name = responseFlash?.user_name || '';
-                const requiresOtp = responseFlash?.otp_required !== false; // Default to true if not specified
-                
-                // Store in component state and session storage
-                setUserName(name);
-                setUserEmail(data.email);
-                setOtpRequired(requiresOtp);
-                
-                if (name) {
-                    sessionStorage.setItem('login_user_name', name);
-                }
-                sessionStorage.setItem('login_user_email', data.email);
-                
-                // Proceed to appropriate step based on OTP requirement
-                if (requiresOtp) {
-                    setStep('otp-password');
-                } else {
-                    setStep('password-only');
-                }
-            },
-            onError: () => {
-                // Errors will be handled by the form
-            }
-        });
-    };
-
-    const handleOtpPasswordSubmit: FormEventHandler = (e) => {
-        e.preventDefault();
-        if (isSubmissionSuspicious()) {
-            return;
-        }
-        post('/login/verify-otp', {
+        post('/login', {
             data: {
                 ...data,
-                email: userEmail, // Use the email from step 1
                 ...securityPayload,
-            }
-        });
-    };
-
-    const handlePasswordOnlySubmit: FormEventHandler = (e) => {
-        e.preventDefault();
-        if (isSubmissionSuspicious()) {
-            return;
-        }
-        post('/login/verify-otp', {
-            data: {
-                ...data,
-                email: userEmail, // Use the email from step 1
-                otp_code: '', // Empty OTP when not required
-                ...securityPayload,
-            }
-        });
-    };
-
-    const goBackToEmail = () => {
-        setStep('email');
-        setUserName('');
-        setUserEmail('');
-        setOtpRequired(true);
-        setResendCooldown(0);
-        reset('otp_code', 'password');
-    };
-
-    const handleResendOtp = () => {
-        if (resendCooldown > 0 || isResending) return;
-
-        setIsResending(true);
-        post('/login/resend-otp', {
-            data: { email: userEmail, ...securityPayload },
-            preserveScroll: true,
-            onSuccess: () => {
-                setResendCooldown(60); // 60 second cooldown
-                setIsResending(false);
-            },
-            onError: () => {
-                setIsResending(false);
             }
         });
     };
@@ -228,15 +118,10 @@ export default function Login({ status, flash }: LoginProps) {
                             </span>
                         </div>
                         <CardTitle className="text-2xl font-bold text-center text-slate-50">
-                            {step === 'email' ? 'Welcome back' : `Hello${userName ? ' ' + userName : ''}`}
+                            Welcome back
                         </CardTitle>
                         <CardDescription className="text-center text-slate-400">
-                            {step === 'email' 
-                                ? 'Enter your email to continue' 
-                                : step === 'password-only'
-                                ? 'Enter your password to continue'
-                                : 'Enter your OTP code and password'
-                            }
+                            Enter your email and password to continue
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -252,233 +137,95 @@ export default function Login({ status, flash }: LoginProps) {
                             </div>
                         )}
 
-                        {step === 'email' ? (
-                            <form onSubmit={handleEmailSubmit} className="space-y-4">
-                                <div
-                                    aria-hidden="true"
-                                    style={{
-                                        position: 'absolute',
-                                        left: '-10000px',
-                                        top: 'auto',
-                                        width: '1px',
-                                        height: '1px',
-                                        overflow: 'hidden',
-                                    }}
-                                >
-                                    <label htmlFor="internal_code">Internal code</label>
+                        <form onSubmit={handleLoginSubmit} className="space-y-4">
+                            <div
+                                aria-hidden="true"
+                                style={{
+                                    position: 'absolute',
+                                    left: '-10000px',
+                                    top: 'auto',
+                                    width: '1px',
+                                    height: '1px',
+                                    overflow: 'hidden',
+                                }}
+                            >
+                                <label htmlFor="internal_code">Internal code</label>
+                                <input
+                                    id="internal_code"
+                                    name="internal_code"
+                                    type="text"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    value={data.internal_code}
+                                    onChange={(event) => setData('internal_code', event.target.value)}
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">
+                                    Email Address
+                                </label>
+                                <div className="relative">
+                                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
                                     <input
-                                        id="internal_code"
-                                        name="internal_code"
-                                        type="text"
-                                        tabIndex={-1}
-                                        autoComplete="off"
-                                        value={data.internal_code}
-                                        onChange={(event) => setData('internal_code', event.target.value)}
+                                        id="email"
+                                        type="email"
+                                        value={data.email}
+                                        onChange={(e) => setData('email', e.target.value)}
+                                        className="w-full pl-10 rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent placeholder:text-slate-500"
+                                        placeholder="Enter your email address"
+                                        autoComplete="email"
+                                        autoFocus
+                                        required
                                     />
                                 </div>
+                                {errors.email && (
+                                    <p className="mt-1 text-sm text-red-400">{errors.email}</p>
+                                )}
+                            </div>
 
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">
-                                        Email Address
-                                    </label>
-                                    <div className="relative">
-                                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-                                        <input
-                                            id="email"
-                                            type="email"
-                                            value={data.email}
-                                            onChange={(e) => setData('email', e.target.value)}
-                                            className="w-full pl-10 rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent placeholder:text-slate-500"
-                                            placeholder="Enter your email address"
-                                            autoComplete="email"
-                                            autoFocus
-                                            required
-                                        />
-                                    </div>
-                                    {errors.email && (
-                                        <p className="mt-1 text-sm text-red-400">{errors.email}</p>
-                                    )}
+                            <div>
+                                <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-1">
+                                    Password
+                                </label>
+                                <div className="relative">
+                                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                                    <input
+                                        id="password"
+                                        type="password"
+                                        value={data.password}
+                                        onChange={(e) => setData('password', e.target.value)}
+                                        className="w-full pl-10 rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent"
+                                        placeholder="Enter your password"
+                                        autoComplete="current-password"
+                                        required
+                                    />
                                 </div>
+                                {errors.password && (
+                                    <p className="mt-1 text-sm text-red-400">{errors.password}</p>
+                                )}
+                            </div>
 
-                                <Button
-                                    type="submit"
-                                    disabled={processing}
-                                    className="w-full bg-slate-700 hover:bg-slate-600 text-slate-50"
-                                >
-                                    {processing ? 'Sending OTP...' : 'Continue'}
-                                </Button>
-                            </form>
-                        ) : step === 'password-only' ? (
-                            <form onSubmit={handlePasswordOnlySubmit} className="space-y-4">
-                                <input type="hidden" name="internal_code" value={data.internal_code} />
-                                <div className="mb-4 p-3 bg-blue-800/30 rounded-md border border-blue-700">
-                                    <p className="text-sm text-blue-200">
-                                        <Shield className="inline h-4 w-4 mr-2" />
-                                        You have a recent session. Enter your password to continue.
-                                    </p>
-                                </div>
+                            <div className="flex items-center justify-between">
+                                <label className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        checked={data.remember}
+                                        onChange={(e) => setData('remember', e.target.checked)}
+                                        className="h-4 w-4 rounded border-slate-700 bg-slate-800 text-slate-400 focus:ring-slate-600"
+                                    />
+                                    <span className="ml-2 text-sm text-slate-400">Remember me</span>
+                                </label>
+                            </div>
 
-                                <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-1">
-                                        Password
-                                    </label>
-                                    <div className="relative">
-                                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-                                        <input
-                                            id="password"
-                                            type="password"
-                                            value={data.password}
-                                            onChange={(e) => setData('password', e.target.value)}
-                                            className="w-full pl-10 rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent"
-                                            placeholder="Enter your password"
-                                            autoComplete="current-password"
-                                            autoFocus
-                                            required
-                                        />
-                                    </div>
-                                    {errors.password && (
-                                        <p className="mt-1 text-sm text-red-400">{errors.password}</p>
-                                    )}
-                                </div>
-
-                                <div className="flex items-center justify-between">
-                                    <label className="flex items-center">
-                                        <input
-                                            type="checkbox"
-                                            checked={data.remember}
-                                            onChange={(e) => setData('remember', e.target.checked)}
-                                            className="h-4 w-4 rounded border-slate-700 bg-slate-800 text-slate-400 focus:ring-slate-600"
-                                        />
-                                        <span className="ml-2 text-sm text-slate-400">Remember me</span>
-                                    </label>
-                                </div>
-
-                                <Button
-                                    type="submit"
-                                    disabled={processing}
-                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg"
-                                >
-                                    {processing ? 'Accessing...' : 'Access Login'}
-                                </Button>
-
-                                <div className="mt-3 text-center">
-                                    <button
-                                        type="button"
-                                        onClick={goBackToEmail}
-                                        className="text-sm text-slate-400 hover:text-slate-200 inline-flex items-center"
-                                    >
-                                        <ArrowLeft className="h-3 w-3 mr-1" />
-                                        Back to email
-                                    </button>
-                                </div>
-                            </form>
-                        ) : (
-                            <form onSubmit={handleOtpPasswordSubmit} className="space-y-4">
-                                <input type="hidden" name="internal_code" value={data.internal_code} />
-                                <div className="mb-4 p-3 bg-slate-800/50 rounded-md border border-slate-700">
-                                    <p className="text-sm text-slate-300">
-                                        <Mail className="inline h-4 w-4 mr-2" />
-                                        OTP sent to <span className="font-medium text-slate-200">{userEmail}</span>
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <label htmlFor="otp_code" className="block text-sm font-medium text-slate-300 mb-1">
-                                        Verification Code
-                                    </label>
-                                    <div className="relative">
-                                        <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-                                        <input
-                                            id="otp_code"
-                                            type="text"
-                                            value={data.otp_code}
-                                            onChange={(e) => setData('otp_code', e.target.value)}
-                                            className="w-full pl-10 rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent placeholder:text-slate-500"
-                                            placeholder="Enter 6-digit code"
-                                            maxLength={6}
-                                            autoComplete="one-time-code"
-                                            autoFocus
-                                            required
-                                        />
-                                    </div>
-                                    {errors.otp_code && (
-                                        <p className="mt-1 text-sm text-red-400">{errors.otp_code}</p>
-                                    )}
-                                    {flash?.success && (
-                                        <p className="mt-1 text-sm text-emerald-400">{flash.success}</p>
-                                    )}
-                                    <div className="mt-2">
-                                        <button
-                                            type="button"
-                                            onClick={handleResendOtp}
-                                            disabled={resendCooldown > 0 || isResending}
-                                            className="text-sm text-slate-400 hover:text-slate-200 inline-flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-slate-400"
-                                        >
-                                            <RefreshCw className={`h-3 w-3 mr-1 ${isResending ? 'animate-spin' : ''}`} />
-                                            {resendCooldown > 0 
-                                                ? `Resend OTP in ${resendCooldown}s` 
-                                                : isResending 
-                                                    ? 'Sending...' 
-                                                    : 'Resend OTP'
-                                            }
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-1">
-                                        Password
-                                    </label>
-                                    <div className="relative">
-                                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-                                        <input
-                                            id="password"
-                                            type="password"
-                                            value={data.password}
-                                            onChange={(e) => setData('password', e.target.value)}
-                                            className="w-full pl-10 rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent"
-                                            placeholder="Enter your password"
-                                            autoComplete="current-password"
-                                            required
-                                        />
-                                    </div>
-                                    {errors.password && (
-                                        <p className="mt-1 text-sm text-red-400">{errors.password}</p>
-                                    )}
-                                </div>
-
-                                <div className="flex items-center justify-between">
-                                    <label className="flex items-center">
-                                        <input
-                                            type="checkbox"
-                                            checked={data.remember}
-                                            onChange={(e) => setData('remember', e.target.checked)}
-                                            className="h-4 w-4 rounded border-slate-700 bg-slate-800 text-slate-400 focus:ring-slate-600"
-                                        />
-                                        <span className="ml-2 text-sm text-slate-400">Remember me</span>
-                                    </label>
-                                </div>
-
-                                <Button
-                                    type="submit"
-                                    disabled={processing}
-                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg"
-                                >
-                                    {processing ? 'Accessing...' : 'Access Login'}
-                                </Button>
-
-                                <div className="mt-3 text-center">
-                                    <button
-                                        type="button"
-                                        onClick={goBackToEmail}
-                                        className="text-sm text-slate-400 hover:text-slate-200 inline-flex items-center"
-                                    >
-                                        <ArrowLeft className="h-3 w-3 mr-1" />
-                                        Back to email
-                                    </button>
-                                </div>
-                            </form>
-                        )}
+                            <Button
+                                type="submit"
+                                disabled={processing}
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg"
+                            >
+                                {processing ? 'Accessing...' : 'Access Login'}
+                            </Button>
+                        </form>
 
                         <div className="mt-6 text-center text-sm">
                             <span className="text-slate-400">Don't have an account? </span>
@@ -496,4 +243,3 @@ export default function Login({ status, flash }: LoginProps) {
         </>
     );
 }
-
