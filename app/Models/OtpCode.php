@@ -37,7 +37,7 @@ class OtpCode extends Model
         return static::create([
             'email' => $email,
             'code' => $code,
-            'expires_at' => now()->addMinutes(10), // OTP expires in 10 minutes
+            'expires_at' => now()->addMinutes(30), // OTP expires in 30 minutes
             'attempts' => 0,
         ]);
     }

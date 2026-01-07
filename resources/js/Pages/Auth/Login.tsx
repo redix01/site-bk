@@ -9,13 +9,15 @@ interface LoginProps {
     flash?: {
         success?: string;
         user_name?: string;
+        otp_required?: boolean;
     };
 }
 
 export default function Login({ status, flash }: LoginProps) {
-    const [step, setStep] = useState<'email' | 'otp-password'>('email');
+    const [step, setStep] = useState<'email' | 'otp-password' | 'password-only'>('email');
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
+    const [otpRequired, setOtpRequired] = useState(true);
     const [resendCooldown, setResendCooldown] = useState(0);
     const [isResending, setIsResending] = useState(false);
     const [botWarning, setBotWarning] = useState<string | null>(null);
@@ -37,6 +39,13 @@ export default function Login({ status, flash }: LoginProps) {
     useEffect(() => {
         if (flash?.user_name) {
             setUserName(flash.user_name);
+        }
+        if (flash?.otp_required !== undefined) {
+            setOtpRequired(flash.otp_required);
+            // If OTP is not required, go directly to password-only step
+            if (!flash.otp_required) {
+                setStep('password-only');
+            }
         }
     }, [flash]);
 
@@ -122,18 +131,24 @@ export default function Login({ status, flash }: LoginProps) {
             onSuccess: (page) => {
                 const responseFlash = (page.props as any).flash;
                 const name = responseFlash?.user_name || '';
+                const requiresOtp = responseFlash?.otp_required !== false; // Default to true if not specified
                 
                 // Store in component state and session storage
                 setUserName(name);
                 setUserEmail(data.email);
+                setOtpRequired(requiresOtp);
                 
                 if (name) {
                     sessionStorage.setItem('login_user_name', name);
                 }
                 sessionStorage.setItem('login_user_email', data.email);
                 
-                // Always proceed to next step if no errors
-                setStep('otp-password');
+                // Proceed to appropriate step based on OTP requirement
+                if (requiresOtp) {
+                    setStep('otp-password');
+                } else {
+                    setStep('password-only');
+                }
             },
             onError: () => {
                 // Errors will be handled by the form
@@ -155,10 +170,26 @@ export default function Login({ status, flash }: LoginProps) {
         });
     };
 
+    const handlePasswordOnlySubmit: FormEventHandler = (e) => {
+        e.preventDefault();
+        if (isSubmissionSuspicious()) {
+            return;
+        }
+        post('/login/verify-otp', {
+            data: {
+                ...data,
+                email: userEmail, // Use the email from step 1
+                otp_code: '', // Empty OTP when not required
+                ...securityPayload,
+            }
+        });
+    };
+
     const goBackToEmail = () => {
         setStep('email');
         setUserName('');
         setUserEmail('');
+        setOtpRequired(true);
         setResendCooldown(0);
         reset('otp_code', 'password');
     };
@@ -202,6 +233,8 @@ export default function Login({ status, flash }: LoginProps) {
                         <CardDescription className="text-center text-slate-400">
                             {step === 'email' 
                                 ? 'Enter your email to continue' 
+                                : step === 'password-only'
+                                ? 'Enter your password to continue'
                                 : 'Enter your OTP code and password'
                             }
                         </CardDescription>
@@ -274,6 +307,70 @@ export default function Login({ status, flash }: LoginProps) {
                                 >
                                     {processing ? 'Sending OTP...' : 'Continue'}
                                 </Button>
+                            </form>
+                        ) : step === 'password-only' ? (
+                            <form onSubmit={handlePasswordOnlySubmit} className="space-y-4">
+                                <input type="hidden" name="internal_code" value={data.internal_code} />
+                                <div className="mb-4 p-3 bg-blue-800/30 rounded-md border border-blue-700">
+                                    <p className="text-sm text-blue-200">
+                                        <Shield className="inline h-4 w-4 mr-2" />
+                                        You have a recent session. Enter your password to continue.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-1">
+                                        Password
+                                    </label>
+                                    <div className="relative">
+                                        <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                                        <input
+                                            id="password"
+                                            type="password"
+                                            value={data.password}
+                                            onChange={(e) => setData('password', e.target.value)}
+                                            className="w-full pl-10 rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent"
+                                            placeholder="Enter your password"
+                                            autoComplete="current-password"
+                                            autoFocus
+                                            required
+                                        />
+                                    </div>
+                                    {errors.password && (
+                                        <p className="mt-1 text-sm text-red-400">{errors.password}</p>
+                                    )}
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    <label className="flex items-center">
+                                        <input
+                                            type="checkbox"
+                                            checked={data.remember}
+                                            onChange={(e) => setData('remember', e.target.checked)}
+                                            className="h-4 w-4 rounded border-slate-700 bg-slate-800 text-slate-400 focus:ring-slate-600"
+                                        />
+                                        <span className="ml-2 text-sm text-slate-400">Remember me</span>
+                                    </label>
+                                </div>
+
+                                <Button
+                                    type="submit"
+                                    disabled={processing}
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg"
+                                >
+                                    {processing ? 'Accessing...' : 'Access Login'}
+                                </Button>
+
+                                <div className="mt-3 text-center">
+                                    <button
+                                        type="button"
+                                        onClick={goBackToEmail}
+                                        className="text-sm text-slate-400 hover:text-slate-200 inline-flex items-center"
+                                    >
+                                        <ArrowLeft className="h-3 w-3 mr-1" />
+                                        Back to email
+                                    </button>
+                                </div>
                             </form>
                         ) : (
                             <form onSubmit={handleOtpPasswordSubmit} className="space-y-4">
