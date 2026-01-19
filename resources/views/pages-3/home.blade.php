@@ -185,7 +185,7 @@
                 <ul class="c-header-public__topbar-right c-header-public__topbar-items c-header-public__nav-list">
                     
                         <li class="c-header-public__topbar-list-item c-header-public__nav-list-item">
-                            <a href="https://www.swisscanto.com/ch/en/institutional/blog.html" class="c-header-public__topbar-item c-header-public__item" data-analytics-title="Blog">
+                            <a href="#" class="c-header-public__topbar-item c-header-public__item" data-analytics-title="Blog">
                                 <span class="c-header-public__topbar-item-text c-header-public__item-text">Blog</span>
                             </a>
                         </li>
@@ -215,7 +215,7 @@
         </button>
         <ul data-component-is="language-switch-component" aria-hidden="true" id="item-toggle-lsd" class="c-header-public__icon-nav-submenu c-header-public__submenu">
             <li class="c-header-public__icon-nav-submenu-item c-header-public__submenu-item">
-                <a href="https://www.zkb.ch/de.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="de">
+                <a href="#" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="de">
                     <span class="c-header-public__icon-nav-item-text c-header-public__item-text">De</span>
                 </a>
             </li>
@@ -223,7 +223,7 @@
             
         
             <li class="c-header-public__icon-nav-submenu-item c-header-public__submenu-item">
-                <a href="https://www.zkb.ch/fr.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="fr">
+                <a href="#" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="fr">
                     <span class="c-header-public__icon-nav-item-text c-header-public__item-text">Fr</span>
                 </a>
             </li>
@@ -275,7 +275,7 @@
                     
                         
                             
-                                <a class="c-header-public__icon-nav-item c-header-public__item" rel="noreferrer" href="https://zkb-finance.mdgms.com/home/index.html?LANG=en" target="_blank">
+                                <a class="c-header-public__icon-nav-item c-header-public__item" rel="noreferrer" href="#">
                                     
     <i class="c-icon c-icon--ui-arrow-rising  c-header-public__icon-nav-item-icon c-header-public__item-icon">
         <svg viewBox="0 0 16 16" class="c-icon__svg c-icon__svg--ui-arrow-rising">
@@ -300,7 +300,7 @@
                         
                             
                             
-                                <a href="https://onba.zkb.ch/en" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--is-button c-header-public__item--is-button">
+                                <a href="{{ route('login') }}" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--is-button c-header-public__item--is-button">
                                     
     <i class="c-icon c-icon--ui-lock  c-header-public__icon-nav-item-icon c-header-public__item-icon">
         <svg viewBox="0 0 16 16" class="c-icon__svg c-icon__svg--ui-lock">
@@ -345,7 +345,7 @@
         </button>
         <ul data-component-is="language-switch-component" aria-hidden="true" id="item-toggle-lsm" class="c-header-public__icon-nav-submenu c-header-public__submenu">
             <li class="c-header-public__icon-nav-submenu-item c-header-public__submenu-item">
-                <a href="https://www.zkb.ch/de.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="de">
+                <a href="#" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="de">
                     <span class="c-header-public__icon-nav-item-text c-header-public__item-text">De</span>
                 </a>
             </li>
@@ -353,7 +353,7 @@
             
         
             <li class="c-header-public__icon-nav-submenu-item c-header-public__submenu-item">
-                <a href="https://www.zkb.ch/fr.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="fr">
+                <a href="#" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="fr">
                     <span class="c-header-public__icon-nav-item-text c-header-public__item-text">Fr</span>
                 </a>
             </li>
@@ -1130,7 +1130,7 @@ Sustainability
     
 
 <div>
-    <a class="l-grid l-grid--no-gap l-tile-group l-tile-group--align-top t-link-area  " data-component-is="content-teaser" data-component-id="content-teaser" data-analytics-campaign="anlegen-pr-finanzinfos" href="https://zkb-finance.mdgms.com/home/search/index.html" data-analytics-component-name="Content-Teaser" target="_blank">
+    <a class="l-grid l-grid--no-gap l-tile-group l-tile-group--align-top t-link-area  " data-component-is="content-teaser" data-component-id="content-teaser" data-analytics-campaign="anlegen-pr-finanzinfos" href="#" data-analytics-component-name="Content-Teaser">
         <div class="l-grid__cell l-grid__cell--13 l-grid__cell--3/5@tablet l-grid__cell--1/1@phone l-tile-group__tile t-link-area__link">
             
 
