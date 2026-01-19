@@ -19,15 +19,15 @@ Route::prefix('pages-3')->name('pages3.')->group(function () {
     Route::get('/', [Pages3Controller::class, 'home'])->name('home');
     Route::get('/legal', [Pages3Controller::class, 'legal'])->name('legal');
     
-    // Home sub-pages
-    Route::get('/home/asset-management', [Pages3Controller::class, 'homeAssetManagement'])->name('home.asset-management');
-    Route::get('/home/international-banking', [Pages3Controller::class, 'homeInternationalBanking'])->name('home.international-banking');
-    Route::get('/home/private-banking', [Pages3Controller::class, 'homePrivateBanking'])->name('home.private-banking');
-    Route::get('/home/contact', [Pages3Controller::class, 'homeContact'])->name('home.contact');
-    Route::get('/home/our-company', [Pages3Controller::class, 'homeOurCompany'])->name('home.our-company');
-    Route::get('/home/media', [Pages3Controller::class, 'homeMedia'])->name('home.media');
-    Route::get('/home/investor-relations', [Pages3Controller::class, 'homeInvestorRelations'])->name('home.investor-relations');
-    Route::get('/home/institutional-clients', [Pages3Controller::class, 'homeInstitutionalClients'])->name('home.institutional-clients');
+    // Home sub-pages with simplified route names for header menu
+    Route::get('/asset-management', [Pages3Controller::class, 'homeAssetManagement'])->name('assetmanagement');
+    Route::get('/international-banking', [Pages3Controller::class, 'homeInternationalBanking'])->name('internationalbanking');
+    Route::get('/private-banking', [Pages3Controller::class, 'homePrivateBanking'])->name('privatebanking');
+    Route::get('/contact', [Pages3Controller::class, 'homeContact'])->name('contact');
+    Route::get('/our-company', [Pages3Controller::class, 'homeOurCompany'])->name('ourcompany');
+    Route::get('/media', [Pages3Controller::class, 'homeMedia'])->name('media');
+    Route::get('/investor-relations', [Pages3Controller::class, 'homeInvestorRelations'])->name('investorrelations');
+    Route::get('/institutional-clients', [Pages3Controller::class, 'homeInstitutionalClients'])->name('institutionalclients');
     
     // Legal sub-pages
     Route::get('/legal/whistleblowing', [Pages3Controller::class, 'legalWhistleblowing'])->name('legal.whistleblowing');
