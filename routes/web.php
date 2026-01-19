@@ -8,9 +8,39 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Pages3Controller;
 
-Route::view('/', 'pages.index')->name('home');
+// Homepage - using Pages3 template
+Route::get('/', [Pages3Controller::class, 'home'])->name('home');
 Route::view('/about', 'pages.about')->name('about');
+
+// Pages-3 Routes
+Route::prefix('pages-3')->name('pages3.')->group(function () {
+    Route::get('/', [Pages3Controller::class, 'home'])->name('home');
+    Route::get('/legal', [Pages3Controller::class, 'legal'])->name('legal');
+    
+    // Home sub-pages
+    Route::get('/home/asset-management', [Pages3Controller::class, 'homeAssetManagement'])->name('home.asset-management');
+    Route::get('/home/international-banking', [Pages3Controller::class, 'homeInternationalBanking'])->name('home.international-banking');
+    Route::get('/home/private-banking', [Pages3Controller::class, 'homePrivateBanking'])->name('home.private-banking');
+    Route::get('/home/contact', [Pages3Controller::class, 'homeContact'])->name('home.contact');
+    Route::get('/home/our-company', [Pages3Controller::class, 'homeOurCompany'])->name('home.our-company');
+    Route::get('/home/media', [Pages3Controller::class, 'homeMedia'])->name('home.media');
+    Route::get('/home/investor-relations', [Pages3Controller::class, 'homeInvestorRelations'])->name('home.investor-relations');
+    Route::get('/home/institutional-clients', [Pages3Controller::class, 'homeInstitutionalClients'])->name('home.institutional-clients');
+    
+    // Legal sub-pages
+    Route::get('/legal/whistleblowing', [Pages3Controller::class, 'legalWhistleblowing'])->name('legal.whistleblowing');
+    Route::get('/legal/aeoi', [Pages3Controller::class, 'legalAeoi'])->name('legal.aeoi');
+    Route::get('/legal/data-protection', [Pages3Controller::class, 'legalDataProtection'])->name('legal.data-protection');
+    Route::get('/legal/terms-conditions', [Pages3Controller::class, 'legalTermsConditions'])->name('legal.terms-conditions');
+    Route::get('/legal/trading-and-investment-business', [Pages3Controller::class, 'legalTradingAndInvestmentBusiness'])->name('legal.trading-and-investment-business');
+    Route::get('/legal/conflict-of-interest', [Pages3Controller::class, 'legalConflictOfInterest'])->name('legal.conflict-of-interest');
+    
+    // LPS pages
+    Route::get('/lps/private-banking', [Pages3Controller::class, 'lpsPrivateBanking'])->name('lps.private-banking');
+    Route::get('/lps/corporate/berichterstattung', [Pages3Controller::class, 'lpsCorporateBerichterstattung'])->name('lps.corporate.berichterstattung');
+});
 
 Route::prefix('personal')->name('personal.')->group(function () {
     Route::view('/banking-services', 'pages.personal.banking-services')->name('banking-services');
