@@ -6,7 +6,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="UTF-8"/>
-    <title>Zürcher Kantonalbank – We are the bank that is close to you.</title>
+    <title>{{ config('app.name') }} – We are the bank that is close to you.</title>
     
 
 
@@ -34,7 +34,7 @@
 
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="home.html"/>
-<meta property="og:title" content="Zürcher Kantonalbank – We are the bank that is close to you."/>
+<meta property="og:title" content="{{ config('app.name') }} – We are the bank that is close to you."/>
 <meta property="og:description" content="We are one of the safest universal banks in the world with strong regional roots and an international network. We are committed to solving your financial needs. "/>
 
 <meta property="twitter:card" content="summary"/>
@@ -42,7 +42,7 @@
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="@zkb_ch"/>
-<meta name="twitter:title" content="Zürcher Kantonalbank – We are the bank that is close to you."/>
+<meta name="twitter:title" content="{{ config('app.name') }} – We are the bank that is close to you."/>
 <meta name="twitter:description" content="We are one of the safest universal banks in the world with strong regional roots and an international network. We are committed to solving your financial needs. "/>
 
 
@@ -752,7 +752,7 @@ Sustainability
 </section></div>
 <div class="text zkb-component zkb-component--text"><div class="t-richtext l-max-width l-max-width--apple l-stack l-stack--horse l-stack--cat@phone" data-component-is="text" data-component-id="text" data-analytics-component-name="Text">
     
-    <h3>What distinguishes us as Zürcher Kantonalbank?</h3>
+    <h3>What distinguishes us as {{ config('app.name') }}?</h3>
 
 </div>
 
@@ -1252,7 +1252,7 @@ Sustainability
                 
 
 <div class="c-footer__base" data-component-is="footer-global" data-component-id="footer-global" data-analytics-component-name="Global-Footer">
-    <footer class="c-footer__copyright">© Zürcher Kantonalbank</footer>
+    <footer class="c-footer__copyright">© {{ config('app.name') }}</footer>
     <aside aria-label="Meta Navigation" class="c-footer__metanav">
         <ul class="c-footer__list">
             <li class="c-footer__list-item t-link t-link--no-highlight">
