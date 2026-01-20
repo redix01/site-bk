@@ -65,6 +65,41 @@ class Pages3Controller extends Controller
         return view('pages3.home.institutional-clients');
     }
 
+    public function homeOurCompanyBoardOfDirectors()
+    {
+        return view('pages3.home.our-company.board-of-directors');
+    }
+
+    public function homeOurCompanyCorporateGovernance()
+    {
+        return view('pages3.home.our-company.corporate-governance');
+    }
+
+    public function homeOurCompanyCorporateStrategy()
+    {
+        return view('pages3.home.our-company.corporate-strategy');
+    }
+
+    public function homeOurCompanyExecutiveBoard()
+    {
+        return view('pages3.home.our-company.executive-board');
+    }
+
+    public function homeOurCompanyHistory()
+    {
+        return view('pages3.home.our-company.history');
+    }
+
+    public function homeOurCompanyMissionStatement()
+    {
+        return view('pages3.home.our-company.mission-statement');
+    }
+
+    public function homeOurCompanyPublicServiceMandate()
+    {
+        return view('pages3.home.our-company.public-service-mandate');
+    }
+
     /**
      * Display legal sub-pages
      */
@@ -96,6 +131,36 @@ class Pages3Controller extends Controller
     public function legalConflictOfInterest()
     {
         return view('pages3.legal.conflict-of-interest');
+    }
+
+    public function legalCompanyStructure()
+    {
+        return view('pages3.home.our-company.company-structure');
+    }
+
+    public function legalGeneralInformation()
+    {
+        return view('pages3.legal.general-information');
+    }
+
+    public function legalGips()
+    {
+        return view('pages3.legal.global-investment-performance-standards-gips');
+    }
+
+    public function legalKycAmlPatriotAct()
+    {
+        return view('pages3.legal.kyc-aml-patriot-act');
+    }
+
+    public function legalLegalNoticesWebsites()
+    {
+        return view('pages3.legal.legal-notices-websites');
+    }
+
+    public function legalTrustServices()
+    {
+        return view('pages3.legal.trust-services');
     }
 
     /**
