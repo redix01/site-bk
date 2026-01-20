@@ -81,6 +81,14 @@ class TransactionController extends Controller
 
         $transaction = Transaction::create($data);
 
+        // Notify user
+        try {
+            $user = User::findOrFail($transaction->user_id);
+            \Illuminate\Support\Facades\Mail::to($user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $user->name));
+        } catch (\Exception $e) {
+            report($e);
+        }
+
         return redirect()->route('admin.transactions.index')
                         ->with('success', 'Transaction created successfully.');
     }
@@ -163,6 +171,13 @@ class TransactionController extends Controller
             'reference' => $transaction->reference,
         ], $transaction);
 
+        // Notify user
+        try {
+            \Illuminate\Support\Facades\Mail::to($transaction->user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $transaction->user->name));
+        } catch (\Exception $e) {
+            report($e);
+        }
+
         return back()->with('success', 'Transaction approved successfully.');
     }
 
@@ -193,6 +208,13 @@ class TransactionController extends Controller
             'reference' => $transaction->reference,
             'reason' => $request->reason,
         ], $transaction);
+
+        // Notify user
+        try {
+            \Illuminate\Support\Facades\Mail::to($transaction->user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $transaction->user->name));
+        } catch (\Exception $e) {
+            report($e);
+        }
 
         return back()->with('success', 'Transaction rejected successfully.');
     }
@@ -242,6 +264,13 @@ class TransactionController extends Controller
             'reversal_id' => $reversal->id,
             'reason' => $request->reason,
         ], $transaction);
+
+        // Notify user
+        try {
+            \Illuminate\Support\Facades\Mail::to($transaction->user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $transaction->user->name));
+        } catch (\Exception $e) {
+            report($e);
+        }
 
         return back()->with('success', 'Transaction reversed successfully.');
     }
