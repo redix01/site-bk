@@ -130,29 +130,7 @@
     
     
         
-        <div class="headerSimple">
-<div class="l-page__start l-sticky l-sticky--top l-z-index l-z-index--navigation" data-component-is="simple-header-component" data-component-id="simple-header-component" data-analytics-component-name="Simple-Header" data-current-page-template="Overview">
-    <header class="c-header-process">
-        <div class="l-max-width l-max-width--pineapple l-page__main--bezel-inline l-horizontal l-horizontal--equidistant">
-            <div class="c-header-process__body">
-                
-                <div class="c-header-process__title-wrap l-max-width l-max-width--coconut">
-                    <span class="c-header-process__title">Legal</span>
-                </div>
-                <a href="#" aria-label="Prozess beenden" class="c-header-process__exit" data-component-hook="exit-process-link" data-fallback-link="/en.html">
-                    
-    <i class="c-icon c-icon--ui-close c-icon--l c-header-process__exit-icon">
-        <svg viewBox="0 0 16 16" class="c-icon__svg c-icon__svg--ui-close">
-            <use href="#ui-close"></use>
-        </svg>
-    </i>
-
-                </a>
-            </div>
-        </div>
-    </header>
-</div>
-</div>
+        <x-pages3-header />
 
 
 

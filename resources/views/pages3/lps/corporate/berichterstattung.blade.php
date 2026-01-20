@@ -80,7 +80,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="CqB3g5aFO7AfqAMtGTFYF5cXp91aWa9Lf6wpi/rIb2Z0gI8=">
 		function OptanonWrapper() {
@@ -346,9 +346,9 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/HIRES_CG22-07-03_U1A4561_2400x1800.r200img.900x600.jpg/1683817594319/hires-cg22-07-03-u1a4561-2400x1800.jpeg 900w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/HIRES_CG22-07-03_U1A4561_2400x1800.r200img.900x600.jpg/1683817594319/hires-cg22-07-03-u1a4561-2400x1800.jpeg 900w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/HIRES_CG22-07-03_U1A4561_2400x1800.r200img.1200x800.jpg/1683817594154/hires-cg22-07-03-u1a4561-2400x1800.jpeg 1200w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/HIRES_CG22-07-03_U1A4561_2400x1800.r200img.1200x800.jpg/1683817594154/hires-cg22-07-03-u1a4561-2400x1800.jpeg 1200w" media="(max-width: 1024px)"/>
                                 
                                 <img loading="eager" fetchpriority="high" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/HIRES_CG22-07-03_U1A4561_2400x1800.r200img.jpg/1683817596254/hires-cg22-07-03-u1a4561-2400x1800.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -568,11 +568,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.600x400.jpg/1742896683007/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.600x400.jpg/1742896683007/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.600x400.jpg/1742896683007/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.600x400.jpg/1742896683007/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.900x600.jpg/1742896682779/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 900w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.900x600.jpg/1742896682779/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 900w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.900x600.jpg/1742896682779/joerg-mueller-ganz-urs-baumann-aug2024.jpeg" alt class="c-image__img  "/>
                             </picture>

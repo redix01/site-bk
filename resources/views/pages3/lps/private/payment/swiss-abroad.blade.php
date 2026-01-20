@@ -81,7 +81,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="nXipiNiDdlDEtJG1Z79cIjzqIcpjvhT3pCp5UaCLcCwx6Y0=">
 		function OptanonWrapper() {
@@ -268,11 +268,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/ch/HIRES_CG19-09-19_DSF1522.r200img.600x400.jpg/1677758633639/hires-cg19-09-19-dsf1522.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/ch/HIRES_CG19-09-19_DSF1522.r200img.600x400.jpg/1677758633639/hires-cg19-09-19-dsf1522.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/ch/HIRES_CG19-09-19_DSF1522.r200img.900x600.jpg/1677758633474/hires-cg19-09-19-dsf1522.jpeg 900w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/ch/HIRES_CG19-09-19_DSF1522.r200img.900x600.jpg/1677758633474/hires-cg19-09-19-dsf1522.jpeg 900w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/ch/HIRES_CG19-09-19_DSF1522.r200img.1200x800.jpg/1677758633385/hires-cg19-09-19-dsf1522.jpeg 1200w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/ch/HIRES_CG19-09-19_DSF1522.r200img.1200x800.jpg/1677758633385/hires-cg19-09-19-dsf1522.jpeg 1200w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="eager" fetchpriority="high" src="https://www.zkb.ch/media/zkb/bilder/mood/ch/HIRES_CG19-09-19_DSF1522.r200img.1200x800.jpg/1677758633385/hires-cg19-09-19-dsf1522.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -501,11 +501,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/anlagen/Anlageklassen_GettyImages-1185858776.r200img.600x400.jpg/1677759245048/anlageklassen-gettyimages-1185858776.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/anlagen/Anlageklassen_GettyImages-1185858776.r200img.600x400.jpg/1677759245048/anlageklassen-gettyimages-1185858776.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/anlagen/Anlageklassen_GettyImages-1185858776.r200img.600x400.jpg/1677759245048/anlageklassen-gettyimages-1185858776.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/anlagen/Anlageklassen_GettyImages-1185858776.r200img.600x400.jpg/1677759245048/anlageklassen-gettyimages-1185858776.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/anlagen/Anlageklassen_GettyImages-1185858776.r200img.600x400.jpg/1677759245048/anlageklassen-gettyimages-1185858776.jpeg 600w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/anlagen/Anlageklassen_GettyImages-1185858776.r200img.600x400.jpg/1677759245048/anlageklassen-gettyimages-1185858776.jpeg 600w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/mood/kern/anlagen/Anlageklassen_GettyImages-1185858776.r200img.600x400.jpg/1677759245048/anlageklassen-gettyimages-1185858776.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -554,11 +554,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/immobilien/GettyImages-1150969049.r200img.600x400.jpg/1677758959761/gettyimages-1150969049.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/immobilien/GettyImages-1150969049.r200img.600x400.jpg/1677758959761/gettyimages-1150969049.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/immobilien/GettyImages-1150969049.r200img.600x400.jpg/1677758959761/gettyimages-1150969049.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/immobilien/GettyImages-1150969049.r200img.600x400.jpg/1677758959761/gettyimages-1150969049.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/immobilien/GettyImages-1150969049.r200img.600x400.jpg/1677758959761/gettyimages-1150969049.jpeg 600w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/immobilien/GettyImages-1150969049.r200img.600x400.jpg/1677758959761/gettyimages-1150969049.jpeg 600w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/mood/kern/immobilien/GettyImages-1150969049.r200img.600x400.jpg/1677758959761/gettyimages-1150969049.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -607,11 +607,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/konten-karten/GettyImages-1010583280.r200img.600x400.jpg/1677759287264/gettyimages-1010583280.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/konten-karten/GettyImages-1010583280.r200img.600x400.jpg/1677759287264/gettyimages-1010583280.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/konten-karten/GettyImages-1010583280.r200img.600x400.jpg/1677759287264/gettyimages-1010583280.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/konten-karten/GettyImages-1010583280.r200img.600x400.jpg/1677759287264/gettyimages-1010583280.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/konten-karten/GettyImages-1010583280.r200img.600x400.jpg/1677759287264/gettyimages-1010583280.jpeg 600w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/konten-karten/GettyImages-1010583280.r200img.600x400.jpg/1677759287264/gettyimages-1010583280.jpeg 600w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/mood/kern/konten-karten/GettyImages-1010583280.r200img.600x400.jpg/1677759287264/gettyimages-1010583280.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -660,11 +660,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/digitales-banking/GettyImages-1223178422.r200img.600x400.jpg/1677759396778/gettyimages-1223178422.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/digitales-banking/GettyImages-1223178422.r200img.600x400.jpg/1677759396778/gettyimages-1223178422.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/digitales-banking/GettyImages-1223178422.r200img.600x400.jpg/1677759396778/gettyimages-1223178422.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/digitales-banking/GettyImages-1223178422.r200img.600x400.jpg/1677759396778/gettyimages-1223178422.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/digitales-banking/GettyImages-1223178422.r200img.600x400.jpg/1677759396778/gettyimages-1223178422.jpeg 600w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/digitales-banking/GettyImages-1223178422.r200img.600x400.jpg/1677759396778/gettyimages-1223178422.jpeg 600w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/mood/kern/digitales-banking/GettyImages-1223178422.r200img.600x400.jpg/1677759396778/gettyimages-1223178422.jpeg" alt class="c-image__img  "/>
                             </picture>

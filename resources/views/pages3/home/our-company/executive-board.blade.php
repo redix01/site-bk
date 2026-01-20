@@ -79,7 +79,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="Em5Re9vkyy7B2KESrSjqyfJV/uPKr5J7BX2Dwgf4U+2sTpI=">
 		function OptanonWrapper() {
@@ -602,11 +602,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/urs_baumann.r200img.600x400.jpg/1677760277541/urs-baumann.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/urs_baumann.r200img.600x400.jpg/1677760277541/urs-baumann.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/urs_baumann.r200img.300x200.jpg/1677760277697/urs-baumann.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/urs_baumann.r200img.300x200.jpg/1677760277697/urs-baumann.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/urs_baumann.r200img.300x200.jpg/1677760277697/urs-baumann.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/urs_baumann.r200img.300x200.jpg/1677760277697/urs-baumann.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/urs_baumann.r200img.450x300.jpg/1677760277618/urs-baumann.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -769,11 +769,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.600x400.jpg/1677758917040/isele-stephanino-2019.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.600x400.jpg/1677758917040/isele-stephanino-2019.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.300x200.jpg/1677758917490/isele-stephanino-2019.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.300x200.jpg/1677758917490/isele-stephanino-2019.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.300x200.jpg/1677758917490/isele-stephanino-2019.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.300x200.jpg/1677758917490/isele-stephanino-2019.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.450x300.jpg/1677758917242/isele-stephanino-2019.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -936,11 +936,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.600x400.jpg/1694504020251/martin-bardenhewer.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.600x400.jpg/1694504020251/martin-bardenhewer.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.300x200.jpg/1694504020816/martin-bardenhewer.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.300x200.jpg/1694504020816/martin-bardenhewer.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.300x200.jpg/1694504020816/martin-bardenhewer.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.300x200.jpg/1694504020816/martin-bardenhewer.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.450x300.jpg/1694504020528/martin-bardenhewer.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1103,11 +1103,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.600x400.jpg/1680269215852/j-buehlmann-sept22.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.600x400.jpg/1680269215852/j-buehlmann-sept22.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.300x200.jpg/1680269216702/j-buehlmann-sept22.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.300x200.jpg/1680269216702/j-buehlmann-sept22.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.300x200.jpg/1680269216702/j-buehlmann-sept22.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.300x200.jpg/1680269216702/j-buehlmann-sept22.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.450x300.jpg/1680269216218/j-buehlmann-sept22.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1276,11 +1276,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.600x400.jpg/1744262386372/mario-crameri-freigestellt.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.600x400.jpg/1744262386372/mario-crameri-freigestellt.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.300x200.jpg/1744262386894/mario-crameri-freigestellt.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.300x200.jpg/1744262386894/mario-crameri-freigestellt.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.300x200.jpg/1744262386894/mario-crameri-freigestellt.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.300x200.jpg/1744262386894/mario-crameri-freigestellt.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.450x300.jpg/1744262386600/mario-crameri-freigestellt.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1439,11 +1439,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.600x400.jpg/1677758906876/previdoli-daniel-2019.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.600x400.jpg/1677758906876/previdoli-daniel-2019.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.300x200.jpg/1677758907328/previdoli-daniel-2019.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.300x200.jpg/1677758907328/previdoli-daniel-2019.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.300x200.jpg/1677758907328/previdoli-daniel-2019.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.300x200.jpg/1677758907328/previdoli-daniel-2019.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.450x300.jpg/1677758907072/previdoli-daniel-2019.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1607,11 +1607,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.600x400.jpg/1759986059884/florence-schnydrig-moser-2021-10-portrait-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.600x400.jpg/1759986059884/florence-schnydrig-moser-2021-10-portrait-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.300x200.jpg/1759986060031/florence-schnydrig-moser-2021-10-portrait-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.300x200.jpg/1759986060031/florence-schnydrig-moser-2021-10-portrait-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.300x200.jpg/1759986060031/florence-schnydrig-moser-2021-10-portrait-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.300x200.jpg/1759986060031/florence-schnydrig-moser-2021-10-portrait-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.450x300.jpg/1759986059955/florence-schnydrig-moser-2021-10-portrait-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1774,11 +1774,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.600x400.jpg/1688031982164/hjalmar-schroeder.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.600x400.jpg/1688031982164/hjalmar-schroeder.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.300x200.jpg/1688031982660/hjalmar-schroeder.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.300x200.jpg/1688031982660/hjalmar-schroeder.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.300x200.jpg/1688031982660/hjalmar-schroeder.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.300x200.jpg/1688031982660/hjalmar-schroeder.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.450x300.jpg/1688031982395/hjalmar-schroeder.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1940,11 +1940,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.600x400.jpg/1756444347043/susanne-thellung-aug25-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.600x400.jpg/1756444347043/susanne-thellung-aug25-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.300x200.jpg/1756444347207/susanne-thellung-aug25-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.300x200.jpg/1756444347207/susanne-thellung-aug25-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.300x200.jpg/1756444347207/susanne-thellung-aug25-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.300x200.jpg/1756444347207/susanne-thellung-aug25-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.450x300.jpg/1756444347123/susanne-thellung-aug25-web.jpeg" alt class="c-image__img  "/>
                             </picture>

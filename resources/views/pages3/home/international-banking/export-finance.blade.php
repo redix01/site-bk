@@ -79,7 +79,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="hhH9zZaEiWj+Sf1vMou65YmvpGcOhVVkxX/mrGf/bqXwoLc=">
 		function OptanonWrapper() {
@@ -563,11 +563,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/business/unternehmen/GettyImages-656286113.r200img.450x300.jpg/1677757259150/gettyimages-656286113.jpeg 450w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/business/unternehmen/GettyImages-656286113.r200img.450x300.jpg/1677757259150/gettyimages-656286113.jpeg 450w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/business/unternehmen/GettyImages-656286113.r200img.800x400.jpg/1677757258542/gettyimages-656286113.jpeg 800w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/business/unternehmen/GettyImages-656286113.r200img.800x400.jpg/1677757258542/gettyimages-656286113.jpeg 800w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/business/unternehmen/GettyImages-656286113.r200img.1200x600.jpg/1677757258473/gettyimages-656286113.jpeg 1200w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/business/unternehmen/GettyImages-656286113.r200img.1200x600.jpg/1677757258473/gettyimages-656286113.jpeg 1200w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/mood/business/unternehmen/GettyImages-656286113.r200img.2000x1000.jpg/1677757258390/gettyimages-656286113.jpeg" alt class="c-image__img  "/>
                             </picture>

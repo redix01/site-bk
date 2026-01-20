@@ -79,7 +79,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="TsrIlhkAMb62QrQ4puZdt5l9+6Gn9PRTmjwd2xN4eq0171Y=">
 		function OptanonWrapper() {
@@ -614,11 +614,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/urs_baumann.r200img.600x400.jpg/1677760277541/urs-baumann.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/urs_baumann.r200img.600x400.jpg/1677760277541/urs-baumann.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/urs_baumann.r200img.300x200.jpg/1677760277697/urs-baumann.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/urs_baumann.r200img.300x200.jpg/1677760277697/urs-baumann.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/urs_baumann.r200img.300x200.jpg/1677760277697/urs-baumann.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/urs_baumann.r200img.300x200.jpg/1677760277697/urs-baumann.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/urs_baumann.r200img.450x300.jpg/1677760277618/urs-baumann.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -713,11 +713,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.600x400.jpg/1677758917040/isele-stephanino-2019.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.600x400.jpg/1677758917040/isele-stephanino-2019.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.300x200.jpg/1677758917490/isele-stephanino-2019.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.300x200.jpg/1677758917490/isele-stephanino-2019.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.300x200.jpg/1677758917490/isele-stephanino-2019.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.300x200.jpg/1677758917490/isele-stephanino-2019.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/Isele_Stephanino_2019.r200img.450x300.jpg/1677758917242/isele-stephanino-2019.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -812,11 +812,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.600x400.jpg/1694504020251/martin-bardenhewer.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.600x400.jpg/1694504020251/martin-bardenhewer.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.300x200.jpg/1694504020816/martin-bardenhewer.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.300x200.jpg/1694504020816/martin-bardenhewer.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.300x200.jpg/1694504020816/martin-bardenhewer.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.300x200.jpg/1694504020816/martin-bardenhewer.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/martin_bardenhewer.r200img.450x300.jpg/1694504020528/martin-bardenhewer.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -911,11 +911,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.600x400.jpg/1680269215852/j-buehlmann-sept22.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.600x400.jpg/1680269215852/j-buehlmann-sept22.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.300x200.jpg/1680269216702/j-buehlmann-sept22.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.300x200.jpg/1680269216702/j-buehlmann-sept22.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.300x200.jpg/1680269216702/j-buehlmann-sept22.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.300x200.jpg/1680269216702/j-buehlmann-sept22.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/j_buehlmann_sept22.r200img.450x300.jpg/1680269216218/j-buehlmann-sept22.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1007,11 +1007,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.600x400.jpg/1744262386372/mario-crameri-freigestellt.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.600x400.jpg/1744262386372/mario-crameri-freigestellt.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.300x200.jpg/1744262386894/mario-crameri-freigestellt.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.300x200.jpg/1744262386894/mario-crameri-freigestellt.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.300x200.jpg/1744262386894/mario-crameri-freigestellt.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.300x200.jpg/1744262386894/mario-crameri-freigestellt.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/mario_crameri_freigestellt.r200img.450x300.jpg/1744262386600/mario-crameri-freigestellt.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1107,11 +1107,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.600x400.jpg/1677758906876/previdoli-daniel-2019.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.600x400.jpg/1677758906876/previdoli-daniel-2019.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.300x200.jpg/1677758907328/previdoli-daniel-2019.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.300x200.jpg/1677758907328/previdoli-daniel-2019.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.300x200.jpg/1677758907328/previdoli-daniel-2019.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.300x200.jpg/1677758907328/previdoli-daniel-2019.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/Previdoli_Daniel_2019.r200img.450x300.jpg/1677758907072/previdoli-daniel-2019.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1207,11 +1207,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.600x400.jpg/1759986059884/florence-schnydrig-moser-2021-10-portrait-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.600x400.jpg/1759986059884/florence-schnydrig-moser-2021-10-portrait-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.300x200.jpg/1759986060031/florence-schnydrig-moser-2021-10-portrait-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.300x200.jpg/1759986060031/florence-schnydrig-moser-2021-10-portrait-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.300x200.jpg/1759986060031/florence-schnydrig-moser-2021-10-portrait-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.300x200.jpg/1759986060031/florence-schnydrig-moser-2021-10-portrait-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/florence_schnydrig_moser_2021-10_portrait_web.r200img.450x300.jpg/1759986059955/florence-schnydrig-moser-2021-10-portrait-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1310,11 +1310,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.600x400.jpg/1688031982164/hjalmar-schroeder.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.600x400.jpg/1688031982164/hjalmar-schroeder.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.300x200.jpg/1688031982660/hjalmar-schroeder.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.300x200.jpg/1688031982660/hjalmar-schroeder.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.300x200.jpg/1688031982660/hjalmar-schroeder.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.300x200.jpg/1688031982660/hjalmar-schroeder.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/hjalmar_schroeder.r200img.450x300.jpg/1688031982395/hjalmar-schroeder.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1406,11 +1406,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.600x400.jpg/1756444347043/susanne-thellung-aug25-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.600x400.jpg/1756444347043/susanne-thellung-aug25-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.300x200.jpg/1756444347207/susanne-thellung-aug25-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.300x200.jpg/1756444347207/susanne-thellung-aug25-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.300x200.jpg/1756444347207/susanne-thellung-aug25-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.300x200.jpg/1756444347207/susanne-thellung-aug25-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/Susanne-Thellung_aug25_web.r200img.450x300.jpg/1756444347123/susanne-thellung-aug25-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1518,11 +1518,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.600x400.jpg/1680269127582/j-mueller-ganz-sept22.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.600x400.jpg/1680269127582/j-mueller-ganz-sept22.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.300x200.jpg/1680269128436/j-mueller-ganz-sept22.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.300x200.jpg/1680269128436/j-mueller-ganz-sept22.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.300x200.jpg/1680269128436/j-mueller-ganz-sept22.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.300x200.jpg/1680269128436/j-mueller-ganz-sept22.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.450x300.jpg/1680269127954/j-mueller-ganz-sept22.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1617,11 +1617,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.600x400.jpg/1680269157414/r-liebi-sept22.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.600x400.jpg/1680269157414/r-liebi-sept22.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.300x200.jpg/1680269158276/r-liebi-sept22.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.300x200.jpg/1680269158276/r-liebi-sept22.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.300x200.jpg/1680269158276/r-liebi-sept22.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.300x200.jpg/1680269158276/r-liebi-sept22.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.450x300.jpg/1680269157781/r-liebi-sept22.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1716,11 +1716,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/m_roth_sept22.r200img.600x400.jpg/1680269186988/m-roth-sept22.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/m_roth_sept22.r200img.600x400.jpg/1680269186988/m-roth-sept22.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/m_roth_sept22.r200img.300x200.jpg/1680269187925/m-roth-sept22.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/m_roth_sept22.r200img.300x200.jpg/1680269187925/m-roth-sept22.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/m_roth_sept22.r200img.300x200.jpg/1680269187925/m-roth-sept22.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/m_roth_sept22.r200img.300x200.jpg/1680269187925/m-roth-sept22.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/m_roth_sept22.r200img.450x300.jpg/1680269187418/m-roth-sept22.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1812,11 +1812,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_03_web.r200img.600x400.jpg/1683817050649/medienbilder-hauptsitz-03-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_03_web.r200img.600x400.jpg/1683817050649/medienbilder-hauptsitz-03-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_03_web.r200img.300x200.jpg/1683817050843/medienbilder-hauptsitz-03-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_03_web.r200img.300x200.jpg/1683817050843/medienbilder-hauptsitz-03-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_03_web.r200img.300x200.jpg/1683817050843/medienbilder-hauptsitz-03-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_03_web.r200img.300x200.jpg/1683817050843/medienbilder-hauptsitz-03-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_03_web.r200img.450x300.jpg/1683817050743/medienbilder-hauptsitz-03-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1888,11 +1888,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_02_web.r200img.600x400.jpg/1683817658496/medienbilder-hauptsitz-02-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_02_web.r200img.600x400.jpg/1683817658496/medienbilder-hauptsitz-02-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_02_web.r200img.300x200.jpg/1683817658677/medienbilder-hauptsitz-02-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_02_web.r200img.300x200.jpg/1683817658677/medienbilder-hauptsitz-02-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_02_web.r200img.300x200.jpg/1683817658677/medienbilder-hauptsitz-02-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_02_web.r200img.300x200.jpg/1683817658677/medienbilder-hauptsitz-02-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_02_web.r200img.450x300.jpg/1683817658586/medienbilder-hauptsitz-02-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1964,11 +1964,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_01_web.r200img.600x400.jpg/1683817662195/medienbilder-hauptsitz-01-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_01_web.r200img.600x400.jpg/1683817662195/medienbilder-hauptsitz-01-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_01_web.r200img.300x200.jpg/1683817662460/medienbilder-hauptsitz-01-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_01_web.r200img.300x200.jpg/1683817662460/medienbilder-hauptsitz-01-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_01_web.r200img.300x200.jpg/1683817662460/medienbilder-hauptsitz-01-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_01_web.r200img.300x200.jpg/1683817662460/medienbilder-hauptsitz-01-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_01_web.r200img.450x300.jpg/1683817662343/medienbilder-hauptsitz-01-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2040,11 +2040,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_04_web.r200img.600x400.jpg/1683817655060/medienbilder-hauptsitz-04-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_04_web.r200img.600x400.jpg/1683817655060/medienbilder-hauptsitz-04-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_04_web.r200img.300x200.jpg/1683817655260/medienbilder-hauptsitz-04-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_04_web.r200img.300x200.jpg/1683817655260/medienbilder-hauptsitz-04-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_04_web.r200img.300x200.jpg/1683817655260/medienbilder-hauptsitz-04-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_04_web.r200img.300x200.jpg/1683817655260/medienbilder-hauptsitz-04-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_04_web.r200img.450x300.jpg/1683817655162/medienbilder-hauptsitz-04-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2116,11 +2116,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_05_web.r200img.600x400.jpg/1683817031065/medienbilder-hauptsitz-05-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_05_web.r200img.600x400.jpg/1683817031065/medienbilder-hauptsitz-05-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_05_web.r200img.300x200.jpg/1683817031248/medienbilder-hauptsitz-05-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_05_web.r200img.300x200.jpg/1683817031248/medienbilder-hauptsitz-05-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_05_web.r200img.300x200.jpg/1683817031248/medienbilder-hauptsitz-05-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_05_web.r200img.300x200.jpg/1683817031248/medienbilder-hauptsitz-05-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hauptsitz_05_web.r200img.450x300.jpg/1683817031161/medienbilder-hauptsitz-05-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2192,11 +2192,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hard_01_web.r200img.600x400.jpg/1683817717119/medienbilder-hard-01-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hard_01_web.r200img.600x400.jpg/1683817717119/medienbilder-hard-01-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hard_01_web.r200img.300x200.jpg/1683817717303/medienbilder-hard-01-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hard_01_web.r200img.300x200.jpg/1683817717303/medienbilder-hard-01-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hard_01_web.r200img.300x200.jpg/1683817717303/medienbilder-hard-01-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hard_01_web.r200img.300x200.jpg/1683817717303/medienbilder-hard-01-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hard_01_web.r200img.450x300.jpg/1683817717209/medienbilder-hard-01-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2268,11 +2268,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hard_02_web.r200img.600x400.jpg/1683817651837/medienbilder-hard-02-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hard_02_web.r200img.600x400.jpg/1683817651837/medienbilder-hard-02-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hard_02_web.r200img.300x200.jpg/1683817652020/medienbilder-hard-02-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hard_02_web.r200img.300x200.jpg/1683817652020/medienbilder-hard-02-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_hard_02_web.r200img.300x200.jpg/1683817652020/medienbilder-hard-02-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hard_02_web.r200img.300x200.jpg/1683817652020/medienbilder-hard-02-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_hard_02_web.r200img.450x300.jpg/1683817651919/medienbilder-hard-02-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2344,11 +2344,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_steinfels_01_web.r200img.600x400.jpg/1683817054421/medienbilder-steinfels-01-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_steinfels_01_web.r200img.600x400.jpg/1683817054421/medienbilder-steinfels-01-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_steinfels_01_web.r200img.300x200.jpg/1683817054657/medienbilder-steinfels-01-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_steinfels_01_web.r200img.300x200.jpg/1683817054657/medienbilder-steinfels-01-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_steinfels_01_web.r200img.300x200.jpg/1683817054657/medienbilder-steinfels-01-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_steinfels_01_web.r200img.300x200.jpg/1683817054657/medienbilder-steinfels-01-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_steinfels_01_web.r200img.450x300.jpg/1683817054537/medienbilder-steinfels-01-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2420,11 +2420,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_steinfels_02_web.r200img.600x400.jpg/1683817064817/medienbilder-steinfels-02-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_steinfels_02_web.r200img.600x400.jpg/1683817064817/medienbilder-steinfels-02-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_steinfels_02_web.r200img.300x200.jpg/1683817065018/medienbilder-steinfels-02-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_steinfels_02_web.r200img.300x200.jpg/1683817065018/medienbilder-steinfels-02-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_steinfels_02_web.r200img.300x200.jpg/1683817065018/medienbilder-steinfels-02-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_steinfels_02_web.r200img.300x200.jpg/1683817065018/medienbilder-steinfels-02-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_steinfels_02_web.r200img.450x300.jpg/1683817064916/medienbilder-steinfels-02-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2496,11 +2496,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_01_web.r200img.600x400.jpg/1683817044218/medienbilder-winterthur-01-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_01_web.r200img.600x400.jpg/1683817044218/medienbilder-winterthur-01-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_01_web.r200img.300x200.jpg/1683817044422/medienbilder-winterthur-01-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_01_web.r200img.300x200.jpg/1683817044422/medienbilder-winterthur-01-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_01_web.r200img.300x200.jpg/1683817044422/medienbilder-winterthur-01-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_01_web.r200img.300x200.jpg/1683817044422/medienbilder-winterthur-01-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_01_web.r200img.450x300.jpg/1683817044311/medienbilder-winterthur-01-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2572,11 +2572,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_03_web.r200img.600x400.jpg/1683817700833/medienbilder-winterthur-03-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_03_web.r200img.600x400.jpg/1683817700833/medienbilder-winterthur-03-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_03_web.r200img.300x200.jpg/1683817701015/medienbilder-winterthur-03-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_03_web.r200img.300x200.jpg/1683817701015/medienbilder-winterthur-03-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_03_web.r200img.300x200.jpg/1683817701015/medienbilder-winterthur-03-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_03_web.r200img.300x200.jpg/1683817701015/medienbilder-winterthur-03-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_03_web.r200img.450x300.jpg/1683817700929/medienbilder-winterthur-03-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2648,11 +2648,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_02_web.r200img.600x400.jpg/1683817047447/medienbilder-winterthur-02-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_02_web.r200img.600x400.jpg/1683817047447/medienbilder-winterthur-02-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_02_web.r200img.300x200.jpg/1683817047620/medienbilder-winterthur-02-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_02_web.r200img.300x200.jpg/1683817047620/medienbilder-winterthur-02-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_winterthur_02_web.r200img.300x200.jpg/1683817047620/medienbilder-winterthur-02-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_02_web.r200img.300x200.jpg/1683817047620/medienbilder-winterthur-02-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_winterthur_02_web.r200img.450x300.jpg/1683817047533/medienbilder-winterthur-02-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2724,11 +2724,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_stettbach_01_web.r200img.600x400.jpg/1683817019551/medienbilder-stettbach-01-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_stettbach_01_web.r200img.600x400.jpg/1683817019551/medienbilder-stettbach-01-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_stettbach_01_web.r200img.300x200.jpg/1683817019753/medienbilder-stettbach-01-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_stettbach_01_web.r200img.300x200.jpg/1683817019753/medienbilder-stettbach-01-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_stettbach_01_web.r200img.300x200.jpg/1683817019753/medienbilder-stettbach-01-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_stettbach_01_web.r200img.300x200.jpg/1683817019753/medienbilder-stettbach-01-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_stettbach_01_web.r200img.450x300.jpg/1683817019652/medienbilder-stettbach-01-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2800,11 +2800,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_stettbach_02_web.r200img.600x400.jpg/1683817034175/medienbilder-stettbach-02-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_stettbach_02_web.r200img.600x400.jpg/1683817034175/medienbilder-stettbach-02-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_stettbach_02_web.r200img.300x200.jpg/1683817034348/medienbilder-stettbach-02-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_stettbach_02_web.r200img.300x200.jpg/1683817034348/medienbilder-stettbach-02-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/medienbilder_stettbach_02_web.r200img.300x200.jpg/1683817034348/medienbilder-stettbach-02-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_stettbach_02_web.r200img.300x200.jpg/1683817034348/medienbilder-stettbach-02-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/medienbilder_stettbach_02_web.r200img.450x300.jpg/1683817034260/medienbilder-stettbach-02-web.jpeg" alt class="c-image__img  "/>
                             </picture>

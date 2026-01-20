@@ -79,7 +79,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="OWNNOmGLsstRtMyjAgI0SGzsT4bq6mYb8bCwtQESBJxWoMo=">
 		function OptanonWrapper() {
@@ -568,11 +568,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kunden/umfangreiche-bankdienstleistungen.r200img.450x300.jpg/1728566787175/umfangreiche-bankdienstleistungen.jpeg 450w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kunden/umfangreiche-bankdienstleistungen.r200img.450x300.jpg/1728566787175/umfangreiche-bankdienstleistungen.jpeg 450w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kunden/umfangreiche-bankdienstleistungen.r200img.800x400.jpg/1728566786392/umfangreiche-bankdienstleistungen.jpeg 800w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kunden/umfangreiche-bankdienstleistungen.r200img.800x400.jpg/1728566786392/umfangreiche-bankdienstleistungen.jpeg 800w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kunden/umfangreiche-bankdienstleistungen.r200img.1200x600.jpg/1728566786287/umfangreiche-bankdienstleistungen.jpeg 1200w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kunden/umfangreiche-bankdienstleistungen.r200img.1200x600.jpg/1728566786287/umfangreiche-bankdienstleistungen.jpeg 1200w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/mood/kunden/umfangreiche-bankdienstleistungen.r200img.2000x1000.jpg/1728566786142/umfangreiche-bankdienstleistungen.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -639,11 +639,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/finanzberatung/GettyImages-1091918678_2400x1800.r200img.600x400.jpg/1726059624574/gettyimages-1091918678-2400x1800.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/finanzberatung/GettyImages-1091918678_2400x1800.r200img.600x400.jpg/1726059624574/gettyimages-1091918678-2400x1800.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/finanzberatung/GettyImages-1091918678_2400x1800.r200img.600x400.jpg/1726059624574/gettyimages-1091918678-2400x1800.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/finanzberatung/GettyImages-1091918678_2400x1800.r200img.600x400.jpg/1726059624574/gettyimages-1091918678-2400x1800.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/kern/finanzberatung/GettyImages-1091918678_2400x1800.r200img.900x600.jpg/1726059624271/gettyimages-1091918678-2400x1800.jpeg 900w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/kern/finanzberatung/GettyImages-1091918678_2400x1800.r200img.900x600.jpg/1726059624271/gettyimages-1091918678-2400x1800.jpeg 900w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/mood/kern/finanzberatung/GettyImages-1091918678_2400x1800.r200img.900x600.jpg/1726059624271/gettyimages-1091918678-2400x1800.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -692,11 +692,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/mood/business/institutionelle/GettyImages-934885120.r200img.600x400.jpg/1677758249610/gettyimages-934885120.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/business/institutionelle/GettyImages-934885120.r200img.600x400.jpg/1677758249610/gettyimages-934885120.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/business/institutionelle/GettyImages-934885120.r200img.600x400.jpg/1677758249610/gettyimages-934885120.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/business/institutionelle/GettyImages-934885120.r200img.600x400.jpg/1677758249610/gettyimages-934885120.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/mood/business/institutionelle/GettyImages-934885120.r200img.900x600.jpg/1677758249459/gettyimages-934885120.jpeg 900w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/mood/business/institutionelle/GettyImages-934885120.r200img.900x600.jpg/1677758249459/gettyimages-934885120.jpeg 900w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/mood/business/institutionelle/GettyImages-934885120.r200img.900x600.jpg/1677758249459/gettyimages-934885120.jpeg" alt class="c-image__img  "/>
                             </picture>

@@ -80,7 +80,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="gp7ZyKdmClgWha843dZRxQ4+NCTclEJKwaYawBu4iDLUzHw=">
 		function OptanonWrapper() {
@@ -355,11 +355,11 @@
                         <div class="c-image__container l-max-width l-max-width--coconut">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/zkb_hausecke-fruehling_2016_2400x1800.r200img.590xauto.jpg/1677764867994/zkb-hausecke-fruehling-2016-2400x1800.jpeg 590w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/zkb_hausecke-fruehling_2016_2400x1800.r200img.590xauto.jpg/1677764867994/zkb-hausecke-fruehling-2016-2400x1800.jpeg 590w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/zkb_hausecke-fruehling_2016_2400x1800.r200img.720xauto.jpg/1677764867902/zkb-hausecke-fruehling-2016-2400x1800.jpeg 720w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/zkb_hausecke-fruehling_2016_2400x1800.r200img.720xauto.jpg/1677764867902/zkb-hausecke-fruehling-2016-2400x1800.jpeg 720w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/filialen/zkb_hausecke-fruehling_2016_2400x1800.r200img.960xauto.jpg/1677764867809/zkb-hausecke-fruehling-2016-2400x1800.jpeg 960w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/filialen/zkb_hausecke-fruehling_2016_2400x1800.r200img.960xauto.jpg/1677764867809/zkb-hausecke-fruehling-2016-2400x1800.jpeg 960w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/filialen/zkb_hausecke-fruehling_2016_2400x1800.r200img.960xauto.jpg/1677764867809/zkb-hausecke-fruehling-2016-2400x1800.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1266,11 +1266,11 @@
                         <div class="c-image__container l-max-width l-max-width--coconut">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/florence_schnydrig_moser_gb.r200img.590xauto.jpg/1742899259146/florence-schnydrig-moser-gb.jpeg 590w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/florence_schnydrig_moser_gb.r200img.590xauto.jpg/1742899259146/florence-schnydrig-moser-gb.jpeg 590w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/florence_schnydrig_moser_gb.r200img.720xauto.jpg/1742899259039/florence-schnydrig-moser-gb.jpeg 720w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/florence_schnydrig_moser_gb.r200img.720xauto.jpg/1742899259039/florence-schnydrig-moser-gb.jpeg 720w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/florence_schnydrig_moser_gb.r200img.960xauto.jpg/1742899258923/florence-schnydrig-moser-gb.jpeg 960w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/florence_schnydrig_moser_gb.r200img.960xauto.jpg/1742899258923/florence-schnydrig-moser-gb.jpeg 960w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/florence_schnydrig_moser_gb.r200img.960xauto.jpg/1742899258923/florence-schnydrig-moser-gb.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1350,11 +1350,11 @@
                         <div class="c-image__container l-max-width l-max-width--coconut">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/blog/startseite/juerg_buehlmann_2022.r200img.590xauto.jpg/1680240082323/juerg-buehlmann-2022.jpeg 590w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/blog/startseite/juerg_buehlmann_2022.r200img.590xauto.jpg/1680240082323/juerg-buehlmann-2022.jpeg 590w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/blog/startseite/juerg_buehlmann_2022.r200img.720xauto.jpg/1680240082178/juerg-buehlmann-2022.jpeg 720w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/blog/startseite/juerg_buehlmann_2022.r200img.720xauto.jpg/1680240082178/juerg-buehlmann-2022.jpeg 720w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/blog/startseite/juerg_buehlmann_2022.r200img.960xauto.jpg/1680240082019/juerg-buehlmann-2022.jpeg 960w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/blog/startseite/juerg_buehlmann_2022.r200img.960xauto.jpg/1680240082019/juerg-buehlmann-2022.jpeg 960w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/blog/startseite/juerg_buehlmann_2022.r200img.960xauto.jpg/1680240082019/juerg-buehlmann-2022.jpeg" alt="Jürg Bühlmann, Mitglied der Generaldirektion Zürcher Kantonalbank" class="c-image__img  " role="presentation"/>
                             </picture>
@@ -1434,11 +1434,11 @@
                         <div class="c-image__container l-max-width l-max-width--coconut">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/iwan_deplazes_gb.r200img.590xauto.jpg/1742899231530/iwan-deplazes-gb.jpeg 590w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/iwan_deplazes_gb.r200img.590xauto.jpg/1742899231530/iwan-deplazes-gb.jpeg 590w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/iwan_deplazes_gb.r200img.720xauto.jpg/1742899231382/iwan-deplazes-gb.jpeg 720w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/iwan_deplazes_gb.r200img.720xauto.jpg/1742899231382/iwan-deplazes-gb.jpeg 720w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/iwan_deplazes_gb.r200img.960xauto.jpg/1742899231227/iwan-deplazes-gb.jpeg 960w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/iwan_deplazes_gb.r200img.960xauto.jpg/1742899231227/iwan-deplazes-gb.jpeg 960w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/iwan_deplazes_gb.r200img.960xauto.jpg/1742899231227/iwan-deplazes-gb.jpeg" alt class="c-image__img  "/>
                             </picture>

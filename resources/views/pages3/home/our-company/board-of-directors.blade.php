@@ -79,7 +79,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="1THaWyFezag8Ln9Ogf5Q0ldX79vnDR885rao3ppaIRRywMw=">
 		function OptanonWrapper() {
@@ -611,11 +611,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.600x400.jpg/1680269127582/j-mueller-ganz-sept22.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.600x400.jpg/1680269127582/j-mueller-ganz-sept22.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.300x200.jpg/1680269128436/j-mueller-ganz-sept22.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.300x200.jpg/1680269128436/j-mueller-ganz-sept22.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.300x200.jpg/1680269128436/j-mueller-ganz-sept22.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.300x200.jpg/1680269128436/j-mueller-ganz-sept22.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/j_mueller-ganz_sept22.r200img.450x300.jpg/1680269127954/j-mueller-ganz-sept22.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -780,11 +780,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.600x400.jpg/1680269157414/r-liebi-sept22.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.600x400.jpg/1680269157414/r-liebi-sept22.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.300x200.jpg/1680269158276/r-liebi-sept22.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.300x200.jpg/1680269158276/r-liebi-sept22.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.300x200.jpg/1680269158276/r-liebi-sept22.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.300x200.jpg/1680269158276/r-liebi-sept22.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/r_liebi_sept22.r200img.450x300.jpg/1680269157781/r-liebi-sept22.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -949,11 +949,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/m_roth_sept22.r200img.600x400.jpg/1680269186988/m-roth-sept22.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/m_roth_sept22.r200img.600x400.jpg/1680269186988/m-roth-sept22.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/m_roth_sept22.r200img.300x200.jpg/1680269187925/m-roth-sept22.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/m_roth_sept22.r200img.300x200.jpg/1680269187925/m-roth-sept22.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/m_roth_sept22.r200img.300x200.jpg/1680269187925/m-roth-sept22.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/m_roth_sept22.r200img.300x200.jpg/1680269187925/m-roth-sept22.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/m_roth_sept22.r200img.450x300.jpg/1680269187418/m-roth-sept22.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1133,11 +1133,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/amr_abdelaziz_2019.r200img.600x400.jpg/1677760327288/amr-abdelaziz-2019.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/amr_abdelaziz_2019.r200img.600x400.jpg/1677760327288/amr-abdelaziz-2019.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/amr_abdelaziz_2019.r200img.300x200.jpg/1677760327824/amr-abdelaziz-2019.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/amr_abdelaziz_2019.r200img.300x200.jpg/1677760327824/amr-abdelaziz-2019.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/amr_abdelaziz_2019.r200img.300x200.jpg/1677760327824/amr-abdelaziz-2019.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/amr_abdelaziz_2019.r200img.300x200.jpg/1677760327824/amr-abdelaziz-2019.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/amr_abdelaziz_2019.r200img.450x300.jpg/1677760327566/amr-abdelaziz-2019.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1298,11 +1298,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/sandra_berberat_kecerski.r200img.600x400.jpg/1677761936692/sandra-berberat-kecerski.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/sandra_berberat_kecerski.r200img.600x400.jpg/1677761936692/sandra-berberat-kecerski.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/sandra_berberat_kecerski.r200img.300x200.jpg/1677761936863/sandra-berberat-kecerski.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/sandra_berberat_kecerski.r200img.300x200.jpg/1677761936863/sandra-berberat-kecerski.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/sandra_berberat_kecerski.r200img.300x200.jpg/1677761936863/sandra-berberat-kecerski.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/sandra_berberat_kecerski.r200img.300x200.jpg/1677761936863/sandra-berberat-kecerski.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/sandra_berberat_kecerski.r200img.450x300.jpg/1677761936770/sandra-berberat-kecerski.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1466,11 +1466,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/adrian_bruhin.r200img.600x400.jpg/1677760298043/adrian-bruhin.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/adrian_bruhin.r200img.600x400.jpg/1677760298043/adrian-bruhin.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/adrian_bruhin.r200img.300x200.jpg/1677760298194/adrian-bruhin.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/adrian_bruhin.r200img.300x200.jpg/1677760298194/adrian-bruhin.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/adrian_bruhin.r200img.300x200.jpg/1677760298194/adrian-bruhin.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/adrian_bruhin.r200img.300x200.jpg/1677760298194/adrian-bruhin.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/adrian_bruhin.r200img.450x300.jpg/1677760298121/adrian-bruhin.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1631,11 +1631,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/bettina_furrer_2019.r200img.600x400.jpg/1677760288770/bettina-furrer-2019.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/bettina_furrer_2019.r200img.600x400.jpg/1677760288770/bettina-furrer-2019.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/bettina_furrer_2019.r200img.300x200.jpg/1677760289238/bettina-furrer-2019.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/bettina_furrer_2019.r200img.300x200.jpg/1677760289238/bettina-furrer-2019.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/bettina_furrer_2019.r200img.300x200.jpg/1677760289238/bettina-furrer-2019.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/bettina_furrer_2019.r200img.300x200.jpg/1677760289238/bettina-furrer-2019.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/bettina_furrer_2019.r200img.450x300.jpg/1677760288980/bettina-furrer-2019.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1794,11 +1794,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/rene_huber_2019.r200img.600x400.jpg/1677760301814/rene-huber-2019.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/rene_huber_2019.r200img.600x400.jpg/1677760301814/rene-huber-2019.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/rene_huber_2019.r200img.300x200.jpg/1677760302280/rene-huber-2019.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/rene_huber_2019.r200img.300x200.jpg/1677760302280/rene-huber-2019.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/rene_huber_2019.r200img.300x200.jpg/1677760302280/rene-huber-2019.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/rene_huber_2019.r200img.300x200.jpg/1677760302280/rene-huber-2019.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/rene_huber_2019.r200img.450x300.jpg/1677760302026/rene-huber-2019.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -1961,11 +1961,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/gregor_kreuzer.r200img.600x400.jpg/1695382023871/gregor-kreuzer.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/gregor_kreuzer.r200img.600x400.jpg/1695382023871/gregor-kreuzer.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/gregor_kreuzer.r200img.300x200.jpg/1695382024530/gregor-kreuzer.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/gregor_kreuzer.r200img.300x200.jpg/1695382024530/gregor-kreuzer.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/gregor_kreuzer.r200img.300x200.jpg/1695382024530/gregor-kreuzer.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/gregor_kreuzer.r200img.300x200.jpg/1695382024530/gregor-kreuzer.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/gregor_kreuzer.r200img.450x300.jpg/1695382024201/gregor-kreuzer.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2127,11 +2127,11 @@ was a member of both the Executive Board and the Board of Directors of the GLP K
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/york-peter_meyer_web.r200img.600x400.jpg/1731062142462/york-peter-meyer-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/york-peter_meyer_web.r200img.600x400.jpg/1731062142462/york-peter-meyer-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/york-peter_meyer_web.r200img.300x200.jpg/1731062142612/york-peter-meyer-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/york-peter_meyer_web.r200img.300x200.jpg/1731062142612/york-peter-meyer-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/york-peter_meyer_web.r200img.300x200.jpg/1731062142612/york-peter-meyer-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/york-peter_meyer_web.r200img.300x200.jpg/1731062142612/york-peter-meyer-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/york-peter_meyer_web.r200img.450x300.jpg/1731062142535/york-peter-meyer-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2292,11 +2292,11 @@ was a member of both the Executive Board and the Board of Directors of the GLP K
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/kristine_schulze_nov24_web.r200img.600x400.jpg/1733493550176/kristine-schulze-nov24-web.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/kristine_schulze_nov24_web.r200img.600x400.jpg/1733493550176/kristine-schulze-nov24-web.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/kristine_schulze_nov24_web.r200img.300x200.jpg/1733493550331/kristine-schulze-nov24-web.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/kristine_schulze_nov24_web.r200img.300x200.jpg/1733493550331/kristine-schulze-nov24-web.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/kristine_schulze_nov24_web.r200img.300x200.jpg/1733493550331/kristine-schulze-nov24-web.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/kristine_schulze_nov24_web.r200img.300x200.jpg/1733493550331/kristine-schulze-nov24-web.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/kristine_schulze_nov24_web.r200img.450x300.jpg/1733493550252/kristine-schulze-nov24-web.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2457,11 +2457,11 @@ Swiss national, born in 1963</p>
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hans-ueli_vogt.r200img.600x400.jpg/1695382088646/hans-ueli-vogt.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hans-ueli_vogt.r200img.600x400.jpg/1695382088646/hans-ueli-vogt.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hans-ueli_vogt.r200img.300x200.jpg/1695382089149/hans-ueli-vogt.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hans-ueli_vogt.r200img.300x200.jpg/1695382089149/hans-ueli-vogt.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/hans-ueli_vogt.r200img.300x200.jpg/1695382089149/hans-ueli-vogt.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/hans-ueli_vogt.r200img.300x200.jpg/1695382089149/hans-ueli-vogt.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/hans-ueli_vogt.r200img.450x300.jpg/1695382088884/hans-ueli-vogt.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -2624,11 +2624,11 @@ of SRG SSR, Berne</li>
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/claudia_zimmermann.r200img.600x400.jpg/1695382134254/claudia-zimmermann.jpeg 600w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/claudia_zimmermann.r200img.600x400.jpg/1695382134254/claudia-zimmermann.jpeg 600w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/claudia_zimmermann.r200img.300x200.jpg/1695382135144/claudia-zimmermann.jpeg 300w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/claudia_zimmermann.r200img.300x200.jpg/1695382135144/claudia-zimmermann.jpeg 300w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/claudia_zimmermann.r200img.300x200.jpg/1695382135144/claudia-zimmermann.jpeg 300w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/claudia_zimmermann.r200img.300x200.jpg/1695382135144/claudia-zimmermann.jpeg 300w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/claudia_zimmermann.r200img.450x300.jpg/1695382134637/claudia-zimmermann.jpeg" alt class="c-image__img  "/>
                             </picture>

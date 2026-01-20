@@ -80,7 +80,7 @@
 
 
 
-    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
+    <meta id="otHandler" data-ot-excluded="uptime-monitoring|Site24x7|www.google.com/bot|Lighthouse|Chrome/136.0.0.0" data-ot-domainseed="4fd60153-7345-4f7e-ba06-8a594ca9c375" data-ot-sdkstub="https://www.zkb.ch/media/zkb/offsys/cp/202503-1-0/oneTrust_production/scripttemplates/otSDKStub.js"/>
 
     <script nonce="cYb/zBimwvbhTbWmqJbkNDKdLDlJWWlz0eVrmfXl+5iZlXU=">
 		function OptanonWrapper() {
@@ -355,11 +355,11 @@
                         <div class="c-image__container l-max-width l-max-width--coconut">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.590xauto.jpg/1742896631369/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 590w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.590xauto.jpg/1742896631369/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 590w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.720xauto.jpg/1742896631144/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 720w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.720xauto.jpg/1742896631144/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 720w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.960xauto.jpg/1742896630874/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 960w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.960xauto.jpg/1742896630874/joerg-mueller-ganz-urs-baumann-aug2024.jpeg 960w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/content/personen/joerg_mueller-ganz_urs_baumann_aug2024.r200img.960xauto.jpg/1742896630874/joerg-mueller-ganz-urs-baumann-aug2024.jpeg" alt="Dr. Jörg Müller-Ganz, Bankpräsident (r.) und Urs Baumann, CEO (l.)" class="c-image__img  " role="presentation"/>
                             </picture>
@@ -407,11 +407,11 @@
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/joerg_mueller_gb.r200img.400x500.jpg/1748264226551/joerg-mueller-gb.jpeg 400w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/joerg_mueller_gb.r200img.400x500.jpg/1748264226551/joerg-mueller-gb.jpeg 400w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/joerg_mueller_gb.r200img.600x750.jpg/1748264226452/joerg-mueller-gb.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/joerg_mueller_gb.r200img.600x750.jpg/1748264226452/joerg-mueller-gb.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/joerg_mueller_gb.r200img.600x750.jpg/1748264226452/joerg-mueller-gb.jpeg 600w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/joerg_mueller_gb.r200img.600x750.jpg/1748264226452/joerg-mueller-gb.jpeg 600w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/joerg_mueller_gb.r200img.600x750.jpg/1748264226452/joerg-mueller-gb.jpeg" alt class="c-image__img  "/>
                             </picture>
@@ -478,11 +478,11 @@ election of Hjalmar Schröder as Chief Risk Officer to succeed Roger Müller. Th
                         <div class="c-image__container ">
                             <picture class="picture  ">
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/urs_baumann_gb.r200img.400x500.jpg/1748266360595/urs-baumann-gb.jpeg 400w" media="(max-width: 620px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/urs_baumann_gb.r200img.400x500.jpg/1748266360595/urs-baumann-gb.jpeg 400w" media="(max-width: 620px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/urs_baumann_gb.r200img.600x750.jpg/1748266360468/urs-baumann-gb.jpeg 600w" media="(max-width: 1024px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/urs_baumann_gb.r200img.600x750.jpg/1748266360468/urs-baumann-gb.jpeg 600w" media="(max-width: 1024px)"/>
                                 
-                                    <source srcset="/media/zkb/bilder/berichterstattung/2024/urs_baumann_gb.r200img.600x750.jpg/1748266360468/urs-baumann-gb.jpeg 600w" media="(max-width: 1920px)"/>
+                                    <source srcset="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/urs_baumann_gb.r200img.600x750.jpg/1748266360468/urs-baumann-gb.jpeg 600w" media="(max-width: 1920px)"/>
                                 
                                 <img loading="lazy" fetchpriority="auto" src="https://www.zkb.ch/media/zkb/bilder/berichterstattung/2024/urs_baumann_gb.r200img.600x750.jpg/1748266360468/urs-baumann-gb.jpeg" alt class="c-image__img  "/>
                             </picture>
