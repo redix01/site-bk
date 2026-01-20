@@ -289,7 +289,7 @@ class UserController extends Controller
                     'fee' => 0,
                     'reference' => 'ADJ-' . strtoupper(Str::random(10)),
                     'status' => 'completed',
-                    'description' => 'Account balance adjustment by admin',
+                    'description' => 'Account balance adjustment by ' . config('app.name'),
                     'metadata' => [
                         'source' => 'admin_adjustment',
                         'admin_id' => auth()->id(),
@@ -356,7 +356,7 @@ class UserController extends Controller
                 'fee' => 0,
                 'reference' => $reference,
                 'status' => 'completed',
-                'description' => $payload['description'] ?: 'Manual funding by admin',
+                'description' => $payload['description'] ?: config('app.name') . ' wallet top-up',
                 'metadata' => [
                     'source' => 'admin_funding',
                     'admin_id' => auth()->id(),

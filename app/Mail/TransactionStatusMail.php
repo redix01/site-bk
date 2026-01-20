@@ -20,7 +20,7 @@ class TransactionStatusMail extends Mailable implements ShouldQueue
         protected Transaction $transaction,
         protected string $recipientName
     ) {
-        $this->transaction->loadMissing('recipient');
+        $this->transaction->loadMissing(['recipient', 'user']);
     }
 
     /**
@@ -46,16 +46,29 @@ class TransactionStatusMail extends Mailable implements ShouldQueue
                 'description' => $this->transaction->description,
                 'beneficiaryName' => $this->transaction->beneficiary_name ?? $this->transaction->recipient?->name,
                 'beneficiaryAccount' => $this->transaction->beneficiary_account_number ?? $this->transaction->recipient?->account_number,
-                'availableBalance' => $this->transaction->new_balance ? $this->formatAmount($this->transaction->new_balance) : null,
+                'availableBalance' => ($this->transaction->new_balance ?? $this->transaction->metadata['new_balance'] ?? null) 
+                    ? $this->formatAmount($this->transaction->new_balance ?? $this->transaction->metadata['new_balance']) 
+                    : null,
                 'actionUrl' => url("/transactions/{$this->transaction->id}"),
             ]);
     }
 
     protected function formatAmount(null|int|float|string $value): string
     {
-        $numeric = (float) $value;
+        $numeric = (float) $value / 100;
+        
+        $currency = $this->transaction->user->preferred_currency ?? 'USD';
+        
+        $symbols = [
+            'USD' => '$',
+            'NGN' => '₦',
+            'EUR' => '€',
+            'GBP' => '£',
+        ];
 
-        return '₦' . number_format($numeric, 2);
+        $symbol = $symbols[strtoupper($currency)] ?? '$';
+
+        return $symbol . number_format($numeric, 2);
     }
 }
 
