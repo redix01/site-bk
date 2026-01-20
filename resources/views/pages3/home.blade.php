@@ -1,5 +1,10 @@
+
+
 <!DOCTYPE HTML>
 <html lang="en">
+
+<!-- Mirrored from www.zkb.ch/en/home.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Jan 2026 08:04:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="UTF-8"/>
     <title>Zürcher Kantonalbank – We are the bank that is close to you.</title>
@@ -19,8 +24,8 @@
     <meta name="robots" content="index,follow"/>
     
 
-    <link rel="canonical" href="https://www.zkb.ch/en/home.html"/>
-    <link rel="alternate" hreflang="en-CH" href="https://www.zkb.ch/en/home.html"/>
+    <link rel="canonical" href="home.html"/>
+    <link rel="alternate" hreflang="en-CH" href="home.html"/>
 
     
 
@@ -29,7 +34,7 @@
 
 
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://www.zkb.ch/en/home.html"/>
+<meta property="og:url" content="home.html"/>
 <meta property="og:title" content="Zürcher Kantonalbank – We are the bank that is close to you."/>
 <meta property="og:description" content="We are one of the safest universal banks in the world with strong regional roots and an international network. We are committed to solving your financial needs. "/>
 
@@ -66,12 +71,12 @@
 
     
     
-<script src="/etc.clientlibs/zkb/clientlibs/all/clientlib-analytics.1767779646944.min.js"></script>
+<script src="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-analytics.1767779646944.min.js"></script>
 
 
 
     
-    <script src="/media/zkb/analytics/aep/9a98dc158ba7/140ae5e98596/launch-d1193b509421-22.min.js" data-ot-ignore async></script>
+    <script src="https://www.zkb.ch/media/zkb/analytics/aep/9a98dc158ba7/140ae5e98596/launch-d1193b509421-22.min.js" data-ot-ignore async></script>
 
 
 
@@ -92,10 +97,10 @@
 
     
     
-<link rel="stylesheet" href="/etc.clientlibs/zkb/clientlibs/all/clientlib-zkb-ui.1767779646944.min.css" type="text/css">
-<link rel="stylesheet" href="/etc.clientlibs/zkb/clientlibs/all/clientlib-consent-banner.1767779646944.min.css" type="text/css">
-<script src="/etc.clientlibs/zkb/clientlibs/all/clientlib-zkb-ui.1767779646944.min.js"></script>
-<script src="/etc.clientlibs/zkb/clientlibs/all/clientlib-consent-banner.1767779646944.min.js"></script>
+<link rel="stylesheet" href="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-zkb-ui.1767779646944.min.css" type="text/css">
+<link rel="stylesheet" href="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-consent-banner.1767779646944.min.css" type="text/css">
+<script src="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-zkb-ui.1767779646944.min.js"></script>
+<script src="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-consent-banner.1767779646944.min.js"></script>
 
 
 
@@ -110,7 +115,7 @@
     
     
     
-<link rel="stylesheet" href="/etc.clientlibs/zkb/clientlibs/all/clientlib-site.1767779646944.min.css" type="text/css">
+<link rel="stylesheet" href="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-site.1767779646944.min.css" type="text/css">
 
 
 
@@ -118,9 +123,9 @@
 
     
 
-<link rel="icon" href="/etc.clientlibs/zkb/clientlibs/all/clientlib-site/resources/images/favicons/zkb/favicon.ico" sizes="48x48"/><!-- this ico should be picked up by Safari only. 48x48 is a trick to fool other browsers -->
-<link rel="icon" href="/etc.clientlibs/zkb/clientlibs/all/clientlib-site/resources/images/favicons/zkb/favicon.svg" sizes="any" type="image/svg+xml"/><!-- all other browsers should pick up svg -->
-<link rel="apple-touch-icon" href="/etc.clientlibs/zkb/clientlibs/all/clientlib-site/resources/images/favicons/zkb/apple-touch-icon.png"/>
+<link rel="icon" href="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-site/resources/images/favicons/zkb/favicon.ico" sizes="48x48"/><!-- this ico should be picked up by Safari only. 48x48 is a trick to fool other browsers -->
+<link rel="icon" href="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-site/resources/images/favicons/zkb/favicon.svg" sizes="any" type="image/svg+xml"/><!-- all other browsers should pick up svg -->
+<link rel="apple-touch-icon" href="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-site/resources/images/favicons/zkb/apple-touch-icon.png"/>
 
 </head>
 <body class="context-zkb">
@@ -147,7 +152,7 @@
 <template id="clientlib-vendor">
     
     
-<script src="/etc.clientlibs/zkb/clientlibs/vue/clientlib-vendor.1767779646944.min.js"></script>
+<script src="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/vue/clientlib-vendor.1767779646944.min.js"></script>
 
 
 
@@ -172,7 +177,7 @@
                 <ul class="c-header-public__topbar-left c-header-public__topbar-items c-header-public__nav-list">
                     
                         <li class="c-header-public__topbar-list-item c-header-public__nav-list-item">
-                            <a href="/en/home.html" class="c-header-public__topbar-item c-header-public__item" aria-current="page" data-component-hook-header="primary-segment-link" data-analytics-title="Home">
+                            <a href="{{ route('pages3.home') }}" class="c-header-public__topbar-item c-header-public__item" aria-current="page" data-component-hook-header="primary-segment-link" data-analytics-title="Home">
                                 <span class="c-header-public__topbar-item-text c-header-public__item-text">Home</span>
                             </a>
                         </li>
@@ -181,7 +186,7 @@
                 <ul class="c-header-public__topbar-right c-header-public__topbar-items c-header-public__nav-list">
                     
                         <li class="c-header-public__topbar-list-item c-header-public__nav-list-item">
-                            <a href="/en/blog.html" class="c-header-public__topbar-item c-header-public__item" data-analytics-title="Blog">
+                            <a href="https://www.swisscanto.com/ch/en/institutional/blog.html" class="c-header-public__topbar-item c-header-public__item" data-analytics-title="Blog">
                                 <span class="c-header-public__topbar-item-text c-header-public__item-text">Blog</span>
                             </a>
                         </li>
@@ -211,7 +216,7 @@
         </button>
         <ul data-component-is="language-switch-component" aria-hidden="true" id="item-toggle-lsd" class="c-header-public__icon-nav-submenu c-header-public__submenu">
             <li class="c-header-public__icon-nav-submenu-item c-header-public__submenu-item">
-                <a href="/de.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="de">
+                <a href="https://www.zkb.ch/de.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="de">
                     <span class="c-header-public__icon-nav-item-text c-header-public__item-text">De</span>
                 </a>
             </li>
@@ -219,7 +224,7 @@
             
         
             <li class="c-header-public__icon-nav-submenu-item c-header-public__submenu-item">
-                <a href="/fr.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="fr">
+                <a href="https://www.zkb.ch/fr.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="fr">
                     <span class="c-header-public__icon-nav-item-text c-header-public__item-text">Fr</span>
                 </a>
             </li>
@@ -242,7 +247,7 @@
 
         <div class="c-header-public__logo-burger-wrap">
             <div class="c-header__public-logo-wrap">
-                <a href="/en/home.html" class="c-header-public__logo" data-analytics-source="Logo">
+                <a href="{{ route('pages3.home') }}" class="c-header-public__logo" data-analytics-source="Logo">
                     
 
 
@@ -271,7 +276,7 @@
                     
                         
                             
-                                <a class="c-header-public__icon-nav-item c-header-public__item" rel="noreferrer" href="#" target="_blank">
+                                <a class="c-header-public__icon-nav-item c-header-public__item" rel="noreferrer" href="https://zkb-finance.mdgms.com/home/index.html?LANG=en" target="_blank">
                                     
     <i class="c-icon c-icon--ui-arrow-rising  c-header-public__icon-nav-item-icon c-header-public__item-icon">
         <svg viewBox="0 0 16 16" class="c-icon__svg c-icon__svg--ui-arrow-rising">
@@ -296,7 +301,7 @@
                         
                             
                             
-                                <a href="#" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--is-button c-header-public__item--is-button">
+                                <a href="https://onba.zkb.ch/en" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--is-button c-header-public__item--is-button">
                                     
     <i class="c-icon c-icon--ui-lock  c-header-public__icon-nav-item-icon c-header-public__item-icon">
         <svg viewBox="0 0 16 16" class="c-icon__svg c-icon__svg--ui-lock">
@@ -341,7 +346,7 @@
         </button>
         <ul data-component-is="language-switch-component" aria-hidden="true" id="item-toggle-lsm" class="c-header-public__icon-nav-submenu c-header-public__submenu">
             <li class="c-header-public__icon-nav-submenu-item c-header-public__submenu-item">
-                <a href="/de.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="de">
+                <a href="https://www.zkb.ch/de.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="de">
                     <span class="c-header-public__icon-nav-item-text c-header-public__item-text">De</span>
                 </a>
             </li>
@@ -349,7 +354,7 @@
             
         
             <li class="c-header-public__icon-nav-submenu-item c-header-public__submenu-item">
-                <a href="/fr.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="fr">
+                <a href="https://www.zkb.ch/fr.html" class="c-header-public__icon-nav-item c-header-public__item c-header-public__icon-nav-item--sub-item c-header-public__item--sub-item" data-language-switch-item-language="fr">
                     <span class="c-header-public__icon-nav-item-text c-header-public__item-text">Fr</span>
                 </a>
             </li>
@@ -369,7 +374,7 @@
 
             
 
-            <a href="/en/home/our-company.html" class="c-header-public__item c-header-public__main-nav-item">Our Company</a>
+            <a href="{{ route('pages3.ourcompany') }}" class="c-header-public__item c-header-public__main-nav-item">Our Company</a>
 
         </li>
     
@@ -377,7 +382,7 @@
 
             
 
-            <a href="/en/home/media.html" class="c-header-public__item c-header-public__main-nav-item">Media</a>
+            <a href="{{ route('pages3.media') }}" class="c-header-public__item c-header-public__main-nav-item">Media</a>
 
         </li>
     
@@ -385,7 +390,7 @@
 
             
 
-            <a href="/en/home/investor-relations.html" class="c-header-public__item c-header-public__main-nav-item">Investor Relations</a>
+            <a href="{{ route('pages3.investorrelations') }}" class="c-header-public__item c-header-public__main-nav-item">Investor Relations</a>
 
         </li>
     
@@ -393,7 +398,7 @@
 
             
 
-            <a href="/en/home/private-banking.html" class="c-header-public__item c-header-public__main-nav-item">Private Banking</a>
+            <a href="{{ route('pages3.privatebanking') }}" class="c-header-public__item c-header-public__main-nav-item">Private Banking</a>
 
         </li>
     
@@ -401,7 +406,7 @@
 
             
 
-            <a href="/en/home/international-banking.html" class="c-header-public__item c-header-public__main-nav-item">International Banking</a>
+            <a href="{{ route('pages3.internationalbanking') }}" class="c-header-public__item c-header-public__main-nav-item">International Banking</a>
 
         </li>
     
@@ -409,7 +414,7 @@
 
             
 
-            <a href="/en/home/institutional-clients.html" class="c-header-public__item c-header-public__main-nav-item">Institutional Clients</a>
+            <a href="{{ route('pages3.institutionalclients') }}" class="c-header-public__item c-header-public__main-nav-item">Institutional Clients</a>
 
         </li>
     
@@ -417,7 +422,7 @@
 
             
 
-            <a href="/en/home/asset-management.html" class="c-header-public__item c-header-public__main-nav-item">Asset Management</a>
+            <a href="{{ route('pages3.assetmanagement') }}" class="c-header-public__item c-header-public__main-nav-item">Asset Management</a>
 
         </li>
     
@@ -433,16 +438,57 @@
     </header>
 </div>
 
+
+
+
+
+
+
+
+
+
 <main id="main-content" class=" l-page__main l-main-bezel-bottom l-page__main--bezel-inline l-max-width l-max-width--pineapple">
     
     
         
         <div class="dt-container">
+
+
+
+
+
+    
+    
+        
+        <div class="experiencefragment"><div class="cmp-experiencefragment cmp-experiencefragment--home-hero-teaser ">
+
+
+
+
+
+    
+    
+        
+        <div class="homeHeroTeaser zkb-component zkb-component--home-hero-teaser l-off-canvas l-off-canvas--left l-off-canvas--right">
+
+
+    
+
+
+
+
+    <div class="cmp-experiencefragment cmp-experiencefragment--home-hero-teaser-slider " data-component-is="home-hero-teaser" data-component-id="home-hero-teaser" data-analytics-component-name="Home-Hero-Teaser">
+
+
+
+
+
+    
     
         
         <div class="heroTeaser baseTeaser zkb-component zkb-component--hero-teaser">
 
-<a class="l-grid l-grid--no-gap l-tile-group l-tile-group--align-top l-tile-group--shifted l-tile-group--no-shift@tablet t-link-area " data-component-is="hero-teaser" data-component-id="hero-teaser" data-analytics-campaign="corporate-oe-intro-zkb" href="home/our-company.html" data-analytics-component-name="Hero-Teaser">
+<a class="l-grid l-grid--no-gap l-tile-group l-tile-group--align-top l-tile-group--shifted l-tile-group--no-shift@tablet t-link-area " data-component-is="hero-teaser" data-component-id="hero-teaser" data-analytics-campaign="corporate-oe-intro-zkb" href="{{ route('pages3.ourcompany') }}" data-analytics-component-name="Hero-Teaser">
     <div class="teaser_card_left l-grid__cell l-grid__cell--9/24 l-grid__cell--11/12@tablet l-tile-group__tile c-card c-card--style-normal c-card--bezel-normal c-card--filled-strong">
         <div class="l-vertical l-vertical--extremities l-vertical--full-height">
             
@@ -480,7 +526,7 @@
                                 
                                     <source srcset="/media/zkb/bilder/mood/ch/HIRES_CG19-10-16_DSF6463.r200img.1200x800.jpg/1677760330836/hires-cg19-10-16-dsf6463.jpeg 1200w" media="(max-width: 1920px)"/>
                                 
-                                <img loading="eager" fetchpriority="high" src="/media/zkb/bilder/mood/ch/HIRES_CG19-10-16_DSF6463.r200img.1200x800.jpg/1677760330836/hires-cg19-10-16-dsf6463.jpeg" alt class="c-image__img  "/>
+                                <img loading="eager" fetchpriority="high" src="https://www.zkb.ch/media/zkb/bilder/mood/ch/HIRES_CG19-10-16_DSF6463.r200img.1200x800.jpg/1677760330836/hires-cg19-10-16-dsf6463.jpeg" alt class="c-image__img  "/>
                             </picture>
                             
                         </div>
@@ -631,7 +677,7 @@
     
 
 
-<a href="home/investor-relations.html" class="t-link t-link--no-highlight t-strong" data-component-is="hero-link" data-component-id="hero-link" data-analytics-component-name="Hero-Link">Investor Relations</a>
+<a href="{{ route('pages3.investorrelations') }}" class="t-link t-link--no-highlight t-strong" data-component-is="hero-link" data-component-id="hero-link" data-analytics-component-name="Hero-Link">Investor Relations</a>
 </li>
 <li class="l-grid__cell l-grid__cell--1/2 l-grid__cell--1/1@phone">
 
@@ -647,7 +693,7 @@ Sustainability
     
 
 
-<a href="home/asset-management.html" class="t-link t-link--no-highlight t-strong" data-component-is="hero-link" data-component-id="hero-link" data-analytics-component-name="Hero-Link">Asset Management</a>
+<a href="{{ route('pages3.assetmanagement') }}" class="t-link t-link--no-highlight t-strong" data-component-is="hero-link" data-component-id="hero-link" data-analytics-component-name="Hero-Link">Asset Management</a>
 </li>
 <li class="l-grid__cell l-grid__cell--1/2 l-grid__cell--1/1@phone">
 
@@ -655,7 +701,7 @@ Sustainability
     
 
 
-<a href="home/media.html" class="t-link t-link--no-highlight t-strong" data-component-is="hero-link" data-component-id="hero-link" data-analytics-component-name="Hero-Link">Media</a>
+<a href="{{ route('pages3.media') }}" class="t-link t-link--no-highlight t-strong" data-component-is="hero-link" data-component-id="hero-link" data-analytics-component-name="Hero-Link">Media</a>
 </li>
 
         
@@ -685,7 +731,7 @@ Sustainability
 
 
     
-<script src="/etc.clientlibs/zkb/clientlibs/all/clientlib-site.1767779646944.min.js"></script>
+<script src="https://www.zkb.ch/etc.clientlibs/zkb/clientlibs/all/clientlib-site.1767779646944.min.js"></script>
 
 
 
@@ -707,7 +753,7 @@ Sustainability
 </section></div>
 <div class="text zkb-component zkb-component--text"><div class="t-richtext l-max-width l-max-width--apple l-stack l-stack--horse l-stack--cat@phone" data-component-is="text" data-component-id="text" data-analytics-component-name="Text">
     
-    <h3>What distinguishes us as {{ config('app.name') }}?</h3>
+    <h3>What distinguishes us as Zürcher Kantonalbank?</h3>
 
 </div>
 
@@ -800,7 +846,7 @@ Sustainability
                             </div>
                         </div>
                     </div>
-                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite 100% Zürich DNA" href="home/our-company/company-structure.html">
+                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite 100% Zürich DNA" href="{{ route('pages3.legal.companystructure') }}">
                         <h3 id="teaser-carousel-slide-0-title" class="t-title t-title--card-narrow t-link-area__link">
                             100% Zürich DNA
                         </h3>
@@ -859,7 +905,7 @@ Sustainability
                             </div>
                         </div>
                     </div>
-                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite Close to you" href="home/contact.html">
+                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite Close to you" href="{{ route('pages3.contact') }}">
                         <h3 id="teaser-carousel-slide-1-title" class="t-title t-title--card-narrow t-link-area__link">
                             Close to you
                         </h3>
@@ -918,7 +964,7 @@ Sustainability
                             </div>
                         </div>
                     </div>
-                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite AAA Rating" href="home/investor-relations/rating.html">
+                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite AAA Rating" href="{{ route('pages3.investorrelations') }}">
                         <h3 id="teaser-carousel-slide-2-title" class="t-title t-title--card-narrow t-link-area__link">
                             AAA Rating
                         </h3>
@@ -977,7 +1023,7 @@ Sustainability
                             </div>
                         </div>
                     </div>
-                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite Together is always better" href="home/international-banking.html">
+                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite Together is always better" href="{{ route('pages3.internationalbanking') }}">
                         <h3 id="teaser-carousel-slide-3-title" class="t-title t-title--card-narrow t-link-area__link">
                             Together is always better
                         </h3>
@@ -1036,7 +1082,7 @@ Sustainability
                             </div>
                         </div>
                     </div>
-                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite Always at your service in Zurich" href="home/asset-management.html">
+                    <a class="c-card c-card--filled-weak l-grid__cell l-grid__cell--1/2 l-grid__cell--push--1/12@tablet l-grid__cell--11/12@tablet l-tile-group__tile t-link-area" aria-label="Link auf Seite Always at your service in Zurich" href="{{ route('pages3.assetmanagement') }}">
                         <h3 id="teaser-carousel-slide-4-title" class="t-title t-title--card-narrow t-link-area__link">
                             Always at your service in Zurich
                         </h3>
@@ -1085,7 +1131,7 @@ Sustainability
     
 
 <div>
-    <a class="l-grid l-grid--no-gap l-tile-group l-tile-group--align-top t-link-area  " data-component-is="content-teaser" data-component-id="content-teaser" data-analytics-campaign="anlegen-pr-finanzinfos" href="#" data-analytics-component-name="Content-Teaser">
+    <a class="l-grid l-grid--no-gap l-tile-group l-tile-group--align-top t-link-area  " data-component-is="content-teaser" data-component-id="content-teaser" data-analytics-campaign="anlegen-pr-finanzinfos" href="https://zkb-finance.mdgms.com/home/search/index.html" data-analytics-component-name="Content-Teaser" target="_blank">
         <div class="l-grid__cell l-grid__cell--13 l-grid__cell--3/5@tablet l-grid__cell--1/1@phone l-tile-group__tile t-link-area__link">
             
 
@@ -1214,13 +1260,13 @@ Sustainability
                 <button data-consent-settings-display-link>Cookie Settings</button>
             </li>
             
-                <li class="c-footer__list-item t-link t-link--no-highlight"><a href="/en/legal.html">Legal</a></li>
+                <li class="c-footer__list-item t-link t-link--no-highlight"><a href="legal.html">Legal</a></li>
             
-                <li class="c-footer__list-item t-link t-link--no-highlight"><a href="/en/legal/data-protection.html">Data Protection</a></li>
+                <li class="c-footer__list-item t-link t-link--no-highlight"><a href="legal/data-protection.html">Data Protection</a></li>
             
-                <li class="c-footer__list-item t-link t-link--no-highlight"><a href="/en/legal/data-protection/cookie-policy.html">Cookie &amp; Tracking Policy</a></li>
+                <li class="c-footer__list-item t-link t-link--no-highlight"><a href="legal/data-protection/cookie-policy.html">Cookie &amp; Tracking Policy</a></li>
             
-                <li class="c-footer__list-item t-link t-link--no-highlight"><a href="/en/legal/general-information.html">General Information</a></li>
+                <li class="c-footer__list-item t-link t-link--no-highlight"><a href="legal/general-information.html">General Information</a></li>
             
         </ul>
     </aside>
