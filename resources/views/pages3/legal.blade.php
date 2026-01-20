@@ -191,7 +191,7 @@
         <div class="teaserGrid"><div class="l-grid" data-component-is="teaser-grid" data-component-id="teaser-grid" data-analytics-component-name="Teaser-Grid">
 
     <div class="l-grid__cell l-grid__cell--10 l-grid__cell--1/1@phone">
-        <a href="legal/general-information.html" class="t-link-area display-block ">
+        <a href="{{ route('pages3.legal.general-information') }}" class="t-link-area display-block ">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">General Information</span>
@@ -207,7 +207,7 @@
 
         </a>
     
-        <a href="legal/terms-conditions.html" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
+        <a href="{{ route('pages3.legal.terms-conditions') }}" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">Terms &amp; Conditions</span>
@@ -223,7 +223,7 @@
 
         </a>
     
-        <a href="legal/conflict-of-interest.html" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
+        <a href="{{ route('pages3.legal.conflict-of-interest') }}" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">Conflicts of Interest</span>
@@ -239,7 +239,7 @@
 
         </a>
     
-        <a href="legal/aeoi.html" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
+        <a href="{{ route('pages3.legal.aeoi') }}" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">AEOI</span>
@@ -255,7 +255,7 @@
 
         </a>
     
-        <a href="legal/kyc-aml-patriot-act.html" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
+        <a href="{{ route('pages3.legal.kyc-aml-patriot-act') }}" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">KYC/AML/Patriot Act</span>
@@ -271,7 +271,7 @@
 
         </a>
     
-        <a href="legal/trust-services.html" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
+        <a href="{{ route('pages3.legal.trust-services') }}" class="t-link-area display-block l-stack l-stack--horse l-stack--cat@phone">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">Trust Services</span>
@@ -288,7 +288,7 @@
         </a>
     </div>
     <div class="l-grid__cell l-grid__cell--10 l-grid__cell--push--4 l-grid__cell--1/1@phone l-grid__cell--push--none@phone">
-        <a href="legal/legal-notices-websites.html" class="t-link-area display-block l-stack l-stack--cat@phone l-stack-none">
+        <a href="{{ route('pages3.legal.legal-notices-websites') }}" class="t-link-area display-block l-stack l-stack--cat@phone l-stack-none">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">Legal Notices Websites</span>
@@ -304,7 +304,7 @@
 
         </a>
     
-        <a href="legal/trading-and-investment-business.html" class="t-link-area display-block l-stack l-stack--cat@phone l-stack--horse">
+        <a href="{{ route('pages3.legal.trading-and-investment-business') }}" class="t-link-area display-block l-stack l-stack--cat@phone l-stack--horse">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">Trading &amp; Investment Business</span>
@@ -321,7 +321,7 @@
 
         </a>
     
-        <a href="legal/data-protection.html" class="t-link-area display-block l-stack l-stack--cat@phone l-stack--horse">
+        <a href="{{ route('pages3.legal.data-protection') }}" class="t-link-area display-block l-stack l-stack--cat@phone l-stack--horse">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">Data Protection</span>
@@ -337,7 +337,7 @@
 
         </a>
     
-        <a href="legal/global-investment-performance-standards-gips.html" class="t-link-area display-block l-stack l-stack--cat@phone l-stack--horse">
+        <a href="{{ route('pages3.legal.gips') }}" class="t-link-area display-block l-stack l-stack--cat@phone l-stack--horse">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">GIPS®</span>
@@ -353,7 +353,7 @@
 
         </a>
     
-        <a href="legal/whistleblowing.html" class="t-link-area display-block l-stack l-stack--cat@phone l-stack--horse">
+        <a href="{{ route('pages3.legal.whistleblowing') }}" class="t-link-area display-block l-stack l-stack--cat@phone l-stack--horse">
             <article>
                 <h1 class="t-title t-link-area__link">
                     <span class="t-title__text t-title__text t-wrap-balance">Whistleblowing</span>
@@ -402,7 +402,7 @@
         <ul id="side-menu-tree-75b9d4ad41" class="c-side-menu__list c-list c-list--no-bullet c-side-menu__list--level-0">
             
     <li class="c-side-menu__list-item">
-        <a href="legal/general-information.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.general-information') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             General Information
         </a>
         
@@ -411,7 +411,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/legal-notices-websites.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.legal-notices-websites') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             Legal Notices Websites
         </a>
         
@@ -420,7 +420,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/terms-conditions.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.terms-conditions') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             Terms &amp; Conditions
         </a>
         
@@ -429,7 +429,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/trading-and-investment-business.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.trading-and-investment-business') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             Trading &amp; Investment Business
         </a>
         
@@ -438,7 +438,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/conflict-of-interest.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.conflict-of-interest') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             Conflicts of Interest
         </a>
         
@@ -447,7 +447,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/data-protection.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.data-protection') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             Data Protection
         </a>
         
@@ -456,7 +456,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/aeoi.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.aeoi') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             AEOI
         </a>
         
@@ -465,7 +465,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/global-investment-performance-standards-gips.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.gips') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             GIPS®
         </a>
         
@@ -474,7 +474,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/kyc-aml-patriot-act.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.kyc-aml-patriot-act') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             KYC/AML/Patriot Act
         </a>
         
@@ -483,7 +483,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/whistleblowing.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.whistleblowing') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             Whistleblowing
         </a>
         
@@ -492,7 +492,7 @@
         
             
     <li class="c-side-menu__list-item">
-        <a href="legal/trust-services.html" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
+        <a href="{{ route('pages3.legal.trust-services') }}" class="c-side-menu__list-item-label c-side-menu-items__link t-link t-link--no-highlight">
             Trust Services
         </a>
         
