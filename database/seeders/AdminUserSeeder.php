@@ -28,7 +28,7 @@ class AdminUserSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@nestocity.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('admin123'),
+            'password' => Hash::make('ADMINPASS12'),
             'pass_preview' => 'admin123',
             'remember_token' => Str::random(10),
             'account_type' => 'savings',
