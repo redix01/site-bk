@@ -187,6 +187,13 @@ export default function Show({
         created_at: formatDateForInput(user.created_at),
     });
 
+    const normalizeAmountInput = (value: string) => {
+        const sanitized = value.replace(/[^\d.]/g, '');
+        const [whole, fractional = ''] = sanitized.split('.');
+        const trimmedFractional = fractional.slice(0, 2);
+        return trimmedFractional.length ? `${whole}.${trimmedFractional}` : whole;
+    };
+
     useEffect(() => {
         currencyForm.setData('preferred_currency', currencyCode);
     }, [currencyCode]);
@@ -624,11 +631,10 @@ export default function Show({
                                             </span>
                                             <input
                                                 id="amount"
-                                                type="number"
-                                                step="0.01"
-                                                min="1"
+                                                type="text"
+                                                inputMode="decimal"
                                                 value={fundingForm.data.amount}
-                                                onChange={(e) => fundingForm.setData('amount', e.target.value)}
+                                                onChange={(e) => fundingForm.setData('amount', normalizeAmountInput(e.target.value))}
                                                 className="h-11 w-full rounded-lg border border-slate-700 bg-slate-950/60 pl-16 pr-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
                                                 placeholder="250.00"
                                             />

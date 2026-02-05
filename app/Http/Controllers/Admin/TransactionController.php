@@ -68,6 +68,8 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->normalizeMoneyInputs($request, ['amount']);
+
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'type' => 'required|in:deposit,withdrawal,transfer',
@@ -77,10 +79,16 @@ class TransactionController extends Controller
         ]);
 
         $data = $request->all();
-        $data['amount'] = (int) ($data['amount'] * 100); // Convert to kobo
+        $data['amount'] = (int) round(((float) $data['amount']) * 100); // Convert to kobo
         $data['reference'] = 'TXN-' . time() . '-' . rand(1000, 9999);
+        $data['metadata'] = $this->withPendingFundsHeldMetadata($data);
 
         $transaction = Transaction::create($data);
+
+        if ($transaction->status === 'completed') {
+            $transaction->loadMissing('user');
+            $this->applyApprovalEffects($transaction);
+        }
 
         return redirect()->route('admin.transactions.index')
                         ->with('success', 'Transaction created successfully.');
@@ -114,6 +122,8 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
+        $this->normalizeMoneyInputs($request, ['amount']);
+
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'type' => 'required|in:deposit,withdrawal,transfer',
@@ -122,10 +132,17 @@ class TransactionController extends Controller
             'status' => 'required|in:pending,completed,failed,cancelled',
         ]);
 
+        $previousStatus = $transaction->status;
         $data = $request->all();
-        $data['amount'] = (int) ($data['amount'] * 100); // Convert to kobo
+        $data['amount'] = (int) round(((float) $data['amount']) * 100); // Convert to kobo
+        $data['metadata'] = $this->withPendingFundsHeldMetadata($data, $transaction->metadata ?? []);
 
         $transaction->update($data);
+
+        if ($previousStatus !== 'completed' && $transaction->status === 'completed') {
+            $transaction->loadMissing('user');
+            $this->applyApprovalEffects($transaction);
+        }
 
         return redirect()->route('admin.transactions.index')
                         ->with('success', 'Transaction updated successfully.');
@@ -263,10 +280,29 @@ class TransactionController extends Controller
     private function applyApprovalEffects(Transaction $transaction): void
     {
         $wallet = $this->getWalletForUser($transaction->user);
+        $metadata = $transaction->metadata ?? [];
+        $transferType = $metadata['transfer_type'] ?? null;
 
         if ($transaction->type === 'deposit') {
             $wallet->credit($transaction->amount);
             $this->syncLegacyUserBalance($transaction->user, $wallet);
+            return;
+        }
+
+        if ($transaction->type === 'withdrawal') {
+            if (!$this->fundsWereHeld($metadata)) {
+                $wallet->debit($transaction->amount);
+                $this->syncLegacyUserBalance($transaction->user, $wallet);
+            }
+            return;
+        }
+
+        if ($transaction->type === 'transfer' && $transferType === 'wire') {
+            if (!$this->fundsWereHeld($metadata)) {
+                $totalAmount = $transaction->amount + ($transaction->fee ?? 0);
+                $wallet->debit($totalAmount);
+                $this->syncLegacyUserBalance($transaction->user, $wallet);
+            }
             return;
         }
     }
@@ -278,15 +314,19 @@ class TransactionController extends Controller
         $transferType = $metadata['transfer_type'] ?? null;
 
         if ($transaction->type === 'withdrawal') {
-            $wallet->credit($transaction->amount);
-            $this->syncLegacyUserBalance($transaction->user, $wallet);
+            if ($this->fundsWereHeld($metadata)) {
+                $wallet->credit($transaction->amount);
+                $this->syncLegacyUserBalance($transaction->user, $wallet);
+            }
             return;
         }
 
         if ($transaction->type === 'transfer' && $transferType === 'wire') {
-            $totalAmount = $transaction->amount + ($transaction->fee ?? 0);
-            $wallet->credit($totalAmount);
-            $this->syncLegacyUserBalance($transaction->user, $wallet);
+            if ($this->fundsWereHeld($metadata)) {
+                $totalAmount = $transaction->amount + ($transaction->fee ?? 0);
+                $wallet->credit($totalAmount);
+                $this->syncLegacyUserBalance($transaction->user, $wallet);
+            }
             return;
         }
     }
@@ -338,5 +378,51 @@ class TransactionController extends Controller
         $user->update([
             'balance' => (int) round(((float) $wallet->balance) * 100),
         ]);
+    }
+
+    private function fundsWereHeld(array $metadata): bool
+    {
+        if (array_key_exists('funds_held', $metadata)) {
+            return (bool) $metadata['funds_held'];
+        }
+
+        return true;
+    }
+
+    private function withPendingFundsHeldMetadata(array $data, ?array $existing = null): ?array
+    {
+        $metadata = $existing ?? ($data['metadata'] ?? null);
+        if ($metadata !== null && !is_array($metadata)) {
+            $metadata = null;
+        }
+
+        $status = $data['status'] ?? null;
+        $type = $data['type'] ?? null;
+
+        if ($status === 'pending' && in_array($type, ['withdrawal', 'transfer'], true)) {
+            $metadata = $metadata ?? [];
+            if (!array_key_exists('funds_held', $metadata)) {
+                $metadata['funds_held'] = false;
+            }
+        }
+
+        return $metadata;
+    }
+
+    private function normalizeMoneyInputs(Request $request, array $fields): void
+    {
+        foreach ($fields as $field) {
+            if (!$request->has($field)) {
+                continue;
+            }
+
+            $value = $request->input($field);
+            if (!is_string($value)) {
+                continue;
+            }
+
+            $normalized = str_replace([',', ' '], '', $value);
+            $request->merge([$field => $normalized]);
+        }
     }
 }

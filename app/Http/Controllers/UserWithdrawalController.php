@@ -49,13 +49,10 @@ class UserWithdrawalController extends Controller
             'metadata' => [
                 'method' => $validated['method'],
                 'account_details' => $validated['account_details'],
+                'funds_held' => false,
             ],
         ]);
-        
-        // Debit wallet (funds will be held until admin approves)
-        $wallet->debit($amountInCents);
-        
+
         return redirect()->route('transactions')->with('success', 'Withdrawal request submitted! An admin will process it shortly.');
     }
 }
-

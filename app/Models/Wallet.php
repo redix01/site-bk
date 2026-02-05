@@ -55,11 +55,8 @@ class Wallet extends Model
             // Lock the row for update
             $wallet = self::where('id', $this->id)->lockForUpdate()->first();
             
-            // Convert minor units to major units
-            $amountInMajorUnits = $amount / 100;
-            
-            // Update balance directly
-            $wallet->balance = $wallet->balance + $amountInMajorUnits;
+            // Update balance directly (amount is in minor units)
+            $wallet->balance = $wallet->balance + $amount;
             $wallet->save();
             
             // Refresh the current instance
@@ -77,16 +74,13 @@ class Wallet extends Model
             // Lock the row for update
             $wallet = self::where('id', $this->id)->lockForUpdate()->first();
             
-            // Convert minor units to major units
-            $amountInMajorUnits = $amount / 100;
-            
             // Check sufficient balance
-            if ($wallet->balance < $amountInMajorUnits) {
+            if ($wallet->balance < $amount) {
                 throw new \Exception('Insufficient balance');
             }
             
-            // Update balance directly
-            $wallet->balance = $wallet->balance - $amountInMajorUnits;
+            // Update balance directly (amount is in minor units)
+            $wallet->balance = $wallet->balance - $amount;
             $wallet->save();
             
             // Refresh the current instance

@@ -218,8 +218,8 @@ class UserController extends Controller
             'id' => $wallet->id,
             'user_id' => $wallet->user_id,
             'account_number' => $wallet->account_number,
-            'balance' => (int) round((float)$wallet->balance * 100),
-            'ledger_balance' => (int) round((float)$wallet->ledger_balance * 100),
+            'balance' => (int) $wallet->balance,
+            'ledger_balance' => (int) $wallet->ledger_balance,
             'currency' => $wallet->currency,
             'status' => $wallet->status,
             'created_at' => optional($wallet->created_at)->toIso8601String(),
@@ -274,10 +274,10 @@ class UserController extends Controller
                 $balanceInDollars = (float) $request->balance;
                 $balanceInCents = (int) round($balanceInDollars * 100);
                 
-                // Update wallet balance (stored as decimal dollars)
+                // Update wallet balance (stored as minor units/cents)
                 $wallet->update([
-                    'balance' => $balanceInDollars,
-                    'ledger_balance' => $balanceInDollars,
+                    'balance' => $balanceInCents,
+                    'ledger_balance' => $balanceInCents,
                 ]);
 
                 // Also update user balance field for backwards compatibility (stored in cents as integer)
@@ -527,8 +527,8 @@ class UserController extends Controller
         $wallet = Wallet::create([
             'user_id' => $user->id,
             'account_number' => Wallet::generateAccountNumber(),
-            'balance' => ($user->balance ?? 0) / 100, // Convert user balance (cents) to major units
-            'ledger_balance' => ($user->balance ?? 0) / 100,
+            'balance' => $user->balance ?? 0,
+            'ledger_balance' => $user->balance ?? 0,
             'currency' => $preferredCurrency,
             'status' => 'active',
         ]);

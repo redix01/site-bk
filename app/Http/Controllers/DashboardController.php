@@ -44,13 +44,12 @@ class DashboardController extends Controller
                 ->sum('amount'),
             'total_withdrawals' => Transaction::where('user_id', $user->id)
                 ->where('type', 'withdrawal')
-                ->whereIn('status', ['completed', 'pending'])
+                ->where('status', 'completed')
                 ->sum('amount'),
             'total_transfers_sent' => Transaction::where('user_id', $user->id)
                 ->where('type', 'transfer')
-                ->whereIn('status', ['completed', 'pending'])
-                ->selectRaw('COALESCE(SUM(amount + fee), 0) as total')
-                ->value('total') ?? 0,
+                ->where('status', 'completed')
+                ->sum('amount'),
             'total_transfers_received' => Transaction::where('recipient_id', $user->id)
                 ->where('type', 'transfer')
                 ->where('status', 'completed')

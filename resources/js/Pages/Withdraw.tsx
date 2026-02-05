@@ -19,12 +19,21 @@ export default function Withdraw({ auth, wallet, flash }: WithdrawPageProps) {
         account_details: '',
     });
 
-    const formatCurrency = (amount: number) => {
+    const normalizeMajor = (value: number | string | null | undefined) => {
+        if (value === null || value === undefined) {
+            return 0;
+        }
+        const numeric = typeof value === 'string' ? parseFloat(value) : value;
+        return Number.isFinite(numeric) ? numeric : 0;
+    };
+
+    const formatCurrency = (amount: number | string | null | undefined) => {
+        const normalized = normalizeMajor(amount);
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: wallet?.currency || 'USD',
             minimumFractionDigits: 2,
-        }).format(amount / 100);
+        }).format(normalized);
     };
 
     const quickAmounts = [1000, 5000, 10000, 25000]; // amounts in cents
@@ -45,8 +54,8 @@ export default function Withdraw({ auth, wallet, flash }: WithdrawPageProps) {
         }
         
         // Check balance
-        const amountInCents = parseFloat(data.amount) * 100;
-        if (amountInCents > (wallet?.balance || 0)) {
+        const amountInMajor = parseFloat(data.amount);
+        if (amountInMajor > normalizeMajor(wallet?.balance)) {
             return;
         }
         
@@ -144,7 +153,7 @@ export default function Withdraw({ auth, wallet, flash }: WithdrawPageProps) {
                                     type="number"
                                     step="0.01"
                                     min="10.00"
-                                    max={(wallet?.balance || 0) / 100}
+                                    max={normalizeMajor(wallet?.balance)}
                                     value={data.amount}
                                     onChange={(e) => setData('amount', e.target.value)}
                                     placeholder="0.00"
@@ -171,7 +180,7 @@ export default function Withdraw({ auth, wallet, flash }: WithdrawPageProps) {
                                         size="sm"
                                         onClick={() => handleQuickAmount(quickAmount)}
                                         className="border-slate-700 text-slate-300 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all"
-                                        disabled={(wallet?.balance || 0) < quickAmount}
+                                        disabled={normalizeMajor(wallet?.balance) < quickAmount / 100}
                                     >
                                         ${quickAmount / 100}
                                     </Button>
@@ -282,7 +291,7 @@ export default function Withdraw({ auth, wallet, flash }: WithdrawPageProps) {
                         <div className="flex justify-between items-center pt-2">
                             <span className="text-slate-300 font-semibold">New Balance</span>
                             <span className="text-slate-50 text-xl font-bold">
-                                {formatCurrency((wallet?.balance || 0) - parseFloat(data.amount) * 100)}
+                                {formatCurrency(normalizeMajor(wallet?.balance) - parseFloat(data.amount))}
                             </span>
                         </div>
                     </div>
@@ -403,4 +412,3 @@ export default function Withdraw({ auth, wallet, flash }: WithdrawPageProps) {
         </MobileLayout>
     );
 }
-

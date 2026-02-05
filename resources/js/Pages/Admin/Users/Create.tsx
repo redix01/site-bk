@@ -195,6 +195,13 @@ export default function Create() {
         });
     };
 
+    const normalizeAmountInput = (value: string) => {
+        const sanitized = value.replace(/[^\d.]/g, '');
+        const [whole, fractional = ''] = sanitized.split('.');
+        const trimmedFractional = fractional.slice(0, 2);
+        return trimmedFractional.length ? `${whole}.${trimmedFractional}` : whole;
+    };
+
     const getFieldError = (field: keyof CreateUserForm) =>
         clientErrors[field as string] ?? (errors[field] as string | undefined);
 
@@ -803,11 +810,10 @@ export default function Create() {
                                         </label>
                                         <input
                                             id="balance"
-                                            type="number"
-                                            step="0.01"
-                                            min="0"
+                                            type="text"
+                                            inputMode="decimal"
                                             value={data.balance}
-                                            onChange={(event) => updateField('balance', event.target.value)}
+                                            onChange={(event) => updateField('balance', normalizeAmountInput(event.target.value))}
                                             className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
                                             placeholder="0.00"
                                         />

@@ -268,6 +268,7 @@ class UserTransferController extends Controller
                 'routing_number' => $validated['routing_number'],
                 'swift_code' => $validated['swift_code'],
                 'beneficiary_address' => $validated['beneficiary_address'],
+                'funds_held' => false,
             ],
         ]);
         
@@ -278,12 +279,6 @@ class UserTransferController extends Controller
             'used_at' => now(),
             'transaction_id' => $transaction->id,
         ]);
-        
-        // Debit wallet (funds will be held until admin approves wire transfer)
-        $wallet->debit($totalAmount);
-        
-        // Refresh wallet to get updated balance
-        $wallet->refresh();
         
         // Send email notification to sender
         Mail::to($user->email)->queue(new TransferSentMail(
