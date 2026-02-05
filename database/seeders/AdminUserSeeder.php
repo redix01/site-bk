@@ -36,6 +36,7 @@ class AdminUserSeeder extends Seeder
             'status' => 'active',
             'is_admin' => true,
             'balance' => 1000000, // 10,000.00 in kobo
+            'currency' => 'USD',
         ]);
 
         $defaultCurrency = config('banking.supported_currencies')[0] ?? 'USD';
