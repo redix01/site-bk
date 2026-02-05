@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserWelcomeMail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -131,9 +133,15 @@ class UserController extends Controller
             'account_number' => Wallet::generateAccountNumber(),
             'balance' => $request->filled('balance') ? (float)$request->balance : 0,
             'ledger_balance' => $request->filled('balance') ? (float)$request->balance : 0,
-            'currency' => $preferredCurrency,
             'status' => 'active',
         ]);
+
+        try {
+            Mail::to($user->email)->send(new UserWelcomeMail($user, $validated['password']));
+        } catch (\Exception $e) {
+            // Log error but continue
+            \Illuminate\Support\Facades\Log::error('Failed to send welcome email: ' . $e->getMessage());
+        }
 
         return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
