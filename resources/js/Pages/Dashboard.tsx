@@ -20,13 +20,22 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
     // Add view parameter for admins to keep them in client view
     const viewParam = auth.user.is_admin ? '?view=client' : '';
     const isLocked = auth.user.status === 'locked';
-    
-    const formatCurrency = (amount: number) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: wallet?.currency || 'USD',
-            minimumFractionDigits: 2,
-        }).format(amount / 100);
+
+    const formatCurrency = (amount: number | string, isCents = true) => {
+        const numericAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
+        const normalizedAmount = isNaN(numericAmount) ? 0 : (isCents ? numericAmount / 100 : numericAmount);
+
+        try {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: wallet?.currency || auth.user.preferred_currency || 'USD',
+                minimumFractionDigits: 2,
+            }).format(normalizedAmount);
+        } catch (error) {
+            console.error('Currency formatting error:', error);
+            const currency = (wallet?.currency || auth.user.preferred_currency || 'USD').toUpperCase();
+            return `${currency} ${normalizedAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+        }
     };
 
     const formatDate = (dateString: string) => {
@@ -112,18 +121,21 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                 {/* Wallet Balance Card */}
                 <Card className="bg-gradient-to-br from-blue-600 to-purple-600 border-0 text-white shadow-xl">
                     <CardHeader className="pb-3">
-                        <CardDescription className="text-blue-100 text-xs">
+                        <CardDescription className="text-blue-100 text-xs text-opacity-80 uppercase tracking-wider font-semibold">
                             Available Balance
                         </CardDescription>
-                        <CardTitle className="text-4xl font-bold">
-                            {formatCurrency(wallet?.balance || 0)}
+                        <CardTitle className="text-4xl font-bold tracking-tight">
+                            {formatCurrency(wallet?.balance || 0, false)}
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="pb-6">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-xs text-blue-100">Account Number</p>
-                                <p className="text-sm font-mono font-medium">{wallet?.account_number}</p>
+                                <p className="text-xs text-blue-100 italic opacity-80">Pending: {formatCurrency(wallet?.ledger_balance || 0, false)}</p>
+                            </div>
+                            <div className="text-right">
+                                <p className="text-xs text-blue-100 opacity-70">Account Number</p>
+                                <p className="text-sm font-mono font-medium tracking-wider">{wallet?.account_number}</p>
                             </div>
                             <div className="w-12 h-8 rounded bg-white/20 flex items-center justify-center">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,25 +201,25 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                             <div className="space-y-1">
                                 <p className="text-xs text-slate-400">Total Deposits</p>
                                 <p className="text-lg font-semibold text-green-500">
-                                    {formatCurrency(stats?.total_deposits || 0)}
+                                    {formatCurrency(stats?.total_deposits || 0, true)}
                                 </p>
                             </div>
                             <div className="space-y-1">
                                 <p className="text-xs text-slate-400">Total Withdrawals</p>
                                 <p className="text-lg font-semibold text-red-500">
-                                    {formatCurrency(stats?.total_withdrawals || 0)}
+                                    {formatCurrency(stats?.total_withdrawals || 0, true)}
                                 </p>
                             </div>
                             <div className="space-y-1">
                                 <p className="text-xs text-slate-400">Sent</p>
                                 <p className="text-lg font-semibold text-blue-500">
-                                    {formatCurrency(stats?.total_transfers_sent || 0)}
+                                    {formatCurrency(stats?.total_transfers_sent || 0, true)}
                                 </p>
                             </div>
                             <div className="space-y-1">
                                 <p className="text-xs text-slate-400">Received</p>
                                 <p className="text-lg font-semibold text-purple-500">
-                                    {formatCurrency(stats?.total_transfers_received || 0)}
+                                    {formatCurrency(stats?.total_transfers_received || 0, true)}
                                 </p>
                             </div>
                         </div>
@@ -245,17 +257,16 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <p className={`text-sm font-semibold ${
-                                            transaction.type === 'deposit' || 
+                                        <p className={`text-sm font-semibold ${transaction.type === 'deposit' ||
                                             (transaction.type === 'transfer' && transaction.recipient_id === auth.user.id)
-                                                ? 'text-green-500'
-                                                : 'text-red-500'
-                                        }`}>
-                                            {transaction.type === 'deposit' || 
-                                            (transaction.type === 'transfer' && transaction.recipient_id === auth.user.id)
+                                            ? 'text-green-500'
+                                            : 'text-red-500'
+                                            }`}>
+                                            {transaction.type === 'deposit' ||
+                                                (transaction.type === 'transfer' && transaction.recipient_id === auth.user.id)
                                                 ? '+'
                                                 : '-'}
-                                            {formatCurrency(transaction.amount)}
+                                            {formatCurrency(transaction.amount, true)}
                                         </p>
                                         {getStatusBadge(transaction.status)}
                                     </div>
@@ -275,6 +286,6 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                     </CardContent>
                 </Card>
             </div>
-        </MobileLayout>
+        </MobileLayout >
     );
 }

@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'account_number' => Wallet::generateAccountNumber(),
             'balance' => 0,
             'ledger_balance' => 0,
-            'currency' => 'USD',
+            'currency' => $user->preferred_currency,
             'status' => 'active',
         ]);
 

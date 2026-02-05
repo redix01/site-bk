@@ -33,7 +33,7 @@ class UserWithdrawalController extends Controller
         
         // Check if user has sufficient balance
         $wallet = $user->wallet;
-        if (!$wallet || $wallet->balance < $amountInCents) {
+        if (!$wallet || $wallet->balance < ($amountInCents / 100)) {
             return redirect()->back()->with('error', 'Insufficient balance');
         }
         

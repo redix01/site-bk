@@ -111,7 +111,7 @@ class UserTransferController extends Controller
         
         // Check if user has sufficient balance
         $wallet = $user->wallet;
-        if (!$wallet || $wallet->balance < $amountInCents) {
+        if (!$wallet || $wallet->balance < ($amountInCents / 100)) {
             return redirect()->back()->withErrors(['error' => 'Insufficient balance']);
         }
         
@@ -247,7 +247,7 @@ class UserTransferController extends Controller
         
         // Check if user has sufficient balance
         $wallet = $user->wallet;
-        if (!$wallet || $wallet->balance < $totalAmount) {
+        if (!$wallet || $wallet->balance < ($totalAmount / 100)) {
             return redirect()->back()->withErrors(['error' => 'Insufficient balance (including wire transfer fee)']);
         }
         
