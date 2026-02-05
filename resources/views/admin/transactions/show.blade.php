@@ -88,7 +88,7 @@
 
                     <div>
                         <label class="block text-sm font-medium text-gray-400">Account Balance</label>
-                        <p class="text-gray-100">${{ number_format($transaction->user->balance ?? 0, 2) }}</p>
+                        <p class="text-gray-100">${{ number_format(($transaction->user->balance ?? 0) / 100, 2) }}</p>
                     </div>
                 </div>
             </div>

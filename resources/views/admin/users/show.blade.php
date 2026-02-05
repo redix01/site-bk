@@ -79,7 +79,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Account Balance</label>
-                    <div class="p-3 bg-dark-700 rounded-lg text-white text-xl font-semibold">${{ number_format($user->balance ?? 0, 2) }}</div>
+                    <div class="p-3 bg-dark-700 rounded-lg text-white text-xl font-semibold">${{ number_format(($user->balance ?? 0) / 100, 2) }}</div>
                 </div>
                 
                 <div>

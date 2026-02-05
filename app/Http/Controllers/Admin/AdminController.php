@@ -17,7 +17,7 @@ class AdminController extends Controller
         $stats = [
             'total_users' => \App\Models\User::count(),
             'total_transactions' => \App\Models\Transaction::count(),
-            'total_balance' => \App\Models\User::sum('balance'),
+            'total_balance' => \App\Models\Wallet::sum('balance'),
             'recent_activity' => \App\Models\Transaction::with('user')
                 ->latest()
                 ->limit(5)

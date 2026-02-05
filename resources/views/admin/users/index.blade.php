@@ -61,7 +61,7 @@
                             <div class="text-sm text-white">{{ $user->phone ?? 'N/A' }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-white">${{ number_format($user->balance ?? 0, 2) }}</div>
+                            <div class="text-sm font-medium text-white">${{ number_format(($user->balance ?? 0) / 100, 2) }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($user->is_admin)

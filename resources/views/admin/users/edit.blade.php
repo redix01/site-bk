@@ -44,7 +44,7 @@
             <!-- Balance -->
             <div>
                 <label for="balance" class="block text-sm font-medium text-gray-300 mb-2">Account Balance</label>
-                <input type="number" id="balance" name="balance" value="{{ old('balance', $user->balance) }}" step="0.01" min="0"
+                <input type="number" id="balance" name="balance" value="{{ old('balance', ($user->balance ?? 0) / 100) }}" step="0.01" min="0"
                        class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent @error('balance') border-red-500 @enderror">
                 @error('balance')
                     <p class="mt-1 text-sm text-red-400">{{ $message }}</p>

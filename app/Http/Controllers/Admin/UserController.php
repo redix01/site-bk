@@ -53,6 +53,8 @@ class UserController extends Controller
             }
         }
 
+        $this->normalizeMoneyInputs($request, ['balance']);
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -247,6 +249,8 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $this->normalizeMoneyInputs($request, ['balance']);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
@@ -299,6 +303,8 @@ class UserController extends Controller
 
     public function fund(Request $request, User $user)
     {
+        $this->normalizeMoneyInputs($request, ['amount']);
+
         $payload = $request->validate([
             'amount' => 'required|numeric|min:1',
             'description' => 'nullable|string|max:500',
@@ -353,6 +359,23 @@ class UserController extends Controller
         });
 
         return back()->with('success', 'User balance funded successfully.');
+    }
+
+    private function normalizeMoneyInputs(Request $request, array $fields): void
+    {
+        foreach ($fields as $field) {
+            if (!$request->has($field)) {
+                continue;
+            }
+
+            $value = $request->input($field);
+            if (!is_string($value)) {
+                continue;
+            }
+
+            $normalized = str_replace([',', ' '], '', $value);
+            $request->merge([$field => $normalized]);
+        }
     }
 
     /**

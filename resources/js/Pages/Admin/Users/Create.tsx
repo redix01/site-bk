@@ -812,8 +812,8 @@ export default function Create() {
                                             placeholder="0.00"
                                         />
                                         <p className="mt-1 text-xs text-slate-500">
-                                            Tip: The balance is stored in minor units (cents). Enter the amount in whole currency
-                                            and cents, e.g. 1,250.75.
+                                            Tip: Enter the amount in the account currency (e.g. 1,250.75). We store balances internally
+                                            in minor units (cents).
                                         </p>
                                         {getFieldError('balance') && (
                                             <p className="mt-1 text-sm text-red-400">{getFieldError('balance')}</p>
