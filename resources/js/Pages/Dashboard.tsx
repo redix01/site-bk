@@ -205,13 +205,13 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                                 </p>
                             </div>
                             <div className="space-y-1">
-                                <p className="text-xs text-slate-400">Total Withdrawals</p>
+                                <p className="text-xs text-slate-400">Withdrawals (incl. pending)</p>
                                 <p className="text-lg font-semibold text-red-500">
                                     {formatCurrency(stats?.total_withdrawals || 0, true)}
                                 </p>
                             </div>
                             <div className="space-y-1">
-                                <p className="text-xs text-slate-400">Sent</p>
+                                <p className="text-xs text-slate-400">Sent (incl. fees)</p>
                                 <p className="text-lg font-semibold text-blue-500">
                                     {formatCurrency(stats?.total_transfers_sent || 0, true)}
                                 </p>

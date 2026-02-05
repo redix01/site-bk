@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -150,6 +151,9 @@ class TransactionController extends Controller
             return back()->with('error', 'Only pending transactions can be approved.');
         }
 
+        $transaction->loadMissing('user');
+        $this->applyApprovalEffects($transaction);
+
         $transaction->update([
             'status' => 'completed',
             'metadata' => array_merge($transaction->metadata ?? [], [
@@ -178,6 +182,9 @@ class TransactionController extends Controller
         $request->validate([
             'reason' => 'required|string|max:500',
         ]);
+
+        $transaction->loadMissing('user');
+        $this->applyRejectionEffects($transaction);
 
         $transaction->update([
             'status' => 'failed',
@@ -209,6 +216,13 @@ class TransactionController extends Controller
         $request->validate([
             'reason' => 'required|string|max:500',
         ]);
+
+        $transaction->loadMissing('user');
+        try {
+            $this->applyReversalEffects($transaction);
+        } catch (\Throwable $e) {
+            return back()->with('error', 'Unable to reverse transaction: ' . $e->getMessage());
+        }
 
         // Create reversal transaction
         $reversal = Transaction::create([
@@ -244,5 +258,85 @@ class TransactionController extends Controller
         ], $transaction);
 
         return back()->with('success', 'Transaction reversed successfully.');
+    }
+
+    private function applyApprovalEffects(Transaction $transaction): void
+    {
+        $wallet = $this->getWalletForUser($transaction->user);
+
+        if ($transaction->type === 'deposit') {
+            $wallet->credit($transaction->amount);
+            $this->syncLegacyUserBalance($transaction->user, $wallet);
+            return;
+        }
+    }
+
+    private function applyRejectionEffects(Transaction $transaction): void
+    {
+        $wallet = $this->getWalletForUser($transaction->user);
+        $metadata = $transaction->metadata ?? [];
+        $transferType = $metadata['transfer_type'] ?? null;
+
+        if ($transaction->type === 'withdrawal') {
+            $wallet->credit($transaction->amount);
+            $this->syncLegacyUserBalance($transaction->user, $wallet);
+            return;
+        }
+
+        if ($transaction->type === 'transfer' && $transferType === 'wire') {
+            $totalAmount = $transaction->amount + ($transaction->fee ?? 0);
+            $wallet->credit($totalAmount);
+            $this->syncLegacyUserBalance($transaction->user, $wallet);
+            return;
+        }
+    }
+
+    private function applyReversalEffects(Transaction $transaction): void
+    {
+        $wallet = $this->getWalletForUser($transaction->user);
+
+        if ($transaction->type === 'deposit') {
+            $wallet->debit($transaction->amount);
+            $this->syncLegacyUserBalance($transaction->user, $wallet);
+            return;
+        }
+
+        if ($transaction->type === 'withdrawal') {
+            $wallet->credit($transaction->amount);
+            $this->syncLegacyUserBalance($transaction->user, $wallet);
+            return;
+        }
+    }
+
+    private function getWalletForUser(User $user): Wallet
+    {
+        $user->loadMissing('wallet');
+
+        if ($user->wallet) {
+            return $user->wallet;
+        }
+
+        $preferredCurrency = strtoupper($user->preferred_currency ?: 'USD');
+
+        $wallet = Wallet::create([
+            'user_id' => $user->id,
+            'account_number' => Wallet::generateAccountNumber(),
+            'balance' => 0,
+            'ledger_balance' => 0,
+            'currency' => $preferredCurrency,
+            'status' => 'active',
+        ]);
+
+        $user->setRelation('wallet', $wallet);
+
+        return $wallet;
+    }
+
+    private function syncLegacyUserBalance(User $user, Wallet $wallet): void
+    {
+        $wallet->refresh();
+        $user->update([
+            'balance' => (int) round(((float) $wallet->balance) * 100),
+        ]);
     }
 }
