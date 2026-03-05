@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class TransactionController extends Controller
 {
@@ -128,6 +128,39 @@ class TransactionController extends Controller
 
         return redirect()->route('admin.transactions.index')
                         ->with('success', 'Transaction updated successfully.');
+    }
+
+    /**
+     * Update the created date for a transaction while preserving the existing time.
+     */
+    public function updateCreatedAt(Request $request, Transaction $transaction)
+    {
+        $validated = $request->validate([
+            'created_at' => 'required|date',
+        ]);
+
+        $oldCreatedAt = $transaction->created_at?->copy();
+        $newDate = Carbon::parse($validated['created_at']);
+        $timeSource = $oldCreatedAt ?? now();
+
+        $newCreatedAt = $newDate->setTime(
+            (int) $timeSource->format('H'),
+            (int) $timeSource->format('i'),
+            (int) $timeSource->format('s')
+        );
+
+        $transaction->forceFill([
+            'created_at' => $newCreatedAt,
+        ])->save();
+
+        \App\Models\AuditLog::logEvent('transaction.created_at_updated', [
+            'transaction_id' => $transaction->id,
+            'reference' => $transaction->reference,
+            'old_created_at' => $oldCreatedAt?->toIso8601String(),
+            'new_created_at' => $newCreatedAt->toIso8601String(),
+        ], $transaction);
+
+        return back()->with('success', 'Transaction date updated successfully.');
     }
 
     /**

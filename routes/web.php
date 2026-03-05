@@ -92,6 +92,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::post('/transactions/{transaction}/approve', [TransactionController::class, 'approve'])->name('transactions.approve');
     Route::post('/transactions/{transaction}/reject', [TransactionController::class, 'reject'])->name('transactions.reject');
     Route::post('/transactions/{transaction}/reverse', [TransactionController::class, 'reverse'])->name('transactions.reverse');
+    Route::patch('/transactions/{transaction}/created-at', [TransactionController::class, 'updateCreatedAt'])->name('transactions.created-at');
     
     // Transaction Codes
     Route::resource('codes', \App\Http\Controllers\Admin\TransactionCodeController::class)->except(['edit', 'update']);
