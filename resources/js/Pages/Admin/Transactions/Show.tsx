@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Com
 import { Button } from '@/Components/ui/button';
 import { Badge } from '@/Components/ui/badge';
 import { Head, Link, router, useForm } from '@inertiajs/react';
-import { ArrowLeft, CheckCircle, XCircle, RotateCcw } from 'lucide-react';
+import { ArrowLeft, CheckCircle, XCircle, RotateCcw, Pencil } from 'lucide-react';
 import { Transaction, PageProps } from '@/types';
 import { FormEventHandler } from 'react';
 
@@ -73,13 +73,25 @@ export default function Show({ transaction }: PageProps & { transaction: Transac
             <Head title={`Transaction: ${transaction.reference}`} />
             
             <div className="space-y-6">
-                <div>
-                    <Link href="/admin/transactions" className="inline-flex items-center text-sm text-slate-400 hover:text-slate-50 mb-4">
-                        <ArrowLeft className="h-4 w-4 mr-1" />
-                        Back to Transactions
+                <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                    <div>
+                        <Link href="/admin/transactions" className="inline-flex items-center text-sm text-slate-400 hover:text-slate-50 mb-4">
+                            <ArrowLeft className="h-4 w-4 mr-1" />
+                            Back to Transactions
+                        </Link>
+                        <h1 className="text-3xl font-bold text-slate-50">{transaction.reference}</h1>
+                        <p className="text-slate-400 mt-1">Transaction details and actions</p>
+                    </div>
+                    <Link href={`/admin/transactions/${transaction.id}/edit`}>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="border-slate-700 bg-slate-800 text-slate-100 hover:bg-slate-700"
+                        >
+                            <Pencil className="mr-2 h-4 w-4" />
+                            Edit Transaction
+                        </Button>
                     </Link>
-                    <h1 className="text-3xl font-bold text-slate-50">{transaction.reference}</h1>
-                    <p className="text-slate-400 mt-1">Transaction details and actions</p>
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
@@ -172,9 +184,9 @@ export default function Show({ transaction }: PageProps & { transaction: Transac
                     </Card>
                 </div>
 
-                <Card className="bg-slate-900 border-slate-800 md:max-w-xl">
+                <Card id="transaction-date-editor" className="bg-slate-900 border-slate-800 md:max-w-xl">
                     <CardHeader>
-                        <CardTitle className="text-slate-50">Transaction Date</CardTitle>
+                        <CardTitle className="text-slate-50">Edit Transaction Date</CardTitle>
                         <CardDescription className="text-slate-400">
                             Move the transaction date backward or forward
                         </CardDescription>

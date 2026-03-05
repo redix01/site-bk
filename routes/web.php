@@ -23,12 +23,9 @@ Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name
 Route::post('/admin/login', [AdminLoginController::class, 'login']);
 Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 
-// Regular User Authentication Routes (with OTP)
+// Regular User Authentication Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']); // Legacy login
-Route::post('/login/send-otp', [LoginController::class, 'sendOtp'])->name('login.send-otp');
-Route::post('/login/resend-otp', [LoginController::class, 'resendOtp'])->name('login.resend-otp');
-Route::post('/login/verify-otp', [LoginController::class, 'verifyOtpAndLogin'])->name('login.verify-otp');
+Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');

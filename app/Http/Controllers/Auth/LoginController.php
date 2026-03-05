@@ -176,9 +176,8 @@ class LoginController extends Controller
     }
 
     /**
-     * Legacy login method for backward compatibility
-     * Note: This should not be used for new logins. Use the OTP flow instead.
-     * Admins should use /admin/login
+     * Email + password login for regular users.
+     * Admins should use /admin/login.
      */
     public function login(Request $request)
     {
