@@ -371,6 +371,8 @@ export default function Register() {
     const [botWarning, setBotWarning] = useState<string | null>(null);
     const [humanDetected, setHumanDetected] = useState<boolean>(false);
     const mountTimeRef = useRef<number>(Date.now());
+    const appName = import.meta.env.VITE_APP_NAME || 'Banko';
+    const appUrl = import.meta.env.VITE_APP_URL || '/';
     const securityError = (errors as Record<string, string | undefined>).form_security;
 
     const steps = useMemo<StepDefinition[]>(
@@ -624,7 +626,15 @@ export default function Register() {
                 <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col justify-center px-4 sm:px-6 lg:px-8">
                     <div className="space-y-6">
                         <div className="text-center">
-                            <CardTitle className="text-3xl font-bold text-slate-50">Open your Banko account</CardTitle>
+                            <div className="mb-2">
+                                <a
+                                    href={appUrl}
+                                    className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500 hover:text-slate-300"
+                                >
+                                    Visit {appName}
+                                </a>
+                            </div>
+                            <CardTitle className="text-3xl font-bold text-slate-50">Open your {appName} account</CardTitle>
                             <CardDescription className="mt-2 text-base text-slate-400">
                                 Complete the three-step onboarding to activate secure digital banking.
                             </CardDescription>
@@ -1305,4 +1315,3 @@ export default function Register() {
         </>
     );
 }
-

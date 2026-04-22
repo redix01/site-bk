@@ -12,6 +12,8 @@ export default function Login({ status }: LoginProps) {
     const [botWarning, setBotWarning] = useState<string | null>(null);
     const [humanDetected, setHumanDetected] = useState(false);
     const mountTimeRef = useRef<number>(Date.now());
+    const appName = import.meta.env.VITE_APP_NAME || 'Banko';
+    const appUrl = import.meta.env.VITE_APP_URL || '/';
 
     const { data, setData, post, processing, errors } = useForm({
         email: '',
@@ -101,9 +103,12 @@ export default function Login({ status }: LoginProps) {
                                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/10">
                                     <Banknote className="h-6 w-6 text-blue-400" />
                                 </div>
-                                <span className="text-lg font-semibold uppercase tracking-[0.35em] text-slate-300">
-                                    Banko
-                                </span>
+                                <a
+                                    href={appUrl}
+                                    className="text-lg font-semibold uppercase tracking-[0.35em] text-slate-300 hover:text-slate-50"
+                                >
+                                    {appName}
+                                </a>
                             </div>
                             <CardTitle className="text-center text-2xl font-bold text-slate-50">
                                 Welcome back
