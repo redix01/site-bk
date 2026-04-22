@@ -1,660 +1,401 @@
 @extends('pages.layout.app')
 
-@section('title', env('APP_NAME') . ' | Front Page')
-@section('meta_description', 'Premium digital banking experience for personal accounts, guidance, and support.')
-
-@push('styles')
-<style>
-    .sc-landing {
-        padding: 42px 0 0;
-    }
-
-    .sc-hero {
-        padding: 54px 0 108px;
-    }
-
-    .sc-hero-grid,
-    .sc-story,
-    .sc-split,
-    .sc-footer-grid {
-        display: grid;
-        gap: 32px;
-    }
-
-    .sc-hero-grid {
-        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-        align-items: center;
-    }
-
-    .sc-hero-copy {
-        max-width: 700px;
-    }
-
-    .sc-hero-copy p {
-        margin: 0 0 36px;
-        color: var(--sc-muted);
-        font-size: 19px;
-        line-height: 1.8;
-    }
-
-    .sc-hero-actions,
-    .sc-inline-actions,
-    .sc-footer-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-    }
-
-    .sc-note-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        margin-top: 28px;
-        color: var(--sc-muted);
-        font-size: 13px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-    }
-
-    .sc-hero-card,
-    .sc-panel,
-    .sc-feature-card,
-    .sc-stat-card,
-    .sc-footer-card {
-        border: 1px solid var(--sc-border);
-        background: var(--sc-card);
-        backdrop-filter: blur(18px);
-        box-shadow: var(--sc-shadow);
-    }
-
-    .sc-hero-card {
-        border-radius: var(--sc-radius);
-        padding: 28px;
-        position: relative;
-        overflow: hidden;
-        min-height: 560px;
-        display: flex;
-        align-items: flex-end;
-    }
-
-    .sc-hero-card::before,
-    .sc-hero-card::after {
-        content: "";
-        position: absolute;
-        border-radius: 999px;
-        background: rgba(102, 163, 255, 0.14);
-        filter: blur(8px);
-    }
-
-    .sc-hero-card::before {
-        top: -60px;
-        right: -20px;
-        width: 240px;
-        height: 240px;
-    }
-
-    .sc-hero-card::after {
-        bottom: -70px;
-        left: -30px;
-        width: 220px;
-        height: 220px;
-        background: rgba(255, 255, 255, 0.08);
-    }
-
-    .sc-card-stack {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        display: grid;
-        gap: 20px;
-    }
-
-    .sc-card-chip {
-        width: 54px;
-        height: 40px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #f8d06a 0%, #d9a631 100%);
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
-    }
-
-    .sc-elite-card {
-        border-radius: 28px;
-        padding: 28px;
-        background:
-            linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
-            linear-gradient(145deg, #0b0f18 0%, #121827 100%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        min-height: 240px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .sc-elite-top,
-    .sc-elite-bottom,
-    .sc-story,
-    .sc-footer-bottom {
-        display: flex;
-        justify-content: space-between;
-        gap: 18px;
-    }
-
-    .sc-elite-top strong,
-    .sc-elite-bottom strong {
-        display: block;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        color: rgba(255, 255, 255, 0.58);
-        margin-bottom: 10px;
-    }
-
-    .sc-elite-bottom {
-        align-items: flex-end;
-    }
-
-    .sc-elite-number {
-        margin: 0;
-        font-size: 26px;
-        letter-spacing: 0.24em;
-        font-weight: 300;
-    }
-
-    .sc-card-mini {
-        padding: 18px 20px;
-        border-radius: 22px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .sc-card-mini p,
-    .sc-card-mini span,
-    .sc-story-copy p,
-    .sc-list,
-    .sc-list li,
-    .sc-feature-card p,
-    .sc-stat-card p,
-    .sc-split-card p,
-    .sc-footer-card p,
-    .sc-footer-bottom {
-        color: var(--sc-muted);
-    }
-
-    .sc-stats {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 30px;
-    }
-
-    .sc-stat-card {
-        border-radius: 24px;
-        padding: 28px;
-    }
-
-    .sc-stat-card strong {
-        display: block;
-        font-size: clamp(30px, 4vw, 46px);
-        font-weight: 300;
-        letter-spacing: -0.05em;
-        margin-bottom: 10px;
-        color: var(--sc-text);
-    }
-
-    .sc-features-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 34px;
-    }
-
-    .sc-feature-card {
-        border-radius: 28px;
-        padding: 28px;
-    }
-
-    .sc-feature-index {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border-radius: 999px;
-        background: var(--sc-accent-soft);
-        color: var(--sc-accent);
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.16em;
-        margin-bottom: 26px;
-    }
-
-    .sc-feature-card h3,
-    .sc-story-copy h2,
-    .sc-split-card h3,
-    .sc-footer-card h4 {
-        margin: 0 0 14px;
-        font-size: 28px;
-        line-height: 1.08;
-        letter-spacing: -0.04em;
-        font-weight: 300;
-    }
-
-    .sc-story {
-        align-items: center;
-        grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
-    }
-
-    .sc-story-copy p,
-    .sc-split-card p {
-        margin: 0 0 18px;
-        line-height: 1.85;
-        font-size: 17px;
-    }
-
-    .sc-list {
-        list-style: none;
-        margin: 28px 0 0;
-        padding: 0;
-        display: grid;
-        gap: 16px;
-    }
-
-    .sc-list li {
-        position: relative;
-        padding-left: 24px;
-        font-size: 15px;
-        line-height: 1.75;
-    }
-
-    .sc-list li::before {
-        content: "";
-        position: absolute;
-        top: 11px;
-        left: 0;
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: var(--sc-accent);
-        box-shadow: 0 0 14px rgba(102, 163, 255, 0.55);
-    }
-
-    .sc-story-visual {
-        padding: 32px;
-        border-radius: var(--sc-radius);
-        background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
-            linear-gradient(145deg, #0c111b 0%, #151c2d 100%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: var(--sc-shadow);
-    }
-
-    .sc-visual-grid {
-        display: grid;
-        gap: 16px;
-    }
-
-    .sc-visual-card {
-        border-radius: 22px;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .sc-visual-card strong,
-    .sc-footer-card strong {
-        display: block;
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--sc-accent);
-        margin-bottom: 12px;
-    }
-
-    .sc-visual-card h4 {
-        margin: 0 0 10px;
-        font-size: 22px;
-        font-weight: 300;
-        letter-spacing: -0.03em;
-    }
-
-    .sc-split {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .sc-split-card {
-        padding: 34px;
-        border-radius: var(--sc-radius);
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: var(--sc-shadow);
-    }
-
-    .sc-footer {
-        padding: 0 0 72px;
-    }
-
-    .sc-footer-card {
-        padding: 32px;
-        border-radius: var(--sc-radius);
-    }
-
-    .sc-footer-grid {
-        grid-template-columns: minmax(0, 1.2fr) repeat(2, minmax(220px, 1fr));
-        align-items: start;
-    }
-
-    .sc-footer-links {
-        margin-top: 18px;
-    }
-
-    .sc-footer-links a {
-        color: var(--sc-text);
-    }
-
-    .sc-footer-bottom {
-        margin-top: 22px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        font-size: 13px;
-        line-height: 1.8;
-    }
-
-    @media (max-width: 1100px) {
-        .sc-hero-grid,
-        .sc-story,
-        .sc-split,
-        .sc-footer-grid,
-        .sc-features-grid,
-        .sc-stats {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .sc-hero-grid > :first-child,
-        .sc-story-copy,
-        .sc-footer-grid > :first-child {
-            grid-column: 1 / -1;
-        }
-    }
-
-    @media (max-width: 780px) {
-        .sc-landing {
-            padding-top: 22px;
-        }
-
-        .sc-hero {
-            padding-bottom: 84px;
-        }
-
-        .sc-hero-grid,
-        .sc-story,
-        .sc-split,
-        .sc-footer-grid,
-        .sc-features-grid,
-        .sc-stats {
-            grid-template-columns: 1fr;
-        }
-
-        .sc-hero-card {
-            min-height: auto;
-        }
-
-        .sc-title {
-            line-height: 1;
-        }
-
-        .sc-feature-card h3,
-        .sc-story-copy h2,
-        .sc-split-card h3 {
-            font-size: 24px;
-        }
-
-        .sc-footer-bottom,
-        .sc-story,
-        .sc-elite-top,
-        .sc-elite-bottom {
-            flex-direction: column;
-        }
-    }
-</style>
-@endpush
-
 @section('content')
-<div class="sc-landing">
-    <section class="sc-hero">
-        <div class="sc-container">
-            <div class="sc-hero-grid">
-                <div class="sc-hero-copy">
-                    <span class="sc-kicker">Template Direction: Shirecity UI</span>
-                    <h1 class="sc-title">{{ env('APP_NAME') }} brings private-bank polish to your daily money flow.</h1>
-                    <p>
-                        A sharper front page for customers who want secure onboarding, concierge-grade support,
-                        and financial tools that feel modern from the first click. This rebuild takes the
-                        premium tone of the <code>shirecity-ui</code> template and maps it onto the live routes in this app.
-                    </p>
-                    <div class="sc-hero-actions">
-                        <a href="{{ route('register') }}" class="mil-btn sc-btn-primary">Open Account</a>
-                        <a href="{{ route('personal.banking-services') }}" class="mil-btn sc-btn-ghost">Explore Services</a>
-                    </div>
-                    <div class="sc-note-row">
-                        <span>Protected onboarding</span>
-                        <span>Live human support</span>
-                        <span>Always-on digital access</span>
-                    </div>
-                </div>
+<div id="smooth-content">
 
-                <div class="sc-hero-card">
-                    <div class="sc-card-stack">
-                        <div class="sc-elite-card">
-                            <div class="sc-elite-top">
-                                <div>
-                                    <strong>{{ env('APP_NAME') }} Signature</strong>
-                                    <p class="sc-elite-number">4532 8892 1048 7713</p>
-                                </div>
-                                <div class="sc-card-chip" aria-hidden="true"></div>
-                            </div>
-                            <div class="sc-elite-bottom">
-                                <div>
-                                    <strong>Account Focus</strong>
-                                    <span>Personal and advisory banking</span>
-                                </div>
-                                <div>
-                                    <strong>Member Since</strong>
-                                    <span>2012</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sc-card-mini">
-                            <strong>Decision layer</strong>
-                            <p>Open an account, compare services, or speak with support in two taps from the landing page.</p>
-                        </div>
-                        <div class="sc-card-mini">
-                            <strong>Trust signal</strong>
-                            <p>Every call to action on this page now points at a real route, phone number, or email address.</p>
-                        </div>
+<!-- banner -->
+<div class="mil-banner mil-dark-2">
+    <div class="mil-radial-g-2"></div>
+    <div class="mil-radial-g-3"></div>
+    <div class="container">
+        <div class="row align-items-center mil-mb-80">
+            <div class="col-xl-5">
+                <div class="mil-banner-text">
+                    <div class="mil-text-l mil-light mil-mb-20">Modern banking, tailored to every stage of life.</div>
+                    <h1 class="mil-display mil-light mil-mb-60">Bank with Confidence. Bank with Banko.</h1>
+                    <div class="mil-buttons-frame">
+                        <a href="{{ route('personal.open-account') }}" class="mil-btn mil-md mil-add-arrow">Open an Account</a>
+                        <a href="{{ route('personal.customer-support') }}" class="mil-btn mil-md mil-transp mil-add-play">Talk to a Banker</a>
                     </div>
                 </div>
             </div>
-
-            <div class="sc-stats">
-                <article class="sc-stat-card">
-                    <strong>2.1M+</strong>
-                    <p>clients supported through digital and branch banking.</p>
-                </article>
-                <article class="sc-stat-card">
-                    <strong>45+</strong>
-                    <p>markets served with guided onboarding and secure transfers.</p>
-                </article>
-                <article class="sc-stat-card">
-                    <strong>99.9%</strong>
-                    <p>platform uptime target across customer-facing tools.</p>
-                </article>
-                <article class="sc-stat-card">
-                    <strong>15 min</strong>
-                    <p>average time to resolve most support requests.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="sc-section">
-        <div class="sc-container">
-            <p class="sc-eyebrow">Capabilities</p>
-            <h2 class="sc-title">The front page now sells clarity, confidence, and action.</h2>
-            <p class="sc-subtitle">
-                The original `shirecity-ui` concept leaned premium and minimal. This adaptation keeps that posture,
-                but swaps placeholder destinations for routes that already exist in the Laravel app.
-            </p>
-
-            <div class="sc-features-grid">
-                <article class="sc-feature-card">
-                    <span class="sc-feature-index">01</span>
-                    <h3>Fast onboarding</h3>
-                    <p>Primary calls to action route directly to registration and open-account flows without dead ends.</p>
-                </article>
-                <article class="sc-feature-card">
-                    <span class="sc-feature-index">02</span>
-                    <h3>Premium navigation</h3>
-                    <p>A simpler top bar keeps the experience polished on desktop and mobile while staying easy to scan.</p>
-                </article>
-                <article class="sc-feature-card">
-                    <span class="sc-feature-index">03</span>
-                    <h3>Route-safe actions</h3>
-                    <p>Every visible button now lands on a working page, launches email, calls support, or scrolls back to top.</p>
-                </article>
-                <article class="sc-feature-card">
-                    <span class="sc-feature-index">04</span>
-                    <h3>Visual hierarchy</h3>
-                    <p>Large headline typography, restrained color, and layered surfaces keep the page from feeling generic.</p>
-                </article>
-                <article class="sc-feature-card">
-                    <span class="sc-feature-index">05</span>
-                    <h3>Support-first trust</h3>
-                    <p>Customer support and banking services stay one click away for visitors who are not ready to register.</p>
-                </article>
-                <article class="sc-feature-card">
-                    <span class="sc-feature-index">06</span>
-                    <h3>Lower error surface</h3>
-                    <p>The home layout no longer depends on the old external theme scripts that were easy to break in browser checks.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="sc-section">
-        <div class="sc-container">
-            <div class="sc-story">
-                <div class="sc-story-copy">
-                    <p class="sc-eyebrow">Personal banking</p>
-                    <h2>Designed for people who want human guidance without losing digital speed.</h2>
-                    <p>
-                        From checking and savings to secure alerts and account setup, the personal banking flow is the
-                        core path on this site. The page now keeps that path visible from the hero to the footer.
-                    </p>
-                    <ul class="sc-list">
-                        <li>Compare accounts and services before committing to registration.</li>
-                        <li>Reach live support quickly if questions come up during onboarding.</li>
-                        <li>Move from discovery to account opening without placeholder links.</li>
-                    </ul>
-                    <div class="sc-inline-actions">
-                        <a href="{{ route('personal.open-account') }}" class="mil-btn sc-btn-primary">Start Opening</a>
-                        <a href="{{ route('personal.customer-support') }}" class="mil-btn sc-btn-ghost">Talk to Support</a>
-                    </div>
-                </div>
-
-                <aside class="sc-story-visual">
-                    <div class="sc-visual-grid">
-                        <div class="sc-visual-card">
-                            <strong>Guided setup</strong>
-                            <h4>Three clean entry points</h4>
-                            <p>Register, review services, or reach support directly from the home page.</p>
-                        </div>
-                        <div class="sc-visual-card">
-                            <strong>Security posture</strong>
-                            <h4>Fewer moving parts</h4>
-                            <p>The landing layout runs on local CSS and a tiny interaction script, which makes console checks cleaner.</p>
-                        </div>
-                        <div class="sc-visual-card">
-                            <strong>Template carryover</strong>
-                            <h4>Premium without fake routes</h4>
-                            <p>The page keeps the shirecity-inspired attitude without shipping buttons that go nowhere.</p>
-                        </div>
-                    </div>
-                </aside>
-            </div>
-        </div>
-    </section>
-
-    <section class="sc-section">
-        <div class="sc-container">
-            <div class="sc-split">
-                <article class="sc-split-card">
-                    <p class="sc-eyebrow">Service path</p>
-                    <h3>Need to explore before you join?</h3>
-                    <p>
-                        Use the services page for a full view of the account experience, the benefits, and the support structure
-                        behind the platform.
-                    </p>
-                    <div class="sc-inline-actions">
-                        <a href="{{ route('personal.banking-services') }}" class="mil-btn sc-btn-ghost">View Banking Services</a>
-                    </div>
-                </article>
-                <article class="sc-split-card">
-                    <p class="sc-eyebrow">Relationship path</p>
-                    <h3>Want more context before signup?</h3>
-                    <p>
-                        Learn how {{ env('APP_NAME') }} positions trust, transparency, and advisory support before you take the next step.
-                    </p>
-                    <div class="sc-inline-actions">
-                        <a href="{{ route('about') }}" class="mil-btn sc-btn-ghost">Read About {{ env('APP_NAME') }}</a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="sc-section">
-        <div class="sc-container">
-            <div class="sc-footer-card">
-                <div class="sc-footer-grid">
-                    <div>
-                        <p class="sc-eyebrow">Ready to move?</p>
-                        <h3 class="sc-title" style="font-size: clamp(30px, 4vw, 52px);">Choose your next click and keep it moving.</h3>
-                        <p class="sc-subtitle">
-                            No decorative dead ends. The page now closes with real actions for registration, support, and service discovery.
-                        </p>
-                        <div class="sc-footer-links">
-                            <a href="{{ route('register') }}" class="mil-btn sc-btn-primary">Create Account</a>
-                            <a href="{{ route('personal.customer-support') }}" class="mil-btn sc-btn-ghost">Contact Support</a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <strong>Quick links</strong>
-                        <div class="sc-footer-links">
-                            <a href="{{ route('home') }}">Home</a>
-                            <a href="{{ route('personal.banking-services') }}">Services</a>
-                            <a href="{{ route('personal.open-account') }}">Open Account</a>
-                            <a href="{{ route('login') }}">Login</a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <strong>Reach us</strong>
-                        <div class="sc-footer-links">
-                            <a href="mailto:support@shirecommerce.com">support@shirecommerce.com</a>
-                            <a href="tel:+442079460123">+44 20 7946 0123</a>
-                            <a href="{{ route('about') }}">About the bank</a>
-                            <a href="{{ route('personal.customer-support') }}">Customer support</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sc-footer-bottom">
-                    <span>&copy; {{ now()->year }} {{ env('APP_NAME') }}. Front page refreshed from the `shirecity-ui` template direction.</span>
-                    <span>Built for the main marketing route at <code>/</code>.</span>
+            <div class="col-xl-7">
+                <div class="mil-banner-img mil-banner-img-out">
+                    <img src="{{ asset('img/home-5/1.png') }}" alt="banner" style="max-width:150%">
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
+<!-- banner end -->
+
+<!-- about -->
+<div class="mil-cta">
+    <div class="container">
+        <div class="mil-out-frame mil-out-top mil-visible">
+            <div class="row flex-sm-row-reverse justify-content-between align-items-center">
+                <div class="col-xl-5 mil-mb-60">
+                    <h2 class="mil-mb-30 mil-light mil-up">Banking That Moves With You</h2>
+                    <p class="mil-text-l mil-pale-2 mil-up mil-mb-60">From digital-first tools to expert support in-branch, Banko keeps your finances running smoothly. Pay bills, transfer funds, and manage savings from one secure platform—backed by real people who know your goals.</p>
+                    <div class="mil-up"><a href="{{ route('personal.banking-services') }}" class="mil-btn mil-m mil-add-arrow">Explore Services</a></div>
+                </div>
+                <div class="col-xl-6">
+                    <img src="{{ asset('img/home-5/2.png') }}" alt="img" style="width: 100%" class="mil-up">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- about end -->
+
+<!-- icon boxes -->
+<div class="icon-boxes mil-p-160-130">
+    <div class="container">
+        <div class="mil-text-center">
+            <h2 class="mil-light mil-mb-30 mil-up">Why House Your Money with Banko?</h2>
+            <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">Three pillars that keep your finances protected, empowered, and growing.</p>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-xl-4 mil-mb-30">
+                <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
+                    <img src="{{ asset('img/home-5/icons/1.svg') }}" alt="icon" class="mil-mb-30 mil-up">
+                    <h5 class="mil-mb-20 mil-light mil-up">Digital Tools That Deliver</h5>
+                    <p class="mil-text-s mil-soft mil-up">Track spending, automate savings, and manage cards in real time with a mobile experience built for clarity.</p>
+                </div>
+            </div>
+            <div class="col-xl-4 mil-mb-30">
+                <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
+                    <img src="{{ asset('img/home-5/icons/2.svg') }}" alt="icon" class="mil-mb-30 mil-up">
+                    <h5 class="mil-mb-20 mil-light mil-up">Security You Can Trust</h5>
+                    <p class="mil-text-s mil-soft mil-up">Layered authentication and real-time fraud monitoring keep your accounts protected around the clock.</p>
+                </div>
+            </div>
+            <div class="col-xl-4 mil-mb-30">
+                <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
+                    <img src="{{ asset('img/home-5/icons/3.svg') }}" alt="icon" class="mil-mb-30 mil-up">
+                    <h5 class="mil-mb-20 mil-light mil-up">Transparent Pricing</h5>
+                    <p class="mil-text-s mil-soft mil-up">No surprise fees—just clear, upfront pricing on every account, loan, and investment solution we offer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- icon boxes end -->
+
+<!-- account steps -->
+<div class="mil-dark-2 mil-p-160-130">
+    <div class="container">
+        <div class="mil-text-center mil-mb-60">
+            <h2 class="mil-light mil-mb-20 mil-up">Your Account in Three Simple Steps</h2>
+            <p class="mil-text-l mil-pale-2 mil-up">Open your Banko account with a streamlined, secure onboarding experience.</p>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 mil-mb-30">
+                <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
+                    <div class="mil-mb-20">
+                        <span class="mil-text-s mil-accent">STEP 01</span>
+                    </div>
+                    <img src="{{ asset('img/home-5/icons/1.svg') }}" alt="Personal details icon" class="mil-mb-30 mil-up">
+                    <h5 class="mil-mb-20 mil-light mil-up">Fill Your Personal Details</h5>
+                    <p class="mil-text-s mil-soft mil-up">Share essential information to get started. Our guided form ensures accuracy and keeps your data protected.</p>
+                </div>
+            </div>
+            <div class="col-xl-4 mil-mb-30">
+                <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
+                    <div class="mil-mb-20">
+                        <span class="mil-text-s mil-accent">STEP 02</span>
+                    </div>
+                    <img src="{{ asset('img/home-5/icons/2.svg') }}" alt="KYC verification icon" class="mil-mb-30 mil-up">
+                    <h5 class="mil-mb-20 mil-light mil-up">Complete KYC Verification</h5>
+                    <p class="mil-text-s mil-soft mil-up">Verify your identity with our secure digital KYC process. Stay compliant while protecting your transactions.</p>
+                </div>
+            </div>
+            <div class="col-xl-4 mil-mb-30">
+                <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
+                    <div class="mil-mb-20">
+                        <span class="mil-text-s mil-accent">STEP 03</span>
+                    </div>
+                    <img src="{{ asset('img/home-5/icons/3.svg') }}" alt="Savings icon" class="mil-mb-30 mil-up">
+                    <h5 class="mil-mb-20 mil-light mil-up">Start Your Savings</h5>
+                    <p class="mil-text-s mil-soft mil-up">Activate tailored savings plans with competitive rates, and begin growing your balance right away.</p>
+                </div>
+            </div>
+        </div>
+        <div class="mil-text-center mil-up">
+            <a href="{{ route('personal.open-account') }}" class="mil-btn mil-m mil-add-arrow">Open Account</a>
+        </div>
+    </div>
+</div>
+<!-- account steps end -->
+
+<!-- facts -->
+<div class="mil-p-0-80">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-xl-5 mil-mb-80">
+                <h2 class="mil-light mil-mb-30 mil-up">Banko by the Numbers</h2>
+                <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">A trusted partner for households, businesses, and communities nationwide.</p>
+                <ul class="mil-list-2 mil-type-2 mil-accent mil-mb-60">
+                    <li>
+                        <div class="mil-up">
+                            <h5 class="mil-light mil-mb-15">Serving 40+ Markets</h5>
+                            <p class="mil-text-m mil-pale-2">From local branches to virtual consultations, we’re present where our customers live and work.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="mil-up">
+                            <h5 class="mil-light mil-mb-15">Customer Satisfaction 96%</h5>
+                            <p class="mil-text-m mil-pale-2">Our teams resolve most support requests in under 15 minutes, earning industry-leading satisfaction scores.</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="mil-up"><a href="{{ url('/about') }}" class="mil-btn mil-m mil-add-arrow">Learn More</a></div>
+            </div>
+            <div class="col-xl-6 mil-mb-80">
+                <div class="row">
+                    <div class="col-xl-6 mil-mb-30">
+                        <p class="h1 mil-display mil-mb-15"><span class="mil-accent mil-counter" data-number="2.1">2.1</span><span class="mil-accent">M</span></p>
+                        <h5 class="mil-light">Retail Customers</h5>
+                    </div>
+                    <div class="col-xl-6 mil-mb-30">
+                        <p class="h1 mil-display mil-mb-15"><span class="mil-accent">+</span><span class="mil-accent mil-counter" data-number="800">800</span></p>
+                        <h5 class="mil-light">Corporate & Commercial Clients</h5>
+                    </div>
+                    <div class="col-xl-6 mil-mb-30">
+                        <p class="h1 mil-display mil-mb-15"><span class="mil-accent">+</span><span class="mil-accent mil-counter" data-number="8.8">8.8</span><span class="mil-accent">K</span></p>
+                        <h5 class="mil-light">Dedicated Advisors & Specialists</h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- facts end -->
+
+<!-- call to action -->
+<div class="mil-cta mil-p-0-160 mil-up">
+    <div class="container">
+        <div class="mil-out-frame mil-bg-2">
+            <div class="row justify-content-center align-items-center mil-p-160-160">
+                <div class="col-xl-7 mil-text-center">
+                    <h2 class="mil-light mil-mb-30 mil-up">Your Money, Working 24/7</h2>
+                    <p class="mil-text-l mil-light mil-mb-60 mil-up">Set savings goals, automate investments, and monitor cash flow with dashboards that update in real time. Wherever you are, Banko keeps you connected to what matters.</p>
+                    <div class="mil-up"><a href="{{ route('register') }}" class="mil-btn mil-md mil-add-arrow">Get Started</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- call to action end -->
+
+<!-- features -->
+<div class="mil-features mil-p-0-80">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-xl-6 mil-mb-80">
+                <h2 class="mil-mb-30 mil-light mil-up">Personal Banking, Elevated</h2>
+                <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">Everyday finances feel effortless with flexible accounts, actionable insights, and support when you need it.</p>
+                <ul class="mil-list-1 mil-accent">
+                    <li>
+                <div class="mil-up">
+                    <h5 class="mil-mb-15 mil-light mil-up">Smart Checking &amp; Savings</h5>
+                    <p class="mil-text-m mil-pale-2 mil-up">Earn interest, waive fees, and see cash flow at a glance with customizable alerts and budgeting tools.</p>
+                </div>
+                    </li>
+                    <li>
+                <div class="mil-up">
+                    <h5 class="mil-mb-15 mil-light mil-up">Flexible Credit Options</h5>
+                    <p class="mil-text-m mil-pale-2 mil-up">Choose from low-rate credit cards, personal loans, or lines of credit designed for planned and unexpected expenses.</p>
+                </div>
+                    </li>
+                    <li>
+                <div class="mil-up">
+                    <h5 class="mil-mb-15 mil-light mil-up">Guided Wealth Building</h5>
+                    <p class="mil-text-m mil-pale-2 mil-up">Work with our advisors or use self-directed tools to plan for education, retirement, and everything in between.</p>
+                </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xl-5 mil-mb-80">
+                <div class="mil-image-frame mil-up">
+                    <img src="{{ asset('img/home-5/3.png') }}" alt="image" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- features end -->
+
+<!-- features -->
+<div class="mil-features mil-p-0-80">
+    <div class="container">
+        <div class="row flex-sm-row-reverse justify-content-between align-items-center">
+            <div class="col-xl-6 mil-mb-80">
+                <h2 class="mil-mb-30 mil-light mil-up">Powering Ambitious Businesses</h2>
+                <p class="mil-text-l mil-pale-2 mil-mb-60 mil-up">Streamline payables, improve liquidity, and finance growth with solutions tailored to your industry and scale.</p>
+                    <div class="mil-up">
+                        <p class="mil-text-m mil-pale-2 mil-up">Connect with our commercial banking team for tailored treasury and lending advice that scales with your operations.</p>
+                    </div>
+            </div>
+            <div class="col-xl-5 mil-mb-80">
+                <div class="mil-image-frame mil-up">
+                    <img src="{{ asset('img/home-5/4.png') }}" alt="image" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- features end -->
+
+<!-- testimonials -->
+<div class="mil-cta mil-up">
+    <div class="container">
+        <div class="mil-out-frame mil-bg-4 mil-p-160-160">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 mil-relative">
+                    <div class="swiper-container mil-testimonials-1 mil-up">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <blockquote class="mil-center" data-swiper-parallax="-400" data-swiper-parallax-opacity="0" data-swiper-parallax-scale="0.8">
+                                    <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mil-mb-30 mil-up mil-accent">
+                                        <path d="M13.0425 9.59881C13.734 7.27646 15.0099 5.16456 16.7515 3.45982C17.0962 3.11455 17.2958 2.65336 17.31 2.16891C17.3243 1.68445 17.1523 1.2126 16.8285 0.848135L16.6225 0.619235C16.3552 0.313531 15.9908 0.106228 15.5887 0.0311485C15.1866 -0.0439312 14.7706 0.0176452 14.4085 0.205827C-0.299477 8.01918 -0.116489 18.6169 0.0295105 20.4165C0.0195105 20.6139 -0.000488281 20.8112 -0.000488281 21.0085C0.0518962 23.1543 0.724816 25.2405 1.93898 27.0214C3.15314 28.8023 4.85796 30.2037 6.85252 31.0604C8.84709 31.9171 11.0483 32.1935 13.1967 31.8569C15.3452 31.5203 17.3514 30.5848 18.9788 29.1606C20.6063 27.7364 21.7873 25.8829 22.3826 23.8185C22.9779 21.7541 22.9627 19.5648 22.3389 17.5086C21.715 15.4524 20.5085 13.615 18.8614 12.2129C17.2144 10.8108 15.1954 9.90246 13.0425 9.59487V9.59881Z" fill="#F27457" />
+                                        <path d="M40.2255 9.59881C40.9171 7.27648 42.193 5.16459 43.9345 3.45982C44.2793 3.11455 44.4788 2.65336 44.4931 2.16891C44.5074 1.68445 44.3353 1.2126 44.0115 0.848135L43.8055 0.619235C43.5382 0.313531 43.1738 0.106228 42.7717 0.0311485C42.3696 -0.0439312 41.9536 0.0176452 41.5915 0.205827C26.8835 8.01918 27.0665 18.6169 27.2115 20.4165C27.2015 20.6139 27.1815 20.8112 27.1815 21.0085C27.2332 23.1544 27.9055 25.241 29.1191 27.0224C30.3328 28.8038 32.0373 30.2057 34.0318 31.063C36.0262 31.9203 38.2274 32.1972 40.3761 31.8611C42.5248 31.525 44.5313 30.5899 46.1591 29.166C47.787 27.742 48.9684 25.8887 49.5641 23.8242C50.1599 21.7598 50.1451 19.5704 49.5215 17.514C48.8979 15.4576 47.6915 13.6199 46.0445 12.2176C44.3975 10.8152 42.3785 9.90659 40.2255 9.59881Z" fill="#F27457" />
+                                    </svg>
+                                    <p class="mil-text-l mil-mb-60 mil-up mil-light">“Switching to Banko gave our family a single view of every account. Automatic savings boosts and real-time alerts mean we never miss a payment.”</p>
+                                    <img src="{{ asset('img/faces/2.jpg') }}" alt="Customer" class="mil-mb-15 mil-up">
+                                    <h5 class="mil-up mil-light">Beth Nilsson</h5>
+                                </blockquote>
+                            </div>
+                            <div class="swiper-slide">
+                                <blockquote class="mil-center" data-swiper-parallax="-400" data-swiper-parallax-opacity="0" data-swiper-parallax-scale="0.8">
+                                    <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mil-mb-30 mil-up mil-accent">
+                                        <path d="M13.0425 9.59881C13.734 7.27646 15.0099 5.16456 16.7515 3.45982C17.0962 3.11455 17.2958 2.65336 17.31 2.16891C17.3243 1.68445 17.1523 1.2126 16.8285 0.848135L16.6225 0.619235C16.3552 0.313531 15.9908 0.106228 15.5887 0.0311485C15.1866 -0.0439312 14.7706 0.0176452 14.4085 0.205827C-0.299477 8.01918 -0.116489 18.6169 0.0295105 20.4165C0.0195105 20.6139 -0.000488281 20.8112 -0.000488281 21.0085C0.0518962 23.1543 0.724816 25.2405 1.93898 27.0214C3.15314 28.8023 4.85796 30.2037 6.85252 31.0604C8.84709 31.9171 11.0483 32.1935 13.1967 31.8569C15.3452 31.5203 17.3514 30.5848 18.9788 29.1606C20.6063 27.7364 21.7873 25.8829 22.3826 23.8185C22.9779 21.7541 22.9627 19.5648 22.3389 17.5086C21.715 15.4524 20.5085 13.615 18.8614 12.2129C17.2144 10.8108 15.1954 9.90246 13.0425 9.59487V9.59881Z" fill="#03A6A6" />
+                                        <path d="M40.2255 9.59881C40.9171 7.27648 42.193 5.16459 43.9345 3.45982C44.2793 3.11455 44.4788 2.65336 44.4931 2.16891C44.5074 1.68445 44.3353 1.2126 44.0115 0.848135L43.8055 0.619235C43.5382 0.313531 43.1738 0.106228 42.7717 0.0311485C42.3696 -0.0439312 41.9536 0.0176452 41.5915 0.205827C26.8835 8.01918 27.0665 18.6169 27.2115 20.4165C27.2015 20.6139 27.1815 20.8112 27.1815 21.0085C27.2332 23.1544 27.9055 25.241 29.1191 27.0224C30.3328 28.8038 32.0373 30.2057 34.0318 31.063C36.0262 31.9203 38.2274 32.1972 40.3761 31.8611C42.5248 31.525 44.5313 30.5899 46.1591 29.166C47.787 27.742 48.9684 25.8887 49.5641 23.8242C50.1599 21.7598 50.1451 19.5704 49.5215 17.514C48.8979 15.4576 47.6915 13.6199 46.0445 12.2176C44.3975 10.8152 42.3785 9.90659 40.2255 9.59881Z" fill="#03A6A6" />
+                                    </svg>
+                                    <p class="mil-text-l mil-mb-60 mil-up mil-light">“Our treasury team relies on Banko for cash flow forecasting and same-day wires. The platform makes complex transactions feel effortless.”</p>
+                                    <img src="{{ asset('img/faces/1.jpg') }}" alt="Customer" class="mil-mb-15 mil-up">
+                                    <h5 class="mil-up mil-light">Karl Andreassen, CFO</h5>
+                                </blockquote>
+                            </div>
+                            <div class="swiper-slide">
+                                <blockquote class="mil-center" data-swiper-parallax="-400" data-swiper-parallax-opacity="0" data-swiper-parallax-scale="0.8">
+                                    <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="mil-mb-30 mil-up mil-accent">
+                                        <path d="M13.0425 9.59881C13.734 7.27646 15.0099 5.16456 16.7515 3.45982C17.0962 3.11455 17.2958 2.65336 17.31 2.16891C17.3243 1.68445 17.1523 1.2126 16.8285 0.848135L16.6225 0.619235C16.3552 0.313531 15.9908 0.106228 15.5887 0.0311485C15.1866 -0.0439312 14.7706 0.0176452 14.4085 0.205827C-0.299477 8.01918 -0.116489 18.6169 0.0295105 20.4165C0.0195105 20.6139 -0.000488281 20.8112 -0.000488281 21.0085C0.0518962 23.1543 0.724816 25.2405 1.93898 27.0214C3.15314 28.8023 4.85796 30.2037 6.85252 31.0604C8.84709 31.9171 11.0483 32.1935 13.1967 31.8569C15.3452 31.5203 17.3514 30.5848 18.9788 29.1606C20.6063 27.7364 21.7873 25.8829 22.3826 23.8185C22.9779 21.7541 22.9627 19.5648 22.3389 17.5086C21.715 15.4524 20.5085 13.615 18.8614 12.2129C17.2144 10.8108 15.1954 9.90246 13.0425 9.59487V9.59881Z" fill="#03A6A6" />
+                                        <path d="M40.2255 9.59881C40.9171 7.27648 42.193 5.16459 43.9345 3.45982C44.2793 3.11455 44.4788 2.65336 44.4931 2.16891C44.5074 1.68445 44.3353 1.2126 44.0115 0.848135L43.8055 0.619235C43.5382 0.313531 43.1738 0.106228 42.7717 0.0311485C42.3696 -0.0439312 41.9536 0.0176452 41.5915 0.205827C26.8835 8.01918 27.0665 18.6169 27.2115 20.4165C27.2015 20.6139 27.1815 20.8112 27.1815 21.0085C27.2332 23.1544 27.9055 25.241 29.1191 27.0224C30.3328 28.8038 32.0373 30.2057 34.0318 31.063C36.0262 31.9203 38.2274 32.1972 40.3761 31.8611C42.5248 31.525 44.5313 30.5899 46.1591 29.166C47.787 27.742 48.9684 25.8887 49.5641 23.8242C50.1599 21.7598 50.1451 19.5704 49.5215 17.514C48.8979 15.4576 47.6915 13.6199 46.0445 12.2176C44.3975 10.8152 42.3785 9.90659 40.2255 9.59881Z" fill="#03A6A6" />
+                                    </svg>
+                                    <p class="mil-text-l mil-mb-60 mil-up mil-light">“The wealth team mapped out our retirement and estate plan in one session. Their guidance keeps our investments on track.”</p>
+                                    <img src="{{ asset('img/faces/3.jpg') }}" alt="Customer" class="mil-mb-15 mil-up">
+                                    <h5 class="mil-up mil-light">Rüdiger Karlsen</h5>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="mil-slider-nav-1">
+                            <div class="mil-testi-prev"></div>
+                            <div class="mil-testi-next"></div>
+                        </div>
+                    </div>
+                    <div class="mil-testi-pagination mil-up"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- testimonials end -->
+
+<!-- brands -->
+<div class="mil-p-160-130">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-xl-6 mil-mb-60">
+                <h2 class="mil-light mil-mb-30 mil-up">Solutions for Every Banking Journey</h2>
+                <p class="mil-text-l mil-pale-2 mil-up mil-mb-60">Combine tailored guidance with technology that keeps you connected to capital, insights, and opportunities.</p>
+                <div class="mil-up"><a href="{{ route('personal.banking-services') }}" class="mil-btn mil-m mil-add-arrow">View All Solutions</a></div>
+            </div>
+            <div class="col-xl-6">
+                <div class="mil-brand-card mil-mb-30 mil-up">
+                    <img src="{{ asset('img/brands/1.svg') }}" alt="brand" class="mil-mb-30">
+                    <h5 class="mil-light mil-light mil-mb-20">Digital Banking</h5>
+                    <p class="mil-text-s mil-pale-2">All-in-one mobile and online platform for transfers, budgeting, card controls, and personalized insights.</p>
+                </div>
+                <div class="mil-brand-card mil-mb-30 mil-up">
+                    <img src="{{ asset('img/brands/2.svg') }}" alt="brand" class="mil-mb-30">
+                    <h5 class="mil-light mil-light mil-mb-20">Commercial Banking</h5>
+                    <p class="mil-text-s mil-pale-2">Treasury management, payment automation, and tailored lending that scale with your business.</p>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="mil-brand-card mil-mb-30 mil-up">
+                    <img src="{{ asset('img/brands/3.svg') }}" alt="brand" class="mil-mb-30">
+                    <h5 class="mil-light mil-light mil-mb-20">Wealth Management</h5>
+                    <p class="mil-text-s mil-pale-2">Dedicated advisors craft investment, retirement, and trust strategies aligned to your ambitions.</p>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="mil-brand-card mil-mb-30 mil-up">
+                    <img src="{{ asset('img/brands/4.svg') }}" alt="brand" class="mil-mb-30">
+                    <h5 class="mil-light mil-light mil-mb-20">Community Impact</h5>
+                    <p class="mil-text-s mil-pale-2">Local lending and financial education programs that expand access to capital for underserved communities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- brands end -->
+
+<!-- footer -->
+<footer class="mil-footer-dark-2 mil-p-160-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4 col-md-6 mil-mb-60">
+                <h2 class="mil-light mil-mb-30">{{ env('APP_NAME') }}</h2>
+                <p class="mil-text-s mil-pale">
+                    Modern banking solutions designed for individuals and businesses seeking secure, digital-first experiences.
+                </p>
+            </div>
+            <div class="col-xl-4 col-md-6 mil-mb-60">
+                <h6 class="mil-mb-60 mil-soft">Useful Links</h6>
+                <ul class="mil-footer-list">
+                    <li class="mil-text-m mil-pale mil-mb-15">
+                        <a href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li class="mil-text-m mil-pale mil-mb-15">
+                        <a href="{{ url('/about') }}">About Us</a>
+                    </li>
+                    <li class="mil-text-m mil-pale mil-mb-15">
+                        <a href="{{ route('personal.banking-services') }}">Services</a>
+                    </li>
+                    <li class="mil-text-m mil-pale mil-mb-15">
+                        <a href="{{ route('personal.customer-support') }}">Support</a>
+                    </li>
+                    <li class="mil-text-m mil-pale mil-mb-15">
+                        <a href="{{ route('login') }}">Client Login</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xl-4 col-md-6 mil-mb-60">
+                <h6 class="mil-mb-60 mil-soft">Get in Touch</h6>
+                <ul class="mil-footer-list">
+                    <li class="mil-text-m mil-pale mil-mb-15">
+                        999 Rue du Cherche-Midi, 7755500666 Paris, <br>France
+                    </li>
+                    <li class="mil-text-m mil-pale mil-mb-15">
+                        support@goldengatecorporation.com
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mil-footer-bottom">
+            <div class="row">
+                <div class="col-xl-6">
+                    <p class="mil-text-s mil-pale">© 2024 Banko Financial Group</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer end -->
+
+</div>
+
 @endsection
