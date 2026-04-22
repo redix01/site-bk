@@ -1,9 +1,14 @@
 @import 'tailwindcss';
+@import '../../shirecity-ui/src/index.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../**/*.ts';
+@source '../**/*.tsx';
+@source '../../shirecity-ui/src/**/*.ts';
+@source '../../shirecity-ui/src/**/*.tsx';
 
 /* Prevent body scroll bounce */
 html,
