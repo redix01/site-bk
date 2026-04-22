@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -9,7 +10,11 @@ use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TransactionController;
 
-Route::view('/', 'pages.index')->name('home');
+Route::get('/', fn () => Inertia::render('Frontpage/Home'))->name('home');
+Route::get('/frontpage', fn () => Inertia::render('Frontpage/Home'))->name('frontpage.home');
+Route::get('/frontpage/personal', fn () => Inertia::render('Frontpage/Personal'))->name('frontpage.personal');
+Route::get('/frontpage/business', fn () => Inertia::render('Frontpage/Business'))->name('frontpage.business');
+Route::get('/frontpage/security', fn () => Inertia::render('Frontpage/Security'))->name('frontpage.security');
 Route::view('/about', 'pages.about')->name('about');
 
 Route::prefix('personal')->name('personal.')->group(function () {
