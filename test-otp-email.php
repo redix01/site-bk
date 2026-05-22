@@ -19,7 +19,7 @@ echo "🧪 Testing OTP Email Functionality\n";
 echo "==================================\n\n";
 
 // Test with admin user (should exist)
-$testEmail = 'admin@banko.com';
+$testEmail = 'admin@obsidianwealths.com';
 $user = User::where('email', $testEmail)->first();
 
 if (!$user) {
@@ -57,6 +57,5 @@ echo "Next steps:\n";
 echo "1. Check your Mailtrap inbox at: https://mailtrap.io/inboxes\n";
 echo "2. Look for an email to: {$testEmail}\n";
 echo "3. The OTP code should be: {$otpCode->code}\n";
-echo "4. Test the login flow at: http://banko.test/login\n\n";
-
+echo "4. Test the login flow at: https://obsidianwealths.com/login\n\n";
 

@@ -13,7 +13,7 @@ export default function Welcome() {
                 <header className="border-b border-slate-800">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                         <div className="flex justify-between items-center">
-                            <h1 className="text-2xl font-bold text-slate-50">Banko</h1>
+                            <h1 className="text-2xl font-bold text-slate-50">Obsidian Wealth</h1>
                             <div className="flex space-x-4">
                                 <Link href="/login">
                                     <Button variant="ghost" className="text-slate-400 hover:text-slate-50">
@@ -107,7 +107,7 @@ export default function Welcome() {
                 <footer className="border-t border-slate-800 mt-20">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                         <p className="text-center text-slate-500 text-sm">
-                            © 2025 Banko. Mini Bank Sandbox System.
+                            © 2025 Obsidian Wealth.
                         </p>
                     </div>
                 </footer>
@@ -115,5 +115,4 @@ export default function Welcome() {
         </>
     );
 }
-
 

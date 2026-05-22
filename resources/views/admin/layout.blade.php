@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Admin Dashboard') - {{ config('app.name', 'Banko') }}</title>
+    <title>@yield('title', 'Admin Dashboard') - {{ config('app.name', 'Obsidian Wealth') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -119,7 +119,7 @@
                             <span class="text-white font-bold text-lg">🏦</span>
                         </div>
                         <div>
-                            <h1 class="text-xl font-bold text-white">Banko</h1>
+                            <h1 class="text-xl font-bold text-white">{{ config('app.name', 'Obsidian Wealth') }}</h1>
                             <p class="text-xs text-gray-400">Admin Panel</p>
                         </div>
                     </div>

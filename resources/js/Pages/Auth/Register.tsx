@@ -624,7 +624,7 @@ export default function Register() {
                 <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col justify-center px-4 sm:px-6 lg:px-8">
                     <div className="space-y-6">
                         <div className="text-center">
-                            <CardTitle className="text-3xl font-bold text-slate-50">Open your Banko account</CardTitle>
+                            <CardTitle className="text-3xl font-bold text-slate-50">Open your Obsidian Wealth account</CardTitle>
                             <CardDescription className="mt-2 text-base text-slate-400">
                                 Complete the three-step onboarding to activate secure digital banking.
                             </CardDescription>
@@ -1305,4 +1305,3 @@ export default function Register() {
         </>
     );
 }
-

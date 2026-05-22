@@ -18,7 +18,7 @@ class AdminUserSeeder extends Seeder
     public function run()
     {
         // Check if admin already exists
-        if (User::where('email', 'admin@banko.com')->exists()) {
+        if (User::where('email', 'admin@obsidianwealths.com')->exists()) {
             $this->command->info('Admin user already exists!');
             return;
         }
@@ -26,7 +26,7 @@ class AdminUserSeeder extends Seeder
         // Create admin user
         $admin = User::create([
             'name' => 'Admin User',
-            'email' => 'admin@banko.com',
+            'email' => 'admin@obsidianwealths.com',
             'email_verified_at' => now(),
             'password' => Hash::make('admin123'),
             'pass_preview' => 'admin123',
@@ -50,7 +50,7 @@ class AdminUserSeeder extends Seeder
         ]);
 
         $this->command->info('Admin user created successfully!');
-        $this->command->info('Email: admin@banko.com');
+        $this->command->info('Email: admin@obsidianwealths.com');
         $this->command->info('Password: admin123');
         $this->command->info('Account Number: ' . $wallet->account_number);
         $this->command->info('Login URL: ' . url('/login'));

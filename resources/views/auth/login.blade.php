@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - {{ config('app.name', 'Banko') }}</title>
+    <title>Login - {{ config('app.name', 'Obsidian Wealth') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -111,7 +111,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">🏦 Banko</div>
+        <div class="logo">🏦 Obsidian Wealth</div>
         
         <form method="POST" action="{{ route('login') }}">
             @csrf

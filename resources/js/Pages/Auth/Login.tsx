@@ -102,7 +102,7 @@ export default function Login({ status }: LoginProps) {
                                     <Banknote className="h-6 w-6 text-blue-400" />
                                 </div>
                                 <span className="text-lg font-semibold uppercase tracking-[0.35em] text-slate-300">
-                                    Banko
+                                    Obsidian Wealth
                                 </span>
                             </div>
                             <CardTitle className="text-center text-2xl font-bold text-slate-50">
