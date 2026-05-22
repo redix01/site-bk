@@ -4,24 +4,25 @@
 <div id="smooth-content">
 
 <!-- banner -->
-<div class="mil-banner mil-dark-2">
+<div class="mil-banner mil-dark-2 mil-home-banner">
     <div class="mil-radial-g-2"></div>
     <div class="mil-radial-g-3"></div>
     <div class="container">
-        <div class="row align-items-center mil-mb-80">
-            <div class="col-xl-5">
-                <div class="mil-banner-text">
-                    <div class="mil-text-l mil-light mil-mb-20">Modern banking, tailored to every stage of life.</div>
-                    <h1 class="mil-display mil-light mil-mb-60">Grow and protect your future with Obsidian Wealth.</h1>
-                    <div class="mil-buttons-frame">
+        <div class="row align-items-center">
+            <div class="col-xl-5 col-lg-6">
+                <div class="mil-banner-text mil-home-banner-copy">
+                    <div class="mil-home-banner-kicker">Modern banking, tailored to every stage of life.</div>
+                    <h1 class="mil-display mil-light mil-home-banner-title">Grow and protect your future with Obsidian Wealth.</h1>
+                    <p class="mil-home-banner-description">Bring everyday banking, guided wealth planning, and responsive support into one secure experience designed to keep your money moving with clarity.</p>
+                    <div class="mil-home-banner-actions">
                         <a href="{{ route('personal.open-account') }}" class="mil-btn mil-md mil-add-arrow">Open an Account</a>
                         <a href="{{ route('personal.customer-support') }}" class="mil-btn mil-md mil-transp mil-add-play">Talk to a Banker</a>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-7">
-                <div class="mil-banner-img mil-banner-img-out">
-                    <img src="{{ asset('img/home-5/1.png') }}" alt="banner" style="max-width:150%">
+            <div class="col-xl-7 col-lg-6">
+                <div class="mil-banner-img mil-banner-img-out mil-home-banner-visual">
+                    <img src="{{ asset('img/home-5/1.png') }}" alt="Obsidian Wealth mobile banking preview">
                 </div>
             </div>
         </div>
