@@ -90,9 +90,9 @@
         }
         .mil-home-banner {
             min-height: auto;
-            padding-top: 190px;
-            padding-bottom: 96px;
-            align-items: stretch;
+            padding-top: 148px;
+            padding-bottom: 72px;
+            align-items: center;
         }
         .mil-home-banner .container,
         .mil-home-banner .row {
@@ -100,37 +100,41 @@
             z-index: 1;
         }
         .mil-home-banner-copy {
-            max-width: 560px;
+            max-width: 500px;
         }
         .mil-home-banner-kicker {
             display: inline-block;
-            margin-bottom: 24px;
-            font-size: 18px;
+            margin-bottom: 18px;
+            font-size: 16px;
             line-height: 1.4;
             color: rgba(242, 250, 250, 0.86);
         }
         .mil-home-banner-title {
-            margin-bottom: 28px;
-            font-size: clamp(4.2rem, 8vw, 7rem);
-            line-height: 0.92;
+            margin-bottom: 20px;
+            font-size: clamp(3.25rem, 6vw, 5.6rem);
+            line-height: 0.96;
             letter-spacing: -0.06em;
             text-wrap: balance;
         }
         .mil-home-banner-description {
-            max-width: 32rem;
-            margin-bottom: 36px;
-            font-size: 1.1rem;
-            line-height: 1.7;
+            max-width: 29rem;
+            margin-bottom: 26px;
+            font-size: 1rem;
+            line-height: 1.6;
             color: rgba(242, 250, 250, 0.78);
         }
         .mil-home-banner-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
             align-items: center;
         }
         .mil-home-banner-actions .mil-btn {
             margin: 0;
+        }
+        .mil-home-banner-actions .mil-btn.mil-md {
+            height: 60px;
+            padding: 0 24px;
         }
         .mil-home-banner-visual {
             display: flex;
@@ -138,20 +142,21 @@
             align-items: center;
         }
         .mil-home-banner-visual img {
-            width: min(100%, 780px);
+            width: min(100%, 700px);
             max-width: none;
             margin-left: auto;
-            transform: translateX(20px);
+            transform: translateX(10px);
         }
         @media (max-width: 1200px) {
             .mil-home-banner {
-                padding-top: 168px;
+                padding-top: 140px;
+                padding-bottom: 64px;
             }
             .mil-home-banner-title {
-                font-size: clamp(3.5rem, 8vw, 5.8rem);
+                font-size: clamp(3rem, 6vw, 4.9rem);
             }
             .mil-home-banner-visual img {
-                width: min(100%, 680px);
+                width: min(100%, 620px);
                 transform: none;
             }
         }
@@ -160,12 +165,12 @@
                 height: 108px;
             }
             .mil-home-banner {
-                padding-top: 150px;
-                padding-bottom: 72px;
+                padding-top: 132px;
+                padding-bottom: 60px;
                 min-height: auto;
             }
             .mil-home-banner .row {
-                row-gap: 40px;
+                row-gap: 28px;
             }
             .mil-home-banner-copy {
                 max-width: none;
@@ -176,21 +181,21 @@
                 font-size: 16px;
             }
             .mil-home-banner-title {
-                font-size: clamp(3rem, 12vw, 4.8rem);
-                line-height: 0.96;
-                margin-bottom: 24px;
+                font-size: clamp(2.75rem, 9vw, 4rem);
+                line-height: 1;
+                margin-bottom: 18px;
             }
             .mil-home-banner-description {
                 max-width: 100%;
                 margin-left: auto;
                 margin-right: auto;
-                margin-bottom: 30px;
+                margin-bottom: 22px;
             }
             .mil-home-banner-actions {
                 justify-content: center;
             }
             .mil-home-banner-visual img {
-                width: min(100%, 560px);
+                width: min(100%, 500px);
             }
         }
         @media (max-width: 768px) {
@@ -204,20 +209,20 @@
                 font-size: 1.15rem;
             }
             .mil-home-banner {
-                padding-top: 124px;
-                padding-bottom: 56px;
+                padding-top: 112px;
+                padding-bottom: 44px;
             }
             .mil-home-banner-kicker {
-                margin-bottom: 18px;
-                font-size: 15px;
+                margin-bottom: 14px;
+                font-size: 14px;
             }
             .mil-home-banner-title {
-                font-size: clamp(2.6rem, 15vw, 3.8rem);
+                font-size: clamp(2.3rem, 12vw, 3.3rem);
                 letter-spacing: -0.05em;
             }
             .mil-home-banner-description {
-                font-size: 1rem;
-                line-height: 1.65;
+                font-size: 0.95rem;
+                line-height: 1.55;
             }
             .mil-home-banner-actions {
                 flex-direction: column;
@@ -225,6 +230,9 @@
             }
             .mil-home-banner-actions .mil-btn {
                 width: 100%;
+            }
+            .mil-home-banner-actions .mil-btn.mil-md {
+                height: 56px;
             }
         }
     </style>
