@@ -403,8 +403,11 @@ class UserController extends Controller
             'created_at' => 'required|date',
         ]);
 
-        $oldCreatedAt = $user->created_at;
-        $newCreatedAt = Carbon::parse($validated['created_at']);
+        $oldCreatedAt = $user->created_at?->copy();
+        $newDate = Carbon::parse($validated['created_at']);
+        $newCreatedAt = $oldCreatedAt
+            ? $newDate->copy()->setTimeFrom($oldCreatedAt)
+            : $newDate;
 
         // Update using DB::table to bypass mass assignment protection for created_at
         DB::table('users')
@@ -418,7 +421,7 @@ class UserController extends Controller
             'user_id' => $user->id,
             'old_created_at' => $oldCreatedAt?->toIso8601String(),
             'new_created_at' => $newCreatedAt->toIso8601String(),
-        ], auth()->user());
+        ], $user);
 
         return back()->with('success', 'Account created date updated successfully.');
     }

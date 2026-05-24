@@ -330,6 +330,12 @@ export default function Show({
                                     Edit
                                 </Button>
                             </Link>
+                            <a href="#account-created-date-editor">
+                                <Button variant="outline" className="border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800">
+                                    <Clock className="mr-2 h-4 w-4" />
+                                    Edit creation date
+                                </Button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -760,7 +766,7 @@ export default function Show({
                             </CardContent>
                         </Card>
 
-                        <Card className="border-slate-800 bg-slate-900">
+                        <Card id="account-created-date-editor" className="border-slate-800 bg-slate-900">
                             <CardHeader>
                                 <CardTitle className="text-slate-50">Account Created Date</CardTitle>
                                 <CardDescription className="text-slate-400">
