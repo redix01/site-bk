@@ -165,6 +165,7 @@ export default function Show({
     const formatMoney = (value: number | string | null | undefined) => formatCurrency(value, currencyCode);
 
     const fundingForm = useForm({
+        action: 'credit',
         amount: '',
         description: '',
         reference: '',
@@ -610,13 +611,34 @@ export default function Show({
                     <div className="flex flex-col gap-4">
                         <Card className="border-slate-800 bg-slate-900">
                             <CardHeader>
-                                <CardTitle className="text-slate-50">Fund User Balance</CardTitle>
+                                <CardTitle className="text-slate-50">Adjust User Balance</CardTitle>
                                 <CardDescription className="text-slate-400">
-                                    Credit this wallet instantly with an admin top-up
+                                    Add to or deduct from this account instantly
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <form onSubmit={submitFunding} className="space-y-5">
+                                    <div>
+                                        <label
+                                            htmlFor="action"
+                                            className="mb-2 block text-sm font-medium text-slate-300"
+                                        >
+                                            Adjustment type
+                                        </label>
+                                        <select
+                                            id="action"
+                                            value={fundingForm.data.action}
+                                            onChange={(e) => fundingForm.setData('action', e.target.value as 'credit' | 'debit')}
+                                            className="h-11 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 text-sm text-slate-100 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+                                        >
+                                            <option value="credit">Add funds</option>
+                                            <option value="debit">Subtract funds</option>
+                                        </select>
+                                        {fundingForm.errors.action && (
+                                            <p className="mt-2 text-xs text-rose-300">{fundingForm.errors.action}</p>
+                                        )}
+                                    </div>
+
                                     <div>
                                         <label
                                             htmlFor="amount"
@@ -677,7 +699,11 @@ export default function Show({
                                             onChange={(e) => fundingForm.setData('description', e.target.value)}
                                             rows={3}
                                             className="w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
-                                            placeholder="Reason for credit or internal note"
+                                            placeholder={
+                                                fundingForm.data.action === 'credit'
+                                                    ? 'Reason for credit or internal note'
+                                                    : 'Reason for deduction or internal note'
+                                            }
                                         />
                                         {fundingForm.errors.description && (
                                             <p className="mt-2 text-xs text-rose-300">{fundingForm.errors.description}</p>
@@ -691,16 +717,22 @@ export default function Show({
                                             onChange={(e) => fundingForm.setData('notify_user', e.target.checked)}
                                             className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-primary-500 focus:ring-primary-500/60"
                                         />
-                                        Email user about this credit
+                                        Email user about this adjustment
                                     </label>
 
                                     <Button
                                         type="submit"
-                                        className="w-full justify-center bg-primary-600 hover:bg-primary-700"
+                                        className={`w-full justify-center ${
+                                            fundingForm.data.action === 'credit'
+                                                ? 'bg-primary-600 hover:bg-primary-700'
+                                                : 'bg-rose-600 hover:bg-rose-700'
+                                        }`}
                                         disabled={fundingForm.processing}
                                     >
                                         <PlusCircle className="mr-2 h-4 w-4" />
-                                        {fundingForm.processing ? 'Funding...' : 'Fund Balance'}
+                                        {fundingForm.processing
+                                            ? (fundingForm.data.action === 'credit' ? 'Funding...' : 'Deducting...')
+                                            : (fundingForm.data.action === 'credit' ? 'Add Funds' : 'Subtract Funds')}
                                     </Button>
                                 </form>
                             </CardContent>

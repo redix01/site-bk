@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -300,6 +301,7 @@ class UserController extends Controller
     public function fund(Request $request, User $user)
     {
         $payload = $request->validate([
+            'action' => 'required|string|in:credit,debit',
             'amount' => 'required|numeric|min:1',
             'description' => 'nullable|string|max:500',
             'reference' => 'nullable|string|max:100',
@@ -309,50 +311,70 @@ class UserController extends Controller
         $amountInCents = (int) round($payload['amount'] * 100);
 
         if ($amountInCents <= 0) {
-            return back()->with('error', 'Please provide a valid amount to fund.');
+            return back()->with('error', 'Please provide a valid amount to adjust.');
         }
 
         $reference = !empty($payload['reference'])
             ? Str::upper($payload['reference'])
-            : 'FND-' . Str::upper(Str::random(10));
+            : ($payload['action'] === 'credit' ? 'CRD-' : 'DBT-') . Str::upper(Str::random(10));
 
         DB::transaction(function () use ($user, $amountInCents, $payload, $reference) {
             $wallet = $this->ensureWallet($user);
             $previousBalance = (int) $wallet->balance;
+            $previousLedgerBalance = (int) $wallet->ledger_balance;
 
-            $wallet = $wallet->credit($amountInCents);
+            if ($payload['action'] === 'debit' && (($user->balance ?? 0) < $amountInCents || $previousBalance < $amountInCents || $previousLedgerBalance < $amountInCents)) {
+                throw ValidationException::withMessages([
+                    'amount' => 'Insufficient balance for this deduction.',
+                ]);
+            }
+
+            $wallet = $payload['action'] === 'credit'
+                ? $wallet->credit($amountInCents)
+                : $wallet->debit($amountInCents);
             $newBalance = (int) $wallet->balance;
+            $newLedgerBalance = (int) $wallet->ledger_balance;
 
             $user->update([
-                'balance' => ($user->balance ?? 0) + $amountInCents,
+                'balance' => $payload['action'] === 'credit'
+                    ? ($user->balance ?? 0) + $amountInCents
+                    : ($user->balance ?? 0) - $amountInCents,
             ]);
 
             $transaction = Transaction::create([
                 'user_id' => $user->id,
-                'type' => 'deposit',
+                'type' => $payload['action'] === 'credit' ? 'deposit' : 'withdrawal',
                 'amount' => $amountInCents,
                 'fee' => 0,
                 'reference' => $reference,
                 'status' => 'completed',
-                'description' => $payload['description'] ?: 'Manual funding by admin',
+                'description' => $payload['description'] ?: ($payload['action'] === 'credit'
+                    ? 'Manual account funding by admin'
+                    : 'Manual account deduction by admin'),
                 'metadata' => [
-                    'source' => 'admin_funding',
+                    'source' => 'admin_balance_adjustment',
+                    'action' => $payload['action'],
                     'admin_id' => auth()->id(),
                     'previous_balance' => $previousBalance,
                     'new_balance' => $newBalance,
+                    'previous_ledger_balance' => $previousLedgerBalance,
+                    'new_ledger_balance' => $newLedgerBalance,
                     'notes' => $payload['description'] ?? null,
                     'notify_user' => (bool) ($payload['notify_user'] ?? false),
                 ],
             ]);
 
-            AuditLog::logEvent('user.balance_funded', [
+            AuditLog::logEvent('user.balance_adjusted', [
+                'action' => $payload['action'],
                 'amount' => $amountInCents,
                 'reference' => $reference,
                 'transaction_id' => $transaction->id,
             ], $user);
         });
 
-        return back()->with('success', 'User balance funded successfully.');
+        return back()->with('success', $payload['action'] === 'credit'
+            ? 'User balance funded successfully.'
+            : 'User balance deducted successfully.');
     }
 
     /**

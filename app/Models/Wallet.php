@@ -57,6 +57,7 @@ class Wallet extends Model
             
             // Update balance directly
             $wallet->balance = $wallet->balance + $amount;
+            $wallet->ledger_balance = $wallet->ledger_balance + $amount;
             $wallet->save();
             
             // Refresh the current instance
@@ -75,12 +76,13 @@ class Wallet extends Model
             $wallet = self::where('id', $this->id)->lockForUpdate()->first();
             
             // Check sufficient balance
-            if ($wallet->balance < $amount) {
+            if ($wallet->balance < $amount || $wallet->ledger_balance < $amount) {
                 throw new \Exception('Insufficient balance');
             }
             
             // Update balance directly
             $wallet->balance = $wallet->balance - $amount;
+            $wallet->ledger_balance = $wallet->ledger_balance - $amount;
             $wallet->save();
             
             // Refresh the current instance
