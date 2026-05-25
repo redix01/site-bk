@@ -34,11 +34,21 @@ export interface User {
     wallet?: Wallet | null;
 }
 
+export type TransactionType =
+    | 'deposit'
+    | 'withdrawal'
+    | 'transfer'
+    | 'fee'
+    | 'refund'
+    | 'stamp_duty'
+    | 'monthly_fee'
+    | 'general';
+
 export interface Transaction {
     id: number;
     user_id: number;
     recipient_id?: number;
-    type: 'deposit' | 'withdrawal' | 'transfer';
+    type: TransactionType;
     amount: number;
     fee?: number;
     reference: string;
@@ -136,5 +146,4 @@ export interface LoginHistory {
     formatted_created_at: string;
     created_at: string;
 }
-
 

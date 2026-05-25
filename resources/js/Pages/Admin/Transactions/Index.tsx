@@ -15,6 +15,10 @@ interface TransactionsIndexProps extends PageProps {
 }
 
 export default function Index({ transactions }: TransactionsIndexProps) {
+    const formatTransactionType = (type: string) => (
+        type.split('_').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
+    );
+
     const getStatusColor = (status: string) => {
         switch (status) {
             case 'completed':
@@ -35,6 +39,9 @@ export default function Index({ transactions }: TransactionsIndexProps) {
             case 'deposit':
                 return 'bg-green-900/50 text-green-200 border-green-700';
             case 'withdrawal':
+            case 'fee':
+            case 'stamp_duty':
+            case 'monthly_fee':
                 return 'bg-red-900/50 text-red-200 border-red-700';
             case 'transfer':
                 return 'bg-blue-900/50 text-blue-200 border-blue-700';
@@ -138,7 +145,7 @@ export default function Index({ transactions }: TransactionsIndexProps) {
                                             </td>
                                             <td className="py-3 px-4">
                                                 <Badge className={getTypeColor(transaction.type)}>
-                                                    {transaction.type}
+                                                    {formatTransactionType(transaction.type)}
                                                 </Badge>
                                             </td>
                                             <td className="py-3 px-4">
@@ -206,5 +213,3 @@ export default function Index({ transactions }: TransactionsIndexProps) {
         </AdminLayout>
     );
 }
-
-

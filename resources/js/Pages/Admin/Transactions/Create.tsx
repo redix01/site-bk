@@ -6,6 +6,15 @@ import { FormEventHandler } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { User, PageProps } from '@/types';
 
+const transactionTypeOptions = [
+    { value: 'deposit', label: 'Deposit' },
+    { value: 'withdrawal', label: 'Withdrawal' },
+    { value: 'transfer', label: 'Transfer' },
+    { value: 'stamp_duty', label: 'Stamp Duty' },
+    { value: 'monthly_fee', label: 'Monthly Fee' },
+    { value: 'general', label: 'General' },
+];
+
 export default function Create({ users }: PageProps & { users: User[] }) {
     const { data, setData, post, processing, errors } = useForm({
         user_id: '',
@@ -72,9 +81,11 @@ export default function Create({ users }: PageProps & { users: User[] }) {
                                     className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600"
                                     required
                                 >
-                                    <option value="deposit">Deposit</option>
-                                    <option value="withdrawal">Withdrawal</option>
-                                    <option value="transfer">Transfer</option>
+                                    {transactionTypeOptions.map((type) => (
+                                        <option key={type.value} value={type.value}>
+                                            {type.label}
+                                        </option>
+                                    ))}
                                 </select>
                                 {errors.type && <p className="mt-1 text-sm text-red-400">{errors.type}</p>}
                             </div>
@@ -97,7 +108,7 @@ export default function Create({ users }: PageProps & { users: User[] }) {
 
                             <div>
                                 <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-1">
-                                    Description <span className="text-red-400">*</span>
+                                    Description
                                 </label>
                                 <textarea
                                     id="description"
@@ -105,7 +116,6 @@ export default function Create({ users }: PageProps & { users: User[] }) {
                                     onChange={(e) => setData('description', e.target.value)}
                                     rows={3}
                                     className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600"
-                                    required
                                 />
                                 {errors.description && <p className="mt-1 text-sm text-red-400">{errors.description}</p>}
                             </div>
@@ -150,5 +160,4 @@ export default function Create({ users }: PageProps & { users: User[] }) {
         </AdminLayout>
     );
 }
-
 

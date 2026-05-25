@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
+    public const TYPES = [
+        'deposit',
+        'withdrawal',
+        'transfer',
+        'fee',
+        'refund',
+        'stamp_duty',
+        'monthly_fee',
+        'general',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

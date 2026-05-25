@@ -8,6 +8,10 @@ import { Transaction, PageProps } from '@/types';
 import { FormEventHandler } from 'react';
 
 export default function Show({ transaction }: PageProps & { transaction: Transaction }) {
+    const formatTransactionType = (type: string) => (
+        type.split('_').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
+    );
+
     const formatDateForInput = (value?: string | null) => {
         if (!value) return '';
         const parsed = new Date(value);
@@ -62,7 +66,11 @@ export default function Show({ transaction }: PageProps & { transaction: Transac
     const getTypeColor = (type: string) => {
         switch (type) {
             case 'deposit': return 'bg-green-900/50 text-green-200 border-green-700';
-            case 'withdrawal': return 'bg-red-900/50 text-red-200 border-red-700';
+            case 'withdrawal':
+            case 'fee':
+            case 'stamp_duty':
+            case 'monthly_fee':
+                return 'bg-red-900/50 text-red-200 border-red-700';
             case 'transfer': return 'bg-blue-900/50 text-blue-200 border-blue-700';
             default: return 'bg-slate-800 text-slate-300 border-slate-700';
         }
@@ -111,7 +119,7 @@ export default function Show({ transaction }: PageProps & { transaction: Transac
                             <div>
                                 <p className="text-sm text-slate-400">Type</p>
                                 <Badge className={getTypeColor(transaction.type)}>
-                                    {transaction.type}
+                                    {formatTransactionType(transaction.type)}
                                 </Badge>
                             </div>
                             <div>

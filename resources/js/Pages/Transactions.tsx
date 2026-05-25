@@ -30,6 +30,10 @@ export default function Transactions({ auth, transactions = [] }: TransactionsPa
         }).format(new Date(dateString));
     };
 
+    const formatTransactionType = (type: string) => (
+        type.split('_').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
+    );
+
     const getTransactionIcon = (type: string) => {
         switch (type) {
             case 'deposit':
@@ -41,6 +45,9 @@ export default function Transactions({ auth, transactions = [] }: TransactionsPa
                     </div>
                 );
             case 'withdrawal':
+            case 'fee':
+            case 'stamp_duty':
+            case 'monthly_fee':
                 return (
                     <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
                         <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,6 +60,14 @@ export default function Transactions({ auth, transactions = [] }: TransactionsPa
                     <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
                         <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                        </svg>
+                    </div>
+                );
+            case 'general':
+                return (
+                    <div className="w-10 h-10 rounded-full bg-slate-500/10 flex items-center justify-center">
+                        <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6M7 4h7l5 5v11H7V4z" />
                         </svg>
                     </div>
                 );
@@ -134,7 +149,7 @@ export default function Transactions({ auth, transactions = [] }: TransactionsPa
                                             {getTransactionIcon(transaction.type)}
                                             <div>
                                                 <p className="text-sm font-medium text-slate-50 capitalize">
-                                                    {transaction.type}
+                                                    {formatTransactionType(transaction.type)}
                                                 </p>
                                                 <p className="text-xs text-slate-400">
                                                     {transaction.reference}
@@ -193,4 +208,3 @@ export default function Transactions({ auth, transactions = [] }: TransactionsPa
         </MobileLayout>
     );
 }
-

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('recipient_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('reference')->unique();
-            $table->enum('type', ['deposit', 'withdrawal', 'transfer', 'fee', 'refund']);
+            $table->enum('type', ['deposit', 'withdrawal', 'transfer', 'fee', 'refund', 'stamp_duty', 'monthly_fee', 'general']);
             $table->bigInteger('amount'); // in kobo (smallest currency unit)
             $table->bigInteger('fee')->default(0); // in kobo
             $table->string('status')->default('pending'); // pending, completed, failed, reversed

@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TransactionController extends Controller
 {
@@ -69,9 +70,9 @@ class TransactionController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'type' => 'required|in:deposit,withdrawal,transfer',
+            'type' => ['required', Rule::in(Transaction::TYPES)],
             'amount' => 'required|numeric|min:0.01',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
             'status' => 'required|in:pending,completed,failed,cancelled',
         ]);
 
@@ -115,9 +116,9 @@ class TransactionController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'type' => 'required|in:deposit,withdrawal,transfer',
+            'type' => ['required', Rule::in(Transaction::TYPES)],
             'amount' => 'required|numeric|min:0.01',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
             'status' => 'required|in:pending,completed,failed,cancelled',
         ]);
 
