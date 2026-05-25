@@ -27,6 +27,9 @@ type SettingsPayload = {
         two_factor_threshold: number | null;
         admin_approval_threshold: number | null;
     };
+    transfers: {
+        wire_transfer_fee_percentage: number | null;
+    };
 };
 
 type Props = PageProps & { settings: SettingsPayload };
@@ -38,6 +41,7 @@ type SettingsFormData = {
     app_url: string;
     timezone: string;
     currency: string;
+    wire_transfer_fee_percentage: string;
     site_logo: File | null;
     remove_logo: boolean;
 };
@@ -50,6 +54,7 @@ export default function Index({ settings }: Props) {
         app_url: settings.site.url ?? '',
         timezone: settings.site.timezone ?? '',
         currency: settings.site.currency ?? '',
+        wire_transfer_fee_percentage: String(settings.transfers.wire_transfer_fee_percentage ?? 2),
         site_logo: null,
         remove_logo: false,
     });
@@ -64,6 +69,7 @@ export default function Index({ settings }: Props) {
             app_url: settings.site.url ?? '',
             timezone: settings.site.timezone ?? '',
             currency: settings.site.currency ?? '',
+            wire_transfer_fee_percentage: String(settings.transfers.wire_transfer_fee_percentage ?? 2),
             site_logo: null,
             remove_logo: false,
         }));
@@ -75,6 +81,7 @@ export default function Index({ settings }: Props) {
         settings.site.support_email,
         settings.site.timezone,
         settings.site.url,
+        settings.transfers.wire_transfer_fee_percentage,
     ]);
 
     const [logoPreview, setLogoPreview] = useState<string | null>(settings.branding.logo_url ?? null);
@@ -148,6 +155,7 @@ export default function Index({ settings }: Props) {
             app_url: formData.app_url.trim() === '' ? null : formData.app_url.trim(),
             timezone: formData.timezone.trim() === '' ? null : formData.timezone.trim(),
             currency: formData.currency.trim() === '' ? null : formData.currency.trim(),
+            wire_transfer_fee_percentage: formData.wire_transfer_fee_percentage.trim() === '' ? null : formData.wire_transfer_fee_percentage.trim(),
         }));
 
         form.put('/admin/settings', {
@@ -274,6 +282,40 @@ export default function Index({ settings }: Props) {
                                             className="uppercase"
                                     />
                                         {errors.currency && <p className="text-sm text-red-400">{errors.currency}</p>}
+                                    </div>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="bg-slate-900 border-slate-800">
+                        <CardHeader>
+                            <CardTitle className="text-slate-50">Transfer Fees</CardTitle>
+                            <CardDescription className="text-slate-400">
+                                Configure the percentage fee charged on wire transfers. Internal transfers remain fee-free.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label htmlFor="wire_transfer_fee_percentage" className="block text-sm font-medium text-slate-300">
+                                        Wire Transfer Fee (%)
+                                    </label>
+                                    <div className="mt-2 space-y-2">
+                                        <Input
+                                            id="wire_transfer_fee_percentage"
+                                            type="number"
+                                            inputMode="decimal"
+                                            min="0"
+                                            max="100"
+                                            step="0.01"
+                                            value={data.wire_transfer_fee_percentage}
+                                            onChange={(e) => setData('wire_transfer_fee_percentage', e.target.value)}
+                                            placeholder="2"
+                                        />
+                                        {errors.wire_transfer_fee_percentage && (
+                                            <p className="text-sm text-red-400">{errors.wire_transfer_fee_percentage}</p>
+                                        )}
                                     </div>
                                 </div>
                             </div>

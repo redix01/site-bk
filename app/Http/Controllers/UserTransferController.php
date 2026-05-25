@@ -14,6 +14,7 @@ use App\Mail\AdminTransferReviewMail;
 use App\Mail\TransferCodeRequestMail;
 use App\Mail\TransferReceivedMail;
 use App\Mail\TransferSentMail;
+use App\Support\SettingsManager;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
@@ -21,6 +22,8 @@ use Illuminate\Validation\Rule;
 
 class UserTransferController extends Controller
 {
+    private const DEFAULT_WIRE_TRANSFER_FEE_PERCENTAGE = 2.0;
+
     public function index()
     {
         $user = Auth::user();
@@ -28,6 +31,7 @@ class UserTransferController extends Controller
         
         return inertia('Transfer', [
             'wallet' => $wallet,
+            'wireTransferFeePercentage' => $this->wireTransferFeePercentage(),
         ]);
     }
 
@@ -242,7 +246,8 @@ class UserTransferController extends Controller
             $amountInCents = $transactionCode->amount;
         }
         
-        $wireFee = (int) ($amountInCents * 0.02); // 2% wire transfer fee
+        $wireFeePercentage = $this->wireTransferFeePercentage();
+        $wireFee = (int) round($amountInCents * ($wireFeePercentage / 100));
         $totalAmount = $amountInCents + $wireFee;
         
         // Check if user has sufficient balance
@@ -268,6 +273,7 @@ class UserTransferController extends Controller
                 'routing_number' => $validated['routing_number'],
                 'swift_code' => $validated['swift_code'],
                 'beneficiary_address' => $validated['beneficiary_address'],
+                'fee_percentage' => $wireFeePercentage,
             ],
         ]);
         
@@ -299,6 +305,7 @@ class UserTransferController extends Controller
             'reference' => $transaction->reference,
             'amount' => $amountInCents,
             'fee' => $wireFee,
+            'fee_percentage' => $wireFeePercentage,
             'sender_new_balance' => $wallet->balance,
         ], $transaction);
         
@@ -412,5 +419,14 @@ class UserTransferController extends Controller
         ]);
         
         return $pdf->download('transaction-' . $transaction->reference . '.pdf');
+    }
+
+    private function wireTransferFeePercentage(): float
+    {
+        return max(
+            0.0,
+            (float) (SettingsManager::get('wire_transfer_fee_percentage', self::DEFAULT_WIRE_TRANSFER_FEE_PERCENTAGE)
+                ?? self::DEFAULT_WIRE_TRANSFER_FEE_PERCENTAGE)
+        );
     }
 }

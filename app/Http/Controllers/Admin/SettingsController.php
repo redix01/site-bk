@@ -37,6 +37,9 @@ class SettingsController extends Controller
                 'two_factor_threshold' => SettingsManager::get('security_two_factor_threshold', config('banking.security.two_factor_threshold', 100000)),
                 'admin_approval_threshold' => SettingsManager::get('security_admin_approval_threshold', config('banking.security.admin_approval_threshold', 1000000)),
             ],
+            'transfers' => [
+                'wire_transfer_fee_percentage' => SettingsManager::get('wire_transfer_fee_percentage', 2),
+            ],
         ];
 
         return inertia('Admin/Settings/Index', [
@@ -61,6 +64,7 @@ class SettingsController extends Controller
             'security_session_timeout',
             'security_two_factor_threshold',
             'security_admin_approval_threshold',
+            'wire_transfer_fee_percentage',
         ];
 
         $sanitised = [];
@@ -97,6 +101,7 @@ class SettingsController extends Controller
             'security_session_timeout' => ['nullable', 'integer', 'min:1', 'max:1440'],
             'security_two_factor_threshold' => ['nullable', 'numeric', 'min:0'],
             'security_admin_approval_threshold' => ['nullable', 'numeric', 'min:0'],
+            'wire_transfer_fee_percentage' => ['nullable', 'numeric', 'min:0', 'max:100'],
         ]);
 
         $logoPath = SettingsManager::get('site_logo_path');
@@ -125,6 +130,9 @@ class SettingsController extends Controller
                     : null,
                 'security_admin_approval_threshold' => array_key_exists('security_admin_approval_threshold', $validated)
                     ? (float) $validated['security_admin_approval_threshold']
+                    : null,
+                'wire_transfer_fee_percentage' => array_key_exists('wire_transfer_fee_percentage', $validated)
+                    ? (float) $validated['wire_transfer_fee_percentage']
                     : null,
             ];
 

@@ -41,6 +41,7 @@ class SettingsUpdateTest extends TestCase
             'security_session_timeout' => 60,
             'security_two_factor_threshold' => 150000,
             'security_admin_approval_threshold' => 250000,
+            'wire_transfer_fee_percentage' => 3.5,
         ];
 
         $response = $this->actingAs($admin)
@@ -68,6 +69,7 @@ class SettingsUpdateTest extends TestCase
         $this->assertSame('Banko Pro', SettingsManager::get('site_name'));
         $this->assertSame(4, SettingsManager::get('security_max_login_attempts'));
         $this->assertSame(150000.0, SettingsManager::get('security_two_factor_threshold'));
+        $this->assertSame(3.5, SettingsManager::get('wire_transfer_fee_percentage'));
     }
 
     /** @test */
@@ -100,6 +102,7 @@ class SettingsUpdateTest extends TestCase
             'security_session_timeout' => 60,
             'security_two_factor_threshold' => 150000,
             'security_admin_approval_threshold' => 250000,
+            'wire_transfer_fee_percentage' => 3.5,
             'site_logo' => UploadedFile::fake()->image('logo.png', 200, 200),
         ];
 
@@ -127,5 +130,4 @@ class SettingsUpdateTest extends TestCase
         Storage::disk('public')->assertMissing($existingPath);
     }
 }
-
 

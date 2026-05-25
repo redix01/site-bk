@@ -8,12 +8,13 @@ import axios from 'axios';
 
 interface TransferPageProps extends PageProps {
     wallet?: Wallet;
+    wireTransferFeePercentage?: number;
 }
 
 type TransferType = 'internal' | 'wire';
 type TransferStep = 'details' | 'verify' | 'processing';
 
-export default function Transfer({ auth, wallet, supportEmail }: TransferPageProps) {
+export default function Transfer({ auth, wallet, supportEmail, wireTransferFeePercentage = 2 }: TransferPageProps) {
     const [transferType, setTransferType] = useState<TransferType>('internal');
     const [step, setStep] = useState<TransferStep>('details');
     const isLocked = auth.user.status === 'locked';
@@ -50,6 +51,23 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
             minimumFractionDigits: 2,
         }).format(amount / 100);
     };
+
+    const getAmountInCents = () => {
+        const parsedAmount = parseFloat(amount);
+        return Number.isNaN(parsedAmount) ? 0 : Math.round(parsedAmount * 100);
+    };
+
+    const getTransferFeeCents = () => (
+        transferType === 'wire'
+            ? Math.round(getAmountInCents() * (wireTransferFeePercentage / 100))
+            : 0
+    );
+
+    const getTotalDebitCents = () => getAmountInCents() + getTransferFeeCents();
+
+    const formatPercentage = (value: number) => (
+        Number.isInteger(value) ? value.toString() : value.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')
+    );
 
     // Lookup account when typing internal transfer recipient
     useEffect(() => {
@@ -89,16 +107,17 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
         setFormErrors({});
 
         const parsedAmount = parseFloat(amount);
-        const availableBalanceCents = wallet?.balance ?? 0;
-        const availableBalance = availableBalanceCents / 100;
+        const availableBalanceCents = Number(wallet?.balance ?? 0);
+        const amountInCents = getAmountInCents();
+        const totalDebitCents = amountInCents + (transferType === 'wire' ? Math.round(amountInCents * (wireTransferFeePercentage / 100)) : 0);
 
         if (Number.isNaN(parsedAmount) || parsedAmount <= 0) {
             setFormErrors({ amount: 'Enter a valid transfer amount.' });
             return;
         }
 
-        if (transferType === 'wire' && parsedAmount > availableBalance) {
-            setFormErrors({ amount: 'Transfer amount exceeds your available balance.' });
+        if (transferType === 'wire' && totalDebitCents > availableBalanceCents) {
+            setFormErrors({ amount: `Transfer amount plus the ${formatPercentage(wireTransferFeePercentage)}% wire fee exceeds your available balance.` });
             return;
         }
 
@@ -596,7 +615,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                             ) : (
                                 <>
                                     <p>• Wire transfers may take 1-3 business days</p>
-                                    <p>• A wire transfer fee may apply</p>
+                                    <p>• Wire transfers include a {formatPercentage(wireTransferFeePercentage)}% fee</p>
                                     <p>• International transfers require SWIFT code</p>
                                     <p>• Verify all bank details before sending</p>
                                 </>
@@ -649,6 +668,18 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                 ${parseFloat(amount).toFixed(2)}
                             </span>
                         </div>
+                        {transferType === 'wire' && (
+                            <>
+                                <div className="flex justify-between py-2 border-b border-slate-800">
+                                    <span className="text-slate-400">Wire Fee ({formatPercentage(wireTransferFeePercentage)}%)</span>
+                                    <span className="text-slate-50">{formatCurrency(getTransferFeeCents())}</span>
+                                </div>
+                                <div className="flex justify-between py-2 border-b border-slate-800">
+                                    <span className="text-slate-400">Total Debit</span>
+                                    <span className="text-slate-50 font-bold text-lg">{formatCurrency(getTotalDebitCents())}</span>
+                                </div>
+                            </>
+                        )}
                         {description && (
                             <div className="flex justify-between py-2 border-b border-slate-800">
                                 <span className="text-slate-400">Description</span>
