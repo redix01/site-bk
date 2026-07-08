@@ -15,6 +15,7 @@ import {
     Home,
     ExternalLink,
     CreditCard,
+    Shield,
 } from 'lucide-react';
 import { Button } from '@/Components/ui/button';
 import { cn } from '@/lib/utils';
@@ -72,7 +73,8 @@ export default function AdminLayout({ children }: PropsWithChildren) {
         {
             title: 'System',
             items: [
-                { name: 'Settings', href: '/admin/settings', icon: Settings, current: currentPath.startsWith('/admin/settings') },
+                { name: 'Settings', href: '/admin/settings', icon: Settings, current: currentPath === '/admin/settings' },
+                { name: 'Security', href: '/admin/settings/security', icon: Shield, current: currentPath.startsWith('/admin/settings/security') },
             ]
         }
     ];

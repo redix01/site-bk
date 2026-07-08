@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Support\SettingsManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\AuditLog;
 
@@ -170,6 +172,36 @@ class SettingsController extends Controller
         ]);
 
         return redirect()->route('admin.settings')->with('success', 'Settings updated successfully.');
+    }
+
+    /**
+     * Display the security settings page.
+     */
+    public function security()
+    {
+        return inertia('Admin/Settings/Security');
+    }
+
+    /**
+     * Update the admin password.
+     */
+    public function updatePassword(Request $request)
+    {
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = Auth::user();
+        $user->forceFill([
+            'password' => Hash::make($validated['password']),
+        ])->save();
+
+        AuditLog::logEvent('admin.password.updated', [], $user);
+
+        Auth::logoutOtherDevices($validated['password']);
+
+        return redirect()->back()->with('success', 'Password updated successfully.');
     }
 
     /**
