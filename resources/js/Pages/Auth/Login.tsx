@@ -111,10 +111,10 @@ export default function Login({ status, flash }: LoginProps) {
             <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
                 <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/95">
                     <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-                        <Link href="/" className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-50">
+                        <a href="/" className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-50">
                             <Banknote className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                             <span className="text-sm sm:text-base">{appName}</span>
-                        </Link>
+                        </a>
                         <ThemeToggle theme={theme} onToggle={toggleTheme} />
                     </div>
                 </header>
@@ -127,11 +127,11 @@ export default function Login({ status, flash }: LoginProps) {
                                     <Banknote className="h-7 w-7 text-blue-600 dark:text-blue-400" />
                                 </div>
                                 <span className="text-xl font-bold tracking-[0.4em] text-slate-700 dark:text-slate-200 uppercase">
-                                    {appName}
+                                    CFB
                                 </span>
                             </div>
                             <CardTitle className="text-3xl font-bold text-slate-900 dark:text-slate-50">
-                                Welcome back
+                                Welcome
                             </CardTitle>
                             <CardDescription className="text-base text-slate-500 dark:text-slate-400">
                                 Sign in to your account to continue

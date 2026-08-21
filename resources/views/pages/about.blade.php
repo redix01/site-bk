@@ -175,11 +175,11 @@
         <div class="container">
             <div class="counter-card-wrap style-three d-flex flex-wrap justify-content-center">
                 <div class="counter-card position-relative text-center mb-30" data-cue="slideInUp">
-                    <h4 class="text-white"><span class="counter">0</span>+</h4>
+                    <h4 class="text-white"><span class="counter">1</span>K+</h4>
                     <p class="text-offwhite mb-0">Accounts opened</p>
                 </div>
                 <div class="counter-card position-relative text-center mb-30" data-cue="slideInUp">
-                    <h4 class="text-white">$<span class="counter">0</span>M+</h4>
+                    <h4 class="text-white">$<span class="counter">50</span>M+</h4>
                     <p class="text-offwhite mb-0">Processed in transfers</p>
                 </div>
                 <div class="counter-card position-relative text-center mb-30" data-cue="slideInUp">
