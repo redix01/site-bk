@@ -1,197 +1,249 @@
-@extends('pages.layout.app_layout')
+@extends('layouts.bruk')
+
+@section('title', 'About Us – ' . config('app.name', 'Banko'))
+@section('meta_description', 'Learn why ' . config('app.name', 'Banko') . ' was built, how we keep your money secure, and how to open an account in minutes.')
 
 @section('content')
-<div id="smooth-content">
 
-    <!-- banner -->
-    <div class="mil-banner mil-banner-inner mil-dissolve">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-xl-8">
-                    <div class="mil-banner-text mil-text-center">
-                        <div class="mil-text-m mil-mb-20">About Banko</div>
-                        <h1 class="mil-mb-60">Trusted Banking, Built on Relationships</h1>
-                        <ul class="mil-breadcrumbs mil-center">
-                            <li><a href="{{ url('/') }}">Home</a></li>
-                            <li><a href="{{ url('/about') }}">About</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- banner end -->
-
-    <!-- vision -->
-    <div class="mil-features mil-p-0-80">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-xl-5 mil-mb-80">
-                    <h2 class="mil-mb-30 mil-up">The Vision That Drives Our Team</h2>
-                    <p class="mil-text-m mil-soft mil-mb-60 mil-up">From our first community branch to today’s national footprint, Banko’s purpose has remained the same: help people and businesses prosper with clarity and confidence. We invest in innovation and in people, so every client interaction feels personal and every solution scales with their goals.</p>
-                    <ul class="mil-list-2 mil-type-2">
-                        <li>
-                            <div class="mil-up">
-                                <h5 class="mil-mb-15">Client-First Mindset</h5>
-                                <p class="mil-text-m mil-soft">Banking is personal. We take time to understand each relationship so our advice and products create lasting value.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-xl-6 mil-mb-80">
-                    <div class="mil-image-frame mil-up">
-                        <img src="img/inner-pages/1.png" alt="Bank team collaborating" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- vision end -->
-
-    <!-- stats -->
-    <div class="mil-facts mil-p-0-130">
-        <div class="container">
+    <!-- Breadcrumb Section Start -->
+    <div class="breadcrumb-wrap position-relative index-1 bg-title">
+        <div class="br-bg br-bg-7 position-absolute top-0 end-0 md-none"></div>
+        <img src="{{ asset('bruk/img/breadcrumb/br-shape-2.webp') }}" alt="" class="br-shape-two position-absolute">
+        <div class="container position-relative">
+            <img src="{{ asset('bruk/img/breadcrumb/br-shape-1.webp') }}" alt="" class="br-shape-one position-absolute md-none">
+            <img src="{{ asset('bruk/img/breadcrumb/br-shape-3.webp') }}" alt="" class="br-shape-three position-absolute md-none">
             <div class="row">
-                <div class="col-xl-4 mil-sm-text-center mil-mb-30 mil-up">
-                    <p class="h1 mil-display mil-mb-15"><span class="mil-accent mil-counter" data-number="2.1">2.1</span><span class="mil-pale">M</span></p>
-                    <h5 class="mil-light">Clients Served</h5>
-                </div>
-                <div class="col-xl-4 mil-sm-text-center mil-mb-30 mil-up">
-                    <p class="h1 mil-display mil-mb-15"><span class="mil-accent mil-counter" data-number="800">800</span><span class="mil-pale">+</span></p>
-                    <h5 class="mil-light">Corporate Partners</h5>
-                </div>
-                <div class="col-xl-4 mil-sm-text-center mil-mb-30 mil-up">
-                    <p class="h1 mil-display mil-mb-15"><span class="mil-accent mil-counter" data-number="40">40</span><span class="mil-pale">+</span></p>
-                    <h5 class="mil-light">Markets Supported</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- stats end -->
-
-    <!-- strengths -->
-    <div class="mil-cta mil-up">
-        <div class="container">
-            <div class="mil-out-frame mil-p-160-100">
-                <div class="row justify-content-center mil-text-center">
-                    <div class="col-xl-8 mil-mb-80-adaptive-30">
-                        <h2 class="mil-up">Why Clients Trust Banko</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4 mil-mb-60">
-                        <div class="mil-icon-box">
-                            <img src="img/inner-pages/icons/1.svg" alt="Global network icon" class="mil-mb-30 mil-up">
-                            <h5 class="mil-mb-20 mil-up">Connected Network</h5>
-                            <p class="mil-text-m mil-soft mil-up">Our reach spans major financial centers, providing seamless local expertise backed by national resources.</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 mil-mb-60">
-                        <div class="mil-icon-box">
-                            <img src="img/inner-pages/icons/2.svg" alt="Security icon" class="mil-mb-30 mil-up">
-                            <h5 class="mil-mb-20 mil-up">Uncompromising Security</h5>
-                            <p class="mil-text-m mil-soft mil-up">Advanced fraud monitoring, layered authentication, and 24/7 security teams safeguard every interaction.</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 mil-mb-60">
-                        <div class="mil-icon-box">
-                            <img src="img/inner-pages/icons/3.svg" alt="Innovation icon" class="mil-mb-30 mil-up">
-                            <h5 class="mil-mb-20 mil-up">Purposeful Innovation</h5>
-                            <p class="mil-text-m mil-soft mil-up">We continually invest in tools that make banking simpler—without losing the human insight clients rely on.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- strengths end -->
-
-    <!-- values -->
-    <div class="mil-features mil-p-160-80">
-        <div class="container">
-            <div class="row flex-sm-row-reverse justify-content-between align-items-center">
-                <div class="col-xl-6 mil-mb-80">
-                    <h2 class="mil-mb-30 mil-up">Values That Anchor Banko</h2>
-                    <p class="mil-text-m mil-soft mil-mb-60 mil-up">We blend transparent communication with disciplined risk management to build enduring relationships. Every product, policy, and partnership reflects our promise to steward client wealth responsibly.</p>
-                    <ul class="mil-list-2 mil-type-2">
-                        <li>
-                            <div class="mil-up">
-                                <h5 class="mil-mb-15">Transparency in Action</h5>
-                                <p class="mil-text-m mil-soft">Clear pricing, proactive updates, and open dialogue ensure clients always know where they stand.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="mil-up">
-                                <h5 class="mil-mb-15">Security with Accountability</h5>
-                                <p class="mil-text-m mil-soft">We pair cutting-edge controls with dedicated teams who monitor, respond, and continuously improve.</p>
-                            </div>
-                        </li>
+                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                    <ul class="br-menu list-unstyle d-inline-block">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li>About Us</li>
                     </ul>
+                    <h2 class="br-title fw-medium text-white mb-0">The Bank Built Around Your Life</h2>
                 </div>
-                <div class="col-xl-5 mil-mb-80">
-                    <div class="mil-image-frame mil-up">
-                        <img src="img/inner-pages/2.png" alt="Values illustration" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Why Choose Us Start -->
+    <div class="wh-area position-relative index-1 pt-130">
+        <div class="container">
+            <div class="row pb-130 align-items-center">
+                <div class="col-lg-6 pe-xxl-1">
+                    <div class="wh-img-wrap position-relative">
+                        <img src="{{ asset('bruk/img/about/wh-img-shape-1.webp') }}" alt="" class="wh-shape-one position-absolute rotate">
+                        <img src="{{ asset('bruk/img/about/wh-img-shape-2.webp') }}" alt="" class="wh-shape-two position-absolute bounce">
+                        <img src="{{ asset('bruk/img/about/wh-img-1.webp') }}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 pe-xxl-0">
+                    <div class="wh-content">
+                        <div class="section-title">
+                            <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Why Choose Us</span>
+                            <h2 class="mb-15">Modern Banking, Built On Trust</h2>
+                            <p>We built {{ config('app.name', 'Banko') }} because everyday banking shouldn't mean long lines, confusing fees, or waiting days for your own money to move. Everything here is designed to be fast, clear, and secure.</p>
+                            <p>From your first deposit to your next investment, our team is focused on making banking feel simple again.</p>
+                        </div>
+                        <a href="{{ route('personal.banking-services') }}" class="link style-four">View Our Products <img src="{{ asset('bruk/img/icons/long-arrow-blue.svg') }}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center pb-100">
+                <div class="col-xl-4 col-md-6">
+                    <div class="feature-card style-one d-flex flex-wrap mb-30 transition">
+                        <div class="feature-icon bg-white position-relative d-flex flex-coulmn justify-content-center align-items-center transition">
+                            <img src="{{ asset('bruk/img/icons/shield.svg') }}" alt="" class="transition">
+                        </div>
+                        <div class="feature-text">
+                            <h3 class="fs-20">Secure &amp; Insured</h3>
+                            <p class="mb-0">Your deposits and data are protected with industry-standard security.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 ps-xxl-4">
+                    <div class="feature-card style-one d-flex flex-wrap mb-30 transition">
+                        <div class="feature-icon bg-white position-relative d-flex flex-coulmn justify-content-center align-items-center transition">
+                            <img src="{{ asset('bruk/img/icons/money-bag.svg') }}" alt="" class="transition">
+                        </div>
+                        <div class="feature-text">
+                            <h3 class="fs-20">Transparent Pricing</h3>
+                            <p class="mb-0">No hidden fees — you always know what you're paying, and why.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 ps-xxl-4">
+                    <div class="feature-card style-one d-flex flex-wrap mb-30 transition">
+                        <div class="feature-icon bg-white position-relative d-flex flex-coulmn justify-content-center align-items-center transition">
+                            <img src="{{ asset('bruk/img/icons/easy-to-use.svg') }}" alt="" class="transition">
+                        </div>
+                        <div class="feature-text">
+                            <h3 class="fs-20">Real Support</h3>
+                            <p class="mb-0">Reach a real person by phone, email, or chat, any day of the week.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- values end -->
+    <!-- Why Choose Us End -->
 
-    <!-- principles -->
-    <div class="mil-quote mil-p-160-130">
+    <!-- Our Story Start -->
+    <div class="bg-optional ptb-130">
         <div class="container">
+            <div class="section-title text-center mb-50">
+                <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title" data-cue="slideInUp">Our Story</span>
+                <h2 class="mb-0">How {{ config('app.name', 'Banko') }} Got Here</h2>
+            </div>
             <div class="row justify-content-center">
-                <div class="col-xl-10">
-                    <h2 class="mil-mb-30">“Trust is our most valuable currency. We earn it through clarity, accountability, and an unwavering focus on our clients.”</h2>
-                    <p class="mil-text-m mil-soft mil-mb-60">— The Banko Team</p>
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <ul class="mil-list-2 mil-type-2 mil-mb-30">
-                                <li>
-                                    <div class="mil-up">
-                                        <h5 class="mil-mb-15">Privacy Stewardship</h5>
-                                        <p class="mil-text-m mil-soft">We never share customer data without explicit consent and always communicate how information is used.</p>
-                                    </div>
-                                </li>
-                            </ul>
+                <div class="col-xl-3 col-md-6" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <h3 class="fs-20">Launch</h3>
+                            <p class="mb-0">{{ config('app.name', 'Banko') }} launches with checking and savings accounts.</p>
                         </div>
-                        <div class="col-xl-6">
-                            <ul class="mil-list-2 mil-type-2 mil-mb-30">
-                                <li>
-                                    <div class="mil-up">
-                                        <h5 class="mil-mb-15">Data Protection</h5>
-                                        <p class="mil-text-m mil-soft">Our security architecture is audited regularly to meet and exceed regulatory standards worldwide.</p>
-                                    </div>
-                                </li>
-                            </ul>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <h3 class="fs-20">Instant Transfers</h3>
+                            <p class="mb-0">Instant transfers and mobile deposits go live.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <h3 class="fs-20">Investing Added</h3>
+                            <p class="mb-0">Investing and crypto deposits added to the app.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <h3 class="fs-20">Growing</h3>
+                            <p class="mb-0">A growing number of customers bank with us every day.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- principles end -->
+    <!-- Our Story End -->
 
-    <!-- cta -->
-    <div class="mil-cta mil-up">
+    <!-- How It Works Start -->
+    <div class="ptb-130">
         <div class="container">
-            <div class="mil-out-frame mil-p-160-160" style="background-image: url(img/home-3/5.png)">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-xl-7 mil-sm-text-center">
-                        <h2 class="mil-light mil-mb-30 mil-up">Experience Banking That Adapts to You</h2>
-                        <p class="mil-text-m mil-mb-60 mil-dark-soft mil-up">Partner with Banko and unlock tailored guidance, smarter tools, and a team committed to your long-term success.</p>
-                        <div class="mil-buttons-frame mil-up">
-                            <a href="contact.html" class="mil-btn mil-md">Connect with Us</a>
-                            <a href="register.html" class="mil-btn mil-border mil-md">Open an Account</a>
+            <div class="section-title text-center mb-50">
+                <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title" data-cue="slideInUp">Getting Started</span>
+                <h2 class="mb-15">Open an Account In Three Steps</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <h3 class="fs-24">1. Create Your Account</h3>
+                            <p>Sign up online in a few minutes — no branch visit required.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <h3 class="fs-24">2. Verify &amp; Fund</h3>
+                            <p>Confirm your identity and make your first deposit securely.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <h3 class="fs-24">3. Start Banking</h3>
+                            <p>Transfer, save, and invest right from your dashboard.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- cta end -->
+    <!-- How It Works End -->
 
-</div>
+    <!-- Stats Start -->
+    <div class="counter-wrap bg-title ptb-100">
+        <div class="container">
+            <div class="counter-card-wrap style-three d-flex flex-wrap justify-content-center">
+                <div class="counter-card position-relative text-center mb-30" data-cue="slideInUp">
+                    <h4 class="text-white"><span class="counter">0</span>+</h4>
+                    <p class="text-offwhite mb-0">Accounts opened</p>
+                </div>
+                <div class="counter-card position-relative text-center mb-30" data-cue="slideInUp">
+                    <h4 class="text-white">$<span class="counter">0</span>M+</h4>
+                    <p class="text-offwhite mb-0">Processed in transfers</p>
+                </div>
+                <div class="counter-card position-relative text-center mb-30" data-cue="slideInUp">
+                    <h4 class="text-white">&lt;<span class="counter">10</span>s</h4>
+                    <p class="text-offwhite mb-0">Average transfer time</p>
+                </div>
+                <div class="counter-card position-relative text-center mb-30" data-cue="slideInUp">
+                    <h4 class="text-white"><span class="counter">24</span>/7</h4>
+                    <p class="text-offwhite mb-0">Support availability</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Stats End -->
+
+    <!-- Testimonial Section Start -->
+    <div class="testimonial-wrap style-three position-relative index-1 overflow-hidden ptb-130">
+        <div class="container">
+            <div class="testimonial-box bg-title round-20">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-cue="slideInUp">
+                        <div class="section-title mb-45">
+                            <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Customer Stories</span>
+                            <h2 class="text-white mb-0">What Our Customers Say About Us</h2>
+                        </div>
+                        <div class="testimonial-slider-three swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card style-three">
+                                        <img src="{{ asset('bruk/img/icons/square-quote.svg') }}" alt="" class="quote-icon">
+                                        <p class="fs-20 f-secondary text-white">Customer testimonials will appear here once collected — replace this placeholder with a real quote before launch.</p>
+                                        <div class="client-info-wrap d-flex flex-wrap align-items-center">
+                                            <div class="client-info">
+                                                <h5 class="fs-20 fw-medium text-white">Pending Review</h5>
+                                                <span>Customer testimonial</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider-pagination testimonial-pagination d-flex flex-wrap align-items-center"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-cue="slideInUp">
+                        <div class="testimonial-img">
+                            <img src="{{ asset('bruk/img/testimonials/testimonial-img-2.webp') }}" alt="" class="d-block ms-lg-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial Section End -->
+
+    <!-- Contact / Closing CTA Start -->
+    <div id="contact" class="bg-optional ptb-130">
+        <div class="container text-center">
+            <div class="section-title mb-30">
+                <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Ready When You Are</span>
+                <h2 class="mb-15">Ready to Switch to {{ config('app.name', 'Banko') }}?</h2>
+                <p class="mb-0">Questions before you open an account? Reach us at <a href="mailto:{{ config('mail.from.address', 'support@example.com') }}">{{ config('mail.from.address', 'support@example.com') }}</a>.</p>
+            </div>
+            <a href="{{ route('register') }}" class="btn style-one">Open an Account</a>
+        </div>
+    </div>
+    <!-- Contact / Closing CTA End -->
+
 @endsection
-
