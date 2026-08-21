@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -11,8 +13,8 @@ body {
     overflow-x: hidden;
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
-    background-color: #020617 !important;
-    /* slate-950 */
+    background-color: #f8fafc;
+    /* slate-50 */
     margin: 0;
     padding: 0;
     height: 100%;
@@ -25,7 +27,14 @@ body {
 /* Ensure Inertia root container fills viewport */
 #app {
     min-height: 100vh;
-    background-color: #020617 !important;
+    background-color: #f8fafc;
+}
+
+html.dark,
+html.dark body,
+html.dark #app {
+    background-color: #020617;
+    /* slate-950 */
 }
 
 @theme {

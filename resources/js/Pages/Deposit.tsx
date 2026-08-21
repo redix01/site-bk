@@ -3,7 +3,39 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Com
 import { Button } from '@/Components/ui/button';
 import MobileLayout from '@/Layouts/MobileLayout';
 import { PageProps, Wallet } from '@/types';
-import { useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
+
+export const copyToClipboard = async (text: string): Promise<boolean> => {
+    try {
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            return true;
+        }
+
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            return document.execCommand('copy');
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    } catch (err) {
+        console.error('Failed to copy:', err);
+        return false;
+    }
+};
+
+export const formatGroupedNumber = (value: string, groupSize: number = 4) => {
+    const groups = value.match(new RegExp(`.{1,${groupSize}}`, 'g'));
+    return groups ? groups.join(' ') : value;
+};
 
 const CopyButton = ({ text }: { text: string }) => {
     const [copied, setCopied] = useState(false);
@@ -94,11 +126,14 @@ interface DepositPageProps extends PageProps {
 type DepositMode = 'code' | 'payment';
 type DepositStep = 'select' | 'input' | 'confirm' | 'processing' | 'success';
 
-export default function Deposit({ auth, wallet, depositMethods = {}, flash }: DepositPageProps) {
+export default function Deposit({ auth, wallet, depositMethods = {}, flash, supportEmail }: DepositPageProps) {
+    const viewParam = auth.user.is_admin ? '?view=client' : '';
     const [mode, setMode] = useState<DepositMode>('payment');
     const [step, setStep] = useState<DepositStep>('select');
     const [selectedMethod, setSelectedMethod] = useState<string>('');
-    
+    const [accountCopied, setAccountCopied] = useState(false);
+    const [accountShared, setAccountShared] = useState(false);
+
     // Code redemption form
     const codeForm = useForm({
         deposit_type: 'code',
@@ -125,6 +160,38 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash }: De
     };
 
     const quickAmounts = [1000, 5000, 10000, 25000]; // amounts in cents
+
+    const bankName = depositMethods.bank_transfer?.instructions?.['Bank Name'] || 'Bank Transfer';
+    const accountNumber = wallet?.account_number || depositMethods.bank_transfer?.instructions?.['Account Number'] || '';
+
+    const handleCopyAccount = async () => {
+        if (!accountNumber) return;
+        const ok = await copyToClipboard(accountNumber);
+        if (ok) {
+            setAccountCopied(true);
+            setTimeout(() => setAccountCopied(false), 2000);
+        }
+    };
+
+    const handleShareAccount = async () => {
+        if (!accountNumber) return;
+        const shareText = `${auth.user.name}'s ${bankName} account number: ${accountNumber}`;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({ title: bankName, text: shareText });
+                return;
+            } catch (err) {
+                // user cancelled or share failed, fall back to clipboard
+            }
+        }
+
+        const ok = await copyToClipboard(shareText);
+        if (ok) {
+            setAccountShared(true);
+            setTimeout(() => setAccountShared(false), 2000);
+        }
+    };
 
     const handleQuickAmount = (quickAmount: number) => {
         if (mode === 'code') {
@@ -189,7 +256,8 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash }: De
     const handleBack = () => {
         if (step === 'confirm') {
             setStep('input');
-        } else if (step === 'input' && mode === 'payment') {
+        } else if (step === 'input') {
+            setMode('payment');
             setStep('select');
             setSelectedMethod('');
         }
@@ -221,101 +289,146 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash }: De
         return icons[methodKey] || icons.bank_transfer;
     };
 
-    // Step 1: Mode & Method Selection
-    const renderSelectStep = () => (
-        <>
-            {/* Balance Card */}
-            <Card className="bg-gradient-to-br from-green-600 to-emerald-600 border-0 text-white">
-                <CardContent className="pt-6 pb-6">
-                    <div className="text-center">
-                        <p className="text-sm text-green-100 mb-2">Current Balance</p>
-                        <p className="text-3xl font-bold">{formatCurrency(wallet?.balance || 0)}</p>
-                    </div>
-                </CardContent>
-            </Card>
+    // Step 1: Add Money landing — Bank Transfer summary + Crypto Deposit entry
+    const renderSelectStep = () => {
+        const otherMethods = Object.entries(depositMethods).filter(
+            ([key, method]) => method.enabled && key !== 'bank_transfer' && key !== 'crypto'
+        );
 
-            {/* Mode Selector */}
-            <Card className="bg-slate-900 border-slate-800">
-                <CardContent className="p-2">
-                    <div className="grid grid-cols-2 gap-2">
-                        <Button
-                            variant={mode === 'payment' ? 'default' : 'ghost'}
-                            onClick={() => setMode('payment')}
-                            className={mode === 'payment' ? 'bg-green-600 hover:bg-green-700' : 'text-slate-400 hover:text-slate-50 hover:bg-slate-800'}
-                        >
-                            Make Deposit
-                        </Button>
-                        <Button
-                            variant={mode === 'code' ? 'default' : 'ghost'}
-                            onClick={() => { setMode('code'); setStep('input'); }}
-                            className={mode === 'code' ? 'bg-green-600 hover:bg-green-700' : 'text-slate-400 hover:text-slate-50 hover:bg-slate-800'}
-                        >
-                            Redeem Code
-                        </Button>
-                    </div>
-                </CardContent>
-            </Card>
-
-            {/* Method Selection */}
-            {mode === 'payment' && (
-                <>
-                    <Card className="bg-slate-900 border-slate-800">
-                        <CardHeader>
-                            <CardTitle className="text-slate-50 text-lg">Select Deposit Method</CardTitle>
-                            <CardDescription className="text-slate-400">
-                                Choose how you want to deposit funds
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-3">
-                            {Object.entries(depositMethods).map(([key, method]) => {
-                                if (!method.enabled) return null;
-    return (
-                                    <button
-                                        key={key}
-                                        onClick={() => handleMethodSelect(key)}
-                                        className="w-full flex items-center justify-between p-4 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 hover:border-green-500 transition-all group"
-                                    >
-                                        <div className="flex items-center space-x-3">
-                                            <div className="text-green-400 group-hover:text-green-300">
-                                                {getMethodIcon(key)}
-                                            </div>
-                                            <div className="text-left">
-                                                <p className="text-slate-50 font-semibold">{method.name}</p>
-                                                <p className="text-xs text-slate-400">
-                                                    Min: {formatCurrency(method.min_amount)} • {method.processing_time}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <svg className="w-5 h-5 text-slate-500 group-hover:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </button>
-                                );
-                            })}
-                        </CardContent>
-                    </Card>
-
-                    {/* Info */}
-                    <Card className="bg-green-950/20 border-green-900">
-                        <CardContent className="pt-6 space-y-2">
-                            <div className="flex items-start space-x-2">
-                                <svg className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <div className="text-sm text-green-200 space-y-1">
-                                    <p><strong>How deposits work:</strong></p>
-                                    <p>• Select your preferred payment method</p>
-                                    <p>• Send payment using the provided details</p>
-                                    <p>• Submit your transaction reference</p>
-                                    <p>• Admin verifies and credits your account</p>
+        return (
+            <>
+                {/* Bank Transfer */}
+                {depositMethods.bank_transfer?.enabled && (
+                    <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 overflow-hidden">
+                        <CardContent className="p-0">
+                            <div className="w-full flex items-center justify-between gap-3 px-5 py-4">
+                                <div className="flex items-center gap-3 text-left">
+                                    <div className="w-11 h-11 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-500 flex items-center justify-center">
+                                        {getMethodIcon('bank_transfer')}
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">{bankName}</p>
+                                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                                            FREE instant funding to your account
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
+
+                            {accountNumber && (
+                                <div className="px-5 pb-5 pt-1 border-t border-slate-100 dark:border-slate-800">
+                                    <div className="flex items-center justify-between mt-4 mb-1">
+                                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                                            {auth.user.name}'s Account Number
+                                        </p>
+                                        <span className="text-[10px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-400 bg-green-500/10 rounded-full px-2 py-0.5">
+                                            {wallet?.status || 'Active'}
+                                        </span>
+                                    </div>
+                                    <p className="text-2xl font-bold tracking-wide text-slate-900 dark:text-slate-50 font-mono">
+                                        {formatGroupedNumber(accountNumber)}
+                                    </p>
+                                    <div className="grid grid-cols-2 gap-3 mt-4">
+                                        <button
+                                            type="button"
+                                            onClick={handleCopyAccount}
+                                            className="rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-semibold py-3 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                                        >
+                                            {accountCopied ? 'Copied!' : 'Copy Number'}
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={handleShareAccount}
+                                            className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-3 transition-colors"
+                                        >
+                                            {accountShared ? 'Copied!' : 'Share Account'}
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </CardContent>
                     </Card>
-                </>
-            )}
-        </>
-    );
+                )}
+
+                {/* OR divider */}
+                {depositMethods.crypto?.enabled && (
+                    <div className="flex items-center gap-3">
+                        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
+                        <span className="text-xs font-medium text-slate-400 dark:text-slate-500">OR</span>
+                        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
+                    </div>
+                )}
+
+                {/* Crypto Deposit */}
+                {depositMethods.crypto?.enabled && (
+                    <Link href={"/deposit/crypto" + viewParam}>
+                        <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+                            <CardContent className="flex items-center justify-between gap-3 px-5 py-4">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-11 h-11 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-500 flex items-center justify-center">
+                                        {getMethodIcon('crypto')}
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Crypto Deposit</p>
+                                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                                            Fund your account with BTC, ETH & more
+                                        </p>
+                                    </div>
+                                </div>
+                                <svg className="w-5 h-5 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                )}
+
+                {/* Other payment methods */}
+                {otherMethods.length > 0 && (
+                    <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+                        <CardHeader className="pb-2">
+                            <CardTitle className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                                More Ways to Add Money
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-2">
+                            {otherMethods.map(([key, method]) => (
+                                <button
+                                    key={key}
+                                    onClick={() => handleMethodSelect(key)}
+                                    className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                                >
+                                    <div className="flex items-center space-x-3">
+                                        <div className="text-slate-500 dark:text-slate-400">
+                                            {getMethodIcon(key)}
+                                        </div>
+                                        <div className="text-left">
+                                            <p className="text-sm font-medium text-slate-900 dark:text-slate-50">{method.name}</p>
+                                            <p className="text-xs text-slate-500 dark:text-slate-400">
+                                                Min: {formatCurrency(method.min_amount)} • {method.processing_time}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <svg className="w-4 h-4 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            ))}
+                        </CardContent>
+                    </Card>
+                )}
+
+                {/* Redeem code */}
+                <button
+                    type="button"
+                    onClick={() => { setMode('code'); setStep('input'); }}
+                    className="w-full text-center text-sm font-medium text-blue-600 dark:text-blue-500 hover:text-blue-700 dark:hover:text-blue-400 py-2"
+                >
+                    Have a deposit code? Redeem it
+                </button>
+            </>
+        );
+    };
 
     // Step 2: Input (Code or Payment Details)
     const renderInputStep = () => {
@@ -950,7 +1063,45 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash }: De
     };
 
     return (
-        <MobileLayout user={auth.user} title="Deposit" currentRoute="dashboard">
+        <MobileLayout user={auth.user} title="Add Money" currentRoute="dashboard">
+            <div className="px-4 pt-4 flex items-center justify-between">
+                {step === 'select' ? (
+                    <Link
+                        href={"/dashboard" + viewParam}
+                        className="p-2 -ml-2 rounded-full text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-slate-800 transition-colors"
+                        aria-label="Back to dashboard"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m0 0h18" />
+                        </svg>
+                    </Link>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={handleBack}
+                        className="p-2 -ml-2 rounded-full text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-slate-800 transition-colors"
+                        aria-label="Back"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m0 0h18" />
+                        </svg>
+                    </button>
+                )}
+                <h1 className="text-base font-semibold text-slate-900 dark:text-slate-50">Add Money</h1>
+                {supportEmail ? (
+                    <a
+                        href={`mailto:${supportEmail}`}
+                        className="p-2 -mr-2 rounded-full text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-slate-800 transition-colors"
+                        aria-label="Get help"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </a>
+                ) : (
+                    <div className="w-9" />
+                )}
+            </div>
             <div className="px-4 py-6 space-y-6">
                 {/* Progress Indicator (only for payment method deposits) */}
                 {mode === 'payment' && step !== 'success' && step !== 'select' && (

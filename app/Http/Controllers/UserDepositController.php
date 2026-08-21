@@ -16,15 +16,41 @@ class UserDepositController extends Controller
     {
         $user = Auth::user();
         $wallet = $user->wallet;
-        
-        // Fetch enabled payment methods from database
+
+        return inertia('Deposit', [
+            'wallet' => $wallet,
+            'depositMethods' => $this->buildDepositMethods($user, $wallet),
+        ]);
+    }
+
+    /**
+     * Dedicated crypto deposit page: currency selection, wallet address & QR code.
+     */
+    public function crypto()
+    {
+        $user = Auth::user();
+        $wallet = $user->wallet;
+
+        $depositMethods = $this->buildDepositMethods($user, $wallet);
+        $cryptoMethod = $depositMethods['crypto'] ?? null;
+
+        return inertia('CryptoDeposit', [
+            'wallet' => $wallet,
+            'cryptoMethod' => $cryptoMethod,
+        ]);
+    }
+
+    /**
+     * Fetch enabled payment methods from the database and format them for the frontend.
+     */
+    private function buildDepositMethods($user, $wallet): array
+    {
         $paymentMethods = PaymentMethod::enabled()->ordered()->get();
-        
-        // Format payment methods for frontend
+
         $depositMethods = [];
         foreach ($paymentMethods as $method) {
             $config = $method->getFormattedConfig();
-            
+
             // Replace placeholders in instructions with user's actual data
             if (isset($config['instructions']) && is_array($config['instructions'])) {
                 foreach ($config['instructions'] as $key => $value) {
@@ -35,14 +61,11 @@ class UserDepositController extends Controller
                     }
                 }
             }
-            
+
             $depositMethods[$method->key] = $config;
         }
-        
-        return inertia('Deposit', [
-            'wallet' => $wallet,
-            'depositMethods' => $depositMethods,
-        ]);
+
+        return $depositMethods;
     }
 
     public function store(Request $request)

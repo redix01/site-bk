@@ -106,11 +106,18 @@ Route::middleware('auth')->group(function () {
     
     // Deposit
     Route::get('/deposit', [\App\Http\Controllers\UserDepositController::class, 'index'])->name('deposit');
+    Route::get('/deposit/crypto', [\App\Http\Controllers\UserDepositController::class, 'crypto'])->name('deposit.crypto');
     Route::post('/deposit', [\App\Http\Controllers\UserDepositController::class, 'store'])->name('deposit.store');
     
     // Withdraw
     Route::get('/withdraw', [\App\Http\Controllers\UserWithdrawalController::class, 'index'])->name('withdraw');
     Route::post('/withdraw', [\App\Http\Controllers\UserWithdrawalController::class, 'store'])->name('withdraw.store');
+
+    // Savings
+    Route::get('/savings', fn () => inertia('Savings'))->name('savings');
+
+    // Invest
+    Route::get('/invest', fn () => inertia('Invest'))->name('invest');
 });
 
 // Admin Routes

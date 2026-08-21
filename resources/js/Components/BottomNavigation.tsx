@@ -14,7 +14,7 @@ interface BottomNavigationProps {
 
 export default function BottomNavigation({ items }: BottomNavigationProps) {
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-slate-800 safe-area-inset-bottom z-50">
+        <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 safe-area-inset-bottom z-50">
             <div className="max-w-3xl mx-auto px-2">
                 <div className="flex items-center justify-around h-16">
                     {items.map((item) => (
@@ -24,8 +24,8 @@ export default function BottomNavigation({ items }: BottomNavigationProps) {
                             className={cn(
                                 "flex flex-col items-center justify-center flex-1 h-full space-y-1 transition-colors",
                                 item.active
-                                    ? "text-blue-500"
-                                    : "text-slate-400 hover:text-slate-300"
+                                    ? "text-blue-600 dark:text-blue-500"
+                                    : "text-slate-400 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                             )}
                         >
                             <div className="w-6 h-6">

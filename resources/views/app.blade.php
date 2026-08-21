@@ -10,13 +10,26 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
 
+        <!-- Theme: apply saved/system preference before first paint to avoid a flash -->
+        <script>
+            (function () {
+                try {
+                    var stored = localStorage.getItem('theme');
+                    var theme = stored === 'light' || stored === 'dark'
+                        ? stored
+                        : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                    document.documentElement.classList.toggle('dark', theme === 'dark');
+                } catch (e) {}
+            })();
+        </script>
+
         <!-- Scripts -->
         @routes
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx'])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased overflow-x-hidden overscroll-none h-full m-0 p-0" style="background-color: #020617;">
+    <body class="font-sans antialiased overflow-x-hidden overscroll-none h-full m-0 p-0">
         @inertia
     </body>
 </html>

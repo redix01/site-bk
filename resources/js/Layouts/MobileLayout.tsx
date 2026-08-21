@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { Head, router } from '@inertiajs/react';
 import BottomNavigation from '@/Components/BottomNavigation';
+import ThemeToggle from '@/Components/ThemeToggle';
+import { useTheme } from '@/hooks/useTheme';
 import { User } from '@/types';
 
 interface MobileLayoutProps {
@@ -11,6 +13,8 @@ interface MobileLayoutProps {
 }
 
 export default function MobileLayout({ children, title, user, currentRoute = 'dashboard' }: MobileLayoutProps) {
+    const { theme, toggleTheme } = useTheme();
+
     // Add view parameter for admins to keep them in client view
     const viewParam = user.is_admin ? '?view=client' : '';
     
@@ -61,9 +65,9 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
         <>
             {title && <Head title={title} />}
             
-            <div className="min-h-screen bg-slate-950 pb-20">
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-20 transition-colors">
                 {/* Header */}
-                <header className="sticky top-0 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 z-40">
+                <header className="sticky top-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 z-40">
                     <div className="max-w-3xl mx-auto px-4 py-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-3">
@@ -79,19 +83,22 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                                     )}
                                 </div>
                                 <div>
-                                    <p className="text-sm text-slate-400">Welcome back</p>
-                                    <p className="text-base font-semibold text-slate-50">{user.name}</p>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">Welcome back</p>
+                                    <p className="text-base font-semibold text-slate-900 dark:text-slate-50">{user.name}</p>
                                 </div>
                             </div>
-                            <button
-                                onClick={() => router.post('/logout')}
-                                className="p-2 text-slate-400 hover:text-slate-50 transition-colors"
-                                title="Logout"
-                            >
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                                </svg>
-                            </button>
+                            <div className="flex items-center space-x-1">
+                                <ThemeToggle theme={theme} onToggle={toggleTheme} />
+                                <button
+                                    onClick={() => router.post('/logout')}
+                                    className="p-2 rounded-full text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-slate-800 transition-colors"
+                                    title="Logout"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </header>
