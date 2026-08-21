@@ -68,11 +68,19 @@ class DashboardController extends Controller
      */
     private function statsForPeriod(int $userId, \Illuminate\Support\Carbon $since): array
     {
+        $transactionCount = Transaction::where('status', 'completed')
+            ->where('created_at', '>=', $since)
+            ->where(function ($query) use ($userId) {
+                $query->where('user_id', $userId)->orWhere('recipient_id', $userId);
+            })
+            ->count();
+
         return [
             'total_deposits' => $this->sumTransactions($userId, 'user_id', 'deposit', $since),
             'total_withdrawals' => $this->sumTransactions($userId, 'user_id', 'withdrawal', $since),
             'total_transfers_sent' => $this->sumTransactions($userId, 'user_id', 'transfer', $since),
             'total_transfers_received' => $this->sumTransactions($userId, 'recipient_id', 'transfer', $since),
+            'transaction_count' => $transactionCount,
         ];
     }
 }

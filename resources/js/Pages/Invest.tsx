@@ -11,6 +11,7 @@ interface InvestProduct {
     rate: string | null;
     description: string;
     balance: number;
+    price?: number | null;
 }
 
 interface InvestPageProps extends PageProps {
@@ -148,6 +149,11 @@ export default function Invest({ auth, wallet, products, flash }: InvestPageProp
                                         <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{product.rate}</span>
                                         <span className="text-slate-400 dark:text-slate-500"> P.A</span>
                                     </p>
+                                ) : product.price ? (
+                                    <p className="text-xs mt-0.5">
+                                        <span className="text-slate-700 dark:text-slate-300 font-semibold">{formatCurrency(product.price)}</span>
+                                        <span className="text-slate-400 dark:text-slate-500"> / BTC</span>
+                                    </p>
                                 ) : (
                                     <p className="text-xs mt-0.5 text-slate-400 dark:text-slate-500">Live market price</p>
                                 )}
@@ -196,6 +202,11 @@ export default function Invest({ auth, wallet, products, flash }: InvestPageProp
                             <>
                                 <p className="text-base font-bold text-slate-900 dark:text-slate-50">{selectedProduct.rate}</p>
                                 <p className="text-[10px] uppercase tracking-wide text-slate-400 dark:text-slate-500">P.A</p>
+                            </>
+                        ) : selectedProduct.price ? (
+                            <>
+                                <p className="text-base font-bold text-slate-900 dark:text-slate-50">{formatCurrency(selectedProduct.price)}</p>
+                                <p className="text-[10px] uppercase tracking-wide text-slate-400 dark:text-slate-500">Market Price</p>
                             </>
                         ) : (
                             <p className="text-xs font-medium text-slate-400 dark:text-slate-500">Market Price</p>

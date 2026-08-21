@@ -9,6 +9,7 @@ interface PeriodStats {
     total_withdrawals: number;
     total_transfers_sent: number;
     total_transfers_received: number;
+    transaction_count: number;
 }
 
 type StatsPeriod = '7d' | '30d' | '1y';
@@ -249,7 +250,12 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                 <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                     <CardHeader className="pb-3">
                         <div className="flex items-center justify-between gap-2">
-                            <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Overview</CardTitle>
+                            <div>
+                                <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Overview</CardTitle>
+                                <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
+                                    {periodStats?.transaction_count ?? 0} transaction{periodStats?.transaction_count === 1 ? '' : 's'}
+                                </p>
+                            </div>
                             <div className="flex items-center rounded-full bg-slate-100 dark:bg-slate-800 p-0.5">
                                 {periodOptions.map((option) => (
                                     <button
@@ -315,8 +321,9 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                         {recentTransactions && recentTransactions.length > 0 ? (
                             <div className="divide-y divide-slate-100 dark:divide-slate-800">
                                 {recentTransactions.map((transaction) => (
-                                    <div
+                                    <Link
                                         key={transaction.id}
+                                        href={`/transactions/${transaction.id}${viewParam}`}
                                         className="flex items-center justify-between gap-3 px-6 py-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
                                     >
                                         <div className="flex items-center space-x-3 min-w-0">
@@ -339,7 +346,7 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                                                 {getStatusBadge(transaction.status)}
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
                         ) : (

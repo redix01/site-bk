@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from '@inertiajs/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 
 import { Button } from '@/Components/ui/button';
@@ -10,6 +11,7 @@ interface TransactionsPageProps extends PageProps {
 }
 
 export default function Transactions({ auth, transactions = [] }: TransactionsPageProps) {
+    const viewParam = auth.user.is_admin ? '?view=client' : '';
     const [filter, setFilter] = useState<'all' | 'deposit' | 'withdrawal' | 'transfer'>('all');
 
     const formatCurrency = (amount: number) => {
@@ -127,46 +129,48 @@ export default function Transactions({ auth, transactions = [] }: TransactionsPa
                 <div className="space-y-3">
                     {filteredTransactions.length > 0 ? (
                         filteredTransactions.map((transaction) => (
-                            <Card key={transaction.id} className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-                                <CardContent className="p-4">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center space-x-3">
-                                            {getTransactionIcon(transaction.type)}
-                                            <div>
-                                                <p className="text-sm font-medium text-slate-900 dark:text-slate-50 capitalize">
-                                                    {transaction.type}
+                            <Link key={transaction.id} href={`/transactions/${transaction.id}${viewParam}`}>
+                                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                    <CardContent className="p-4">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center space-x-3">
+                                                {getTransactionIcon(transaction.type)}
+                                                <div>
+                                                    <p className="text-sm font-medium text-slate-900 dark:text-slate-50 capitalize">
+                                                        {transaction.type}
+                                                    </p>
+                                                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                                                        {transaction.reference}
+                                                    </p>
+                                                    <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+                                                        {formatDate(transaction.created_at)}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="text-right space-y-1">
+                                                <p className={`text-sm font-semibold ${
+                                                    transaction.type === 'deposit' ||
+                                                    (transaction.type === 'transfer' && transaction.recipient_id === auth.user.id)
+                                                        ? 'text-green-600 dark:text-green-500'
+                                                        : 'text-red-600 dark:text-red-500'
+                                                }`}>
+                                                    {transaction.type === 'deposit' ||
+                                                    (transaction.type === 'transfer' && transaction.recipient_id === auth.user.id)
+                                                        ? '+'
+                                                        : '-'}
+                                                    {formatCurrency(transaction.amount)}
                                                 </p>
-                                                <p className="text-xs text-slate-500 dark:text-slate-400">
-                                                    {transaction.reference}
-                                                </p>
-                                                <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
-                                                    {formatDate(transaction.created_at)}
-                                                </p>
+                                                {getStatusBadge(transaction.status)}
                                             </div>
                                         </div>
-                                        <div className="text-right space-y-1">
-                                            <p className={`text-sm font-semibold ${
-                                                transaction.type === 'deposit' ||
-                                                (transaction.type === 'transfer' && transaction.recipient_id === auth.user.id)
-                                                    ? 'text-green-600 dark:text-green-500'
-                                                    : 'text-red-600 dark:text-red-500'
-                                            }`}>
-                                                {transaction.type === 'deposit' ||
-                                                (transaction.type === 'transfer' && transaction.recipient_id === auth.user.id)
-                                                    ? '+'
-                                                    : '-'}
-                                                {formatCurrency(transaction.amount)}
+                                        {transaction.description && (
+                                            <p className="text-xs text-slate-400 dark:text-slate-500 mt-3 pl-13">
+                                                {transaction.description}
                                             </p>
-                                            {getStatusBadge(transaction.status)}
-                                        </div>
-                                    </div>
-                                    {transaction.description && (
-                                        <p className="text-xs text-slate-400 dark:text-slate-500 mt-3 pl-13">
-                                            {transaction.description}
-                                        </p>
-                                    )}
-                                </CardContent>
-                            </Card>
+                                        )}
+                                    </CardContent>
+                                </Card>
+                            </Link>
                         ))
                     ) : (
                         <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">

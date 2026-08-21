@@ -89,6 +89,7 @@ Route::middleware('auth')->group(function () {
     
     // Transactions
     Route::get('/transactions', [\App\Http\Controllers\UserTransactionController::class, 'index'])->name('transactions');
+    Route::get('/transactions/{transaction}', [\App\Http\Controllers\UserTransactionController::class, 'show'])->name('transactions.show');
     
     // Transfer
     Route::get('/transfer', [\App\Http\Controllers\UserTransferController::class, 'index'])->name('transfer');

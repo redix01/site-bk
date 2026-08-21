@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, ReactNode, useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Button } from '@/Components/ui/button';
 import MobileLayout from '@/Layouts/MobileLayout';
@@ -8,6 +8,42 @@ import { Camera } from 'lucide-react';
 
 type ProfileAction = 'view' | 'profile' | 'password' | 'security';
 type ProfilePageProps = PageProps & { loginHistory?: LoginHistory[] };
+
+const settingsRows: { key: Exclude<ProfileAction, 'view'>; label: string; iconBg: string; iconColor: string; icon: ReactNode }[] = [
+    {
+        key: 'profile',
+        label: 'Edit Profile',
+        iconBg: 'bg-blue-500/10',
+        iconColor: 'text-blue-600 dark:text-blue-500',
+        icon: (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+        ),
+    },
+    {
+        key: 'password',
+        label: 'Change Password',
+        iconBg: 'bg-amber-500/10',
+        iconColor: 'text-amber-600 dark:text-amber-500',
+        icon: (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+        ),
+    },
+    {
+        key: 'security',
+        label: 'Security Settings',
+        iconBg: 'bg-purple-500/10',
+        iconColor: 'text-purple-600 dark:text-purple-500',
+        icon: (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+        ),
+    },
+];
 
 type ProfileFormData = {
     name: string;
@@ -119,11 +155,6 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
             console.debug('[Profile] profile_photo_url is empty');
         }
     }, [auth?.user?.profile_photo_url]);
-
-    const actionButtonClasses = (action: ProfileAction) =>
-        action === activeAction
-            ? 'w-full bg-blue-600 hover:bg-blue-700 text-white'
-            : 'w-full border-slate-700 text-slate-300 hover:bg-slate-800';
 
     const handleActionChange = (action: ProfileAction) => {
         setActiveAction((current) => (current === action ? 'view' : action));
@@ -306,15 +337,15 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
         <MobileLayout user={auth.user} title="Profile" currentRoute="profile">
             <div className="px-4 py-6 space-y-6">
                 {(flash?.success || flash?.error) && (
-                    <Card className="border-slate-800 bg-slate-900">
+                    <Card className="border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
                         <CardContent className="py-4">
                             {flash?.success && (
-                                <p className="text-sm text-emerald-300">
+                                <p className="text-sm text-emerald-600 dark:text-emerald-300">
                                     {flash.success}
                                 </p>
                             )}
                             {flash?.error && (
-                                <p className="text-sm text-red-300">
+                                <p className="text-sm text-red-600 dark:text-red-300">
                                     {flash.error}
                                 </p>
                             )}
@@ -323,7 +354,7 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                 )}
 
                 {/* Profile Header */}
-                <Card className="bg-slate-900 border-slate-800">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                     <CardContent className="pt-6">
                                 <div className="flex flex-col items-center space-y-4">
                             <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-3xl overflow-hidden">
@@ -347,31 +378,39 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                 <button
                                     type="button"
                                     onClick={handleAvatarUploadClick}
-                                    className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full border border-slate-800 bg-slate-900/90 text-slate-200 shadow-lg transition hover:bg-slate-800"
+                                    className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full border border-white dark:border-slate-800 bg-slate-900 dark:bg-slate-900/90 text-white shadow-lg transition hover:bg-slate-800"
                                     aria-label="Upload profile photo"
                                 >
                                     <Camera className="h-4 w-4" />
                                 </button>
                             </div>
                             <div className="text-center">
-                                <h2 className="text-xl font-bold text-slate-50">{auth.user.name}</h2>
-                                <p className="text-sm text-slate-400">{auth.user.email}</p>
+                                <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50">{auth.user.name}</h2>
+                                <p className="text-sm text-slate-500 dark:text-slate-400">{auth.user.email}</p>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <div className={`w-2 h-2 rounded-full ${
-                                    auth.user.status === 'active' ? 'bg-green-500' : 'bg-yellow-500'
-                                }`}></div>
-                                <span className="text-sm text-slate-400 capitalize">{auth.user.status}</span>
-                            </div>
+                            <span
+                                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold capitalize ${
+                                    auth.user.status === 'active'
+                                        ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400'
+                                        : 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400'
+                                }`}
+                            >
+                                <span
+                                    className={`w-1.5 h-1.5 rounded-full ${
+                                        auth.user.status === 'active' ? 'bg-emerald-500' : 'bg-amber-500'
+                                    }`}
+                                />
+                                {auth.user.status}
+                            </span>
                         </div>
                     </CardContent>
                 </Card>
 
                 {/* Account Information */}
-                <Card className="bg-slate-900 border-slate-800">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                     <CardHeader>
-                        <CardTitle className="text-slate-50 text-lg">Account Information</CardTitle>
-                        <CardDescription className="text-slate-400">
+                        <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Account Information</CardTitle>
+                        <CardDescription className="text-slate-500 dark:text-slate-400">
                             Your personal account details
                         </CardDescription>
                     </CardHeader>
@@ -379,59 +418,59 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                         {activeAction === 'profile' ? (
                             <form onSubmit={handleProfileSubmit} className="space-y-4">
                                 <div>
-                                    <label className="text-xs text-slate-300">Full Name</label>
+                                    <label className="text-xs text-slate-600 dark:text-slate-300">Full Name</label>
                                     <input
                                         type="text"
                                         value={profileData.name}
                                         onChange={handleProfileInput('name')}
                                         placeholder="Enter your full name"
-                                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="mt-1 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {profileErrors.name && (
-                                        <p className="mt-2 text-sm text-red-400">{profileErrors.name}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{profileErrors.name}</p>
                                     )}
                                 </div>
                                 <div>
-                                    <label className="text-xs text-slate-300">Email Address</label>
+                                    <label className="text-xs text-slate-600 dark:text-slate-300">Email Address</label>
                                     <input
                                         type="email"
                                         value={profileData.email}
                                         onChange={handleProfileInput('email')}
                                         placeholder="Enter your email address"
-                                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="mt-1 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {profileErrors.email && (
-                                        <p className="mt-2 text-sm text-red-400">{profileErrors.email}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{profileErrors.email}</p>
                                     )}
                                 </div>
                                 <div>
-                                    <label className="text-xs text-slate-300">Phone Number</label>
+                                    <label className="text-xs text-slate-600 dark:text-slate-300">Phone Number</label>
                                     <input
                                         type="tel"
                                         value={profileData.phone ?? ''}
                                         onChange={handleProfileInput('phone')}
                                         placeholder="Enter your phone number"
-                                        className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="mt-1 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                     {profileErrors.phone && (
-                                        <p className="mt-2 text-sm text-red-400">{profileErrors.phone}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{profileErrors.phone}</p>
                                     )}
                                 </div>
 
                                 <div>
-                                    <label className="text-xs text-slate-300">Profile Photo</label>
+                                    <label className="text-xs text-slate-600 dark:text-slate-300">Profile Photo</label>
                                     <input
                                         ref={fileInputRef}
                                         type="file"
                                         accept="image/*"
                                         onChange={handleProfilePhotoChange}
-                                        className="mt-1 block w-full text-sm text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-800 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-slate-50 hover:file:bg-slate-700"
+                                        className="mt-1 block w-full text-sm text-slate-600 dark:text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-slate-200 dark:file:bg-slate-800 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-slate-900 dark:file:text-slate-50 hover:file:bg-slate-300 dark:hover:file:bg-slate-700"
                                     />
-                                    <p className="mt-2 text-xs text-slate-500">JPG, PNG, GIF up to 2MB.</p>
+                                    <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">JPG, PNG, GIF up to 2MB.</p>
                                     {profileErrors.profile_photo && (
-                                        <p className="mt-2 text-sm text-red-400">{profileErrors.profile_photo}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{profileErrors.profile_photo}</p>
                                     )}
                                 </div>
 
@@ -439,7 +478,7 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                     <Button
                                         type="button"
                                         variant="outline"
-                                        className="border-slate-700 text-slate-300 hover:bg-slate-800"
+                                        className="border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                                         onClick={handleProfileCancel}
                                         disabled={profileProcessing}
                                     >
@@ -457,22 +496,22 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                         ) : (
                             <div className="space-y-4">
                         <div>
-                            <label className="text-xs text-slate-400">Full Name</label>
-                            <p className="text-sm text-slate-50 mt-1">{auth.user.name}</p>
+                            <label className="text-xs text-slate-500 dark:text-slate-400">Full Name</label>
+                            <p className="text-sm text-slate-900 dark:text-slate-50 mt-1">{auth.user.name}</p>
                         </div>
                         <div>
-                            <label className="text-xs text-slate-400">Email Address</label>
-                            <p className="text-sm text-slate-50 mt-1">{auth.user.email}</p>
+                            <label className="text-xs text-slate-500 dark:text-slate-400">Email Address</label>
+                            <p className="text-sm text-slate-900 dark:text-slate-50 mt-1">{auth.user.email}</p>
                         </div>
                         {auth.user.phone && (
                             <div>
-                                <label className="text-xs text-slate-400">Phone Number</label>
-                                <p className="text-sm text-slate-50 mt-1">{auth.user.phone}</p>
+                                <label className="text-xs text-slate-500 dark:text-slate-400">Phone Number</label>
+                                <p className="text-sm text-slate-900 dark:text-slate-50 mt-1">{auth.user.phone}</p>
                             </div>
                         )}
                         <div>
-                            <label className="text-xs text-slate-400">Member Since</label>
-                            <p className="text-sm text-slate-50 mt-1">
+                            <label className="text-xs text-slate-500 dark:text-slate-400">Member Since</label>
+                            <p className="text-sm text-slate-900 dark:text-slate-50 mt-1">
                                 {new Date(auth.user.created_at).toLocaleDateString('en-US', {
                                     year: 'numeric',
                                     month: 'long',
@@ -486,91 +525,98 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                 </Card>
 
                 {/* Actions */}
-                <Card className="bg-slate-900 border-slate-800">
-                    <CardHeader>
-                        <CardTitle className="text-slate-50 text-lg">Settings & Actions</CardTitle>
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <CardHeader className="pb-2">
+                        <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Settings & Actions</CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
-                        <Button
-                            type="button"
-                            onClick={() => handleActionChange('profile')}
-                            className={actionButtonClasses('profile')}
-                            variant={activeAction === 'profile' ? 'default' : 'outline'}
-                        >
-                            Edit Profile
-                        </Button>
-                        <Button
-                            type="button"
-                            onClick={() => handleActionChange('password')}
-                            variant={activeAction === 'password' ? 'default' : 'outline'}
-                            className={actionButtonClasses('password')}
-                        >
-                            Change Password
-                        </Button>
-                        <Button
-                            type="button"
-                            onClick={() => handleActionChange('security')}
-                            variant={activeAction === 'security' ? 'default' : 'outline'}
-                            className={actionButtonClasses('security')}
-                        >
-                            Security Settings
-                        </Button>
+                    <CardContent className="p-0">
+                        <div className="divide-y divide-slate-100 dark:divide-slate-800">
+                            {settingsRows.map((row) => (
+                                <button
+                                    key={row.key}
+                                    type="button"
+                                    onClick={() => handleActionChange(row.key)}
+                                    className={`w-full flex items-center gap-3 px-6 py-4 transition-colors ${
+                                        activeAction === row.key
+                                            ? 'bg-blue-50 dark:bg-blue-500/10'
+                                            : 'hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                                    }`}
+                                >
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${row.iconBg} ${row.iconColor}`}>
+                                        {row.icon}
+                                    </div>
+                                    <span className="flex-1 text-left text-sm font-medium text-slate-900 dark:text-slate-50">
+                                        {row.label}
+                                    </span>
+                                    <svg
+                                        className={`w-5 h-5 shrink-0 text-slate-400 dark:text-slate-500 transition-transform ${
+                                            activeAction === row.key ? 'rotate-90' : ''
+                                        }`}
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            ))}
+                        </div>
                     </CardContent>
                 </Card>
 
                 {activeAction === 'password' && (
-                <Card className="bg-slate-900 border-slate-800">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                     <CardHeader>
-                            <CardTitle className="text-slate-50 text-lg">Change Password</CardTitle>
-                        <CardDescription className="text-slate-400">
+                            <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Change Password</CardTitle>
+                        <CardDescription className="text-slate-500 dark:text-slate-400">
                                 Choose a strong password to protect your account.
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
                             <form onSubmit={handlePasswordSubmit} className="space-y-4">
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">Current Password</label>
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">Current Password</label>
                                     <input
                                         type="password"
                                         autoComplete="current-password"
                                         value={passwordData.current_password}
                                         onChange={handlePasswordInput('current_password')}
                                         placeholder="Enter current password"
-                                        className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {passwordErrors.current_password && (
-                                        <p className="mt-2 text-sm text-red-400">{passwordErrors.current_password}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{passwordErrors.current_password}</p>
                                     )}
                                 </div>
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">New Password</label>
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">New Password</label>
                                     <input
                                         type="password"
                                         autoComplete="new-password"
                                         value={passwordData.password}
                                         onChange={handlePasswordInput('password')}
                                         placeholder="Enter new password"
-                                        className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {passwordErrors.password && (
-                                        <p className="mt-2 text-sm text-red-400">{passwordErrors.password}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{passwordErrors.password}</p>
                                     )}
                                 </div>
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">Confirm Password</label>
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">Confirm Password</label>
                                     <input
                                         type="password"
                                         autoComplete="new-password"
                                         value={passwordData.password_confirmation}
                                         onChange={handlePasswordInput('password_confirmation')}
                                         placeholder="Re-enter new password"
-                                        className="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {passwordErrors.password_confirmation && (
-                                        <p className="mt-2 text-sm text-red-400">{passwordErrors.password_confirmation}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{passwordErrors.password_confirmation}</p>
                                     )}
                                 </div>
 
@@ -578,7 +624,7 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                     <Button
                                         type="button"
                                         variant="outline"
-                                        className="border-slate-700 text-slate-300 hover:bg-slate-800"
+                                        className="border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                                         onClick={handlePasswordCancel}
                                         disabled={passwordProcessing}
                                     >
@@ -598,25 +644,25 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                 )}
 
                 {activeAction === 'security' && (
-                    <Card className="bg-slate-900 border-slate-800">
+                    <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                         <CardHeader>
-                            <CardTitle className="text-slate-50 text-lg">Security Settings</CardTitle>
-                            <CardDescription className="text-slate-400">
+                            <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Security Settings</CardTitle>
+                            <CardDescription className="text-slate-500 dark:text-slate-400">
                                 Review your recent activity, manage sessions, and update your transaction PIN.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-6">
                             <div>
-                                <h3 className="text-sm font-semibold text-slate-200">Recent Login Activity</h3>
+                                <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">Recent Login Activity</h3>
                                 {loginEntries.length ? (
                                     <div className="mt-3 space-y-3">
                                         {loginEntries.map((entry) => (
                                             <div
                                                 key={entry.id}
-                                                className="rounded-lg border border-slate-800 bg-slate-950/60 p-3 text-xs text-slate-400"
+                                                className="rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 p-3 text-xs text-slate-500 dark:text-slate-400"
                                             >
                                                 <div className="flex items-center justify-between text-sm">
-                                                    <span className="font-medium text-slate-50">
+                                                    <span className="font-medium text-slate-900 dark:text-slate-50">
                                                         {entry.location || 'Unknown location'}
                                                     </span>
                                                     <span className={entry.login_successful ? 'text-emerald-300' : 'text-red-300'}>
@@ -626,42 +672,42 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                                 <div className="mt-1">
                                                     {entry.device || 'Device unknown'} • {entry.browser || 'Browser unknown'}
                                                 </div>
-                                                <div className="mt-1 text-slate-500">
+                                                <div className="mt-1 text-slate-400 dark:text-slate-500">
                                                     {entry.ip_address || 'IP unavailable'} • {entry.formatted_created_at}
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                 ) : (
-                                    <p className="mt-2 text-sm text-slate-400">No recent login activity recorded.</p>
+                                    <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">No recent login activity recorded.</p>
                                 )}
                             </div>
 
-                            <div className="rounded-lg border border-slate-800 bg-slate-950/60 p-4">
-                                <p className="text-sm font-semibold text-slate-50">Log out of other sessions</p>
-                                <p className="mt-1 text-xs text-slate-400">
+                            <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 p-4">
+                                <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Log out of other sessions</p>
+                                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                                     Enter your password to sign out from every device except this one.
                                 </p>
                                 <form onSubmit={handleSecuritySubmit} className="mt-4 space-y-3">
                                     <div>
-                                        <label className="text-xs text-slate-300">Account Password</label>
+                                        <label className="text-xs text-slate-600 dark:text-slate-300">Account Password</label>
                                         <input
                                             type="password"
                                             value={securityData.current_password}
                                             onChange={handleSecurityInput}
                                             placeholder="Confirm with your password"
-                                            className="mt-1 w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="mt-1 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-sm text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             required
                                         />
                                         {securityErrors.current_password && (
-                                            <p className="mt-2 text-sm text-red-400">{securityErrors.current_password}</p>
+                                            <p className="mt-2 text-sm text-red-600 dark:text-red-400">{securityErrors.current_password}</p>
                                         )}
                                     </div>
                                     <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-end">
                                         <Button
                                             type="button"
                                             variant="outline"
-                                            className="border-slate-700 text-slate-300 hover:bg-slate-800"
+                                            className="border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                                             onClick={() => {
                                                 resetSecurityForm();
                                                 clearSecurityErrors();
@@ -682,16 +728,16 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                 </form>
                             </div>
 
-                            <div className="rounded-lg border border-slate-800 bg-slate-950/60 p-4">
-                                <p className="text-sm font-semibold text-slate-50">Transaction PIN</p>
-                                <p className="mt-1 text-xs text-slate-400">
+                            <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 p-4">
+                                <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Transaction PIN</p>
+                                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                                     {hasTransactionPin
                                         ? 'Update your 6-digit transfer PIN to keep transfers secure.'
                                         : 'Set a 6-digit PIN to authorize transfers from your account.'}
                                 </p>
 
                                 {pinErrors.error && (
-                                    <div className="mt-3 rounded-lg border border-red-800 bg-red-900/30 px-3 py-2 text-sm text-red-300">
+                                    <div className="mt-3 rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/30 px-3 py-2 text-sm text-red-700 dark:text-red-300">
                                         {pinErrors.error}
                             </div>
                         )}
@@ -699,7 +745,7 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                 <form onSubmit={handleTransactionPinSubmit} className="mt-4 space-y-4">
                             {hasTransactionPin && (
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                         Current Transaction PIN
                                     </label>
                                     <input
@@ -710,17 +756,17 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                         value={pinData.current_transaction_pin}
                                         onChange={handleDigitInput('current_transaction_pin')}
                                         placeholder="Enter current PIN"
-                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center tracking-[0.5em]"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center tracking-[0.5em]"
                                         required
                                     />
                                     {pinErrors.current_transaction_pin && (
-                                        <p className="mt-2 text-sm text-red-400">{pinErrors.current_transaction_pin}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{pinErrors.current_transaction_pin}</p>
                                     )}
                                 </div>
                             )}
 
                             <div>
-                                <label className="text-sm text-slate-300 mb-2 block">
+                                <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                     New Transaction PIN
                                 </label>
                                 <input
@@ -731,16 +777,16 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                     value={pinData.transaction_pin}
                                     onChange={handleDigitInput('transaction_pin')}
                                     placeholder="Enter 6-digit PIN"
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center text-2xl tracking-[0.5em]"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center text-2xl tracking-[0.5em]"
                                     required
                                 />
                                 {pinErrors.transaction_pin && (
-                                    <p className="mt-2 text-sm text-red-400">{pinErrors.transaction_pin}</p>
+                                    <p className="mt-2 text-sm text-red-600 dark:text-red-400">{pinErrors.transaction_pin}</p>
                                 )}
                             </div>
 
                             <div>
-                                <label className="text-sm text-slate-300 mb-2 block">
+                                <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                     Confirm New PIN
                                 </label>
                                 <input
@@ -751,16 +797,16 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                     value={pinData.transaction_pin_confirmation}
                                     onChange={handleDigitInput('transaction_pin_confirmation')}
                                     placeholder="Re-enter 6-digit PIN"
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center tracking-[0.5em]"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center tracking-[0.5em]"
                                     required
                                 />
                                 {pinErrors.transaction_pin_confirmation && (
-                                    <p className="mt-2 text-sm text-red-400">{pinErrors.transaction_pin_confirmation}</p>
+                                    <p className="mt-2 text-sm text-red-600 dark:text-red-400">{pinErrors.transaction_pin_confirmation}</p>
                                 )}
                             </div>
 
                             <div>
-                                <label className="text-sm text-slate-300 mb-2 block">
+                                <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                     Confirm with Account Password
                                 </label>
                                 <input
@@ -769,11 +815,11 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                                     value={pinData.current_password}
                                             onChange={handlePinPasswordChange}
                                     placeholder="Enter your account password"
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
                                 />
                                 {pinErrors.current_password && (
-                                    <p className="mt-2 text-sm text-red-400">{pinErrors.current_password}</p>
+                                    <p className="mt-2 text-sm text-red-600 dark:text-red-400">{pinErrors.current_password}</p>
                                 )}
                             </div>
 
@@ -791,10 +837,10 @@ export default function Profile({ auth, flash, loginHistory = [] }: ProfilePageP
                 )}
 
                 {/* Danger Zone */}
-                <Card className="bg-red-950/20 border-red-900">
+                <Card className="bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-900">
                     <CardHeader>
-                        <CardTitle className="text-red-400 text-lg">Danger Zone</CardTitle>
-                        <CardDescription className="text-red-300/60">
+                        <CardTitle className="text-red-600 dark:text-red-400 text-lg">Danger Zone</CardTitle>
+                        <CardDescription className="text-red-500/70 dark:text-red-300/60">
                             Irreversible actions
                         </CardDescription>
                     </CardHeader>

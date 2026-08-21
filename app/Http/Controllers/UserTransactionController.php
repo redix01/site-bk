@@ -22,5 +22,21 @@ class UserTransactionController extends Controller
             'transactions' => $transactions,
         ]);
     }
+
+    public function show(Transaction $transaction)
+    {
+        $user = Auth::user();
+
+        if ($transaction->user_id !== $user->id && $transaction->recipient_id !== $user->id) {
+            abort(403);
+        }
+
+        $transaction->load(['user', 'recipient']);
+        $transaction->makeVisible('metadata');
+
+        return inertia('TransactionDetail', [
+            'transaction' => $transaction,
+        ]);
+    }
 }
 
