@@ -15,6 +15,7 @@ import {
     Home,
     ExternalLink,
     CreditCard,
+    Shield,
 } from 'lucide-react';
 import { Button } from '@/Components/ui/button';
 import { cn } from '@/lib/utils';
@@ -36,7 +37,7 @@ export default function AdminLayout({ children }: PropsWithChildren) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
 
-    const brandName = appSettings?.siteName ?? 'Banko';
+    const brandName = appSettings?.siteName ?? 'App';
     const adminLabel = `${brandName} Admin`;
     const logoUrl = appSettings?.logoUrl ?? null;
 
@@ -72,7 +73,8 @@ export default function AdminLayout({ children }: PropsWithChildren) {
         {
             title: 'System',
             items: [
-                { name: 'Settings', href: '/admin/settings', icon: Settings, current: currentPath.startsWith('/admin/settings') },
+                { name: 'Settings', href: '/admin/settings', icon: Settings, current: currentPath === '/admin/settings' },
+                { name: 'Security', href: '/admin/settings/security', icon: Shield, current: currentPath.startsWith('/admin/settings/security') },
             ]
         }
     ];

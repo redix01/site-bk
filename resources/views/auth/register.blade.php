@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register - {{ config('app.name', 'Banko') }}</title>
+    @php
+        $siteName = \App\Support\SettingsManager::get('site_name', config('app.name', 'App'));
+    @endphp
+    <title>Register - {{ $siteName }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -103,7 +106,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">🏦 Banko</div>
+        <div class="logo">🏦 {{ $siteName }}</div>
         
         <form method="POST" action="{{ route('register') }}">
             @csrf
