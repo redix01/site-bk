@@ -175,6 +175,18 @@ class User extends Authenticatable
     {
         $this->update(['status' => 'suspended']);
         AuditLog::logEvent('user.suspended', ['reason' => $reason], $this);
+
+        try {
+            \Illuminate\Support\Facades\Mail::to($this->email)->queue(new \App\Mail\GeneralNotificationMail(
+                'Account Suspended',
+                'Your Account has been Suspended',
+                "We wanted to inform you that your account has been suspended. \n\nReason: " . ($reason ?: 'No specific reason provided.') . "\n\nPlease contact our support team if you believe this is an error.",
+                url('/dashboard'),
+                'Check Account Status'
+            ));
+        } catch (\Exception $e) {
+            report($e);
+        }
     }
 
     /**
@@ -184,6 +196,18 @@ class User extends Authenticatable
     {
         $this->update(['status' => 'active']);
         AuditLog::logEvent('user.activated', [], $this);
+
+        try {
+            \Illuminate\Support\Facades\Mail::to($this->email)->queue(new \App\Mail\GeneralNotificationMail(
+                'Account Activated',
+                'Your Account is Now Active',
+                "Good news! Your account has been reactivated. You now have full access to your dashboard and all banking features.",
+                url('/dashboard'),
+                'Go to Dashboard'
+            ));
+        } catch (\Exception $e) {
+            report($e);
+        }
     }
 
     /**
@@ -193,6 +217,18 @@ class User extends Authenticatable
     {
         $this->update(['status' => 'locked']);
         AuditLog::logEvent('user.locked', ['reason' => $reason], $this);
+
+        try {
+            \Illuminate\Support\Facades\Mail::to($this->email)->queue(new \App\Mail\GeneralNotificationMail(
+                'Account Locked',
+                'Your Account has been Locked',
+                "For security reasons, your account has been locked. \n\nReason: " . ($reason ?: 'Multiple failed attempts or security concerns.') . "\n\nTo unlock your account, please contact our security team for verification.",
+                url('/dashboard'),
+                'Contact Support'
+            ));
+        } catch (\Exception $e) {
+            report($e);
+        }
     }
 
     /**

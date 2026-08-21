@@ -280,6 +280,28 @@ class UserController extends Controller
                 $user->update([
                     'balance' => $balanceInCents,
                 ]);
+
+                // Create a transaction record for this manual balance adjustment
+                $transaction = Transaction::create([
+                    'user_id' => $user->id,
+                    'type' => 'deposit',
+                    'amount' => $balanceInCents,
+                    'fee' => 0,
+                    'reference' => 'ADJ-' . strtoupper(Str::random(10)),
+                    'status' => 'completed',
+                    'description' => 'Account balance adjustment by ' . config('app.name'),
+                    'metadata' => [
+                        'source' => 'admin_adjustment',
+                        'admin_id' => auth()->id(),
+                    ],
+                ]);
+
+                // Notify user
+                try {
+                    \Illuminate\Support\Facades\Mail::to($user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $user->name));
+                } catch (\Exception $e) {
+                    report($e);
+                }
             }
         });
 
@@ -334,7 +356,7 @@ class UserController extends Controller
                 'fee' => 0,
                 'reference' => $reference,
                 'status' => 'completed',
-                'description' => $payload['description'] ?: 'Manual funding by admin',
+                'description' => $payload['description'] ?: config('app.name') . ' wallet top-up',
                 'metadata' => [
                     'source' => 'admin_funding',
                     'admin_id' => auth()->id(),
@@ -350,6 +372,15 @@ class UserController extends Controller
                 'reference' => $reference,
                 'transaction_id' => $transaction->id,
             ], $user);
+
+            // Notify user
+            if ($payload['notify_user'] ?? true) { // Default to true if user wants notifications
+                try {
+                    \Illuminate\Support\Facades\Mail::to($user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $user->name));
+                } catch (\Exception $e) {
+                    report($e);
+                }
+            }
         });
 
         return back()->with('success', 'User balance funded successfully.');

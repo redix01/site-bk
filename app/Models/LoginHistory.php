@@ -67,13 +67,15 @@ class LoginHistory extends Model
      */
     public static function recordSuccess(User $user, $request = null)
     {
-        $agent = new Agent();
         $request = $request ?? Request::instance();
+        $userAgent = $request->userAgent();
+        $agent = new Agent();
+        $agent->setUserAgent($userAgent);
         
         return static::create([
             'user_id' => $user->id,
             'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
+            'user_agent' => $userAgent,
             'device' => $agent->device(),
             'platform' => $agent->platform(),
             'browser' => $agent->browser(),
@@ -91,13 +93,15 @@ class LoginHistory extends Model
      */
     public static function recordFailure($user, $reason, $request = null)
     {
-        $agent = new Agent();
         $request = $request ?? Request::instance();
+        $userAgent = $request->userAgent();
+        $agent = new Agent();
+        $agent->setUserAgent($userAgent);
         
         return static::create([
             'user_id' => $user ? $user->id : null,
             'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
+            'user_agent' => $userAgent,
             'device' => $agent->device(),
             'platform' => $agent->platform(),
             'browser' => $agent->browser(),

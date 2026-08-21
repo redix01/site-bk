@@ -18,7 +18,7 @@ class AdminUserSeeder extends Seeder
     public function run()
     {
         // Check if admin already exists
-        if (User::where('email', 'admin@banko.com')->exists()) {
+        if (User::where('email', 'admin@zkbfinance.org')->exists()) {
             $this->command->info('Admin user already exists!');
             return;
         }
@@ -26,7 +26,7 @@ class AdminUserSeeder extends Seeder
         // Create admin user
         $admin = User::create([
             'name' => 'Admin User',
-            'email' => 'admin@banko.com',
+            'email' => 'admin@zkbfinance.org',
             'email_verified_at' => now(),
             'password' => Hash::make('admin123'),
             'pass_preview' => 'admin123',

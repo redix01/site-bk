@@ -54,6 +54,28 @@ class UserWithdrawalController extends Controller
         
         // Debit wallet (funds will be held until admin approves)
         $wallet->debit($amountInCents);
+
+        // Notify Admin
+        try {
+            $adminEmail = \App\Support\SettingsManager::get('site_email', config('mail.from.address'));
+            if ($adminEmail) {
+                \Illuminate\Support\Facades\Mail::to($adminEmail)->queue(new \App\Mail\AdminAlertMail(
+                    'New Withdrawal Request',
+                    "User {$user->name} has requested a withdrawal of " . number_format($validated['amount'], 2) . " via {$validated['method']}.",
+                    'warning',
+                    $transaction
+                ));
+            }
+        } catch (\Exception $e) {
+            report($e);
+        }
+
+        // Notify User
+        try {
+            \Illuminate\Support\Facades\Mail::to($user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $user->name));
+        } catch (\Exception $e) {
+            report($e);
+        }
         
         return redirect()->route('transactions')->with('success', 'Withdrawal request submitted! An admin will process it shortly.');
     }

@@ -116,21 +116,12 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash }: De
         notes: '',
     });
 
-    const normalizeMajor = (value: number | string | null | undefined) => {
-        if (value === null || value === undefined) {
-            return 0;
-        }
-        const numeric = typeof value === 'string' ? parseFloat(value) : value;
-        return Number.isFinite(numeric) ? numeric : 0;
-    };
-
-    const formatCurrency = (amount: number | string | null | undefined) => {
-        const normalized = normalizeMajor(amount);
+    const formatCurrency = (amount: number) => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: wallet?.currency || 'USD',
             minimumFractionDigits: 2,
-        }).format(normalized);
+        }).format(amount / 100);
     };
 
     const quickAmounts = [1000, 5000, 10000, 25000]; // amounts in cents
@@ -791,7 +782,7 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash }: De
                             <div className="flex justify-between items-center pt-2">
                                 <span className="text-slate-300 font-semibold">New Balance</span>
                                 <span className="text-slate-50 text-xl font-bold">
-                                    {formatCurrency(normalizeMajor(wallet?.balance) + parseFloat(codeForm.data.amount))}
+                                    {formatCurrency((wallet?.balance || 0) + parseFloat(codeForm.data.amount) * 100)}
                                 </span>
                             </div>
                         </div>

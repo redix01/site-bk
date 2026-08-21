@@ -15,13 +15,6 @@ export default function Create({ users }: PageProps & { users: User[] }) {
         status: 'pending',
     });
 
-    const normalizeAmountInput = (value: string) => {
-        const sanitized = value.replace(/[^\d.]/g, '');
-        const [whole, fractional = ''] = sanitized.split('.');
-        const trimmedFractional = fractional.slice(0, 2);
-        return trimmedFractional.length ? `${whole}.${trimmedFractional}` : whole;
-    };
-
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post('/admin/transactions');
@@ -92,10 +85,10 @@ export default function Create({ users }: PageProps & { users: User[] }) {
                                 </label>
                                 <input
                                     id="amount"
-                                    type="text"
-                                    inputMode="decimal"
+                                    type="number"
+                                    step="0.01"
                                     value={data.amount}
-                                    onChange={(e) => setData('amount', normalizeAmountInput(e.target.value))}
+                                    onChange={(e) => setData('amount', e.target.value)}
                                     className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600"
                                     required
                                 />
@@ -157,4 +150,5 @@ export default function Create({ users }: PageProps & { users: User[] }) {
         </AdminLayout>
     );
 }
+
 

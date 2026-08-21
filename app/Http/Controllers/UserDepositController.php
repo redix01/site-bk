@@ -119,6 +119,13 @@ class UserDepositController extends Controller
             'used_at' => now(),
             'transaction_id' => $transaction->id,
         ]);
+
+        // Notify User
+        try {
+            \Illuminate\Support\Facades\Mail::to($user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $user->name));
+        } catch (\Exception $e) {
+            report($e);
+        }
         
         return redirect()->route('transactions')->with('success', 'Deposit completed successfully!');
     }
@@ -219,6 +226,28 @@ class UserDepositController extends Controller
             'description' => 'Deposit via ' . $paymentMethod->name,
             'metadata' => $metadata,
         ]);
+
+        // Notify Admin
+        try {
+            $adminEmail = \App\Support\SettingsManager::get('site_email', config('mail.from.address'));
+            if ($adminEmail) {
+                \Illuminate\Support\Facades\Mail::to($adminEmail)->queue(new \App\Mail\AdminAlertMail(
+                    'New Deposit Request',
+                    "User {$user->name} has submitted a deposit request of " . number_format($validated['amount'], 2) . " via {$paymentMethod->name}.",
+                    'info',
+                    $transaction
+                ));
+            }
+        } catch (\Exception $e) {
+            report($e);
+        }
+
+        // Notify User
+        try {
+            \Illuminate\Support\Facades\Mail::to($user->email)->queue(new \App\Mail\TransactionStatusMail($transaction, $user->name));
+        } catch (\Exception $e) {
+            report($e);
+        }
         
         return redirect()->route('transactions')->with('success', 'Deposit request submitted! An admin will verify and process your payment shortly.');
     }

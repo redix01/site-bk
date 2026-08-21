@@ -34,13 +34,6 @@ export default function Edit({ user }: PageProps & { user: User }) {
         is_admin: user.is_admin || false,
     });
 
-    const normalizeAmountInput = (value: string) => {
-        const sanitized = value.replace(/[^\d.]/g, '');
-        const [whole, fractional = ''] = sanitized.split('.');
-        const trimmedFractional = fractional.slice(0, 2);
-        return trimmedFractional.length ? `${whole}.${trimmedFractional}` : whole;
-    };
-
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         put(`/admin/users/${user.id}`);
@@ -117,13 +110,13 @@ export default function Edit({ user }: PageProps & { user: User }) {
                                 </label>
                                 <input
                                     id="balance"
-                                    type="text"
-                                    inputMode="decimal"
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
                                     value={data.balance}
                                     onChange={(e) => {
-                                        const normalized = normalizeAmountInput(e.target.value);
-                                        const value = parseFloat(normalized);
-                                        setData('balance', normalized === '' || Number.isNaN(value) ? 0 : value);
+                                        const value = parseFloat(e.target.value);
+                                        setData('balance', isNaN(value) ? 0 : value);
                                     }}
                                     className="w-full rounded-md bg-slate-800 border border-slate-700 text-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600"
                                 />
@@ -164,4 +157,5 @@ export default function Edit({ user }: PageProps & { user: User }) {
         </AdminLayout>
     );
 }
+
 
