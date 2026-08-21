@@ -1,7 +1,8 @@
 @extends('layouts.bruk')
 
-@section('title', 'About Us – ' . config('app.name', 'Banko'))
-@section('meta_description', 'Learn why ' . config('app.name', 'Banko') . ' was built, how we keep your money secure, and how to open an account in minutes.')
+@section('title', 'About Us – ' . config('app.name', 'Current Financial Bank'))
+@section('meta_description', 'Learn why ' . config('app.name', 'Current Financial Bank') . ' was built, how we keep your money secure, and how to open an account in minutes.')
+@section('navbar_style', 'on-dark')
 
 @section('content')
 
@@ -41,7 +42,7 @@
                         <div class="section-title">
                             <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Why Choose Us</span>
                             <h2 class="mb-15">Modern Banking, Built On Trust</h2>
-                            <p>We built {{ config('app.name', 'Banko') }} because everyday banking shouldn't mean long lines, confusing fees, or waiting days for your own money to move. Everything here is designed to be fast, clear, and secure.</p>
+                            <p>We built {{ config('app.name', 'Current Financial Bank') }} because everyday banking shouldn't mean long lines, confusing fees, or waiting days for your own money to move. Everything here is designed to be fast, clear, and secure.</p>
                             <p>From your first deposit to your next investment, our team is focused on making banking feel simple again.</p>
                         </div>
                         <a href="{{ route('personal.banking-services') }}" class="link style-four">View Our Products <img src="{{ asset('bruk/img/icons/long-arrow-blue.svg') }}" alt=""></a>
@@ -92,14 +93,14 @@
         <div class="container">
             <div class="section-title text-center mb-50">
                 <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title" data-cue="slideInUp">Our Story</span>
-                <h2 class="mb-0">How {{ config('app.name', 'Banko') }} Got Here</h2>
+                <h2 class="mb-0">How {{ config('app.name', 'Current Financial Bank') }} Got Here</h2>
             </div>
             <div class="row justify-content-center">
                 <div class="col-xl-3 col-md-6" data-cue="slideInUp">
                     <div class="feature-card style-one mb-30 transition text-center">
                         <div class="feature-text">
                             <h3 class="fs-20">Launch</h3>
-                            <p class="mb-0">{{ config('app.name', 'Banko') }} launches with checking and savings accounts.</p>
+                            <p class="mb-0">{{ config('app.name', 'Current Financial Bank') }} launches with checking and savings accounts.</p>
                         </div>
                     </div>
                 </div>
@@ -238,7 +239,7 @@
         <div class="container text-center">
             <div class="section-title mb-30">
                 <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Ready When You Are</span>
-                <h2 class="mb-15">Ready to Switch to {{ config('app.name', 'Banko') }}?</h2>
+                <h2 class="mb-15">Ready to Switch to {{ config('app.name', 'Current Financial Bank') }}?</h2>
                 <p class="mb-0">Questions before you open an account? Reach us at <a href="mailto:{{ config('mail.from.address', 'support@example.com') }}">{{ config('mail.from.address', 'support@example.com') }}</a>.</p>
             </div>
             <a href="{{ route('register') }}" class="btn style-one">Open an Account</a>

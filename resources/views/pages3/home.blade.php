@@ -1,6 +1,6 @@
 @extends('layouts.bruk')
 
-@section('title', config('app.name', 'Banko') . ' – Digital Banking Made Simple')
+@section('title', config('app.name', 'Current Financial Bank') . ' – Digital Banking Made Simple')
 @section('meta_description', 'Open an account in minutes, move money instantly, and grow your savings — all from one secure dashboard.')
 
 @section('content')
@@ -12,7 +12,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                        <span class="d-inline-block fs-15 fw-semibold text-title" data-cue="slideInUp">Digital Banking With {{ config('app.name', 'Banko') }}</span>
+                        <span class="d-inline-block fs-15 fw-semibold text-title" data-cue="slideInUp">Digital Banking With {{ config('app.name', 'Current Financial Bank') }}</span>
                         <h1 data-cue="slideInUp">Banking That Moves As Fast As You Do</h1>
                         <p class="d-block" data-cue="slideInUp">Open an account in minutes, move money instantly, and grow your savings — all from one secure dashboard. No branch visits, no paperwork, no waiting.</p>
                         <div class="hero-btn" data-animate="bottom" data-cue="slideInUp">
@@ -78,7 +78,7 @@
                     <div class="section-title text-center mb-50" data-cue="slideInUp">
                         <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Our Features</span>
                         <h2 class="text-white mb-15">Everything Your Money Needs, In One App</h2>
-                        <p class="text-offwhite mb-0">{{ config('app.name', 'Banko') }} brings checking, savings, transfers, and investing together — built around security, simplicity, and speed.</p>
+                        <p class="text-offwhite mb-0">{{ config('app.name', 'Current Financial Bank') }} brings checking, savings, transfers, and investing together — built around security, simplicity, and speed.</p>
                     </div>
                 </div>
             </div>
@@ -159,7 +159,7 @@
                         <div class="section-title" data-cue="slideInUp">
                             <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">About Us</span>
                             <h2 class="fw-semibold mb-15">Banking Built Around You</h2>
-                            <p>{{ config('app.name', 'Banko') }} was built to make everyday banking simple — open an account online, manage your money from any device, and get support from real people when you need it.</p>
+                            <p>{{ config('app.name', 'Current Financial Bank') }} was built to make everyday banking simple — open an account online, manage your money from any device, and get support from real people when you need it.</p>
                         </div>
                         <div class="feature-list list-unstyle">
                             <div class="feature-item position-relative" data-cue="slideInUp">
@@ -350,14 +350,14 @@
             <div class="row align-items-lg-end">
                 <div class="col-lg-6" data-cue="slideInUp">
                     <div class="app-img">
-                        <img src="{{ asset('bruk/img/app/app-screen-2.webp') }}" alt="">
+                        <img src="{{ asset('bruk/img/hero/hero-img-4.webp') }}" alt="" class="round-2">
                     </div>
                 </div>
                 <div class="col-lg-6" data-cue="slideInUp">
                     <div class="app-content">
                         <div class="section-title">
                             <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Coming Soon</span>
-                            <h2>Take {{ config('app.name', 'Banko') }} Wherever You Go</h2>
+                            <h2>Take {{ config('app.name', 'Current Financial Bank') }} Wherever You Go</h2>
                         </div>
                         <ul class="feature-list list-unstyle">
                             <li class="position-relative fw-bold"><img src="{{ asset('bruk/img/icons/check.svg') }}" alt="" class="position-absolute start-0">Check balances and move money from your phone</li>

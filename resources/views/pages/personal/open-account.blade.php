@@ -1,185 +1,178 @@
-@extends('pages.layout.app_layout')
+@extends('layouts.bruk')
+
+@section('title', 'Open an Account – ' . config('app.name', 'Current Financial Bank'))
+@section('meta_description', 'Open a ' . config('app.name', 'Current Financial Bank') . ' account online in three steps — apply, verify, and activate your benefits.')
+@section('navbar_style', 'on-dark')
 
 @section('content')
-<div id="smooth-content">
 
-    <!-- banner -->
-    <div class="mil-banner mil-banner-inner mil-dissolve">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-xl-8">
-                    <div class="mil-banner-text mil-text-center">
-                        <div class="mil-text-m mil-mb-20">Personal Banking</div>
-                        <h1 class="mil-mb-60">Open a Banko Account</h1>
-                        <ul class="mil-breadcrumbs mil-center">
-                            <li><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{ route('personal.open-account') }}">Open an Account</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- banner end -->
-
-    <!-- steps -->
-    <div class="mil-dark-2 mil-p-160-130">
-        <div class="container">
-            <div class="mil-text-center mil-mb-60">
-                <h2 class="mil-light mil-mb-20 mil-up">Three Steps to Get Started</h2>
-                <p class="mil-text-l mil-pale-2 mil-up">Apply completely online, verify your details, and activate the benefits that keep your money organized.</p>
-            </div>
+    <!-- Breadcrumb Section Start -->
+    <div class="breadcrumb-wrap position-relative index-1 bg-title">
+        <div class="br-bg br-bg-7 position-absolute top-0 end-0 md-none"></div>
+        <img src="{{ asset('bruk/img/breadcrumb/br-shape-2.webp') }}" alt="" class="br-shape-two position-absolute">
+        <div class="container position-relative">
+            <img src="{{ asset('bruk/img/breadcrumb/br-shape-1.webp') }}" alt="" class="br-shape-one position-absolute md-none">
+            <img src="{{ asset('bruk/img/breadcrumb/br-shape-3.webp') }}" alt="" class="br-shape-three position-absolute md-none">
             <div class="row">
-                <div class="col-xl-4 mil-mb-30">
-                    <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
-                        <span class="mil-text-s mil-accent mil-mb-20 mil-up">STEP 01</span>
-                        <h5 class="mil-mb-20 mil-light mil-up">Share Your Details</h5>
-                        <p class="mil-text-s mil-soft mil-up">
-                            Complete the guided application with your personal information and direct deposit preferences. No minimum opening balance required.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xl-4 mil-mb-30">
-                    <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
-                        <span class="mil-text-s mil-accent mil-mb-20 mil-up">STEP 02</span>
-                        <h5 class="mil-mb-20 mil-light mil-up">Verify Securely</h5>
-                        <p class="mil-text-s mil-soft mil-up">
-                            Complete digital KYC in minutes. We protect your data with layered authentication and notify you of any activity above $50,000.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xl-4 mil-mb-30">
-                    <div class="mil-icon-box mil-with-bg mil-dark-2 mil-center mil-up">
-                        <span class="mil-text-s mil-accent mil-mb-20 mil-up">STEP 03</span>
-                        <h5 class="mil-mb-20 mil-light mil-up">Activate Your Account</h5>
-                        <p class="mil-text-s mil-soft mil-up">
-                            Set your savings pocket, enroll in alerts, and start transacting with your chip debit card and secure mobile banking access.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- steps end -->
-
-    <!-- requirements -->
-    <div class="mil-features mil-p-0-80">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-xl-5 mil-mb-80">
-                    <h2 class="mil-mb-30 mil-up">What You Need Before You Apply</h2>
-                    <ul class="mil-list-1 mil-accent">
-                        <li>
-                            <div class="mil-up">
-                                <h5 class="mil-mb-15 mil-light mil-up">Valid Identification</h5>
-                                <p class="mil-text-m mil-soft mil-up">Government-issued ID and proof of address to complete the digital KYC process.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="mil-up">
-                                <h5 class="mil-mb-15 mil-light mil-up">Funding Source</h5>
-                                <p class="mil-text-m mil-soft mil-up">Connect your existing bank or employer payroll for instant funding and auto-deposit setup.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="mil-up">
-                                <h5 class="mil-mb-15 mil-light mil-up">Contact Preferences</h5>
-                                <p class="mil-text-m mil-soft mil-up">Choose SMS or email for account alerts, including large transactions and savings milestones.</p>
-                            </div>
-                        </li>
+                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                    <ul class="br-menu list-unstyle d-inline-block">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li>Open an Account</li>
                     </ul>
-                </div>
-                <div class="col-xl-6 mil-mb-80">
-                    <div class="mil-image-frame mil-up">
-                        <img src="{{ asset('img/inner-pages/6.png') }}" alt="Account onboarding illustration" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
-                    </div>
+                    <h2 class="br-title fw-medium text-white mb-0">Open a {{ config('app.name', 'Current Financial Bank') }} Account</h2>
                 </div>
             </div>
         </div>
     </div>
-    <!-- requirements end -->
+    <!-- Breadcrumb Section End -->
 
-    <!-- automation -->
-    <div class="mil-cta mil-up">
+    <!-- Steps Start -->
+    <div class="ptb-130">
         <div class="container">
-            <div class="mil-out-frame mil-p-160-100">
-                <div class="row justify-content-center mil-text-center">
-                    <div class="col-xl-8 mil-mb-80-adaptive-30">
-                        <h2 class="mil-up">Automate Savings from Day One</h2>
-                        <p class="mil-text-m mil-soft mil-up">
-                            Set recurring transfers to your savings pocket weekly, fortnightly, or monthly. Adjust anytime and access funds instantly when plans change.
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6 mil-mb-60">
-                        <div class="mil-icon-box">
-                            <img src="{{ asset('img/inner-pages/icons/7.svg') }}" alt="Scheduling icon" class="mil-mb-30 mil-up">
-                            <h5 class="mil-mb-20 mil-up">Flexible Scheduling</h5>
-                            <p class="mil-text-m mil-soft mil-up">
-                                Create multiple automated contributions and edit them with one tap inside online or mobile banking.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 mil-mb-60">
-                        <div class="mil-icon-box">
-                            <img src="{{ asset('img/inner-pages/icons/8.svg') }}" alt="Visibility icon" class="mil-mb-30 mil-up">
-                            <h5 class="mil-mb-20 mil-up">Real-Time Visibility</h5>
-                            <p class="mil-text-m mil-soft mil-up">
-                                Track progress toward each goal with dashboards that show balance growth, upcoming transfers, and recent activity.
-                            </p>
+            <div class="section-title text-center mb-50">
+                <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title" data-cue="slideInUp">Getting Started</span>
+                <h2 class="mb-15">Three Steps to Get Started</h2>
+                <p class="mb-0">Apply completely online, verify your details, and activate the benefits that keep your money organized.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <span class="section-subtitle d-block fs-15 fw-semibold text-title mb-10">STEP 01</span>
+                            <h3 class="fs-24">Share Your Details</h3>
+                            <p>Complete the guided application with your personal information and direct deposit preferences. No minimum opening balance required.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- automation end -->
-
-    <!-- support -->
-    <div class="mil-features mil-p-0-80">
-        <div class="container">
-            <div class="row flex-sm-row-reverse justify-content-between align-items-center">
-                <div class="col-xl-5 mil-mb-80">
-                    <h2 class="mil-mb-30 mil-up">Help Whenever You Need It</h2>
-                    <p class="mil-text-m mil-soft mil-mb-30 mil-up">
-                        Unlimited consultations through our website, mobile banking, and dedicated support line ensure you always have answers to account questions.
-                    </p>
-                    <div class="mil-up">
-                        <a href="{{ route('personal.customer-support') }}" class="mil-btn mil-m mil-add-arrow">Connect with Support</a>
+                <div class="col-lg-4" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <span class="section-subtitle d-block fs-15 fw-semibold text-title mb-10">STEP 02</span>
+                            <h3 class="fs-24">Verify Securely</h3>
+                            <p>Complete digital identity verification in minutes. We protect your data with layered authentication and monitor for unusual activity.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xl-6 mil-mb-80">
-                    <div class="mil-image-frame mil-up">
-                        <img src="{{ asset('img/inner-pages/7.png') }}" alt="Customer support illustration" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- support end -->
-
-    <!-- final cta -->
-    <div class="mil-cta mil-up">
-        <div class="container">
-            <div class="mil-out-frame mil-p-160-160" style="background-image: url({{ asset('img/home-5/5.png') }})">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-xl-7 mil-sm-text-center">
-                        <h2 class="mil-light mil-mb-30 mil-up">Ready to Open Your Account?</h2>
-                        <p class="mil-text-m mil-mb-60 mil-light mil-up">
-                            Secure your spot with Banko and unlock digital tools, interest-earning accounts, and 24/7 account alerts.
-                        </p>
-                        <div class="mil-buttons-frame mil-up">
-                            <a href="{{ route('register') }}" class="mil-btn mil-md">Apply Now</a>
-                            <a href="{{ route('personal.banking-services') }}" class="mil-btn mil-border mil-md">Compare Accounts</a>
+                <div class="col-lg-4" data-cue="slideInUp">
+                    <div class="feature-card style-one mb-30 transition text-center">
+                        <div class="feature-text">
+                            <span class="section-subtitle d-block fs-15 fw-semibold text-title mb-10">STEP 03</span>
+                            <h3 class="fs-24">Activate Your Account</h3>
+                            <p>Set your savings pocket, enroll in alerts, and start transacting with your debit card and secure mobile banking access.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- final cta end -->
+    <!-- Steps End -->
 
-</div>
+    <!-- What You Need Start -->
+    <div class="bg-optional ptb-130">
+        <div class="container">
+            <div class="section-title text-center mb-50">
+                <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title" data-cue="slideInUp">Before You Apply</span>
+                <h2 class="mb-0">What You Need Before You Apply</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-md-6" data-cue="slideInUp">
+                    <div class="feature-card style-one d-flex flex-wrap mb-30 transition">
+                        <div class="feature-icon bg-white position-relative d-flex flex-coulmn justify-content-center align-items-center transition">
+                            <img src="{{ asset('bruk/img/icons/shield.svg') }}" alt="" class="transition">
+                        </div>
+                        <div class="feature-text">
+                            <h3 class="fs-20">Valid Identification</h3>
+                            <p class="mb-0">Government-issued ID and proof of address to complete the digital verification process.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 ps-xxl-4" data-cue="slideInUp">
+                    <div class="feature-card style-one d-flex flex-wrap mb-30 transition">
+                        <div class="feature-icon bg-white position-relative d-flex flex-coulmn justify-content-center align-items-center transition">
+                            <img src="{{ asset('bruk/img/icons/money-bag.svg') }}" alt="" class="transition">
+                        </div>
+                        <div class="feature-text">
+                            <h3 class="fs-20">Funding Source</h3>
+                            <p class="mb-0">Connect your existing bank or employer payroll for instant funding and auto-deposit setup.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 ps-xxl-4" data-cue="slideInUp">
+                    <div class="feature-card style-one d-flex flex-wrap mb-30 transition">
+                        <div class="feature-icon bg-white position-relative d-flex flex-coulmn justify-content-center align-items-center transition">
+                            <img src="{{ asset('bruk/img/icons/easy-to-use.svg') }}" alt="" class="transition">
+                        </div>
+                        <div class="feature-text">
+                            <h3 class="fs-20">Contact Preferences</h3>
+                            <p class="mb-0">Choose SMS or email for account alerts, including large transactions and savings milestones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- What You Need End -->
+
+    <!-- Automate Savings Start -->
+    <div class="ptb-130">
+        <div class="container">
+            <div class="row align-items-center gx-xl-25">
+                <div class="col-lg-6" data-cue="slideInUp">
+                    <div class="simple-img style-one">
+                        <img src="{{ asset('bruk/img/about/about-img-1.webp') }}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 pe-xxl-0" data-cue="slideInUp">
+                    <div class="simple-content style-one position-relative">
+                        <div class="section-title">
+                            <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Savings Goals</span>
+                            <h2 class="mb-15">Automate Savings From Day One</h2>
+                            <p>Set recurring transfers to your savings pocket weekly, fortnightly, or monthly. Adjust anytime and access funds instantly when plans change.</p>
+                        </div>
+                        <div class="feature-list list-unstyle">
+                            <div class="feature-item position-relative" data-cue="slideInUp">
+                                <img src="{{ asset('bruk/img/icons/check.svg') }}" alt="" class="position-absolute start-0 top-0">
+                                <h5 class="fs-20 fw-semibold">Flexible Scheduling</h5>
+                                <p class="mb-0">Create multiple automated contributions and edit them with one tap inside online or mobile banking.</p>
+                            </div>
+                            <div class="feature-item position-relative" data-cue="slideInUp">
+                                <img src="{{ asset('bruk/img/icons/check.svg') }}" alt="">
+                                <h5>Real-Time Visibility</h5>
+                                <p class="mb-0">Track progress toward each goal with dashboards that show balance growth, upcoming transfers, and recent activity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Automate Savings End -->
+
+    <!-- Help Start -->
+    <div class="bg-optional ptb-130">
+        <div class="container text-center">
+            <div class="section-title mb-30">
+                <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Support</span>
+                <h2 class="mb-15">Help Whenever You Need It</h2>
+                <p class="mb-0">Unlimited consultations through our website, mobile banking, and dedicated support line ensure you always have answers to account questions.</p>
+            </div>
+            <a href="{{ route('personal.customer-support') }}" class="btn style-one">Connect With Support</a>
+        </div>
+    </div>
+    <!-- Help End -->
+
+    <!-- Closing CTA Start -->
+    <div class="ptb-130">
+        <div class="container text-center">
+            <div class="section-title mb-30">
+                <span class="section-subtitle d-inline-block fs-15 fw-semibold text-title">Ready When You Are</span>
+                <h2 class="mb-15">Ready to Open Your Account?</h2>
+                <p class="mb-0">Secure your spot with {{ config('app.name', 'Current Financial Bank') }} and unlock digital tools, interest-earning accounts, and 24/7 account alerts.</p>
+            </div>
+            <a href="{{ route('register') }}" class="btn style-one me-3">Apply Now</a>
+            <a href="{{ route('personal.banking-services') }}" class="link style-one">Compare Accounts <img src="{{ asset('bruk/img/icons/arrow-blue.svg') }}" alt=""></a>
+        </div>
+    </div>
+    <!-- Closing CTA End -->
+
 @endsection
-
