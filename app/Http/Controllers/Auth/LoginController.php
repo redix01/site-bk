@@ -19,87 +19,71 @@ class LoginController extends Controller
     }
 
     /**
-     * Step 1: Validate email and send OTP
-     * This is for regular users only. Admins should use /admin/login
+     * Single login entry point.
+     * Admins are logged in directly and sent to /admin/dashboard.
+     * Normal users have credentials validated, receive an OTP via email,
+     * and are redirected to the OTP verification page.
      */
-    public function sendOtp(Request $request)
+    public function login(Request $request)
     {
         $this->enforceBotProtection($request);
 
         $request->validate([
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         $user = User::where('email', $request->email)->first();
-        
-        if (!$user) {
+
+        if (!$user || !Auth::attempt($request->only('email', 'password'))) {
             throw ValidationException::withMessages([
-                'email' => 'No account found with this email address.',
+                'email' => __('auth.failed'),
             ]);
         }
 
-        // Prevent admins from using the user login flow - redirect them to admin login
+        // Admin → log in directly, skip OTP
         if ($user->isAdmin()) {
-            return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
+            $request->session()->regenerate();
+            return redirect()->intended('/admin/dashboard');
         }
 
-        // Generate and send OTP
+        // Normal user → generate OTP, send email, redirect to OTP page
+        Auth::logout();
+
         $otpCode = OtpCode::generateForEmail($request->email);
-        
-        // Send OTP via email
         Mail::to($request->email)->send(new OtpCodeMail($otpCode->code, $user->name));
 
-        // Store user name in session for the next step
-        session(['login_user_name' => $user->name, 'login_user_email' => $request->email]);
+        session([
+            'otp_user_email' => $request->email,
+            'otp_user_name' => $user->name,
+            'otp_remember' => $request->boolean('remember'),
+        ]);
 
-        return back()->with([
-            'success' => 'OTP code sent to your email',
+        return redirect()->route('login.otp')->with([
+            'success' => 'A verification code has been sent to your email.',
             'user_name' => $user->name,
         ]);
     }
 
     /**
-     * Resend OTP code
-     * This is for regular users only. Admins should use /admin/login
+     * Show the OTP verification form for normal users.
      */
-    public function resendOtp(Request $request)
+    public function showOtpForm()
     {
-        $this->enforceBotProtection($request);
+        $email = session('otp_user_email');
 
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-        
-        if (!$user) {
-            throw ValidationException::withMessages([
-                'email' => 'No account found with this email address.',
-            ]);
+        if (!$email) {
+            return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
         }
 
-        // Prevent admins from using the user login flow - redirect them to admin login
-        if ($user->isAdmin()) {
-            return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
-        }
-
-        // Delete any existing OTP codes for this email
-        OtpCode::where('email', $request->email)->delete();
-
-        // Generate and send new OTP
-        $otpCode = OtpCode::generateForEmail($request->email);
-        
-        // Send OTP via email
-        Mail::to($request->email)->send(new OtpCodeMail($otpCode->code, $user->name));
-
-        return back()->with([
-            'success' => 'New OTP code sent to your email',
+        return inertia('Auth/OtpVerify', [
+            'email' => $email,
+            'userName' => session('otp_user_name'),
         ]);
     }
 
     /**
-     * Step 2: Verify OTP and password
-     * This is for regular users only. Admins should use /admin/login
+     * Verify OTP and complete login for normal users.
      */
     public function verifyOtpAndLogin(Request $request)
     {
@@ -108,25 +92,13 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required|email',
             'otp_code' => 'required|string|size:6',
-            'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-        
-        if (!$user) {
-            throw ValidationException::withMessages([
-                'email' => 'No account found with this email address.',
-            ]);
+        $sessionEmail = session('otp_user_email');
+        if (!$sessionEmail || $sessionEmail !== $request->email) {
+            return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
         }
 
-        // Prevent admins from using the user login flow - redirect to admin login
-        // This is a security measure in case they somehow bypassed the sendOtp check
-        if ($user->isAdmin()) {
-            Auth::logout();
-            return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
-        }
-
-        // Verify OTP code - Get the most recent OTP for this email
         $otpCode = OtpCode::where('email', $request->email)
             ->orderBy('created_at', 'desc')
             ->first();
@@ -161,54 +133,42 @@ class LoginController extends Controller
             ]);
         }
 
-        // Verify password
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            throw ValidationException::withMessages([
-                'password' => 'Invalid password.',
-            ]);
-        }
+        // OTP verified — log the user in
+        $user = User::where('email', $request->email)->first();
 
+        Auth::login($user, session('otp_remember', false));
         $request->session()->regenerate();
-        
-        // Regular users go to their dashboard
-        // Admins should never reach this point due to the check above
+
+        // Clean up session data
+        session()->forget(['otp_user_email', 'otp_user_name', 'otp_remember']);
+
         return redirect()->intended('/dashboard');
     }
 
     /**
-     * Email + password login for regular users.
-     * Admins should use /admin/login.
+     * Resend OTP code for normal users.
      */
-    public function login(Request $request)
+    public function resendOtp(Request $request)
     {
         $this->enforceBotProtection($request);
 
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        // Check if user exists and is admin before attempting login
-        $user = User::where('email', $request->email)->first();
-        if ($user && $user->isAdmin()) {
-            return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
+        $sessionEmail = session('otp_user_email');
+        if (!$sessionEmail) {
+            return redirect()->route('login')->with('error', 'Session expired. Please log in again.');
         }
 
-        if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            $request->session()->regenerate();
-            $user = Auth::user();
-            
-            // Double check - admins should not use this route
-            if ($user->isAdmin()) {
-                Auth::logout();
-                return redirect()->route('admin.login')->with('info', 'Please sign in using the admin login.');
-            }
-            
-            return redirect()->intended('/dashboard');
+        $user = User::where('email', $sessionEmail)->first();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Account not found. Please log in again.');
         }
 
-        throw ValidationException::withMessages([
-            'email' => __('auth.failed'),
+        // Delete old OTPs and generate a new one
+        OtpCode::where('email', $sessionEmail)->delete();
+        $otpCode = OtpCode::generateForEmail($sessionEmail);
+        Mail::to($sessionEmail)->send(new OtpCodeMail($otpCode->code, $user->name));
+
+        return back()->with([
+            'success' => 'A new verification code has been sent to your email.',
         ]);
     }
 

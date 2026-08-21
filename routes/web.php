@@ -26,6 +26,9 @@ Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('adm
 // Regular User Authentication Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/login/otp', [LoginController::class, 'showOtpForm'])->name('login.otp');
+Route::post('/login/otp', [LoginController::class, 'verifyOtpAndLogin']);
+Route::post('/login/otp/resend', [LoginController::class, 'resendOtp'])->name('login.otp.resend');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
