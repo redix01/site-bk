@@ -108,7 +108,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/withdraw', [\App\Http\Controllers\UserWithdrawalController::class, 'store'])->name('withdraw.store');
 
     // Savings
-    Route::get('/savings', fn () => inertia('Savings'))->name('savings');
+    Route::get('/savings', [\App\Http\Controllers\UserSavingsController::class, 'index'])->name('savings');
+    Route::post('/savings', [\App\Http\Controllers\UserSavingsController::class, 'store'])->name('savings.store');
 
     // Invest
     Route::get('/invest', fn () => inertia('Invest'))->name('invest');

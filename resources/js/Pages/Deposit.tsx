@@ -294,11 +294,12 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash, supp
         const otherMethods = Object.entries(depositMethods).filter(
             ([key, method]) => method.enabled && key !== 'bank_transfer' && key !== 'crypto'
         );
+        const hasCryptoWallets = !!(depositMethods.crypto?.currencies && Object.keys(depositMethods.crypto.currencies).length > 0);
 
         return (
             <>
-                {/* Bank Transfer */}
-                {depositMethods.bank_transfer?.enabled && (
+                {/* Bank Transfer — your account number is always available regardless of admin config */}
+                {accountNumber && (
                     <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 overflow-hidden">
                         <CardContent className="p-0">
                             <div className="w-full flex items-center justify-between gap-3 px-5 py-4">
@@ -315,52 +316,48 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash, supp
                                 </div>
                             </div>
 
-                            {accountNumber && (
-                                <div className="px-5 pb-5 pt-1 border-t border-slate-100 dark:border-slate-800">
-                                    <div className="flex items-center justify-between mt-4 mb-1">
-                                        <p className="text-xs text-slate-500 dark:text-slate-400">
-                                            {auth.user.name}'s Account Number
-                                        </p>
-                                        <span className="text-[10px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-400 bg-green-500/10 rounded-full px-2 py-0.5">
-                                            {wallet?.status || 'Active'}
-                                        </span>
-                                    </div>
-                                    <p className="text-2xl font-bold tracking-wide text-slate-900 dark:text-slate-50 font-mono">
-                                        {formatGroupedNumber(accountNumber)}
+                            <div className="px-5 pb-5 pt-1 border-t border-slate-100 dark:border-slate-800">
+                                <div className="flex items-center justify-between mt-4 mb-1">
+                                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                                        {auth.user.name}'s Account Number
                                     </p>
-                                    <div className="grid grid-cols-2 gap-3 mt-4">
-                                        <button
-                                            type="button"
-                                            onClick={handleCopyAccount}
-                                            className="rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-semibold py-3 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                                        >
-                                            {accountCopied ? 'Copied!' : 'Copy Number'}
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={handleShareAccount}
-                                            className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-3 transition-colors"
-                                        >
-                                            {accountShared ? 'Copied!' : 'Share Account'}
-                                        </button>
-                                    </div>
+                                    <span className="text-[10px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-400 bg-green-500/10 rounded-full px-2 py-0.5">
+                                        {wallet?.status || 'Active'}
+                                    </span>
                                 </div>
-                            )}
+                                <p className="text-2xl font-bold tracking-wide text-slate-900 dark:text-slate-50 font-mono">
+                                    {formatGroupedNumber(accountNumber)}
+                                </p>
+                                <div className="grid grid-cols-2 gap-3 mt-4">
+                                    <button
+                                        type="button"
+                                        onClick={handleCopyAccount}
+                                        className="rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-semibold py-3 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                                    >
+                                        {accountCopied ? 'Copied!' : 'Copy Number'}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={handleShareAccount}
+                                        className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-3 transition-colors"
+                                    >
+                                        {accountShared ? 'Copied!' : 'Share Account'}
+                                    </button>
+                                </div>
+                            </div>
                         </CardContent>
                     </Card>
                 )}
 
                 {/* OR divider */}
-                {depositMethods.crypto?.enabled && (
-                    <div className="flex items-center gap-3">
-                        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
-                        <span className="text-xs font-medium text-slate-400 dark:text-slate-500">OR</span>
-                        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
-                    </div>
-                )}
+                <div className="flex items-center gap-3">
+                    <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
+                    <span className="text-xs font-medium text-slate-400 dark:text-slate-500">OR</span>
+                    <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
+                </div>
 
-                {/* Crypto Deposit */}
-                {depositMethods.crypto?.enabled && (
+                {/* Crypto Deposit — disabled until an admin sets up at least one wallet */}
+                {hasCryptoWallets ? (
                     <Link href={"/deposit/crypto" + viewParam}>
                         <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
                             <CardContent className="flex items-center justify-between gap-3 px-5 py-4">
@@ -381,6 +378,22 @@ export default function Deposit({ auth, wallet, depositMethods = {}, flash, supp
                             </CardContent>
                         </Card>
                     </Link>
+                ) : (
+                    <Card className="bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 opacity-60 cursor-not-allowed">
+                        <CardContent className="flex items-center justify-between gap-3 px-5 py-4">
+                            <div className="flex items-center gap-3">
+                                <div className="w-11 h-11 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-500 flex items-center justify-center">
+                                    {getMethodIcon('crypto')}
+                                </div>
+                                <div>
+                                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Crypto Deposit</p>
+                                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                                        No wallet has been set up yet
+                                    </p>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
                 )}
 
                 {/* Other payment methods */}
