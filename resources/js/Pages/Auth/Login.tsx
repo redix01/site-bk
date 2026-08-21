@@ -3,6 +3,10 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Mail, Lock, Banknote } from 'lucide-react';
+import ThemeToggle from '@/Components/ThemeToggle';
+import { useTheme } from '@/hooks/useTheme';
+
+const appName = import.meta.env.VITE_APP_NAME || 'Current Financial Bank';
 
 interface LoginProps {
     status?: string;
@@ -12,6 +16,7 @@ interface LoginProps {
 }
 
 export default function Login({ status, flash }: LoginProps) {
+    const { theme, toggleTheme } = useTheme();
     const [botWarning, setBotWarning] = useState<string | null>(null);
     const [humanDetected, setHumanDetected] = useState<boolean>(false);
     const mountTimeRef = useRef<number>(Date.now());
@@ -103,36 +108,46 @@ export default function Login({ status, flash }: LoginProps) {
         <>
             <Head title="Log in" />
 
-            <div className="fixed inset-0 flex items-center justify-center overflow-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                <div className="w-full py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center min-h-full">
-                    <Card className="w-full max-w-md bg-slate-900/95 border-slate-700/50 shadow-2xl backdrop-blur-sm">
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
+                <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/95">
+                    <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+                        <Link href="/" className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-50">
+                            <Banknote className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                            <span className="text-sm sm:text-base">{appName}</span>
+                        </Link>
+                        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+                    </div>
+                </header>
+
+                <div className="flex w-full items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+                    <Card className="w-full max-w-md border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
                         <CardHeader className="space-y-4 text-center pb-6">
                             <div className="flex flex-col items-center space-y-3">
-                                <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-blue-500/50 bg-blue-500/10 shadow-lg">
-                                    <Banknote className="h-7 w-7 text-blue-400" />
+                                <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-blue-200 bg-blue-50 shadow-sm dark:border-blue-500/50 dark:bg-blue-500/10">
+                                    <Banknote className="h-7 w-7 text-blue-600 dark:text-blue-400" />
                                 </div>
-                                <span className="text-xl font-bold tracking-[0.4em] text-slate-200 uppercase">
-                                    Banko
+                                <span className="text-xl font-bold tracking-[0.4em] text-slate-700 dark:text-slate-200 uppercase">
+                                    {appName}
                                 </span>
                             </div>
-                            <CardTitle className="text-3xl font-bold text-slate-50">
+                            <CardTitle className="text-3xl font-bold text-slate-900 dark:text-slate-50">
                                 Welcome back
                             </CardTitle>
-                            <CardDescription className="text-base text-slate-400">
+                            <CardDescription className="text-base text-slate-500 dark:text-slate-400">
                                 Sign in to your account to continue
                             </CardDescription>
                         </CardHeader>
-                        
+
                         <CardContent className="space-y-6">
-                            {status && (
-                                <div className="rounded-lg bg-emerald-900/30 border border-emerald-700/50 p-4">
-                                    <p className="text-sm font-medium text-emerald-200">{status}</p>
+                            {(status || flash?.success) && (
+                                <div className="rounded-lg bg-emerald-50 border border-emerald-200 p-4 dark:bg-emerald-900/30 dark:border-emerald-700/50">
+                                    <p className="text-sm font-medium text-emerald-700 dark:text-emerald-200">{status || flash?.success}</p>
                                 </div>
                             )}
 
                             {(botWarning || securityError) && (
-                                <div className="rounded-lg border border-red-500/50 bg-red-500/10 p-4">
-                                    <p className="text-sm font-medium text-red-200">{botWarning ?? securityError}</p>
+                                <div className="rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-500/50 dark:bg-red-500/10">
+                                    <p className="text-sm font-medium text-red-700 dark:text-red-200">{botWarning ?? securityError}</p>
                                 </div>
                             )}
 
@@ -156,7 +171,7 @@ export default function Login({ status, flash }: LoginProps) {
 
                                 {/* Email Field */}
                                 <div className="space-y-2">
-                                    <label htmlFor="email" className="block text-sm font-semibold text-slate-300">
+                                    <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                                         Email Address
                                     </label>
                                     <div className="relative">
@@ -167,7 +182,7 @@ export default function Login({ status, flash }: LoginProps) {
                                             type="email"
                                             value={data.email}
                                             onChange={(e) => setData('email', e.target.value)}
-                                            className="w-full pl-12 pr-4 py-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-50 text-sm placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+                                            className="w-full pl-12 pr-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-50 text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                                             placeholder="you@example.com"
                                             autoComplete="email"
                                             autoFocus
@@ -175,13 +190,13 @@ export default function Login({ status, flash }: LoginProps) {
                                         />
                                     </div>
                                     {errors.email && (
-                                        <p className="mt-1.5 text-sm font-medium text-red-400">{errors.email}</p>
+                                        <p className="mt-1.5 text-sm font-medium text-red-600 dark:text-red-400">{errors.email}</p>
                                     )}
                                 </div>
 
                                 {/* Password Field */}
                                 <div className="space-y-2">
-                                    <label htmlFor="password" className="block text-sm font-semibold text-slate-300">
+                                    <label htmlFor="password" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                                         Password
                                     </label>
                                     <div className="relative">
@@ -192,14 +207,14 @@ export default function Login({ status, flash }: LoginProps) {
                                             type="password"
                                             value={data.password}
                                             onChange={(e) => setData('password', e.target.value)}
-                                            className="w-full pl-12 pr-4 py-3 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-50 text-sm placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+                                            className="w-full pl-12 pr-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-50 text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                                             placeholder="Enter your password"
                                             autoComplete="current-password"
                                             required
                                         />
                                     </div>
                                     {errors.password && (
-                                        <p className="mt-1.5 text-sm font-medium text-red-400">{errors.password}</p>
+                                        <p className="mt-1.5 text-sm font-medium text-red-600 dark:text-red-400">{errors.password}</p>
                                     )}
                                 </div>
 
@@ -211,9 +226,9 @@ export default function Login({ status, flash }: LoginProps) {
                                         type="checkbox"
                                         checked={data.remember}
                                         onChange={(e) => setData('remember', e.target.checked)}
-                                        className="h-4 w-4 rounded border-slate-700 bg-slate-800/50 text-blue-600 focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-0 focus:ring-offset-slate-900 cursor-pointer"
+                                        className="h-4 w-4 rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-blue-600 focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-0 cursor-pointer"
                                     />
-                                    <label htmlFor="remember" className="ml-3 text-sm font-medium text-slate-400 cursor-pointer hover:text-slate-300 transition-colors">
+                                    <label htmlFor="remember" className="ml-3 text-sm font-medium text-slate-600 dark:text-slate-400 cursor-pointer hover:text-slate-900 dark:hover:text-slate-300 transition-colors">
                                         Remember me
                                     </label>
                                 </div>
@@ -222,7 +237,7 @@ export default function Login({ status, flash }: LoginProps) {
                                 <Button
                                     type="submit"
                                     disabled={processing}
-                                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-sm hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {processing ? (
                                         <span className="flex items-center justify-center">
@@ -239,12 +254,12 @@ export default function Login({ status, flash }: LoginProps) {
                             </form>
 
                             {/* Sign Up Link */}
-                            <div className="pt-4 text-center border-t border-slate-700/50">
-                                <p className="text-sm text-slate-400">
+                            <div className="pt-4 text-center border-t border-slate-200 dark:border-slate-700">
+                                <p className="text-sm text-slate-500 dark:text-slate-400">
                                     Don't have an account?{' '}
                                     <Link
                                         href="/register"
-                                        className="font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+                                        className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
                                     >
                                         Sign up
                                     </Link>

@@ -2,6 +2,11 @@ import { FormEventHandler, useEffect, useMemo, useRef, useState } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
+import { Banknote } from 'lucide-react';
+import ThemeToggle from '@/Components/ThemeToggle';
+import { useTheme } from '@/hooks/useTheme';
+
+const appName = import.meta.env.VITE_APP_NAME || 'Current Financial Bank';
 
 type RegisterForm = {
     name: string;
@@ -365,6 +370,7 @@ export default function Register() {
         interaction_token: 'pending',
     };
 
+    const { theme, toggleTheme } = useTheme();
     const { data, setData, post, processing, errors, reset } = useForm<RegisterForm>(initialData);
     const [currentStep, setCurrentStep] = useState<number>(0);
     const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
@@ -620,17 +626,63 @@ export default function Register() {
         <>
             <Head title="Register" />
 
-            <div className="fixed inset-0 overflow-auto bg-slate-950/95 py-12">
-                <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col justify-center px-4 sm:px-6 lg:px-8">
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
+                <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/95">
+                    <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+                        <Link href="/" className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-50">
+                            <Banknote className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                            <span className="text-sm sm:text-base">{appName}</span>
+                        </Link>
+                        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+                    </div>
+                </header>
+
+                <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
                     <div className="space-y-6">
                         <div className="text-center">
-                            <CardTitle className="text-3xl font-bold text-slate-50">Open your Banko account</CardTitle>
-                            <CardDescription className="mt-2 text-base text-slate-400">
+                            <CardTitle className="text-2xl font-bold text-slate-900 dark:text-slate-50 sm:text-3xl">
+                                Open your {appName} account
+                            </CardTitle>
+                            <CardDescription className="mt-2 text-base text-slate-500 dark:text-slate-400">
                                 Complete the three-step onboarding to activate secure digital banking.
                             </CardDescription>
                         </div>
 
-                        <div className="grid gap-4 md:grid-cols-3">
+                        {/* Compact stepper for mobile */}
+                        <div className="flex items-center justify-center gap-2 sm:hidden">
+                            {steps.map((step, index) => {
+                                const isActive = index === currentStep;
+                                const isCompleted = index < currentStep;
+                                return (
+                                    <div key={step.key} className="flex items-center">
+                                        <div
+                                            className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold ${
+                                                isCompleted
+                                                    ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300'
+                                                    : isActive
+                                                    ? 'bg-blue-600 text-white'
+                                                    : 'bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-500'
+                                            }`}
+                                        >
+                                            {index + 1}
+                                        </div>
+                                        {index < steps.length - 1 && (
+                                            <div
+                                                className={`h-0.5 w-8 ${
+                                                    isCompleted ? 'bg-emerald-400 dark:bg-emerald-500/40' : 'bg-slate-200 dark:bg-slate-800'
+                                                }`}
+                                            />
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <p className="text-center text-sm font-medium text-slate-500 dark:text-slate-400 sm:hidden">
+                            Step {currentStep + 1} of {steps.length}: {steps[currentStep]?.title}
+                        </p>
+
+                        {/* Full step cards on larger screens */}
+                        <div className="hidden gap-4 sm:grid sm:grid-cols-3">
                             {steps.map((step, index) => {
                                 const isActive = index === currentStep;
                                 const isCompleted = index < currentStep;
@@ -640,36 +692,36 @@ export default function Register() {
                                         key={step.key}
                                         className={`rounded-lg border p-4 transition ${
                                             isActive
-                                                ? 'border-slate-400 bg-slate-900/80'
+                                                ? 'border-blue-300 bg-blue-50 dark:border-slate-400 dark:bg-slate-900/80'
                                                 : isCompleted
-                                                ? 'border-emerald-500/40 bg-slate-900/60'
-                                                : 'border-slate-800 bg-slate-900/40'
+                                                ? 'border-emerald-300 bg-emerald-50 dark:border-emerald-500/40 dark:bg-slate-900/60'
+                                                : 'border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/40'
                                         }`}
                                     >
                                         <div
                                             className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold ${
                                                 isCompleted
-                                                    ? 'bg-emerald-500/20 text-emerald-300'
+                                                    ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300'
                                                     : isActive
-                                                    ? 'bg-slate-800 text-slate-100'
-                                                    : 'bg-slate-800 text-slate-500'
+                                                    ? 'bg-blue-600 text-white dark:bg-slate-800 dark:text-slate-100'
+                                                    : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-500'
                                             }`}
                                         >
                                             {index + 1}
                                         </div>
-                                        <h3 className="mt-3 text-base font-semibold text-slate-50">{step.title}</h3>
-                                        <p className="mt-1 text-sm text-slate-400">{step.description}</p>
+                                        <h3 className="mt-3 text-base font-semibold text-slate-900 dark:text-slate-50">{step.title}</h3>
+                                        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{step.description}</p>
                                     </div>
                                 );
                             })}
                         </div>
 
-                        <Card className="border-slate-800 bg-slate-900">
+                        <Card className="border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
                             <CardHeader>
-                                <CardTitle className="text-slate-50">
+                                <CardTitle className="text-slate-900 dark:text-slate-50">
                                     {steps[currentStep]?.title ?? 'Account Setup'}
                         </CardTitle>
-                                <CardDescription className="text-slate-400">
+                                <CardDescription className="text-slate-500 dark:text-slate-400">
                                     {steps[currentStep]?.description ?? 'Add your account credentials.'}
                         </CardDescription>
                     </CardHeader>
@@ -699,7 +751,7 @@ export default function Register() {
                                     </div>
 
                                     {(botWarning || securityError) && (
-                                        <div className="rounded-md border border-red-500/60 bg-red-500/10 p-3 text-sm text-red-200">
+                                        <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-500/60 dark:bg-red-500/10 dark:text-red-200">
                                             {botWarning ?? securityError}
                                         </div>
                                     )}
@@ -709,60 +761,60 @@ export default function Register() {
                             <div>
                                                 <label
                                                     htmlFor="name"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Full Name <span className="text-red-400">*</span>
+                                                    Full Name <span className="text-red-500 dark:text-red-400">*</span>
                                 </label>
                                 <input
                                     id="name"
                                     type="text"
                                     value={data.name}
                                                     onChange={(event) => updateField('name', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                     autoComplete="name"
                                     autoFocus
                                                 />
                                                 {getFieldError('name') && (
-                                                    <p className="mt-1 text-sm text-red-400">{getFieldError('name')}</p>
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{getFieldError('name')}</p>
                                                 )}
                                             </div>
 
                                             <div>
                                                 <label
                                                     htmlFor="phone"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Phone Number <span className="text-red-400">*</span>
+                                                    Phone Number <span className="text-red-500 dark:text-red-400">*</span>
                                                 </label>
                                                 <input
                                                     id="phone"
                                                     type="tel"
                                                     value={data.phone}
                                                     onChange={(event) => updateField('phone', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                     autoComplete="tel"
                                                 />
                                                 {getFieldError('phone') && (
-                                                    <p className="mt-1 text-sm text-red-400">{getFieldError('phone')}</p>
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{getFieldError('phone')}</p>
                                                 )}
                                             </div>
 
                                             <div>
                                                 <label
                                                     htmlFor="date_of_birth"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Date of Birth <span className="text-red-400">*</span>
+                                                    Date of Birth <span className="text-red-500 dark:text-red-400">*</span>
                                                 </label>
                                                 <input
                                                     id="date_of_birth"
                                                     type="date"
                                                     value={data.date_of_birth}
                                                     onChange={(event) => updateField('date_of_birth', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 />
                                                 {getFieldError('date_of_birth') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('date_of_birth')}
                                                     </p>
                                                 )}
@@ -771,7 +823,7 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="gender"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     Gender (optional)
                                                 </label>
@@ -779,7 +831,7 @@ export default function Register() {
                                                     id="gender"
                                                     value={data.gender}
                                                     onChange={(event) => updateField('gender', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 >
                                                     <option value="prefer_not_to_say">Prefer not to say</option>
                                                     <option value="female">Female</option>
@@ -787,22 +839,22 @@ export default function Register() {
                                                     <option value="other">Other</option>
                                                 </select>
                                                 {getFieldError('gender') && (
-                                                    <p className="mt-1 text-sm text-red-400">{getFieldError('gender')}</p>
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{getFieldError('gender')}</p>
                                                 )}
                                             </div>
 
                                             <div>
                                                 <label
                                                     htmlFor="nationality"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Nationality <span className="text-red-400">*</span>
+                                                    Nationality <span className="text-red-500 dark:text-red-400">*</span>
                                                 </label>
                                             <select
                                                 id="nationality"
                                                 value={data.nationality}
                                                 onChange={(event) => updateField('nationality', event.target.value)}
-                                                className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                             >
                                                 <option value="">Select nationality</option>
                                                 {countryOptions.map((countryName) => (
@@ -812,7 +864,7 @@ export default function Register() {
                                                 ))}
                                             </select>
                                                 {getFieldError('nationality') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('nationality')}
                                                     </p>
                                                 )}
@@ -821,15 +873,15 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="country"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Country of Residence <span className="text-red-400">*</span>
+                                                    Country of Residence <span className="text-red-500 dark:text-red-400">*</span>
                                                 </label>
                                             <select
                                                 id="country"
                                                 value={data.country}
                                                 onChange={(event) => updateField('country', event.target.value)}
-                                                className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                             >
                                                 <option value="">Select country</option>
                                                 {countryOptions.map((countryName) => (
@@ -839,27 +891,27 @@ export default function Register() {
                                                 ))}
                                             </select>
                                                 {getFieldError('country') && (
-                                                    <p className="mt-1 text-sm text-red-400">{getFieldError('country')}</p>
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{getFieldError('country')}</p>
                                                 )}
                                             </div>
 
                                             <div className="md:col-span-2">
                                                 <label
                                                     htmlFor="address_line1"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Street Address <span className="text-red-400">*</span>
+                                                    Street Address <span className="text-red-500 dark:text-red-400">*</span>
                                                 </label>
                                                 <input
                                                     id="address_line1"
                                                     type="text"
                                                     value={data.address_line1}
                                                     onChange={(event) => updateField('address_line1', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                     placeholder="Building and street information"
                                                 />
                                                 {getFieldError('address_line1') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('address_line1')}
                                                     </p>
                                                 )}
@@ -868,7 +920,7 @@ export default function Register() {
                                             <div className="md:col-span-2">
                                                 <label
                                                     htmlFor="address_line2"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     Address Line 2 (optional)
                                                 </label>
@@ -877,11 +929,11 @@ export default function Register() {
                                                     type="text"
                                                     value={data.address_line2}
                                                     onChange={(event) => updateField('address_line2', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                     placeholder="Apartment, suite, unit, etc."
                                                 />
                                                 {getFieldError('address_line2') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('address_line2')}
                                                     </p>
                                                 )}
@@ -890,26 +942,26 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="city"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    City <span className="text-red-400">*</span>
+                                                    City <span className="text-red-500 dark:text-red-400">*</span>
                                                 </label>
                                                 <input
                                                     id="city"
                                                     type="text"
                                                     value={data.city}
                                                     onChange={(event) => updateField('city', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 />
                                                 {getFieldError('city') && (
-                                                    <p className="mt-1 text-sm text-red-400">{getFieldError('city')}</p>
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{getFieldError('city')}</p>
                                                 )}
                                             </div>
 
                                             <div>
                                                 <label
                                                     htmlFor="state"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     State / Province (optional)
                                                 </label>
@@ -918,17 +970,17 @@ export default function Register() {
                                                     type="text"
                                                     value={data.state}
                                                     onChange={(event) => updateField('state', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 />
                                                 {getFieldError('state') && (
-                                                    <p className="mt-1 text-sm text-red-400">{getFieldError('state')}</p>
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{getFieldError('state')}</p>
                                                 )}
                                             </div>
 
                                             <div>
                                                 <label
                                                     htmlFor="postal_code"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     Postal Code (optional)
                                                 </label>
@@ -937,10 +989,10 @@ export default function Register() {
                                                     type="text"
                                                     value={data.postal_code}
                                                     onChange={(event) => updateField('postal_code', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 />
                                                 {getFieldError('postal_code') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('postal_code')}
                                                     </p>
                                                 )}
@@ -949,19 +1001,19 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="passport_number"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Passport Number <span className="text-red-400">*</span>
+                                                    Passport Number <span className="text-red-500 dark:text-red-400">*</span>
                                                 </label>
                                                 <input
                                                     id="passport_number"
                                                     type="text"
                                                     value={data.passport_number}
                                                     onChange={(event) => updateField('passport_number', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 />
                                                 {getFieldError('passport_number') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('passport_number')}
                                                     </p>
                                                 )}
@@ -970,19 +1022,19 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="passport_country"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Passport Issuing Country <span className="text-red-400">*</span>
+                                                    Passport Issuing Country <span className="text-red-500 dark:text-red-400">*</span>
                                                 </label>
                                                 <input
                                                     id="passport_country"
                                                     type="text"
                                                     value={data.passport_country}
                                                     onChange={(event) => updateField('passport_country', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 />
                                                 {getFieldError('passport_country') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('passport_country')}
                                                     </p>
                                                 )}
@@ -991,7 +1043,7 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="passport_expiry"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     Passport Expiry Date (optional)
                                                 </label>
@@ -1000,10 +1052,10 @@ export default function Register() {
                                                     type="date"
                                                     value={data.passport_expiry}
                                                     onChange={(event) => updateField('passport_expiry', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 />
                                                 {getFieldError('passport_expiry') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('passport_expiry')}
                                                     </p>
                                                 )}
@@ -1016,7 +1068,7 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="occupation"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     Occupation (optional)
                                                 </label>
@@ -1025,10 +1077,10 @@ export default function Register() {
                                                     type="text"
                                                     value={data.occupation}
                                                     onChange={(event) => updateField('occupation', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 />
                                                 {getFieldError('occupation') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('occupation')}
                                                     </p>
                                                 )}
@@ -1037,7 +1089,7 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="employment_status"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     Employment Status (optional)
                                                 </label>
@@ -1047,7 +1099,7 @@ export default function Register() {
                                                     onChange={(event) =>
                                                         updateField('employment_status', event.target.value)
                                                     }
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 >
                                                     {employmentOptions.map((option) => (
                                                         <option key={option.value} value={option.value}>
@@ -1056,7 +1108,7 @@ export default function Register() {
                                                     ))}
                                                 </select>
                                                 {getFieldError('employment_status') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('employment_status')}
                                                     </p>
                                                 )}
@@ -1065,7 +1117,7 @@ export default function Register() {
                                             <div>
                                                 <label
                                                     htmlFor="source_of_funds"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     Primary Source of Funds (optional)
                                                 </label>
@@ -1073,7 +1125,7 @@ export default function Register() {
                                                     id="source_of_funds"
                                                     value={data.source_of_funds}
                                                     onChange={(event) => updateField('source_of_funds', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                 >
                                                     {fundsOptions.map((option) => (
                                                         <option key={option.value} value={option.value}>
@@ -1082,7 +1134,7 @@ export default function Register() {
                                                     ))}
                                                 </select>
                                                 {getFieldError('source_of_funds') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('source_of_funds')}
                                                     </p>
                                 )}
@@ -1091,7 +1143,7 @@ export default function Register() {
                             <div>
                                                 <label
                                                     htmlFor="tax_identification_number"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
                                                     Tax Identification Number (optional)
                                 </label>
@@ -1102,11 +1154,11 @@ export default function Register() {
                                                     onChange={(event) =>
                                                         updateField('tax_identification_number', event.target.value)
                                                     }
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                     placeholder="TIN, SSN, etc."
                                                 />
                                                 {getFieldError('tax_identification_number') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('tax_identification_number')}
                                                     </p>
                                                 )}
@@ -1115,15 +1167,15 @@ export default function Register() {
                                                 <div>
                                                     <label
                                                         htmlFor="preferred_currency"
-                                                        className="mb-1 block text-sm font-medium text-slate-300"
+                                                        className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                     >
-                                                        Preferred Currency <span className="text-red-400">*</span>
+                                                        Preferred Currency <span className="text-red-500 dark:text-red-400">*</span>
                                                     </label>
                                                     <select
                                                         id="preferred_currency"
                                                         value={data.preferred_currency}
                                                         onChange={(event) => updateField('preferred_currency', event.target.value)}
-                                                        className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                        className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                     >
                                                         {currencyOptions.map((currency) => (
                                                             <option key={currency} value={currency}>
@@ -1132,7 +1184,7 @@ export default function Register() {
                                                         ))}
                                                     </select>
                                                     {getFieldError('preferred_currency') && (
-                                                        <p className="mt-1 text-sm text-red-400">
+                                                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                             {getFieldError('preferred_currency')}
                                                         </p>
                                 )}
@@ -1141,9 +1193,9 @@ export default function Register() {
                             <div>
                                                     <label
                                                         htmlFor="account_type"
-                                                        className="mb-1 block text-sm font-medium text-slate-300"
+                                                        className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                     >
-                                                        Account Type <span className="text-red-400">*</span>
+                                                        Account Type <span className="text-red-500 dark:text-red-400">*</span>
                                                     </label>
                                                     <select
                                                         id="account_type"
@@ -1154,14 +1206,14 @@ export default function Register() {
                                                                 event.target.value as RegisterForm['account_type']
                                                             )
                                                         }
-                                                        className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                        className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                     >
                                                         <option value="savings">Savings</option>
                                                         <option value="current">Current</option>
                                                         <option value="business">Business</option>
                                                     </select>
                                                     {getFieldError('account_type') && (
-                                                        <p className="mt-1 text-sm text-red-400">
+                                                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                             {getFieldError('account_type')}
                                                         </p>
                                                     )}
@@ -1170,7 +1222,7 @@ export default function Register() {
                                                 <div className="md:col-span-2">
                                                     <label
                                                         htmlFor="branch_code"
-                                                        className="mb-1 block text-sm font-medium text-slate-300"
+                                                        className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                     >
                                                         Branch Code (optional)
                                                     </label>
@@ -1179,11 +1231,11 @@ export default function Register() {
                                                         type="text"
                                                         value={data.branch_code}
                                                         onChange={(event) => updateField('branch_code', event.target.value)}
-                                                        className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                        className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                         placeholder="Internal reference or branch identifier"
                                                     />
                                                     {getFieldError('branch_code') && (
-                                                        <p className="mt-1 text-sm text-red-400">
+                                                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                             {getFieldError('branch_code')}
                                                         </p>
                                                     )}
@@ -1196,49 +1248,49 @@ export default function Register() {
                                             <div className="md:col-span-2">
                                                 <label
                                                     htmlFor="email"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Email Address <span className="text-red-400">*</span>
+                                                    Email Address <span className="text-red-500 dark:text-red-400">*</span>
                                 </label>
                                 <input
                                                     id="email"
                                                     type="email"
                                                     value={data.email}
                                                     onChange={(event) => updateField('email', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                                     autoComplete="email"
                                                 />
                                                 {getFieldError('email') && (
-                                                    <p className="mt-1 text-sm text-red-400">{getFieldError('email')}</p>
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{getFieldError('email')}</p>
                                 )}
                             </div>
 
                             <div>
                                                 <label
                                                     htmlFor="password"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Password <span className="text-red-400">*</span>
+                                                    Password <span className="text-red-500 dark:text-red-400">*</span>
                                 </label>
                                 <input
                                     id="password"
                                     type="password"
                                     value={data.password}
                                                     onChange={(event) => updateField('password', event.target.value)}
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                     autoComplete="new-password"
                                 />
                                                 {getFieldError('password') && (
-                                                    <p className="mt-1 text-sm text-red-400">{getFieldError('password')}</p>
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{getFieldError('password')}</p>
                                 )}
                             </div>
 
                             <div>
                                                 <label
                                                     htmlFor="password_confirmation"
-                                                    className="mb-1 block text-sm font-medium text-slate-300"
+                                                    className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300"
                                                 >
-                                                    Confirm Password <span className="text-red-400">*</span>
+                                                    Confirm Password <span className="text-red-500 dark:text-red-400">*</span>
                                 </label>
                                 <input
                                     id="password_confirmation"
@@ -1247,11 +1299,11 @@ export default function Register() {
                                                     onChange={(event) =>
                                                         updateField('password_confirmation', event.target.value)
                                                     }
-                                                    className="w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-600"
+                                                    className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50"
                                     autoComplete="new-password"
                                                 />
                                                 {getFieldError('password_confirmation') && (
-                                                    <p className="mt-1 text-sm text-red-400">
+                                                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                                                         {getFieldError('password_confirmation')}
                                                     </p>
                                                 )}
@@ -1259,18 +1311,18 @@ export default function Register() {
                                         </div>
                                     )}
 
-                                    <div className="flex flex-col gap-3 pt-4 md:flex-row md:items-center md:justify-between">
-                                        <div className="text-sm text-slate-400">
+                                    <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:items-center sm:justify-between">
+                                        <div className="order-2 text-center text-sm text-slate-500 dark:text-slate-400 sm:order-1 sm:text-left">
                                             Step {currentStep + 1} of {steps.length}
                             </div>
 
-                                        <div className="flex flex-1 items-center justify-end gap-3">
+                                        <div className="order-1 flex flex-col-reverse gap-3 sm:order-2 sm:flex-row sm:items-center sm:justify-end">
                                             {currentStep > 0 && (
                                                 <Button
                                                     type="button"
                                                     variant="outline"
                                                     onClick={goToPreviousStep}
-                                                    className="border-slate-700 bg-slate-800 text-slate-50 hover:bg-slate-700"
+                                                    className="w-full border-slate-300 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-700 sm:w-auto"
                                                 >
                                                     Back
                                                 </Button>
@@ -1279,7 +1331,7 @@ export default function Register() {
                             <Button
                                 type="submit"
                                 disabled={processing}
-                                                className="bg-slate-700 text-slate-50 hover:bg-slate-600"
+                                                className="w-full bg-blue-600 py-3 text-white hover:bg-blue-700 sm:w-auto sm:py-2"
                                             >
                                                 {processing
                                                     ? 'Submitting...'
@@ -1291,9 +1343,9 @@ export default function Register() {
                                     </div>
                         </form>
 
-                        <div className="mt-6 text-center text-sm">
-                            <span className="text-slate-400">Already have an account? </span>
-                                    <Link href="/login" className="font-medium text-slate-300 hover:text-slate-50">
+                        <div className="mt-6 border-t border-slate-200 pt-4 text-center text-sm dark:border-slate-800">
+                            <span className="text-slate-500 dark:text-slate-400">Already have an account? </span>
+                                    <Link href="/login" className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
                                 Sign in
                             </Link>
                         </div>
