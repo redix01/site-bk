@@ -113,7 +113,7 @@ export default function Login({ status, flash }: LoginProps) {
                     <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
                         <a href="/" className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-50">
                             <Banknote className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                            <span className="text-sm sm:text-base">{appName}</span>
+                            <span className="font-brand text-sm sm:text-base">{appName}</span>
                         </a>
                         <ThemeToggle theme={theme} onToggle={toggleTheme} />
                     </div>
@@ -126,7 +126,7 @@ export default function Login({ status, flash }: LoginProps) {
                                 <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-blue-200 bg-blue-50 shadow-sm dark:border-blue-500/50 dark:bg-blue-500/10">
                                     <Banknote className="h-7 w-7 text-blue-600 dark:text-blue-400" />
                                 </div>
-                                <span className="text-xl font-bold tracking-[0.4em] text-slate-700 dark:text-slate-200 uppercase">
+                                <span className="font-brand text-xl font-bold tracking-[0.4em] text-slate-700 dark:text-slate-200 uppercase">
                                     CFB
                                 </span>
                             </div>

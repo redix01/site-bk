@@ -631,7 +631,7 @@ export default function Register() {
                     <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
                         <a href="/" className="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-50">
                             <Banknote className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                            <span className="text-sm sm:text-base">{appName}</span>
+                            <span className="font-brand text-sm sm:text-base">{appName}</span>
                         </a>
                         <ThemeToggle theme={theme} onToggle={toggleTheme} />
                     </div>
