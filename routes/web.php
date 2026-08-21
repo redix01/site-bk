@@ -112,7 +112,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/savings', [\App\Http\Controllers\UserSavingsController::class, 'store'])->name('savings.store');
 
     // Invest
-    Route::get('/invest', fn () => inertia('Invest'))->name('invest');
+    Route::get('/invest', [\App\Http\Controllers\UserInvestController::class, 'index'])->name('invest');
+    Route::post('/invest', [\App\Http\Controllers\UserInvestController::class, 'store'])->name('invest.store');
 });
 
 // Admin Routes

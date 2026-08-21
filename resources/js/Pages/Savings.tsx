@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, ReactNode, useState } from 'react';
 import { Link, useForm } from '@inertiajs/react';
 import MobileLayout from '@/Layouts/MobileLayout';
 import { Button } from '@/Components/ui/button';
@@ -20,9 +20,35 @@ interface SavingsPageProps extends PageProps {
 
 type SavingsStep = 'list' | 'amount' | 'confirm' | 'processing' | 'success';
 
-const accents: Record<string, string> = {
-    hysa: 'from-amber-500 to-orange-500',
-    mma: 'from-blue-500 to-indigo-600',
+const productMeta: Record<string, { iconBg: string; iconColor: string; icon: ReactNode }> = {
+    hysa: {
+        iconBg: 'bg-amber-500/10',
+        iconColor: 'text-amber-600 dark:text-amber-500',
+        icon: (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941" />
+            </svg>
+        ),
+    },
+    mma: {
+        iconBg: 'bg-blue-500/10',
+        iconColor: 'text-blue-600 dark:text-blue-500',
+        icon: (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+            </svg>
+        ),
+    },
+};
+
+const fallbackMeta = {
+    iconBg: 'bg-slate-500/10',
+    iconColor: 'text-slate-600 dark:text-slate-400',
+    icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9l9-6 9 6M4.5 9.75V21M19.5 9.75V21M9 21v-6a3 3 0 013-3v0a3 3 0 013 3v6M3 21h18" />
+        </svg>
+    ),
 };
 
 export default function Savings({ auth, wallet, products, flash }: SavingsPageProps) {
@@ -100,37 +126,42 @@ export default function Savings({ auth, wallet, products, flash }: SavingsPagePr
             )}
 
             <div className="space-y-4">
-                {products.map((product) => (
-                    <div
-                        key={product.key}
-                        className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden"
-                    >
-                        <div className={`bg-gradient-to-br ${accents[product.key] || 'from-slate-600 to-slate-800'} px-5 py-5 text-white`}>
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-xs font-medium uppercase tracking-wide text-white/80">
-                                        {product.shortName}
-                                    </p>
-                                    <p className="text-base font-semibold mt-0.5">{product.name}</p>
+                {products.map((product) => {
+                    const meta = productMeta[product.key] || fallbackMeta;
+                    return (
+                        <div
+                            key={product.key}
+                            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5"
+                        >
+                            <div className="flex items-start justify-between gap-3">
+                                <div className="flex items-center gap-3">
+                                    <div className={`w-11 h-11 rounded-full flex items-center justify-center ${meta.iconBg} ${meta.iconColor}`}>
+                                        {meta.icon}
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">{product.name}</p>
+                                        <p className="text-xs text-slate-500 dark:text-slate-400">{product.shortName}</p>
+                                    </div>
                                 </div>
-                                <div className="text-right">
-                                    <p className="text-3xl font-bold leading-none">{product.rate}</p>
-                                    <p className="text-[11px] text-white/80 mt-1">P.A</p>
+                                <div className="text-right shrink-0">
+                                    <p className="text-lg font-bold text-slate-900 dark:text-slate-50">{product.rate}</p>
+                                    <p className="text-[10px] uppercase tracking-wide text-slate-400 dark:text-slate-500">P.A</p>
                                 </div>
                             </div>
-                        </div>
-                        <div className="px-5 py-4">
-                            <p className="text-sm text-slate-600 dark:text-slate-300">
+
+                            <p className="text-sm text-slate-600 dark:text-slate-300 mt-3">
                                 {product.description}
                             </p>
+
                             {product.balance > 0 && (
-                                <div className="flex items-center justify-between mt-3 text-sm">
+                                <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-sm">
                                     <span className="text-slate-500 dark:text-slate-400">Your balance</span>
                                     <span className="font-semibold text-slate-900 dark:text-slate-50">
                                         {formatCurrency(product.balance)}
                                     </span>
                                 </div>
                             )}
+
                             <button
                                 type="button"
                                 onClick={() => handleSelectProduct(product.key)}
@@ -139,8 +170,8 @@ export default function Savings({ auth, wallet, products, flash }: SavingsPagePr
                                 Add Money
                             </button>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
 
             <p className="text-xs text-slate-400 dark:text-slate-500 text-center px-4">
@@ -152,12 +183,24 @@ export default function Savings({ auth, wallet, products, flash }: SavingsPagePr
     const renderAmountStep = () => {
         if (!selectedProduct) return null;
 
+        const meta = productMeta[selectedProduct.key] || fallbackMeta;
+
         return (
             <div className="space-y-4">
-                <div className={`bg-gradient-to-br ${accents[selectedProduct.key] || 'from-slate-600 to-slate-800'} rounded-2xl px-5 py-4 text-white`}>
-                    <p className="text-xs font-medium uppercase tracking-wide text-white/80">{selectedProduct.shortName}</p>
-                    <p className="text-base font-semibold">{selectedProduct.name}</p>
-                    <p className="text-2xl font-bold mt-1">{selectedProduct.rate} <span className="text-xs font-normal text-white/80">P.A</span></p>
+                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                        <div className={`w-11 h-11 rounded-full flex items-center justify-center ${meta.iconBg} ${meta.iconColor}`}>
+                            {meta.icon}
+                        </div>
+                        <div>
+                            <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">{selectedProduct.name}</p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">{selectedProduct.shortName}</p>
+                        </div>
+                    </div>
+                    <div className="text-right shrink-0">
+                        <p className="text-base font-bold text-slate-900 dark:text-slate-50">{selectedProduct.rate}</p>
+                        <p className="text-[10px] uppercase tracking-wide text-slate-400 dark:text-slate-500">P.A</p>
+                    </div>
                 </div>
 
                 <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5">
@@ -281,11 +324,11 @@ export default function Savings({ auth, wallet, products, flash }: SavingsPagePr
 
     return (
         <MobileLayout user={auth.user} title="Savings" currentRoute="savings">
-            <div className="px-4 pt-4 flex items-center justify-between">
+            <div className="px-4 pt-4 pb-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 mb-2">
                 {step === 'list' ? (
                     <Link
                         href={"/dashboard" + viewParam}
-                        className="p-2 -ml-2 rounded-full text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-slate-800 transition-colors"
+                        className="w-9 h-9 -ml-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-50 transition-colors"
                         aria-label="Back to dashboard"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -296,7 +339,7 @@ export default function Savings({ auth, wallet, products, flash }: SavingsPagePr
                     <button
                         type="button"
                         onClick={handleBack}
-                        className="p-2 -ml-2 rounded-full text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-slate-800 transition-colors"
+                        className="w-9 h-9 -ml-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-slate-50 transition-colors"
                         aria-label="Back"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
