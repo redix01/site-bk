@@ -607,54 +607,56 @@ export default function Edit({ paymentMethod, types }: PageProps & {
                         </CardContent>
                     </Card>
 
-                    {/* Instructions */}
-                    <Card className="bg-slate-900 border-slate-800 mt-6">
-                        <CardHeader>
-                            <CardTitle className="text-slate-50">Instructions</CardTitle>
-                            <CardDescription className="text-slate-400">
-                                Payment instructions shown to users
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="space-y-4">
-                            {instructionFields.map((field, index) => (
-                                <div key={index} className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        value={field.key}
-                                        onChange={(e) => {
-                                            const newFields = [...instructionFields];
-                                            newFields[index].key = e.target.value;
-                                            setInstructionFields(newFields);
-                                        }}
-                                        className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                                        placeholder="Label (e.g., Account Number)"
-                                    />
-                                    <input
-                                        type="text"
-                                        value={field.value}
-                                        onChange={(e) => {
-                                            const newFields = [...instructionFields];
-                                            newFields[index].value = e.target.value;
-                                            setInstructionFields(newFields);
-                                        }}
-                                        className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                                        placeholder="Value"
-                                    />
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        onClick={() => removeInstructionField(index)}
-                                        className="text-red-400 hover:text-red-300"
-                                    >
-                                        Remove
-                                    </Button>
-                                </div>
-                            ))}
-                            <Button type="button" variant="outline" onClick={addInstructionField}>
-                                Add Instruction
-                            </Button>
-                        </CardContent>
-                    </Card>
+                    {/* Instructions — not applicable to crypto, which uses the Cryptocurrency Wallets card above */}
+                    {data.type !== 'crypto' && (
+                        <Card className="bg-slate-900 border-slate-800 mt-6">
+                            <CardHeader>
+                                <CardTitle className="text-slate-50">Instructions</CardTitle>
+                                <CardDescription className="text-slate-400">
+                                    Payment instructions shown to users
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                                {instructionFields.map((field, index) => (
+                                    <div key={index} className="flex gap-2">
+                                        <input
+                                            type="text"
+                                            value={field.key}
+                                            onChange={(e) => {
+                                                const newFields = [...instructionFields];
+                                                newFields[index].key = e.target.value;
+                                                setInstructionFields(newFields);
+                                            }}
+                                            className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                            placeholder="Label (e.g., Account Number)"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={field.value}
+                                            onChange={(e) => {
+                                                const newFields = [...instructionFields];
+                                                newFields[index].value = e.target.value;
+                                                setInstructionFields(newFields);
+                                            }}
+                                            className="flex-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                            placeholder="Value"
+                                        />
+                                        <Button
+                                            type="button"
+                                            variant="ghost"
+                                            onClick={() => removeInstructionField(index)}
+                                            className="text-red-400 hover:text-red-300"
+                                        >
+                                            Remove
+                                        </Button>
+                                    </div>
+                                ))}
+                                <Button type="button" variant="outline" onClick={addInstructionField}>
+                                    Add Instruction
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    )}
 
                     {/* Notes */}
                     <Card className="bg-slate-900 border-slate-800 mt-6">
