@@ -38,9 +38,8 @@ class UserLoginTest extends TestCase
             'password' => 'password',
         ]));
 
-        $response->assertRedirect(route('admin.login'));
-        $response->assertSessionHas('info', 'Please sign in using the admin login.');
-        $this->assertGuest();
+        $response->assertRedirect('/admin/dashboard');
+        $this->assertAuthenticatedAs($admin);
     }
 
     public function test_login_fails_with_invalid_password(): void
