@@ -1,18 +1,22 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Link } from '@inertiajs/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import MobileLayout from '@/Layouts/MobileLayout';
 import { PageProps, Transaction, Wallet } from '@/types';
 
+interface PeriodStats {
+    total_deposits: number;
+    total_withdrawals: number;
+    total_transfers_sent: number;
+    total_transfers_received: number;
+}
+
+type StatsPeriod = '7d' | '30d' | '1y';
+
 interface DashboardPageProps extends PageProps {
     wallet: Wallet;
     recentTransactions: Transaction[];
-    stats: {
-        total_deposits: number;
-        total_withdrawals: number;
-        total_transfers_sent: number;
-        total_transfers_received: number;
-    };
+    stats: Record<StatsPeriod, PeriodStats>;
 }
 
 interface QuickAction {
@@ -24,10 +28,18 @@ interface QuickAction {
     disabled?: boolean;
 }
 
+const periodOptions: { key: StatsPeriod; label: string }[] = [
+    { key: '7d', label: '7D' },
+    { key: '30d', label: '30D' },
+    { key: '1y', label: '1Y' },
+];
+
 export default function Dashboard({ auth, wallet, recentTransactions, stats }: DashboardPageProps) {
     // Add view parameter for admins to keep them in client view
     const viewParam = auth.user.is_admin ? '?view=client' : '';
     const isLocked = auth.user.status === 'locked';
+    const [statsPeriod, setStatsPeriod] = useState<StatsPeriod>('30d');
+    const periodStats = stats?.[statsPeriod];
 
     const formatCurrency = (amount: number) => {
         return new Intl.NumberFormat('en-US', {
@@ -236,32 +248,50 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                 {/* Transaction Statistics */}
                 <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                     <CardHeader className="pb-3">
-                        <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Overview</CardTitle>
+                        <div className="flex items-center justify-between gap-2">
+                            <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Overview</CardTitle>
+                            <div className="flex items-center rounded-full bg-slate-100 dark:bg-slate-800 p-0.5">
+                                {periodOptions.map((option) => (
+                                    <button
+                                        key={option.key}
+                                        type="button"
+                                        onClick={() => setStatsPeriod(option.key)}
+                                        className={`px-2.5 py-1 text-xs font-medium rounded-full transition-colors ${
+                                            statsPeriod === option.key
+                                                ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 shadow-sm'
+                                                : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50'
+                                        }`}
+                                    >
+                                        {option.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </CardHeader>
                     <CardContent className="space-y-3">
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-1">
                                 <p className="text-xs text-slate-500 dark:text-slate-400">Total Deposits</p>
                                 <p className="text-lg font-semibold text-green-600 dark:text-green-500">
-                                    {formatCurrency(stats?.total_deposits || 0)}
+                                    {formatCurrency(periodStats?.total_deposits || 0)}
                                 </p>
                             </div>
                             <div className="space-y-1">
                                 <p className="text-xs text-slate-500 dark:text-slate-400">Total Withdrawals</p>
                                 <p className="text-lg font-semibold text-red-600 dark:text-red-500">
-                                    {formatCurrency(stats?.total_withdrawals || 0)}
+                                    {formatCurrency(periodStats?.total_withdrawals || 0)}
                                 </p>
                             </div>
                             <div className="space-y-1">
                                 <p className="text-xs text-slate-500 dark:text-slate-400">Sent</p>
                                 <p className="text-lg font-semibold text-blue-600 dark:text-blue-500">
-                                    {formatCurrency(stats?.total_transfers_sent || 0)}
+                                    {formatCurrency(periodStats?.total_transfers_sent || 0)}
                                 </p>
                             </div>
                             <div className="space-y-1">
                                 <p className="text-xs text-slate-500 dark:text-slate-400">Received</p>
                                 <p className="text-lg font-semibold text-purple-600 dark:text-purple-500">
-                                    {formatCurrency(stats?.total_transfers_received || 0)}
+                                    {formatCurrency(periodStats?.total_transfers_received || 0)}
                                 </p>
                             </div>
                         </div>

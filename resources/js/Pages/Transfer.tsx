@@ -271,17 +271,17 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
     const renderDetailsStep = () => (
         <>
             {/* Balance Card */}
-            <Card className="bg-gradient-to-br from-blue-600 to-purple-600 border-0 text-white shadow-xl">
+            <Card className="bg-slate-900 dark:bg-slate-950 border border-slate-800 text-white shadow-xl">
                 <CardContent className="pt-6 pb-6">
                     <div className="text-center">
-                        <p className="text-sm text-blue-100 mb-2">Available Balance</p>
+                        <p className="text-sm text-slate-400 mb-2">Available Balance</p>
                         <p className="text-3xl font-bold">{formatCurrency(wallet?.balance || 0)}</p>
                     </div>
                 </CardContent>
             </Card>
 
             {/* Transfer Type Tabs */}
-            <Card className="bg-slate-900 border-slate-800">
+            <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                 <CardContent className="p-2">
                     <div className="grid grid-cols-2 gap-2">
                         <Button
@@ -294,7 +294,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                             }}
                             className={transferType === 'internal' 
                                 ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                                : 'text-slate-400 hover:text-slate-50 hover:bg-slate-800'
+                                : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-slate-800'
                             }
                         >
                             Internal Transfer
@@ -309,7 +309,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                             }}
                             className={transferType === 'wire' 
                                 ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                                : 'text-slate-400 hover:text-slate-50 hover:bg-slate-800'
+                                : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-slate-800'
                             }
                         >
                             Wire Transfer
@@ -319,12 +319,12 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
             </Card>
 
             {/* Transfer Form */}
-            <Card className="bg-slate-900 border-slate-800">
+            <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                 <CardHeader>
-                    <CardTitle className="text-slate-50 text-lg">
+                    <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">
                         {transferType === 'internal' ? 'Internal Transfer' : 'Wire Transfer'}
                     </CardTitle>
-                    <CardDescription className="text-slate-400">
+                    <CardDescription className="text-slate-500 dark:text-slate-400">
                         {transferType === 'internal' 
                             ? 'Send money to another user in the system'
                             : 'Send money to an external bank account'
@@ -337,7 +337,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                             <>
                                 {/* Internal Transfer Fields */}
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                         Recipient Account Number
                                     </label>
                                     <input
@@ -350,15 +350,15 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                             clearFormError('recipient_account');
                                         }}
                                         placeholder="Enter account number"
-                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {formErrors.recipient_account && (
-                                        <p className="mt-2 text-sm text-red-400">{formErrors.recipient_account}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{formErrors.recipient_account}</p>
                                     )}
                                     {lookingUpAccount && (
-                                        <div className="mt-2 p-3 bg-blue-900/20 border border-blue-800 rounded-lg animate-pulse">
-                                            <p className="text-sm text-blue-300 flex items-center">
+                                        <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg animate-pulse">
+                                            <p className="text-sm text-blue-700 dark:text-blue-300 flex items-center">
                                                 <svg className="w-4 h-4 mr-2 animate-spin" fill="none" viewBox="0 0 24 24">
                                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -368,8 +368,8 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                         </div>
                                     )}
                                     {!lookingUpAccount && recipientName && (
-                                        <div className="mt-2 p-3 bg-green-900/20 border border-green-800 rounded-lg transition-all duration-300 ease-in-out">
-                                            <p className="text-sm text-green-300 flex items-center">
+                                        <div className="mt-2 p-3 bg-emerald-50 dark:bg-green-900/20 border border-emerald-200 dark:border-green-800 rounded-lg transition-all duration-300 ease-in-out">
+                                            <p className="text-sm text-emerald-700 dark:text-green-300 flex items-center">
                                                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                 </svg>
@@ -378,8 +378,8 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                         </div>
                                     )}
                                     {!lookingUpAccount && accountNotFound && (
-                                        <div className="mt-2 p-3 bg-red-900/20 border border-red-800 rounded-lg">
-                                            <p className="text-sm text-red-300 flex items-center">
+                                        <div className="mt-2 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                                            <p className="text-sm text-red-700 dark:text-red-300 flex items-center">
                                                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                                 </svg>
@@ -393,7 +393,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                             <>
                                 {/* Wire Transfer Fields */}
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                         Beneficiary Name
                                     </label>
                                     <input
@@ -404,16 +404,16 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                             clearFormError('wire_beneficiary_name');
                                         }}
                                         placeholder="Full name of recipient"
-                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {formErrors.wire_beneficiary_name && (
-                                        <p className="mt-2 text-sm text-red-400">{formErrors.wire_beneficiary_name}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{formErrors.wire_beneficiary_name}</p>
                                     )}
                                 </div>
 
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                         Bank Name
                                     </label>
                                     <input
@@ -424,16 +424,16 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                             clearFormError('wire_bank_name');
                                         }}
                                         placeholder="Enter bank name"
-                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {formErrors.wire_bank_name && (
-                                        <p className="mt-2 text-sm text-red-400">{formErrors.wire_bank_name}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{formErrors.wire_bank_name}</p>
                                     )}
                                 </div>
 
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                         Account Number
                                     </label>
                                     <input
@@ -446,17 +446,17 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                             clearFormError('wire_account_number');
                                         }}
                                         placeholder="Enter account number"
-                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         required
                                     />
                                     {formErrors.wire_account_number && (
-                                        <p className="mt-2 text-sm text-red-400">{formErrors.wire_account_number}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{formErrors.wire_account_number}</p>
                                     )}
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-3">
                                     <div>
-                                        <label className="text-sm text-slate-300 mb-2 block">
+                                        <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                             Routing Number
                                         </label>
                                         <input
@@ -469,15 +469,15 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                                 clearFormError('wire_routing_number');
                                             }}
                                             placeholder="Routing #"
-                                            className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             required
                                         />
                                         {formErrors.wire_routing_number && (
-                                            <p className="mt-2 text-sm text-red-400">{formErrors.wire_routing_number}</p>
+                                            <p className="mt-2 text-sm text-red-600 dark:text-red-400">{formErrors.wire_routing_number}</p>
                                         )}
                                     </div>
                                     <div>
-                                        <label className="text-sm text-slate-300 mb-2 block">
+                                        <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                             SWIFT/BIC Code
                                         </label>
                                         <input
@@ -488,16 +488,16 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                                 clearFormError('wire_swift_code');
                                             }}
                                             placeholder="Optional"
-                                            className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         />
                                         {formErrors.wire_swift_code && (
-                                            <p className="mt-2 text-sm text-red-400">{formErrors.wire_swift_code}</p>
+                                            <p className="mt-2 text-sm text-red-600 dark:text-red-400">{formErrors.wire_swift_code}</p>
                                         )}
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label className="text-sm text-slate-300 mb-2 block">
+                                    <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                         Beneficiary Address
                                     </label>
                                     <textarea
@@ -508,11 +508,11 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                         }}
                                         placeholder="Full address of beneficiary"
                                         rows={2}
-                                        className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                                         required
                                     />
                                     {formErrors.wire_beneficiary_address && (
-                                        <p className="mt-2 text-sm text-red-400">{formErrors.wire_beneficiary_address}</p>
+                                        <p className="mt-2 text-sm text-red-600 dark:text-red-400">{formErrors.wire_beneficiary_address}</p>
                                     )}
                                 </div>
                             </>
@@ -520,11 +520,11 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
 
                         {/* Common Fields */}
                         <div>
-                            <label className="text-sm text-slate-300 mb-2 block">
+                            <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                 Amount
                             </label>
                             <div className="relative">
-                                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400">
                                     $
                                 </span>
                                 <input
@@ -538,19 +538,19 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                         clearFormError('amount');
                                     }}
                                     placeholder="0.00"
-                                    className="w-full pl-8 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full pl-8 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
                                 />
                             </div>
                             {formErrors.amount && (
-                                <p className="mt-2 text-sm text-red-400">
+                                <p className="mt-2 text-sm text-red-600 dark:text-red-400">
                                     {formErrors.amount}
                                 </p>
                             )}
                         </div>
 
                         <div>
-                            <label className="text-sm text-slate-300 mb-2 block">
+                            <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                 Description (Optional)
                             </label>
                                 <textarea
@@ -561,10 +561,10 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                     }}
                                     placeholder="What's this transfer for?"
                                     rows={3}
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                                 />
                                 {formErrors.description && (
-                                    <p className="mt-2 text-sm text-red-400">{formErrors.description}</p>
+                                    <p className="mt-2 text-sm text-red-600 dark:text-red-400">{formErrors.description}</p>
                                 )}
                         </div>
 
@@ -580,13 +580,13 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
             </Card>
 
             {/* Info Card */}
-            <Card className="bg-blue-950/20 border-blue-900">
+            <Card className="bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900">
                 <CardContent className="pt-6 space-y-2">
                     <div className="flex items-start space-x-2">
-                        <svg className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-blue-500 dark:text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <div className="text-sm text-blue-200 space-y-1">
+                        <div className="text-sm text-blue-700 dark:text-blue-200 space-y-1">
                             {transferType === 'internal' ? (
                                 <>
                                     <p>• Internal transfers are instant</p>
@@ -611,48 +611,48 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
     const renderVerifyStep = () => (
         <>
             {/* Summary Card */}
-            <Card className="bg-slate-900 border-slate-800">
+            <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                 <CardHeader>
-                    <CardTitle className="text-slate-50 text-lg">Verify Transfer</CardTitle>
-                    <CardDescription className="text-slate-400">
+                    <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Verify Transfer</CardTitle>
+                    <CardDescription className="text-slate-500 dark:text-slate-400">
                         Review your transfer details
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-3">
-                        <div className="flex justify-between py-2 border-b border-slate-800">
-                            <span className="text-slate-400">Recipient</span>
-                            <span className="text-slate-50 font-medium">
+                        <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                            <span className="text-slate-500 dark:text-slate-400">Recipient</span>
+                            <span className="text-slate-900 dark:text-slate-50 font-medium">
                                 {transferType === 'internal' ? recipientName : wireBeneficiaryName}
                             </span>
                         </div>
                         {transferType === 'internal' ? (
-                            <div className="flex justify-between py-2 border-b border-slate-800">
-                                <span className="text-slate-400">Account</span>
-                                <span className="text-slate-50 font-mono">{recipientAccount}</span>
+                            <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                                <span className="text-slate-500 dark:text-slate-400">Account</span>
+                                <span className="text-slate-900 dark:text-slate-50 font-mono">{recipientAccount}</span>
                             </div>
                         ) : (
                             <>
-                                <div className="flex justify-between py-2 border-b border-slate-800">
-                                    <span className="text-slate-400">Bank</span>
-                                    <span className="text-slate-50">{wireBankName}</span>
+                                <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                                    <span className="text-slate-500 dark:text-slate-400">Bank</span>
+                                    <span className="text-slate-900 dark:text-slate-50">{wireBankName}</span>
                                 </div>
-                                <div className="flex justify-between py-2 border-b border-slate-800">
-                                    <span className="text-slate-400">Account</span>
-                                    <span className="text-slate-50 font-mono">{wireAccountNumber}</span>
+                                <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                                    <span className="text-slate-500 dark:text-slate-400">Account</span>
+                                    <span className="text-slate-900 dark:text-slate-50 font-mono">{wireAccountNumber}</span>
                                 </div>
                             </>
                         )}
-                        <div className="flex justify-between py-2 border-b border-slate-800">
-                            <span className="text-slate-400">Amount</span>
-                            <span className="text-slate-50 font-bold text-lg">
+                        <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                            <span className="text-slate-500 dark:text-slate-400">Amount</span>
+                            <span className="text-slate-900 dark:text-slate-50 font-bold text-lg">
                                 ${parseFloat(amount).toFixed(2)}
                             </span>
                         </div>
                         {description && (
-                            <div className="flex justify-between py-2 border-b border-slate-800">
-                                <span className="text-slate-400">Description</span>
-                                <span className="text-slate-50 text-right text-sm">{description}</span>
+                            <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                                <span className="text-slate-500 dark:text-slate-400">Description</span>
+                                <span className="text-slate-900 dark:text-slate-50 text-right text-sm">{description}</span>
                             </div>
                         )}
                     </div>
@@ -660,18 +660,18 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
             </Card>
 
             {/* Verification Form */}
-            <Card className="bg-slate-900 border-slate-800">
+            <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
                 <CardHeader>
-                    <CardTitle className="text-slate-50 text-lg">Security Verification</CardTitle>
-                    <CardDescription className="text-slate-400">
+                    <CardTitle className="text-slate-900 dark:text-slate-50 text-lg">Security Verification</CardTitle>
+                    <CardDescription className="text-slate-500 dark:text-slate-400">
                         Enter your PIN and transaction code
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleVerifySubmit} className="space-y-4">
                         {error && (
-                            <div className="p-3 bg-red-900/20 border border-red-800 rounded-lg">
-                                <p className="text-sm text-red-300 flex items-center">
+                            <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                                <p className="text-sm text-red-700 dark:text-red-300 flex items-center">
                                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                     </svg>
@@ -681,7 +681,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                         )}
 
                         <div>
-                            <label className="text-sm text-slate-300 mb-2 block">
+                            <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                 Transaction PIN
                             </label>
                             <input
@@ -691,13 +691,13 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                 value={transactionPin}
                                 onChange={(e) => setTransactionPin(e.target.value.replace(/\D/g, ''))}
                                 placeholder="Enter 6-digit PIN"
-                                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center text-2xl tracking-widest"
+                                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center text-2xl tracking-widest"
                                 required
                             />
                         </div>
 
                         <div>
-                            <label className="text-sm text-slate-300 mb-2 block">
+                            <label className="text-sm text-slate-600 dark:text-slate-300 mb-2 block">
                                 Transaction Code
                             </label>
                             <input
@@ -705,15 +705,15 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                 value={transactionCode}
                                 onChange={(e) => setTransactionCode(e.target.value.toUpperCase())}
                                 placeholder="XXX-XXX-XXX"
-                                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center font-mono"
+                                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-center font-mono"
                                 required
                             />
-                            <p className="mt-2 text-xs text-slate-400">
+                            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                                 Enter the transfer code provided by our bank. Need one?{' '}
                                 <a
                                     href="#"
                                     onClick={handleRequestTransferCode}
-                                    className="font-medium text-slate-200 underline underline-offset-4"
+                                    className="font-medium text-slate-700 dark:text-slate-200 underline underline-offset-4"
                                 >
                                     {isRequestingCode ? 'Requesting…' : 'Request Transfer Code'}
                                 </a>
@@ -742,7 +742,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                 type="button"
                                 onClick={handleBack}
                                 variant="outline"
-                                className="w-full border-slate-700 text-slate-300 hover:bg-slate-800 py-6"
+                                className="w-full border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 py-6"
                                 disabled={loading}
                             >
                                 Back
@@ -755,11 +755,11 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
     );
 
     const renderProcessingStep = () => (
-        <Card className="bg-slate-900 border-slate-800">
+        <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
             <CardContent className="py-16">
                 <div className="flex flex-col items-center justify-center space-y-6">
                     <div className="relative">
-                        <div className="w-20 h-20 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin"></div>
+                        <div className="w-20 h-20 rounded-full border-4 border-blue-200 dark:border-blue-900/40 border-t-blue-600 animate-spin"></div>
                         <div className="absolute inset-0 flex items-center justify-center">
                             <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -767,19 +767,19 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                         </div>
                     </div>
                     <div className="text-center">
-                        <h3 className="text-xl font-semibold text-slate-50 mb-2">Processing Transfer</h3>
-                        <p className="text-slate-400">Please wait while we process your transaction...</p>
+                        <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-2">Processing Transfer</h3>
+                        <p className="text-slate-500 dark:text-slate-400">Please wait while we process your transaction...</p>
                     </div>
                     <div className="flex flex-col items-center space-y-2">
-                        <div className="flex items-center text-sm text-slate-500">
+                        <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
                             <div className="w-2 h-2 rounded-full bg-blue-600 mr-2 animate-pulse"></div>
                             Verifying transaction details
                         </div>
-                        <div className="flex items-center text-sm text-slate-500">
+                        <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
                             <div className="w-2 h-2 rounded-full bg-blue-600 mr-2 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
                             Authenticating transaction code
                         </div>
-                        <div className="flex items-center text-sm text-slate-500">
+                        <div className="flex items-center text-sm text-slate-500 dark:text-slate-400">
                             <div className="w-2 h-2 rounded-full bg-blue-600 mr-2 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
                             Processing payment
                         </div>
@@ -793,26 +793,26 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
         return (
             <MobileLayout user={auth.user} title="Transfer" currentRoute="transfer">
                 <div className="px-4 py-6">
-                    <Card className="border-rose-500/40 bg-rose-950/40 text-rose-100">
+                    <Card className="border-rose-300 dark:border-rose-500/40 bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-100">
                         <CardContent className="pt-6 pb-6">
                             <div className="flex flex-col space-y-4">
                                 <div className="flex items-start space-x-3">
                                     <div className="mt-1">
-                                        <svg className="w-5 h-5 text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-5 h-5 text-rose-500 dark:text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M5.07 19h13.86A2 2 0 0020.9 17L13.84 4.66a2 2 0 00-3.68 0L3.1 17a2 2 0 001.97 2z" />
                                         </svg>
                                     </div>
                                     <div className="space-y-1">
-                                        <p className="text-sm font-semibold uppercase tracking-wide text-rose-200">
+                                        <p className="text-sm font-semibold uppercase tracking-wide text-rose-700 dark:text-rose-200">
                                             Account Locked
                                         </p>
-                                        <p className="text-sm text-rose-100/90">
+                                        <p className="text-sm text-rose-700/90 dark:text-rose-100/90">
                                             Transfers are currently disabled for your account. Please reach out to our support team to resolve this issue before attempting another transfer.
                                         </p>
                                     </div>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-rose-100/70">
+                                    <p className="text-xs text-rose-700/70 dark:text-rose-100/70">
                                         Need help? Contact us at <span className="font-semibold">{supportEmail ?? 'support@banko.test'}</span>.
                                     </p>
                                 </div>

@@ -36,31 +36,43 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
         
-        // Get transaction statistics
+        // Get transaction statistics for each period filter
         $stats = [
-            'total_deposits' => Transaction::where('user_id', $user->id)
-                ->where('type', 'deposit')
-                ->where('status', 'completed')
-                ->sum('amount'),
-            'total_withdrawals' => Transaction::where('user_id', $user->id)
-                ->where('type', 'withdrawal')
-                ->where('status', 'completed')
-                ->sum('amount'),
-            'total_transfers_sent' => Transaction::where('user_id', $user->id)
-                ->where('type', 'transfer')
-                ->where('status', 'completed')
-                ->sum('amount'),
-            'total_transfers_received' => Transaction::where('recipient_id', $user->id)
-                ->where('type', 'transfer')
-                ->where('status', 'completed')
-                ->sum('amount'),
+            '7d' => $this->statsForPeriod($user->id, now()->subDays(7)),
+            '30d' => $this->statsForPeriod($user->id, now()->subDays(30)),
+            '1y' => $this->statsForPeriod($user->id, now()->subYear()),
         ];
-        
+
         return inertia('Dashboard', [
             'user' => $user,
             'wallet' => $wallet,
             'recentTransactions' => $recentTransactions,
             'stats' => $stats,
         ]);
+    }
+
+    /**
+     * Sum a user's completed transactions of a given type since a given date.
+     */
+    private function sumTransactions(int $userId, string $column, string $type, \Illuminate\Support\Carbon $since): int
+    {
+        return (int) Transaction::where($column, $userId)
+            ->where('type', $type)
+            ->where('status', 'completed')
+            ->where('created_at', '>=', $since)
+            ->sum('amount');
+    }
+
+    /**
+     * Build the deposit/withdrawal/sent/received totals for a user within a given period.
+     */
+    private function statsForPeriod(int $userId, \Illuminate\Support\Carbon $since): array
+    {
+        return [
+            'total_deposits' => $this->sumTransactions($userId, 'user_id', 'deposit', $since),
+            'total_withdrawals' => $this->sumTransactions($userId, 'user_id', 'withdrawal', $since),
+            'total_transfers_sent' => $this->sumTransactions($userId, 'user_id', 'transfer', $since),
+            'total_transfers_received' => $this->sumTransactions($userId, 'recipient_id', 'transfer', $since),
+        ];
     }
 }
