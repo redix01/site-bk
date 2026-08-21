@@ -10,7 +10,7 @@
                 <div class="col-xl-8">
                     <div class="mil-banner-text mil-text-center">
                         <div class="mil-text-m mil-mb-20">Personal Banking</div>
-                        <h1 class="mil-mb-60">Open an Account</h1>
+                        <h1 class="mil-mb-60">Open a Banko Account</h1>
                         <ul class="mil-breadcrumbs mil-center">
                             <li><a href="{{ route('home') }}">Home</a></li>
                             <li><a href="{{ route('personal.open-account') }}">Open an Account</a></li>
@@ -167,7 +167,7 @@
                     <div class="col-xl-7 mil-sm-text-center">
                         <h2 class="mil-light mil-mb-30 mil-up">Ready to Open Your Account?</h2>
                         <p class="mil-text-m mil-mb-60 mil-light mil-up">
-                            Secure your spot and unlock digital tools, interest-earning accounts, and 24/7 account alerts.
+                            Secure your spot with Banko and unlock digital tools, interest-earning accounts, and 24/7 account alerts.
                         </p>
                         <div class="mil-buttons-frame mil-up">
                             <a href="{{ route('register') }}" class="mil-btn mil-md">Apply Now</a>

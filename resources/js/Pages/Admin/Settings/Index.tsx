@@ -195,7 +195,7 @@ export default function Index({ settings }: Props) {
                                         id="site_name"
                                         value={data.site_name}
                                         onChange={(e) => setData('site_name', e.target.value)}
-                                        placeholder="App Name"
+                                        placeholder="Banko"
                                     />
                                         {errors.site_name && <p className="text-sm text-red-400">{errors.site_name}</p>}
                                     </div>
@@ -210,7 +210,7 @@ export default function Index({ settings }: Props) {
                                         type="email"
                                         value={data.site_email}
                                         onChange={(e) => setData('site_email', e.target.value)}
-                                        placeholder="support@example.com"
+                                        placeholder="support@banko.test"
                                     />
                                         {errors.site_email && <p className="text-sm text-red-400">{errors.site_email}</p>}
                                     </div>
@@ -225,7 +225,7 @@ export default function Index({ settings }: Props) {
                                         type="email"
                                             value={data.support_email}
                                         onChange={(e) => setData('support_email', e.target.value)}
-                                        placeholder="help@example.com"
+                                        placeholder="help@banko.test"
                                     />
                                     {errors.support_email && (
                                             <p className="text-sm text-red-400">{errors.support_email}</p>
@@ -242,7 +242,7 @@ export default function Index({ settings }: Props) {
                                         type="url"
                                         value={data.app_url}
                                         onChange={(e) => setData('app_url', e.target.value)}
-                                        placeholder="https://example.com"
+                                        placeholder="https://banko.test"
                                     />
                                         {errors.app_url && <p className="text-sm text-red-400">{errors.app_url}</p>}
                                     </div>
@@ -270,7 +270,7 @@ export default function Index({ settings }: Props) {
                                         id="currency"
                                         value={data.currency}
                                         onChange={(e) => setData('currency', e.target.value.toUpperCase())}
-                                        placeholder="AUD"
+                                        placeholder="NGN"
                                             className="uppercase"
                                     />
                                         {errors.currency && <p className="text-sm text-red-400">{errors.currency}</p>}

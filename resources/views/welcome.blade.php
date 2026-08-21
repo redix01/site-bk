@@ -3,10 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    @php
-        $siteName = \App\Support\SettingsManager::get('site_name', config('app.name', 'App'));
-    @endphp
-    <title>{{ $siteName }}</title>
+    <title>{{ config('app.name', 'Banko') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -99,7 +96,7 @@
     </head>
 <body>
     <div class="container">
-        <div class="logo">🏦 {{ $siteName }}</div>
+        <div class="logo">🏦 Banko</div>
         <div class="subtitle">Your Digital Banking Solution</div>
         
         <div class="button-group">

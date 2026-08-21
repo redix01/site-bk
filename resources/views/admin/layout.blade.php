@@ -3,10 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @php
-        $siteName = \App\Support\SettingsManager::get('site_name', config('app.name', 'App'));
-    @endphp
-    <title>@yield('title', 'Admin Dashboard') - {{ $siteName }}</title>
+    <title>@yield('title', 'Admin Dashboard') - {{ config('app.name', 'Banko') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -122,7 +119,7 @@
                             <span class="text-white font-bold text-lg">🏦</span>
                         </div>
                         <div>
-                            <h1 class="text-xl font-bold text-white">{{ $siteName }}</h1>
+                            <h1 class="text-xl font-bold text-white">Banko</h1>
                             <p class="text-xs text-gray-400">Admin Panel</p>
                         </div>
                     </div>

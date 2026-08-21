@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-xl-6 mil-mb-80">
                     <div class="mil-image-frame mil-up">
-                        <img src="{{ asset('img/inner-pages/support-team.svg') }}" alt="Customer support team" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
+                        <img src="{{ asset('img/inner-pages/8.png') }}" alt="Customer support team" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-xl-4 mil-mb-60">
                         <div class="mil-icon-box">
-                            <img src="{{ asset('img/inner-pages/icons/support-phone.svg') }}" alt="Phone icon" class="mil-mb-30 mil-up">
+                            <img src="{{ asset('img/inner-pages/icons/9.svg') }}" alt="Phone icon" class="mil-mb-30 mil-up">
                             <h5 class="mil-mb-20 mil-up">Call Us</h5>
                             <p class="mil-text-m mil-soft mil-up">
                                 +44 20 7946 0123 <br>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-xl-4 mil-mb-60">
                         <div class="mil-icon-box">
-                            <img src="{{ asset('img/inner-pages/icons/support-chat.svg') }}" alt="Message icon" class="mil-mb-30 mil-up">
+                            <img src="{{ asset('img/inner-pages/icons/10.svg') }}" alt="Message icon" class="mil-mb-30 mil-up">
                             <h5 class="mil-mb-20 mil-up">Secure Messages</h5>
                             <p class="mil-text-m mil-soft mil-up">
                                 Use our Amiga virtual assistant, website, or mobile app for unlimited conversations and real-time guidance.
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-xl-4 mil-mb-60">
                         <div class="mil-icon-box">
-                            <img src="{{ asset('img/inner-pages/icons/support-branch.svg') }}" alt="Branch icon" class="mil-mb-30 mil-up">
+                            <img src="{{ asset('img/inner-pages/icons/11.svg') }}" alt="Branch icon" class="mil-mb-30 mil-up">
                             <h5 class="mil-mb-20 mil-up">Visit a Branch</h5>
                             <p class="mil-text-m mil-soft mil-up">
                                 25 Kingsway Street, Canary Wharf, London, E14 5HP, United Kingdom. Schedule ahead or walk in for tailored support.
@@ -110,7 +110,7 @@
                 </div>
                 <div class="col-xl-6 mil-mb-80">
                     <div class="mil-image-frame mil-up">
-                        <img src="{{ asset('img/inner-pages/security-alerts.svg') }}" alt="Security alerts illustration" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
+                        <img src="{{ asset('img/inner-pages/9.png') }}" alt="Security alerts illustration" class="mil-scale-img" data-value-1="1" data-value-2="1.2">
                     </div>
                 </div>
             </div>
@@ -186,3 +186,4 @@
 
 </div>
 @endsection
+

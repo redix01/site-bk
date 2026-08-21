@@ -3,10 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @php
-        $siteName = \App\Support\SettingsManager::get('site_name', config('app.name', 'App'));
-    @endphp
-    <title>Login - {{ $siteName }}</title>
+    <title>Login - {{ config('app.name', 'Banko') }}</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -114,7 +111,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">🏦 {{ $siteName }}</div>
+        <div class="logo">🏦 Banko</div>
         
         <form method="POST" action="{{ route('login') }}">
             @csrf

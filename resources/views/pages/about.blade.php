@@ -9,7 +9,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-xl-8">
                     <div class="mil-banner-text mil-text-center">
-                        <div class="mil-text-m mil-mb-20">About Us</div>
+                        <div class="mil-text-m mil-mb-20">About Banko</div>
                         <h1 class="mil-mb-60">Trusted Banking, Built on Relationships</h1>
                         <ul class="mil-breadcrumbs mil-center">
                             <li><a href="{{ url('/') }}">Home</a></li>
@@ -28,7 +28,7 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-xl-5 mil-mb-80">
                     <h2 class="mil-mb-30 mil-up">The Vision That Drives Our Team</h2>
-                    <p class="mil-text-m mil-soft mil-mb-60 mil-up">From our first community branch to today's national footprint, our purpose has remained the same: help people and businesses prosper with clarity and confidence. We invest in innovation and in people, so every client interaction feels personal and every solution scales with their goals.</p>
+                    <p class="mil-text-m mil-soft mil-mb-60 mil-up">From our first community branch to today’s national footprint, Banko’s purpose has remained the same: help people and businesses prosper with clarity and confidence. We invest in innovation and in people, so every client interaction feels personal and every solution scales with their goals.</p>
                     <ul class="mil-list-2 mil-type-2">
                         <li>
                             <div class="mil-up">
@@ -75,7 +75,7 @@
             <div class="mil-out-frame mil-p-160-100">
                 <div class="row justify-content-center mil-text-center">
                     <div class="col-xl-8 mil-mb-80-adaptive-30">
-                        <h2 class="mil-up">Why Clients Trust Us</h2>
+                        <h2 class="mil-up">Why Clients Trust Banko</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -111,7 +111,7 @@
         <div class="container">
             <div class="row flex-sm-row-reverse justify-content-between align-items-center">
                 <div class="col-xl-6 mil-mb-80">
-                    <h2 class="mil-mb-30 mil-up">Values That Anchor Us</h2>
+                    <h2 class="mil-mb-30 mil-up">Values That Anchor Banko</h2>
                     <p class="mil-text-m mil-soft mil-mb-60 mil-up">We blend transparent communication with disciplined risk management to build enduring relationships. Every product, policy, and partnership reflects our promise to steward client wealth responsibly.</p>
                     <ul class="mil-list-2 mil-type-2">
                         <li>
@@ -144,7 +144,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-10">
                     <h2 class="mil-mb-30">“Trust is our most valuable currency. We earn it through clarity, accountability, and an unwavering focus on our clients.”</h2>
-                    <p class="mil-text-m mil-soft mil-mb-60">— Our Team</p>
+                    <p class="mil-text-m mil-soft mil-mb-60">— The Banko Team</p>
                     <div class="row">
                         <div class="col-xl-6">
                             <ul class="mil-list-2 mil-type-2 mil-mb-30">
@@ -180,7 +180,7 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-xl-7 mil-sm-text-center">
                         <h2 class="mil-light mil-mb-30 mil-up">Experience Banking That Adapts to You</h2>
-                        <p class="mil-text-m mil-mb-60 mil-dark-soft mil-up">Partner with us and unlock tailored guidance, smarter tools, and a team committed to your long-term success.</p>
+                        <p class="mil-text-m mil-mb-60 mil-dark-soft mil-up">Partner with Banko and unlock tailored guidance, smarter tools, and a team committed to your long-term success.</p>
                         <div class="mil-buttons-frame mil-up">
                             <a href="contact.html" class="mil-btn mil-md">Connect with Us</a>
                             <a href="register.html" class="mil-btn mil-border mil-md">Open an Account</a>

@@ -30,10 +30,10 @@ class SettingsUpdateTest extends TestCase
         ]);
 
         $payload = [
-            'site_name' => 'App Pro',
-            'site_email' => 'hello@example.com',
-            'support_email' => 'support@example.com',
-            'app_url' => 'https://example.com',
+            'site_name' => 'Banko Pro',
+            'site_email' => 'hello@banko.test',
+            'support_email' => 'support@banko.test',
+            'app_url' => 'https://banko.test',
             'timezone' => 'UTC',
             'currency' => 'USD',
             'security_max_login_attempts' => 4,
@@ -55,7 +55,7 @@ class SettingsUpdateTest extends TestCase
 
         $this->assertDatabaseHas('settings', [
             'key' => 'site_name',
-            'value' => 'App Pro',
+            'value' => 'Banko Pro',
         ]);
 
         $this->assertDatabaseHas('settings', [
@@ -65,7 +65,7 @@ class SettingsUpdateTest extends TestCase
 
         SettingsManager::flushCache();
 
-        $this->assertSame('App Pro', SettingsManager::get('site_name'));
+        $this->assertSame('Banko Pro', SettingsManager::get('site_name'));
         $this->assertSame(4, SettingsManager::get('security_max_login_attempts'));
         $this->assertSame(150000.0, SettingsManager::get('security_two_factor_threshold'));
     }
@@ -89,10 +89,10 @@ class SettingsUpdateTest extends TestCase
         SettingsManager::flushCache();
 
         $payload = [
-            'site_name' => 'App Pro',
-            'site_email' => 'hello@example.com',
-            'support_email' => 'support@example.com',
-            'app_url' => 'https://example.com',
+            'site_name' => 'Banko Pro',
+            'site_email' => 'hello@banko.test',
+            'support_email' => 'support@banko.test',
+            'app_url' => 'https://banko.test',
             'timezone' => 'UTC',
             'currency' => 'USD',
             'security_max_login_attempts' => 4,

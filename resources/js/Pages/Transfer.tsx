@@ -43,12 +43,21 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
     const [isRequestingCode, setIsRequestingCode] = useState(false);
     const [codeRequestFeedback, setCodeRequestFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-    const formatCurrency = (amount: number) => {
+    const normalizeMajor = (value: number | string | null | undefined) => {
+        if (value === null || value === undefined) {
+            return 0;
+        }
+        const numeric = typeof value === 'string' ? parseFloat(value) : value;
+        return Number.isFinite(numeric) ? numeric : 0;
+    };
+
+    const formatCurrency = (amount: number | string | null | undefined) => {
+        const normalized = normalizeMajor(amount);
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: wallet?.currency || 'USD',
             minimumFractionDigits: 2,
-        }).format(amount / 100);
+        }).format(normalized);
     };
 
     // Lookup account when typing internal transfer recipient
@@ -89,8 +98,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
         setFormErrors({});
 
         const parsedAmount = parseFloat(amount);
-        const availableBalanceCents = wallet?.balance ?? 0;
-        const availableBalance = availableBalanceCents / 100;
+        const availableBalance = normalizeMajor(wallet?.balance);
 
         if (Number.isNaN(parsedAmount) || parsedAmount <= 0) {
             setFormErrors({ amount: 'Enter a valid transfer amount.' });
@@ -241,7 +249,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
             setFormErrors({});
             setCodeRequestFeedback({
                 type: 'success',
-                message: `Support has been notified at ${supportEmail ?? 'support@example.com'}. Watch your email for a transfer code.`,
+                message: `Support has been notified at ${supportEmail ?? 'support@banko.test'}. Watch your email for a transfer code.`,
             });
         } catch (requestError: any) {
             const message =
@@ -813,7 +821,7 @@ export default function Transfer({ auth, wallet, supportEmail }: TransferPagePro
                                 </div>
                                 <div>
                                     <p className="text-xs text-rose-100/70">
-                                        Need help? Contact us at <span className="font-semibold">{supportEmail ?? 'support@example.com'}</span>.
+                                        Need help? Contact us at <span className="font-semibold">{supportEmail ?? 'support@banko.test'}</span>.
                                     </p>
                                 </div>
                             </div>

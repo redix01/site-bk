@@ -4,10 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        @php
-            $siteName = \App\Support\SettingsManager::get('site_name', config('app.name', 'Laravel'));
-        @endphp
-        <title inertia>{{ $siteName }}</title>
+        <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

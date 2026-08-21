@@ -29,10 +29,10 @@
                 <div class="col-xl-5 mil-mb-80">
                     <h2 class="mil-mb-30 mil-up">Everyday Banking Without the Friction</h2>
                     <p class="mil-text-m mil-soft mil-mb-30 mil-up">
-                        Pick the checking experience that fits your lifestyle. From fee-free essentials to accounts that reward higher balances, we keep your everyday money management simple and secure.
+                        Pick the checking experience that fits your lifestyle. From fee-free essentials to accounts that reward higher balances, Banko keeps your everyday money management simple and secure.
                     </p>
                     <div class="mil-up">
-                        <a href="{{ route('personal.open-account') }}" class="mil-btn mil-m mil-add-arrow">Get Started</a>
+                        <a href="{{ route('personal.open-account') }}" class="mil-btn mil-m mil-add-arrow">Start with Banko</a>
                     </div>
                 </div>
                 <div class="col-xl-6 mil-mb-80">
@@ -119,7 +119,7 @@
                     <div class="col-xl-8 mil-mb-80-adaptive-30">
                         <h2 class="mil-up">Benefits for Account Holders</h2>
                         <p class="mil-text-m mil-soft mil-up">
-                            Our customers enjoy layered security, real-time awareness, and tools that put them in control around the clock.
+                            Banko customers enjoy layered security, real-time awareness, and tools that put them in control around the clock.
                         </p>
                     </div>
                 </div>
