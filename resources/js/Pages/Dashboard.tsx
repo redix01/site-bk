@@ -38,7 +38,7 @@ const periodOptions: { key: StatsPeriod; label: string }[] = [
 export default function Dashboard({ auth, wallet, recentTransactions, stats }: DashboardPageProps) {
     // Add view parameter for admins to keep them in client view
     const viewParam = auth.user.is_admin ? '?view=client' : '';
-    const isLocked = auth.user.status === 'locked';
+    const isRestricted = auth.user.status === 'locked' || auth.user.status === 'suspended';
     const [statsPeriod, setStatsPeriod] = useState<StatsPeriod>('30d');
     const periodStats = stats?.[statsPeriod];
 
@@ -70,6 +70,7 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                 </svg>
             ),
+            disabled: isRestricted,
         },
         {
             name: 'Transfer',
@@ -81,7 +82,7 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
             ),
-            disabled: isLocked,
+            disabled: isRestricted,
         },
         {
             name: 'Savings',
@@ -93,6 +94,7 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9l9-6 9 6M4.5 9.75V21M19.5 9.75V21M9 21v-6a3 3 0 013-3v0a3 3 0 013 3v6M3 21h18" />
                 </svg>
             ),
+            disabled: isRestricted,
         },
         {
             name: 'Invest',
@@ -104,6 +106,7 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941" />
                 </svg>
             ),
+            disabled: isRestricted,
         },
     ];
 
@@ -172,28 +175,6 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
     return (
         <MobileLayout user={auth.user} title="Dashboard" currentRoute="dashboard">
             <div className="px-4 py-6 space-y-6">
-                {isLocked && (
-                    <Card className="border-rose-300 dark:border-rose-500/40 bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-100">
-                        <CardContent className="pt-6 pb-6">
-                            <div className="flex items-start space-x-3">
-                                <div className="mt-1">
-                                    <svg className="w-5 h-5 text-rose-500 dark:text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M5.07 19h13.86A2 2 0 0020.9 17L13.84 4.66a2 2 0 00-3.68 0L3.1 17a2 2 0 001.97 2z" />
-                                    </svg>
-                                </div>
-                                <div className="space-y-1">
-                                    <p className="text-sm font-semibold uppercase tracking-wide text-rose-700 dark:text-rose-200">
-                                        Account Locked
-                                    </p>
-                                    <p className="text-sm text-rose-700/90 dark:text-rose-100/90">
-                                        Transfers and other outgoing transactions are disabled until an administrator unlocks your account. Please contact support if you believe this is a mistake.
-                                    </p>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                )}
-
                 {/* Wallet Balance Card */}
                 <Card className="relative overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-black border border-slate-800 text-white shadow-xl shadow-slate-900/20">
                     <div aria-hidden className="pointer-events-none absolute -top-20 -right-10 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
@@ -239,7 +220,7 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
                                     {action.name}
                                 </p>
                                 {action.disabled && (
-                                    <span className="text-[9px] uppercase tracking-wider text-rose-500 dark:text-rose-300 font-semibold">Locked</span>
+                                    <span className="text-[9px] uppercase tracking-wider text-rose-500 dark:text-rose-300 font-semibold">Restricted</span>
                                 )}
                             </div>
                         </Link>

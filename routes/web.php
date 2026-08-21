@@ -79,42 +79,43 @@ Route::middleware('auth')->prefix('api')->group(function () {
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    // Profile
+
+    // Admin notices (visible to the account regardless of active/suspended status)
+    Route::post('/notifications/{notice}/read', [\App\Http\Controllers\UserNoticeController::class, 'markRead'])->name('notices.read');
+
+    // Profile (viewing is always allowed; changes require an active account)
     Route::get('/profile', [\App\Http\Controllers\UserProfileController::class, 'index'])->name('profile');
-    Route::post('/profile', [\App\Http\Controllers\UserProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/transaction-pin', [\App\Http\Controllers\UserProfileController::class, 'updateTransactionPin'])->name('profile.transaction-pin');
-    Route::post('/profile/password', [\App\Http\Controllers\UserProfileController::class, 'updatePassword'])->name('profile.password');
     Route::post('/profile/logout-sessions', [\App\Http\Controllers\UserProfileController::class, 'logoutOtherSessions'])->name('profile.logout-sessions');
-    
+
     // Transactions
     Route::get('/transactions', [\App\Http\Controllers\UserTransactionController::class, 'index'])->name('transactions');
     Route::get('/transactions/{transaction}', [\App\Http\Controllers\UserTransactionController::class, 'show'])->name('transactions.show');
-    
-    // Transfer
+
+    // Transfer / Deposit / Withdraw / Savings / Invest (viewing)
     Route::get('/transfer', [\App\Http\Controllers\UserTransferController::class, 'index'])->name('transfer');
-    Route::post('/transfer/internal', [\App\Http\Controllers\UserTransferController::class, 'storeInternal'])->name('transfer.internal');
-    Route::post('/transfer/wire', [\App\Http\Controllers\UserTransferController::class, 'storeWire'])->name('transfer.wire');
-    Route::post('/transfer/request-code', [\App\Http\Controllers\UserTransferController::class, 'requestTransferCode'])->name('transfer.request-code');
     Route::get('/transfer/success/{transaction}', [\App\Http\Controllers\UserTransferController::class, 'success'])->name('transfer.success');
     Route::get('/transfer/receipt/{transaction}', [\App\Http\Controllers\UserTransferController::class, 'downloadReceipt'])->name('transfer.receipt');
-    
-    // Deposit
     Route::get('/deposit', [\App\Http\Controllers\UserDepositController::class, 'index'])->name('deposit');
     Route::get('/deposit/crypto', [\App\Http\Controllers\UserDepositController::class, 'crypto'])->name('deposit.crypto');
-    Route::post('/deposit', [\App\Http\Controllers\UserDepositController::class, 'store'])->name('deposit.store');
-    
-    // Withdraw
     Route::get('/withdraw', [\App\Http\Controllers\UserWithdrawalController::class, 'index'])->name('withdraw');
-    Route::post('/withdraw', [\App\Http\Controllers\UserWithdrawalController::class, 'store'])->name('withdraw.store');
-
-    // Savings
     Route::get('/savings', [\App\Http\Controllers\UserSavingsController::class, 'index'])->name('savings');
-    Route::post('/savings', [\App\Http\Controllers\UserSavingsController::class, 'store'])->name('savings.store');
-
-    // Invest
     Route::get('/invest', [\App\Http\Controllers\UserInvestController::class, 'index'])->name('invest');
-    Route::post('/invest', [\App\Http\Controllers\UserInvestController::class, 'store'])->name('invest.store');
+
+    // Account-changing actions — blocked for suspended/locked accounts
+    Route::middleware('active')->group(function () {
+        Route::post('/profile', [\App\Http\Controllers\UserProfileController::class, 'update'])->name('profile.update');
+        Route::post('/profile/transaction-pin', [\App\Http\Controllers\UserProfileController::class, 'updateTransactionPin'])->name('profile.transaction-pin');
+        Route::post('/profile/password', [\App\Http\Controllers\UserProfileController::class, 'updatePassword'])->name('profile.password');
+
+        Route::post('/transfer/internal', [\App\Http\Controllers\UserTransferController::class, 'storeInternal'])->name('transfer.internal');
+        Route::post('/transfer/wire', [\App\Http\Controllers\UserTransferController::class, 'storeWire'])->name('transfer.wire');
+        Route::post('/transfer/request-code', [\App\Http\Controllers\UserTransferController::class, 'requestTransferCode'])->name('transfer.request-code');
+
+        Route::post('/deposit', [\App\Http\Controllers\UserDepositController::class, 'store'])->name('deposit.store');
+        Route::post('/withdraw', [\App\Http\Controllers\UserWithdrawalController::class, 'store'])->name('withdraw.store');
+        Route::post('/savings', [\App\Http\Controllers\UserSavingsController::class, 'store'])->name('savings.store');
+        Route::post('/invest', [\App\Http\Controllers\UserInvestController::class, 'store'])->name('invest.store');
+    });
 });
 
 // Admin Routes
@@ -130,6 +131,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::post('/users/{user}/suspend', [UserController::class, 'suspend'])->name('users.suspend');
     Route::post('/users/{user}/activate', [UserController::class, 'activate'])->name('users.activate');
     Route::post('/users/{user}/lock', [UserController::class, 'lock'])->name('users.lock');
+    Route::post('/users/{user}/send-mail', [UserController::class, 'sendMail'])->name('users.send-mail');
+    Route::post('/users/{user}/send-notification', [UserController::class, 'sendNotification'])->name('users.send-notification');
     Route::patch('/users/{user}/currency', [UserController::class, 'updateCurrency'])->name('users.currency');
     Route::patch('/users/{user}/created-at', [UserController::class, 'updateCreatedAt'])->name('users.created-at');
     

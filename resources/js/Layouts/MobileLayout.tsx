@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import { Head, router } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import BottomNavigation from '@/Components/BottomNavigation';
 import ThemeToggle from '@/Components/ThemeToggle';
 import { useTheme } from '@/hooks/useTheme';
-import { User } from '@/types';
+import { PageProps, User } from '@/types';
 
 interface MobileLayoutProps {
     children: ReactNode;
@@ -14,10 +14,13 @@ interface MobileLayoutProps {
 
 export default function MobileLayout({ children, title, user, currentRoute = 'dashboard' }: MobileLayoutProps) {
     const { theme, toggleTheme } = useTheme();
+    const { notices = [] } = usePage<PageProps>().props;
 
     // Add view parameter for admins to keep them in client view
     const viewParam = user.is_admin ? '?view=client' : '';
-    
+    const isSuspended = user.status === 'suspended';
+    const isLocked = user.status === 'locked';
+
     const navItems = [
         {
             name: 'Home',
@@ -102,6 +105,68 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                         </div>
                     </div>
                 </header>
+
+                {/* Account status & admin notices */}
+                <div className="max-w-3xl mx-auto px-4 pt-4 space-y-3">
+                    {(isSuspended || isLocked) && (
+                        <div className="flex items-start gap-3 rounded-xl border border-rose-300 bg-rose-50 p-4 dark:border-rose-500/40 dark:bg-rose-950/40">
+                            <svg className="mt-0.5 h-5 w-5 shrink-0 text-rose-500 dark:text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M5.07 19h13.86A2 2 0 0020.9 17L13.84 4.66a2 2 0 00-3.68 0L3.1 17a2 2 0 001.97 2z" />
+                            </svg>
+                            <div>
+                                <p className="text-sm font-semibold uppercase tracking-wide text-rose-700 dark:text-rose-200">
+                                    Account {isSuspended ? 'Suspended' : 'Locked'}
+                                </p>
+                                <p className="mt-0.5 text-sm text-rose-700/90 dark:text-rose-100/90">
+                                    Transfers, deposits, withdrawals, and other account changes are disabled until an administrator restores your account. Please contact support if you believe this is a mistake.
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
+                    {notices.map((notice) => {
+                        const isWarning = notice.type === 'warning';
+                        return (
+                            <div
+                                key={notice.id}
+                                className={`flex items-start gap-3 rounded-xl border p-4 ${
+                                    isWarning
+                                        ? 'border-amber-300 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-950/40'
+                                        : 'border-blue-300 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-950/40'
+                                }`}
+                            >
+                                <svg
+                                    className={`mt-0.5 h-5 w-5 shrink-0 ${isWarning ? 'text-amber-500 dark:text-amber-300' : 'text-blue-500 dark:text-blue-300'}`}
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M5.07 19h13.86A2 2 0 0020.9 17L13.84 4.66a2 2 0 00-3.68 0L3.1 17a2 2 0 001.97 2z" />
+                                </svg>
+                                <div className="flex-1">
+                                    <p className={`text-sm font-semibold ${isWarning ? 'text-amber-800 dark:text-amber-200' : 'text-blue-800 dark:text-blue-200'}`}>
+                                        {notice.title}
+                                    </p>
+                                    <p className={`mt-0.5 text-sm ${isWarning ? 'text-amber-700/90 dark:text-amber-100/90' : 'text-blue-700/90 dark:text-blue-100/90'}`}>
+                                        {notice.message}
+                                    </p>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => router.post(`/notifications/${notice.id}/read`, {}, { preserveScroll: true })}
+                                    className={`shrink-0 rounded-full p-1 transition-colors ${
+                                        isWarning
+                                            ? 'text-amber-500 hover:bg-amber-100 dark:text-amber-300 dark:hover:bg-amber-900/40'
+                                            : 'text-blue-500 hover:bg-blue-100 dark:text-blue-300 dark:hover:bg-blue-900/40'
+                                    }`}
+                                    title="Dismiss"
+                                >
+                                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
 
                 {/* Main Content */}
                 <main className="max-w-3xl mx-auto">

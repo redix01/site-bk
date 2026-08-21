@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\GeneralNotificationMail;
+use App\Models\AdminNotice;
 use App\Models\AuditLog;
 use App\Models\LoginHistory;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -496,6 +499,58 @@ class UserController extends Controller
         $user->lock($request->reason);
 
         return back()->with('success', 'User account locked successfully.');
+    }
+
+    /**
+     * Send a one-off email to a user using the bank's email template.
+     */
+    public function sendMail(Request $request, User $user)
+    {
+        $request->validate([
+            'subject' => 'required|string|max:150',
+            'message' => 'required|string|max:5000',
+        ]);
+
+        Mail::to($user->email)->queue(new GeneralNotificationMail(
+            $request->subject,
+            $request->subject,
+            $request->message,
+            url('/dashboard'),
+            'Go to Dashboard'
+        ));
+
+        AuditLog::logEvent('user.mail_sent', [
+            'subject' => $request->subject,
+        ], $user);
+
+        return back()->with('success', "Email sent to {$user->name}.");
+    }
+
+    /**
+     * Send an in-app notification that appears at the top of the user's dashboard.
+     */
+    public function sendNotification(Request $request, User $user)
+    {
+        $request->validate([
+            'type' => 'required|in:info,warning',
+            'title' => 'required|string|max:150',
+            'message' => 'required|string|max:2000',
+        ]);
+
+        AdminNotice::create([
+            'user_id' => $user->id,
+            'created_by' => Auth::id(),
+            'type' => $request->type,
+            'title' => $request->title,
+            'message' => $request->message,
+        ]);
+
+        AuditLog::logEvent('user.notice_sent', [
+            'type' => $request->type,
+            'title' => $request->title,
+        ], $user);
+
+        return back()->with('success', "Notification sent to {$user->name}.");
     }
 
     /**

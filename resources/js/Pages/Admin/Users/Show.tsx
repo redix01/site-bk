@@ -9,6 +9,7 @@ import {
     ArrowLeft,
     ArrowUpRight,
     Ban,
+    Bell,
     Check,
     CheckCircle,
     Clock,
@@ -16,6 +17,7 @@ import {
     Edit,
     KeyRound,
     Lock,
+    Mail,
     MailCheck,
     PlusCircle,
     ShieldCheck,
@@ -186,6 +188,35 @@ export default function Show({
     const createdAtForm = useForm({
         created_at: formatDateForInput(user.created_at),
     });
+
+    const [sendTab, setSendTab] = useState<'email' | 'notification'>('email');
+
+    const mailForm = useForm({
+        subject: '',
+        message: '',
+    });
+
+    const noticeForm = useForm({
+        type: 'info' as 'info' | 'warning',
+        title: '',
+        message: '',
+    });
+
+    const submitMail: FormEventHandler<HTMLFormElement> = (event) => {
+        event.preventDefault();
+        mailForm.post(`/admin/users/${user.id}/send-mail`, {
+            preserveScroll: true,
+            onSuccess: () => mailForm.reset(),
+        });
+    };
+
+    const submitNotice: FormEventHandler<HTMLFormElement> = (event) => {
+        event.preventDefault();
+        noticeForm.post(`/admin/users/${user.id}/send-notification`, {
+            preserveScroll: true,
+            onSuccess: () => noticeForm.reset('title', 'message'),
+        });
+    };
 
     useEffect(() => {
         currencyForm.setData('preferred_currency', currencyCode);
@@ -808,6 +839,177 @@ export default function Show({
                                         </Button>
                                     </form>
                                 </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="border-slate-800 bg-slate-900">
+                            <CardHeader>
+                                <CardTitle className="text-slate-50">Contact User</CardTitle>
+                                <CardDescription className="text-slate-400">
+                                    Send an email using the bank's template, or post a notice to their dashboard
+                                </CardDescription>
+                                <div className="mt-3 flex gap-1 rounded-lg bg-slate-950/60 p-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => setSendTab('email')}
+                                        className={`flex flex-1 items-center justify-center gap-2 rounded-md py-2 text-sm font-medium transition-colors ${
+                                            sendTab === 'email'
+                                                ? 'bg-slate-800 text-slate-50'
+                                                : 'text-slate-400 hover:text-slate-200'
+                                        }`}
+                                    >
+                                        <Mail className="h-4 w-4" />
+                                        Send Email
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setSendTab('notification')}
+                                        className={`flex flex-1 items-center justify-center gap-2 rounded-md py-2 text-sm font-medium transition-colors ${
+                                            sendTab === 'notification'
+                                                ? 'bg-slate-800 text-slate-50'
+                                                : 'text-slate-400 hover:text-slate-200'
+                                        }`}
+                                    >
+                                        <Bell className="h-4 w-4" />
+                                        Send Notification
+                                    </button>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                {sendTab === 'email' ? (
+                                    <form onSubmit={submitMail} className="space-y-4">
+                                        <p className="text-xs text-slate-500">
+                                            Delivered to {user.email} using the bank's branded email template.
+                                        </p>
+                                        <div>
+                                            <label
+                                                htmlFor="mail_subject"
+                                                className="mb-2 block text-sm font-medium text-slate-300"
+                                            >
+                                                Subject
+                                            </label>
+                                            <input
+                                                id="mail_subject"
+                                                type="text"
+                                                value={mailForm.data.subject}
+                                                onChange={(e) => mailForm.setData('subject', e.target.value)}
+                                                className="h-11 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+                                                placeholder="Important update about your account"
+                                            />
+                                            {mailForm.errors.subject && (
+                                                <p className="mt-2 text-xs text-rose-300">{mailForm.errors.subject}</p>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <label
+                                                htmlFor="mail_message"
+                                                className="mb-2 block text-sm font-medium text-slate-300"
+                                            >
+                                                Message
+                                            </label>
+                                            <textarea
+                                                id="mail_message"
+                                                rows={5}
+                                                value={mailForm.data.message}
+                                                onChange={(e) => mailForm.setData('message', e.target.value)}
+                                                className="w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+                                                placeholder="Write the email body..."
+                                            />
+                                            {mailForm.errors.message && (
+                                                <p className="mt-2 text-xs text-rose-300">{mailForm.errors.message}</p>
+                                            )}
+                                        </div>
+                                        <Button
+                                            type="submit"
+                                            className="w-full justify-center bg-primary-600 hover:bg-primary-700"
+                                            disabled={mailForm.processing}
+                                        >
+                                            <Mail className="mr-2 h-4 w-4" />
+                                            {mailForm.processing ? 'Sending...' : 'Send Email'}
+                                        </Button>
+                                    </form>
+                                ) : (
+                                    <form onSubmit={submitNotice} className="space-y-4">
+                                        <p className="text-xs text-slate-500">
+                                            Shows as a dismissible banner at the top of {user.name}'s dashboard.
+                                        </p>
+                                        <div>
+                                            <label className="mb-2 block text-sm font-medium text-slate-300">
+                                                Type
+                                            </label>
+                                            <div className="flex gap-2">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => noticeForm.setData('type', 'info')}
+                                                    className={`flex-1 rounded-lg border py-2 text-sm font-medium transition-colors ${
+                                                        noticeForm.data.type === 'info'
+                                                            ? 'border-sky-500/50 bg-sky-500/10 text-sky-200'
+                                                            : 'border-slate-700 bg-slate-950/60 text-slate-400 hover:text-slate-200'
+                                                    }`}
+                                                >
+                                                    Info
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => noticeForm.setData('type', 'warning')}
+                                                    className={`flex-1 rounded-lg border py-2 text-sm font-medium transition-colors ${
+                                                        noticeForm.data.type === 'warning'
+                                                            ? 'border-amber-500/50 bg-amber-500/10 text-amber-200'
+                                                            : 'border-slate-700 bg-slate-950/60 text-slate-400 hover:text-slate-200'
+                                                    }`}
+                                                >
+                                                    Warning
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label
+                                                htmlFor="notice_title"
+                                                className="mb-2 block text-sm font-medium text-slate-300"
+                                            >
+                                                Title
+                                            </label>
+                                            <input
+                                                id="notice_title"
+                                                type="text"
+                                                value={noticeForm.data.title}
+                                                onChange={(e) => noticeForm.setData('title', e.target.value)}
+                                                className="h-11 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+                                                placeholder="Action required on your account"
+                                            />
+                                            {noticeForm.errors.title && (
+                                                <p className="mt-2 text-xs text-rose-300">{noticeForm.errors.title}</p>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <label
+                                                htmlFor="notice_message"
+                                                className="mb-2 block text-sm font-medium text-slate-300"
+                                            >
+                                                Message
+                                            </label>
+                                            <textarea
+                                                id="notice_message"
+                                                rows={4}
+                                                value={noticeForm.data.message}
+                                                onChange={(e) => noticeForm.setData('message', e.target.value)}
+                                                className="w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/40"
+                                                placeholder="Write the notice shown on their dashboard..."
+                                            />
+                                            {noticeForm.errors.message && (
+                                                <p className="mt-2 text-xs text-rose-300">{noticeForm.errors.message}</p>
+                                            )}
+                                        </div>
+                                        <Button
+                                            type="submit"
+                                            className="w-full justify-center bg-primary-600 hover:bg-primary-700"
+                                            disabled={noticeForm.processing}
+                                        >
+                                            <Bell className="mr-2 h-4 w-4" />
+                                            {noticeForm.processing ? 'Sending...' : 'Send Notification'}
+                                        </Button>
+                                    </form>
+                                )}
                             </CardContent>
                         </Card>
                     </div>

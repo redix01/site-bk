@@ -121,6 +121,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the admin notices sent to this user.
+     */
+    public function notices()
+    {
+        return $this->hasMany(AdminNotice::class)->latest();
+    }
+
+    /**
+     * Get this user's unread admin notices.
+     */
+    public function unreadNotices()
+    {
+        return $this->notices()->whereNull('read_at');
+    }
+
+    /**
      * Get the user's audit logs.
      */
     public function auditLogs()

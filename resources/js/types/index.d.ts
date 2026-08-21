@@ -123,6 +123,19 @@ export interface PageProps {
     stats?: DashboardStats;
     users?: User[];
     loginHistory?: LoginHistory[];
+    notices?: AdminNotice[];
+}
+
+export interface AdminNotice {
+    id: number;
+    user_id: number;
+    created_by?: number | null;
+    type: 'info' | 'warning';
+    title: string;
+    message: string;
+    read_at?: string | null;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface LoginHistory {
