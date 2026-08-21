@@ -3,7 +3,9 @@
 namespace App\Support;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Cache;
+use Throwable;
 
 class SettingsManager
 {
@@ -80,16 +82,24 @@ class SettingsManager
      */
     protected static function getCachedSettings(): array
     {
-        return Cache::rememberForever(self::CACHE_KEY, function () {
-            return Setting::query()
-                ->get(['key', 'value', 'type'])
-                ->keyBy('key')
-                ->map(fn (Setting $setting) => [
-                    'value' => $setting->value,
-                    'type' => $setting->type,
-                ])
-                ->toArray();
-        });
+        try {
+            return Cache::rememberForever(self::CACHE_KEY, function () {
+                if (! Schema::hasTable('settings')) {
+                    return [];
+                }
+
+                return Setting::query()
+                    ->get(['key', 'value', 'type'])
+                    ->keyBy('key')
+                    ->map(fn (Setting $setting) => [
+                        'value' => $setting->value,
+                        'type' => $setting->type,
+                    ])
+                    ->toArray();
+            });
+        } catch (Throwable) {
+            return [];
+        }
     }
 
     /**
@@ -145,5 +155,4 @@ class SettingsManager
         };
     }
 }
-
 
