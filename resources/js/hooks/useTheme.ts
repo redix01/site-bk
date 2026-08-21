@@ -6,7 +6,7 @@ const STORAGE_KEY = 'theme';
 
 function getInitialTheme(): Theme {
     if (typeof window === 'undefined') {
-        return 'dark';
+        return 'light';
     }
 
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -14,7 +14,7 @@ function getInitialTheme(): Theme {
         return stored;
     }
 
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    return 'light';
 }
 
 export function useTheme() {
