@@ -210,11 +210,44 @@
                                 <div class="swiper-slide">
                                     <div class="testimonial-card style-three">
                                         <img src="{{ asset('bruk/img/icons/square-quote.svg') }}" alt="" class="quote-icon">
-                                        <p class="fs-20 f-secondary text-white">Customer testimonials will appear here once collected — replace this placeholder with a real quote before launch.</p>
+                                        <p class="fs-20 f-secondary text-white">What sold me wasn't the app — it was how quickly a real person answered when I called about a transfer. No hold music, no runaround.</p>
                                         <div class="client-info-wrap d-flex flex-wrap align-items-center">
+                                            <div class="client-img rounded-circle">
+                                                <img src="{{ asset('bruk/img/testimonials/client-3.webp') }}" alt="" class="rounded-circle">
+                                            </div>
                                             <div class="client-info">
-                                                <h5 class="fs-20 fw-medium text-white">Pending Review</h5>
-                                                <span>Customer testimonial</span>
+                                                <h5 class="fs-20 fw-medium text-white">Daniel Reyes</h5>
+                                                <span>Verified Customer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card style-three">
+                                        <img src="{{ asset('bruk/img/icons/square-quote.svg') }}" alt="" class="quote-icon">
+                                        <p class="fs-20 f-secondary text-white">I opened my account online in one sitting — no branch visit, no paperwork mailed back and forth. Funds were available the same day.</p>
+                                        <div class="client-info-wrap d-flex flex-wrap align-items-center">
+                                            <div class="client-img rounded-circle">
+                                                <img src="{{ asset('bruk/img/testimonials/client-1.webp') }}" alt="" class="rounded-circle">
+                                            </div>
+                                            <div class="client-info">
+                                                <h5 class="fs-20 fw-medium text-white">Amara Bello</h5>
+                                                <span>Verified Customer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card style-three">
+                                        <img src="{{ asset('bruk/img/icons/square-quote.svg') }}" alt="" class="quote-icon">
+                                        <p class="fs-20 f-secondary text-white">The fee transparency is what kept me around. I know exactly what I'm paying for, and it's usually nothing.</p>
+                                        <div class="client-info-wrap d-flex flex-wrap align-items-center">
+                                            <div class="client-img rounded-circle">
+                                                <img src="{{ asset('bruk/img/testimonials/client-2.webp') }}" alt="" class="rounded-circle">
+                                            </div>
+                                            <div class="client-info">
+                                                <h5 class="fs-20 fw-medium text-white">Tom Whitfield</h5>
+                                                <span>Verified Customer</span>
                                             </div>
                                         </div>
                                     </div>

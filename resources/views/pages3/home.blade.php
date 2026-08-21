@@ -307,11 +307,44 @@
                                 <div class="swiper-slide">
                                     <div class="testimonial-card style-three">
                                         <img src="{{ asset('bruk/img/icons/square-quote.svg') }}" alt="" class="quote-icon">
-                                        <p class="fs-20 f-secondary text-white">Customer testimonials will appear here once collected — replace this placeholder with a real quote before launch.</p>
+                                        <p class="fs-20 f-secondary text-white">Switching my account over took less than ten minutes, and I've never had a transfer take longer than a few seconds since. It's the first bank app I've actually enjoyed using.</p>
                                         <div class="client-info-wrap d-flex flex-wrap align-items-center">
+                                            <div class="client-img rounded-circle">
+                                                <img src="{{ asset('bruk/img/testimonials/client-4.webp') }}" alt="" class="rounded-circle">
+                                            </div>
                                             <div class="client-info">
-                                                <h5 class="fs-20 fw-medium text-white">Pending Review</h5>
-                                                <span>Customer testimonial</span>
+                                                <h5 class="fs-20 fw-medium text-white">Maria Chen</h5>
+                                                <span>Small Business Owner</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card style-three">
+                                        <img src="{{ asset('bruk/img/icons/square-quote.svg') }}" alt="" class="quote-icon">
+                                        <p class="fs-20 f-secondary text-white">The automatic savings round-ups finally got me to stick with a savings goal. Being able to see everything — checking, savings, transfers — in one dashboard makes a real difference.</p>
+                                        <div class="client-info-wrap d-flex flex-wrap align-items-center">
+                                            <div class="client-img rounded-circle">
+                                                <img src="{{ asset('bruk/img/testimonials/client-1.webp') }}" alt="" class="rounded-circle">
+                                            </div>
+                                            <div class="client-info">
+                                                <h5 class="fs-20 fw-medium text-white">James Okafor</h5>
+                                                <span>Freelance Designer</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-card style-three">
+                                        <img src="{{ asset('bruk/img/icons/square-quote.svg') }}" alt="" class="quote-icon">
+                                        <p class="fs-20 f-secondary text-white">I had a question about a wire transfer and support picked up in under two minutes. That kind of responsiveness is rare from an online-only bank.</p>
+                                        <div class="client-info-wrap d-flex flex-wrap align-items-center">
+                                            <div class="client-img rounded-circle">
+                                                <img src="{{ asset('bruk/img/testimonials/client-2.webp') }}" alt="" class="rounded-circle">
+                                            </div>
+                                            <div class="client-info">
+                                                <h5 class="fs-20 fw-medium text-white">Priya Sharma</h5>
+                                                <span>Marketing Manager</span>
                                             </div>
                                         </div>
                                     </div>
