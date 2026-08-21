@@ -1,5 +1,5 @@
-import { FormEventHandler } from 'react';
-import { Head, useForm } from '@inertiajs/react';
+import { FormEventHandler, useEffect } from 'react';
+import { Head, router, useForm } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Mail, Lock, Shield } from 'lucide-react';
@@ -15,9 +15,13 @@ export default function AdminLogin({ status }: AdminLoginProps) {
         remember: false,
     });
 
+    useEffect(() => {
+        router.visit('/login', { replace: true });
+    }, []);
+
     const handleSubmit: FormEventHandler = (e) => {
         e.preventDefault();
-        post('/admin/login');
+        post('/login');
     };
 
     return (

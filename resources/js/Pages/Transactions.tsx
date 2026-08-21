@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
-import { Badge } from '@/Components/ui/badge';
+
 import { Button } from '@/Components/ui/button';
 import MobileLayout from '@/Layouts/MobileLayout';
 import { PageProps, Transaction } from '@/types';
@@ -62,17 +62,17 @@ export default function Transactions({ auth, transactions = [] }: TransactionsPa
     };
 
     const getStatusBadge = (status: string) => {
-        const variants: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
-            completed: 'default',
-            pending: 'secondary',
-            failed: 'destructive',
-            cancelled: 'outline',
+        const styles: Record<string, string> = {
+            completed: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40',
+            pending: 'bg-amber-500/20 text-amber-400 border border-amber-500/40',
+            failed: 'bg-red-500/20 text-red-400 border border-red-500/40',
+            cancelled: 'bg-slate-500/20 text-slate-400 border border-slate-500/40',
         };
 
         return (
-            <Badge variant={variants[status] || 'outline'} className="text-xs">
-                {status}
-            </Badge>
+            <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${styles[status] || 'bg-slate-500/20 text-slate-400 border border-slate-500/40'}`}>
+                {status.charAt(0).toUpperCase() + status.slice(1)}
+            </span>
         );
     };
 

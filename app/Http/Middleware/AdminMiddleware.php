@@ -19,7 +19,7 @@ class AdminMiddleware
     {
         // Check if user is authenticated
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Please login to access this area.');
+            return redirect()->guest(route('login'))->with('error', 'Please login to access this area.');
         }
 
         $user = Auth::user();

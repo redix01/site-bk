@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Link } from '@inertiajs/react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
-import { Badge } from '@/Components/ui/badge';
 import MobileLayout from '@/Layouts/MobileLayout';
 import { PageProps, Transaction, Wallet } from '@/types';
 
@@ -143,17 +142,17 @@ export default function Dashboard({ auth, wallet, recentTransactions, stats }: D
         (transaction.type === 'transfer' && transaction.recipient_id === auth.user.id);
 
     const getStatusBadge = (status: string) => {
-        const variants: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
-            completed: 'default',
-            pending: 'secondary',
-            failed: 'destructive',
-            cancelled: 'outline',
+        const styles: Record<string, string> = {
+            completed: 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-400 dark:border-emerald-500/40',
+            pending: 'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-500/20 dark:text-amber-400 dark:border-amber-500/40',
+            failed: 'bg-red-100 text-red-700 border-red-200 dark:bg-red-500/20 dark:text-red-400 dark:border-red-500/40',
+            cancelled: 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-500/20 dark:text-slate-400 dark:border-slate-500/40',
         };
 
         return (
-            <Badge variant={variants[status] || 'outline'} className="text-[10px]">
-                {status}
-            </Badge>
+            <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-semibold ${styles[status] || styles.cancelled}`}>
+                {status.charAt(0).toUpperCase() + status.slice(1)}
+            </span>
         );
     };
 
