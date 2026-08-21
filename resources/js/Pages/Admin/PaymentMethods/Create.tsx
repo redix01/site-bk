@@ -162,7 +162,14 @@ export default function Create({ types }: PageProps & { types: Record<string, st
                                 </label>
                                 <select
                                     value={data.type}
-                                    onChange={(e) => setData('type', e.target.value)}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        setData((prev) => ({
+                                            ...prev,
+                                            type: value,
+                                            ...(value === 'crypto' ? { name: 'Cryptocurrency', key: 'crypto' } : {}),
+                                        }));
+                                    }}
                                     className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
                                 >
                                     {Object.entries(types).map(([value, label]) => (
@@ -172,36 +179,43 @@ export default function Create({ types }: PageProps & { types: Record<string, st
                                 {errors.type && <p className="text-red-400 text-sm mt-1">{errors.type}</p>}
                             </div>
 
-                            {/* Name */}
-                            <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    Name <span className="text-red-400">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    value={data.name}
-                                    onChange={(e) => setData('name', e.target.value)}
-                                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                                    placeholder="e.g., Bank Transfer"
-                                />
-                                {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
-                            </div>
+                            {/* Name & Key — fixed for crypto since deposit lookups hardcode key === 'crypto' */}
+                            {data.type === 'crypto' ? (
+                                <div className="rounded-md border border-slate-700 bg-slate-800/50 px-3 py-2.5 text-xs text-slate-400">
+                                    Name and key are fixed to <span className="font-mono text-slate-300">Cryptocurrency</span> / <span className="font-mono text-slate-300">crypto</span> so deposits can always find this method.
+                                </div>
+                            ) : (
+                                <>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                                            Name <span className="text-red-400">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={data.name}
+                                            onChange={(e) => setData('name', e.target.value)}
+                                            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                            placeholder="e.g., Bank Transfer"
+                                        />
+                                        {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
+                                    </div>
 
-                            {/* Key */}
-                            <div>
-                                <label className="block text-sm font-medium text-slate-300 mb-2">
-                                    Key (Unique Identifier) <span className="text-red-400">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    value={data.key}
-                                    onChange={(e) => setData('key', e.target.value)}
-                                    className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                                    placeholder="e.g., bank_transfer"
-                                />
-                                <p className="text-slate-500 text-xs mt-1">Use lowercase with underscores, e.g., bank_transfer</p>
-                                {errors.key && <p className="text-red-400 text-sm mt-1">{errors.key}</p>}
-                            </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                                            Key (Unique Identifier) <span className="text-red-400">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={data.key}
+                                            onChange={(e) => setData('key', e.target.value)}
+                                            className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-md text-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                            placeholder="e.g., bank_transfer"
+                                        />
+                                        <p className="text-slate-500 text-xs mt-1">Use lowercase with underscores, e.g., bank_transfer</p>
+                                        {errors.key && <p className="text-red-400 text-sm mt-1">{errors.key}</p>}
+                                    </div>
+                                </>
+                            )}
 
                             {/* Min Amount */}
                             <div className="grid grid-cols-2 gap-4">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="min-h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.tsx'])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased overflow-x-hidden overscroll-none h-full m-0 p-0">
+    <body class="font-sans antialiased overflow-x-hidden overscroll-none min-h-full m-0 p-0">
         @inertia
     </body>
 </html>
