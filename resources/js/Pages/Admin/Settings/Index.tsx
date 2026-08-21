@@ -195,7 +195,7 @@ export default function Index({ settings }: Props) {
                                         id="site_name"
                                         value={data.site_name}
                                         onChange={(e) => setData('site_name', e.target.value)}
-                                        placeholder="Banko"
+                                        placeholder={settings.site.name || 'Site Name'}
                                     />
                                         {errors.site_name && <p className="text-sm text-red-400">{errors.site_name}</p>}
                                     </div>

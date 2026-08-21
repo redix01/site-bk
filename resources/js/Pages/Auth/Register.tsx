@@ -1,7 +1,8 @@
 import { FormEventHandler, useEffect, useMemo, useRef, useState } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
+import { PageProps } from '@/types';
 
 type RegisterForm = {
     name: string;
@@ -335,6 +336,8 @@ const countryOptions = [
 ];
 
 export default function Register() {
+    const { appSettings } = usePage<PageProps>().props;
+    const siteName = appSettings?.siteName ?? import.meta.env.VITE_APP_NAME ?? 'App';
     const initialData: RegisterForm = {
         name: '',
         email: '',
@@ -624,7 +627,7 @@ export default function Register() {
                 <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col justify-center px-4 sm:px-6 lg:px-8">
                     <div className="space-y-6">
                         <div className="text-center">
-                            <CardTitle className="text-3xl font-bold text-slate-50">Open your Banko account</CardTitle>
+                            <CardTitle className="text-3xl font-bold text-slate-50">Open your {siteName} account</CardTitle>
                             <CardDescription className="mt-2 text-base text-slate-400">
                                 Complete the three-step onboarding to activate secure digital banking.
                             </CardDescription>

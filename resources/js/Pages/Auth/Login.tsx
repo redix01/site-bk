@@ -1,14 +1,17 @@
 import { FormEventHandler, useEffect, useRef, useState } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Mail, Lock, Banknote } from 'lucide-react';
+import { PageProps } from '@/types';
 
 interface LoginProps {
     status?: string;
 }
 
 export default function Login({ status }: LoginProps) {
+    const { appSettings } = usePage<PageProps>().props;
+    const siteName = appSettings?.siteName ?? import.meta.env.VITE_APP_NAME ?? 'App';
     const [botWarning, setBotWarning] = useState<string | null>(null);
     const [humanDetected, setHumanDetected] = useState(false);
     const mountTimeRef = useRef<number>(Date.now());
@@ -102,7 +105,7 @@ export default function Login({ status }: LoginProps) {
                                     <Banknote className="h-6 w-6 text-blue-400" />
                                 </div>
                                 <span className="text-lg font-semibold uppercase tracking-[0.35em] text-slate-300">
-                                    Banko
+                                    {siteName}
                                 </span>
                             </div>
                             <CardTitle className="text-center text-2xl font-bold text-slate-50">
