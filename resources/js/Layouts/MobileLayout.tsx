@@ -104,10 +104,11 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                                         <button
                                             type="button"
                                             onClick={() => setIsNoticePanelOpen((open) => !open)}
-                                            className="relative rounded-full p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-50"
+                                            className="relative flex h-11 w-11 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-50"
                                             title="Notifications"
                                             aria-label={`Notifications${unreadNoticeCount ? `, ${unreadNoticeCount} unread` : ''}`}
                                             aria-expanded={isNoticePanelOpen}
+                                            aria-controls="dashboard-notifications"
                                         >
                                             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -120,7 +121,10 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                                         </button>
 
                                         {isNoticePanelOpen && (
-                                            <div className="absolute right-0 top-full mt-2 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl shadow-slate-900/15 dark:border-slate-700 dark:bg-slate-900">
+                                            <div
+                                                id="dashboard-notifications"
+                                                className="fixed left-1/2 top-20 z-50 w-[calc(100vw-2rem)] max-w-sm -translate-x-1/2 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md dark:border-slate-700 dark:bg-slate-900"
+                                            >
                                                 <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3 dark:border-slate-800">
                                                     <div>
                                                         <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Notifications</p>
@@ -128,14 +132,14 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                                                             {unreadNoticeCount ? `${unreadNoticeCount} unread` : 'You’re all caught up'}
                                                         </p>
                                                     </div>
-                                                    <button type="button" onClick={() => setIsNoticePanelOpen(false)} className="rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200" aria-label="Close notifications">
+                                                    <button type="button" onClick={() => setIsNoticePanelOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200" aria-label="Close notifications">
                                                         <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                                         </svg>
                                                     </button>
                                                 </div>
                                                 {notices.length > 0 ? (
-                                                    <div className="max-h-96 divide-y divide-slate-100 overflow-y-auto dark:divide-slate-800">
+                                                    <div className="max-h-[calc(100dvh-10rem)] divide-y divide-slate-100 overflow-y-auto overscroll-contain dark:divide-slate-800">
                                                         {notices.map((notice) => {
                                                             const isWarning = notice.type === 'warning';
                                                             return (
