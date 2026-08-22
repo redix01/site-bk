@@ -49,10 +49,10 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $user,
             ],
-            'notices' => $user && !$user->isAdmin()
+            'notices' => $user
                 ? $user->unreadNotices()->latest()->limit(5)->get()
                 : [],
-            'unreadNoticeCount' => $user && !$user->isAdmin()
+            'unreadNoticeCount' => $user
                 ? $user->unreadNotices()->count()
                 : 0,
             'supportEmail' => SettingsManager::get('support_email', env('MAIL_SUPPORT')),

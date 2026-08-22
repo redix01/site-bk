@@ -82,7 +82,7 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                 <header className="sticky top-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 z-40">
                     <div className="max-w-3xl mx-auto px-4 py-4">
                         <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
+                            <div className="flex min-w-0 items-center space-x-3">
                                 <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-base overflow-hidden">
                                     {user.profile_photo_url ? (
                                         <img
@@ -94,14 +94,13 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                                         user.name.charAt(0).toUpperCase()
                                     )}
                                 </div>
-                                <div>
+                                <div className="min-w-0">
                                     <p className="text-sm text-slate-500 dark:text-slate-400">Welcome back</p>
-                                    <p className="text-base font-semibold text-slate-900 dark:text-slate-50">{user.name}</p>
+                                    <p className="truncate text-base font-semibold text-slate-900 dark:text-slate-50">{user.name}</p>
                                 </div>
                             </div>
-                            <div className="flex items-center space-x-1">
-                                {!user.is_admin && (
-                                    <div className="relative">
+                            <div className="flex shrink-0 items-center space-x-1">
+                                <div className="relative">
                                         <button
                                             type="button"
                                             onClick={() => setIsNoticePanelOpen((open) => !open)}
@@ -163,8 +162,7 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                                                 )}
                                             </div>
                                         )}
-                                    </div>
-                                )}
+                                </div>
                                 <ThemeToggle theme={theme} onToggle={toggleTheme} />
                                 <button
                                     onClick={() => router.post('/logout')}
