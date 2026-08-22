@@ -124,6 +124,7 @@ export interface PageProps {
     users?: User[];
     loginHistory?: LoginHistory[];
     notices?: AdminNotice[];
+    unreadNoticeCount?: number;
 }
 
 export interface AdminNotice {
@@ -149,5 +150,4 @@ export interface LoginHistory {
     formatted_created_at: string;
     created_at: string;
 }
-
 

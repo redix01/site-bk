@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Head, router, usePage } from '@inertiajs/react';
 import BottomNavigation from '@/Components/BottomNavigation';
 import ThemeToggle from '@/Components/ThemeToggle';
@@ -14,12 +14,21 @@ interface MobileLayoutProps {
 
 export default function MobileLayout({ children, title, user, currentRoute = 'dashboard' }: MobileLayoutProps) {
     const { theme, toggleTheme } = useTheme();
-    const { notices = [] } = usePage<PageProps>().props;
+    const { notices = [], unreadNoticeCount = 0 } = usePage<PageProps>().props;
+    const [isNoticePanelOpen, setIsNoticePanelOpen] = useState(false);
 
     // Add view parameter for admins to keep them in client view
     const viewParam = user.is_admin ? '?view=client' : '';
     const isSuspended = user.status === 'suspended';
     const isLocked = user.status === 'locked';
+    const noticeBadge = unreadNoticeCount > 99 ? '99+' : unreadNoticeCount;
+
+    const markNoticeRead = (noticeId: number) => {
+        router.post(`/notifications/${noticeId}/read`, {}, {
+            preserveScroll: true,
+            onSuccess: () => setIsNoticePanelOpen(false),
+        });
+    };
 
     const navItems = [
         {
@@ -91,6 +100,71 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                                 </div>
                             </div>
                             <div className="flex items-center space-x-1">
+                                {!user.is_admin && (
+                                    <div className="relative">
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsNoticePanelOpen((open) => !open)}
+                                            className="relative rounded-full p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-50"
+                                            title="Notifications"
+                                            aria-label={`Notifications${unreadNoticeCount ? `, ${unreadNoticeCount} unread` : ''}`}
+                                            aria-expanded={isNoticePanelOpen}
+                                        >
+                                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                            </svg>
+                                            {unreadNoticeCount > 0 && (
+                                                <span className="absolute -right-1 -top-1 min-w-4 h-4 rounded-full bg-rose-500 px-1 text-[10px] font-bold leading-4 text-white ring-2 ring-white dark:ring-slate-900">
+                                                    {noticeBadge}
+                                                </span>
+                                            )}
+                                        </button>
+
+                                        {isNoticePanelOpen && (
+                                            <div className="absolute right-0 top-full mt-2 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl shadow-slate-900/15 dark:border-slate-700 dark:bg-slate-900">
+                                                <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3 dark:border-slate-800">
+                                                    <div>
+                                                        <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Notifications</p>
+                                                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                                                            {unreadNoticeCount ? `${unreadNoticeCount} unread` : 'You’re all caught up'}
+                                                        </p>
+                                                    </div>
+                                                    <button type="button" onClick={() => setIsNoticePanelOpen(false)} className="rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200" aria-label="Close notifications">
+                                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                {notices.length > 0 ? (
+                                                    <div className="max-h-96 divide-y divide-slate-100 overflow-y-auto dark:divide-slate-800">
+                                                        {notices.map((notice) => {
+                                                            const isWarning = notice.type === 'warning';
+                                                            return (
+                                                                <div key={notice.id} className="px-4 py-3">
+                                                                    <div className="flex items-start gap-3">
+                                                                        <span className={`mt-1 h-2 w-2 shrink-0 rounded-full ${isWarning ? 'bg-amber-500' : 'bg-blue-500'}`} />
+                                                                        <div className="min-w-0 flex-1">
+                                                                            <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{notice.title}</p>
+                                                                            <p className="mt-1 whitespace-pre-wrap text-sm text-slate-600 dark:text-slate-300">{notice.message}</p>
+                                                                            <button type="button" onClick={() => markNoticeRead(notice.id)} className="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+                                                                                Mark as read
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                ) : (
+                                                    <p className="px-4 py-8 text-center text-sm text-slate-500 dark:text-slate-400">No active notifications.</p>
+                                                )}
+                                                {unreadNoticeCount > notices.length && (
+                                                    <p className="border-t border-slate-100 px-4 py-2 text-center text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">Showing the 5 most recent notifications.</p>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                                 <ThemeToggle theme={theme} onToggle={toggleTheme} />
                                 <button
                                     onClick={() => router.post('/logout')}
@@ -124,48 +198,6 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
                         </div>
                     )}
 
-                    {notices.map((notice) => {
-                        const isWarning = notice.type === 'warning';
-                        return (
-                            <div
-                                key={notice.id}
-                                className={`flex items-start gap-3 rounded-xl border p-4 ${
-                                    isWarning
-                                        ? 'border-amber-300 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-950/40'
-                                        : 'border-blue-300 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-950/40'
-                                }`}
-                            >
-                                <svg
-                                    className={`mt-0.5 h-5 w-5 shrink-0 ${isWarning ? 'text-amber-500 dark:text-amber-300' : 'text-blue-500 dark:text-blue-300'}`}
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M5.07 19h13.86A2 2 0 0020.9 17L13.84 4.66a2 2 0 00-3.68 0L3.1 17a2 2 0 001.97 2z" />
-                                </svg>
-                                <div className="flex-1">
-                                    <p className={`text-sm font-semibold ${isWarning ? 'text-amber-800 dark:text-amber-200' : 'text-blue-800 dark:text-blue-200'}`}>
-                                        {notice.title}
-                                    </p>
-                                    <p className={`mt-0.5 text-sm ${isWarning ? 'text-amber-700/90 dark:text-amber-100/90' : 'text-blue-700/90 dark:text-blue-100/90'}`}>
-                                        {notice.message}
-                                    </p>
-                                </div>
-                                <button
-                                    type="button"
-                                    onClick={() => router.post(`/notifications/${notice.id}/read`, {}, { preserveScroll: true })}
-                                    className={`shrink-0 rounded-full p-1 transition-colors ${
-                                        isWarning
-                                            ? 'text-amber-500 hover:bg-amber-100 dark:text-amber-300 dark:hover:bg-amber-900/40'
-                                            : 'text-blue-500 hover:bg-blue-100 dark:text-blue-300 dark:hover:bg-blue-900/40'
-                                    }`}
-                                    title="Dismiss"
-                                >
-                                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-                        );
-                    })}
                 </div>
 
                 {/* Main Content */}
@@ -179,4 +211,3 @@ export default function MobileLayout({ children, title, user, currentRoute = 'da
         </>
     );
 }
-
